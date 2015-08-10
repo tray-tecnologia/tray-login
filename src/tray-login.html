@@ -1,0 +1,46 @@
+<template>
+    <style>
+        /**
+         * Use vulcanize to process the stylesheet?
+         */
+        @import url("dist/tray-login.css");
+    </style>
+    <svg display="none" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+            <symbol id="ch-icon-locked2" viewBox="0 0 1024 1024">
+                <title>locked2</title>
+                <path class="path1" d="M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"></path>
+            </symbol>
+        </defs>
+    </svg>
+    <form class="tray-container" action="" id="login-form">
+        <button class="tray-close">X</button>
+        <div id="screen-1">
+            <h1 class="tray-title">Alterar informações</h1>
+            <p class="tray-action">Escolha uma das opções para se identificar:</p>
+            <div class="tray-actions">
+                <button class="tray-btn-primary">E-mail e senha da loja</button>
+                <button class="tray-btn-facebook">facebook</button>
+                <button class="tray-btn-otp" id="login-otp">Receber código de segurança por e-mail</button>
+            </div>
+        </div>
+        <div id="screen-2">
+            <h1 class="tray-title">Código de Segurança</h1>
+            <p class="tray-action">Informe o código de segurança recebido por e-mail.</p>
+            <div class="tray-well" id="tray-email"></div>
+            <div class="tray-input-group">
+                <input class="tray-input empty" type="text" name="login-code" id="login-code" type="number" required>
+                <label for="login-code" class="tray-label">
+                    <svg><use xlink:href="#ch-icon-locked2"></use></svg>Código de segurança
+                </label>
+            </div>
+            <div class="tray-actions">
+                <button class="tray-btn-primary">Continuar</button>
+                <button class="tray-btn-default" id="login-other-option">Escolher outra opção</button>
+            </div>
+        </div>
+    </form>
+</template>
+
+<script src="../bower_components/zepto/dist/zepto.min.js"></script>
+<script src="../src/tray-login.js"></script>

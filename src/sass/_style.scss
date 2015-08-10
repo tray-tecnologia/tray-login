@@ -1,0 +1,188 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900);
+/**
+ * Base
+ */
+
+:host,
+:host * {
+    color: #909090;
+    font-family: 'Lato', Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+polyfill-next-selector { content: 'tray-login::before'; }
+:host::before {
+    background: #191919;
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+polyfill-next-selector { content: 'tray-login *'; }
+:host * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+polyfill-next-selector { content: 'tray-login .tray-container'; }
+:host .tray-container {
+    background: #fff;
+    border: 1px solid #191919;
+    min-height: 300px;
+    width: 292px;
+    position: absolute;
+    left: calc(50% - 146px);
+    top: calc(50% - 150px);
+    padding: 12px;
+}
+
+    polyfill-next-selector { content: 'tray-login .tray-close'; }
+    :host .tray-close {
+        background: #fff;
+        border: 2px solid #bababa;
+        border-radius: 50%;
+        color: #bababa;
+        cursor: pointer;
+        float: right;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 1;
+        padding: 0;
+        margin: 0;
+        height: 21px;
+        width: 21px;
+    }
+
+    polyfill-next-selector { content: 'tray-login .tray-title'; }
+    :host .tray-title {
+        color: #8f8f8f;
+        font-weight: 900;
+        font-size: 19px;
+        margin-top: 23px;
+        margin-bottom: 25px;
+    }
+
+    polyfill-next-selector { content: 'tray-login .tray-action'; }
+    :host .tray-action {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    /**
+     * Well
+     */
+    :host .tray-well {
+        background-color: #ebebeb;
+        border-radius: 3px;
+        border: 1px solid #efeded;
+        color: #8f8f8f;
+        margin-bottom: 11px;
+        padding: 15px 10px;
+        text-align: center;
+    }
+
+    /**
+     * Forms
+     */
+
+    .tray-input-group {
+        display: block;
+        margin-bottom: 11px;
+        position: relative;
+    }
+
+    .tray-label {
+        left: 12px;
+        height: 15px;
+        position: absolute;
+        top: 16px;
+    }
+
+        .tray-label svg {
+            fill: currentColor;
+            float: left;
+            height: 15px;
+            margin-right: 11px;
+            padding: 0;
+            width: 15px;
+        }
+
+    .tray-input {
+        background: #ffffff;
+        border: 1px solid #e0dcdc;
+        border-radius: 3px;
+        color: #c7c7c7;
+        display: block;
+        font-size: 14px;
+        font-weight: 300;
+        height: 47px;
+        line-height: 14px;
+        padding: 13px 0 14px;
+        text-indent: 36px;
+        width: 100%;
+    }
+
+    .tray-input:focus {
+        outline: none;
+        border-color: #c0c0c0;
+        border-width: 2px;
+        color: #909090;
+    }
+
+    /**
+     * Buttons
+     */
+    :host .tray-btn-primary,
+    :host .tray-btn-default,
+    :host .tray-btn-facebook,
+    :host .tray-btn-otp {
+        background: #4cd9c0;
+        display: block;
+        width: 100%;
+        height: 48px;
+        border-radius: 3px;
+        border: none;
+        border-bottom: 3px solid #62c0b0;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 13px;
+        padding: 0;
+    }
+
+    :host .tray-btn-facebook {
+        background-color: #3b5998;
+        border-bottom-color: #243f77;
+    }
+
+    :host .tray-btn-otp {
+        background-color: #52447c;
+        border-bottom-color: #3d3160;
+        font-size: 13px;
+    }
+
+    :host .tray-btn-default,
+    :host .tray-btn-default:hover,
+    :host .tray-btn-default:active {
+        background-color: #fff;
+        border: 1px solid #d3d1d1;
+        border-bottom-width: 3px;
+        color: #bcbcbc;
+    }
+
+    :host .tray-btn-primary,
+    :host .tray-btn-primary:hover,
+    :host .tray-btn-primary:active,
+    :host .tray-btn-facebook,
+    :host .tray-btn-facebook:hover,
+    :host .tray-btn-facebook:active,
+    :host .tray-btn-otp,
+    :host .tray-btn-otp:hover,
+    :host .tray-btn-otp:active {
+        color: #fff;
+        text-decoration: none;
+    }
