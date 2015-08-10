@@ -4,10 +4,7 @@
         template = thisDoc.querySelector('template').content,
         trayLoginProto = Object.create(HTMLElement.prototype),
         thisElement,
-        urls = {
-            otp: '',
-            callback: ''
-        };
+        urls = {};
 
     $(document).on('tray-login', function(event, response, type) {
         if (type === 'finished') {
@@ -25,12 +22,13 @@
         shadowRoot.appendChild(clone);
         thisElement = this;
         this.addListeners();
-        this.setAttributes();
+        this.setUrls();
         this.shadowRoot.querySelector('#screen-2').style.display = 'none';
     };
 
-    trayLoginProto.setAttributes = function() {
+    trayLoginProto.setUrls = function() {
         urls.otp = $(this).attr('api-otp');
+        urls.otpLogin = $(this).attr('api-otp-login');
         urls.callback = $(this).attr('url-callback');
     };
 
@@ -58,11 +56,12 @@
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 url: urls.otp,
                 dataType: 'json',
                 success: function(response) {
                     thisElement.shadowRoot.querySelector('#tray-email').innerHTML = response.data.email;
+                    thisElement.shadowRoot.querySelector('#input-email').value = response.data.email;
                     thisElement.shadowRoot.querySelector('#screen-1').style.display = 'none';
                     thisElement.shadowRoot.querySelector('#screen-2').style.display = 'block';
                 },
@@ -96,7 +95,7 @@
             $.ajax({
                 type: 'GET',
                 data: data,
-                url: urls.otp,
+                url: urls.otpLogin,
                 dataType: 'json',
                 success: function(response) {
                     $(document).trigger('tray-login', [response, 'finished']);

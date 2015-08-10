@@ -20,6 +20,7 @@ polyfill-next-selector { content: 'tray-login::before'; }
     left: 0;
     height: 100%;
     width: 100%;
+    z-index: 9998;
 }
 
 polyfill-next-selector { content: 'tray-login *'; }
@@ -39,6 +40,7 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
     left: calc(50% - 146px);
     top: calc(50% - 150px);
     padding: 12px;
+    z-index: 9999;
 }
 
     polyfill-next-selector { content: 'tray-login .tray-close'; }

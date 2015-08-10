@@ -3,7 +3,7 @@
         /**
          * Use vulcanize to process the stylesheet?
          */
-        @import url("dist/tray-login.css");
+        @import url("/vendor/tray-login/dist/tray-login.css");
     </style>
     <svg display="none" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <defs>
@@ -29,7 +29,8 @@
             <p class="tray-action">Informe o código de segurança recebido por e-mail.</p>
             <div class="tray-well" id="tray-email"></div>
             <div class="tray-input-group">
-                <input class="tray-input empty" type="text" name="login-code" id="login-code" type="number" required>
+                <input type="hidden" id="input-email" name="email">
+                <input class="tray-input empty" type="text" name="code" id="login-code" type="text" required>
                 <label for="login-code" class="tray-label">
                     <svg><use xlink:href="#ch-icon-locked2"></use></svg>Código de segurança
                 </label>
