@@ -12,7 +12,7 @@ api-otp       | URL de geração do código (POST, params: email)
 api-otp-login | URL de login (GET, params: email, code)
 url-callback  | URL de callback caso o login esteja correto
 
-## Event Listeners
+## Eventos
 
 Em caso de sucesso ou em caso de falha, é disparado um evento no documento principal.
 Exemplo de utilização do evento:
@@ -28,8 +28,11 @@ $(document).on('tray-login', function(event, response, type) {
 
 ## Uso
 
-1. Adicione o polyfill no `<head>`:
-`<script src="bower_components/webcomponentsjs/webcomponentsjs.min.js">`
+1. Adicione o polyfill e importe o componente no `<head>`:
+```HTML
+<script src="bower_components/webcomponentsjs/webcomponentsjs.min.js">
+<link rel="import" href="dist/tray-login.html">
+```
 
 2. Adicione o elemento no seu HTML substituindo as URLs da aplicação.
 
@@ -41,7 +44,7 @@ $(document).on('tray-login', function(event, response, type) {
 </tray-login>
 ```
 
-## Dev
+## Contribuindo
 
 Para configurar o ambiente de dev, execute:
 ```sh
