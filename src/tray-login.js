@@ -6,6 +6,9 @@
         thisElement,
         urls = {};
 
+    /**
+     * Load the callback URL
+     */
     $(document).on('tray-login', function(event, response, type) {
         if (type === 'finished') {
             window.location = urls.callback;
@@ -16,6 +19,9 @@
         WebComponents.ShadowCSS.shimStyling(template, 'tray-login');
     }
 
+    /**
+     * Executes when element was created
+     */
     trayLoginProto.createdCallback = function() {
         var shadowRoot = this.createShadowRoot();
         var clone = thatDoc.importNode(template, true);
@@ -26,12 +32,18 @@
         this.shadowRoot.querySelector('#screen-2').style.display = 'none';
     };
 
+    /**
+     * Define API's urls
+     */
     trayLoginProto.setUrls = function() {
         urls.otp = $(this).attr('api-otp');
         urls.otpLogin = $(this).attr('api-otp-login');
         urls.callback = $(this).attr('url-callback');
     };
 
+    /**
+     * Add event listeners
+     */
     trayLoginProto.addListeners = function() {
         this.onCloseElement()
             .onOTPLogin()
@@ -39,6 +51,9 @@
             .onSubmitCode();
     };
 
+    /**
+     * When click in the close button
+     */
     trayLoginProto.onCloseElement = function() {
         this.closeButton = this.shadowRoot.querySelector('.tray-close');
 
@@ -50,6 +65,10 @@
         return this;
     };
 
+    /**
+     * Try to login with OTP method
+     * @return {object} trayLoginProto
+     */
     trayLoginProto.onOTPLogin = function() {
         this.OTPButton = this.shadowRoot.getElementById('login-otp');
         
@@ -74,6 +93,10 @@
         return this;
     };
 
+    /**
+     * Back to other options
+     * @return {object} trayLoginProto
+     */
     trayLoginProto.onChooseOtherOption = function() {
         this.otherOptionButton = this.shadowRoot.getElementById('login-other-option');
 
@@ -86,6 +109,10 @@
         return this;
     };
 
+    /**
+     * Event listener to the form submit
+     * @return {object} trayLoginProto
+     */
     trayLoginProto.onSubmitCode = function() {
         this.loginForm = this.shadowRoot.getElementById('login-form');
 
@@ -109,6 +136,9 @@
         return this;
     };
 
+    /**
+     * Register the element
+     */
     window.trayLogin = thatDoc.registerElement('tray-login', {
         prototype: trayLoginProto
     });
