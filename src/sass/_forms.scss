@@ -1,36 +1,36 @@
-.tray-form fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
 
-.tray-input-group {
+polyfill-next-selector { content: 'tray-login .tray-input-group'; }
+:host .tray-input-group {
     display: block;
     margin-bottom: 11px;
     position: relative;
+}
 
-    .tray-label {
+polyfill-next-selector { content: 'tray-login .tray-input-group.row .tray-label'; }
+:host .tray-input-group.row .tray-label {
+    left: 27px;
+}
+
+    polyfill-next-selector { content: 'tray-login .tray-input-group .tray-label'; }
+    :host .tray-input-group .tray-label {
         left: 12px;
         height: 15px;
         position: absolute;
         top: 16px;
-
-        svg {
-            fill: currentColor;
-            float: left;
-            height: 15px;
-            margin-right: 11px;
-            padding: 0;
-            width: 15px;
-        }
     }
 
-    &.row .tray-label {
-        left: 27px;
+    polyfill-next-selector { content: 'tray-login .tray-input-group .tray-label svg'; }
+    :host .tray-input-group .tray-label svg {
+        fill: currentColor;
+        float: left;
+        height: 15px;
+        margin-right: 11px;
+        padding: 0;
+        width: 15px;
     }
-}
 
-.tray-input {
+polyfill-next-selector { content: 'tray-login .tray-input'; }
+:host .tray-input {
     background: $input-bg;
     border: 1px solid $input-bd;
     border-radius: 3px;
@@ -43,29 +43,18 @@
     padding: 13px 0 14px;
     text-indent: 36px;
     width: 100%;
-
-    &:focus {
-        outline: none;
-        border-color: $input-focus-bd;
-        border-width: 2px;
-        color: $input-focus-txt;
-    }
-
-    &.tray-input-no-icon {
-        text-indent: 13px;
-    }
 }
 
-select.tray-input {
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
-
-    background: $input-bg url('/img/icons/down.svg') calc(100% - 15px) center no-repeat;
-    background-size: 10px;
+polyfill-next-selector { content: 'tray-login .tray-input:focus'; }
+:host .tray-input:focus {
+    outline: none;
+    border-color: $input-focus-bd;
+    border-width: 2px;
+    color: $input-focus-txt;
 }
 
-.tray-label {
+polyfill-next-selector { content: 'tray-login .tray-label'; }
+:host .tray-label {
     color: $input-txt;
     display: block;
     font-size: 14px;
@@ -73,50 +62,45 @@ select.tray-input {
     line-height: 14px;
 }
 
-.tray-input:focus + .tray-label {
+polyfill-next-selector { content: 'tray-login .tray-input:focus + .tray-label'; }
+:host .tray-input:focus + .tray-label {
     color: $input-txt;
 }
 
-.tray-input:valid + .tray-label,
-.tray-input:not(.empty) + .tray-label {
+polyfill-next-selector { content: 'tray-login .tray-input:valid + .tray-label, tray-login .tray-input:not(.empty) + .tray-label'; }
+:host .tray-input:valid + .tray-label,
+:host .tray-input:not(.empty) + .tray-label {
     color: $input-focus-txt;
     height: 15px;
     width: 15px;
     overflow: hidden;
 }
 
-.tray-input.empty:not([required]) + .tray-label {
+polyfill-next-selector { content: 'tray-login .tray-input.empty:not([required]) + .tray-label'; }
+:host .tray-input.empty:not([required]) + .tray-label {
     color: $input-txt;
     width: auto !important;
     height: auto !important;
 }
 
-.tray-input:not(.empty):invalid {
+polyfill-next-selector { content: 'tray-login .tray-input:not(.empty):invalid'; }
+:host .tray-input:not(.empty):invalid {
     border-color: $input-error-bd;
     color: $input-error-txt;
-
-    & + .tray-label {
-        color: $input-error-txt;
-    }
 }
 
-.tray-input-invalid {
+polyfill-next-selector { content: 'tray-login .tray-input:not(.empty):invalid + .tray-label'; }
+:host .tray-input:not(.empty):invalid + .tray-label {
+    color: $input-error-txt;
+}
+
+polyfill-next-selector { content: 'tray-login .tray-input-invalid'; }
+:host .tray-input-invalid {
     border-color: $input-error-bd;
     color: $input-error-txt;
-
-    & ~ .tray-label {
-        color: $input-error-txt;
-    }
 }
 
-.tray-input ~ .message,
-.tray-input ~ .tray-error-message {
+polyfill-next-selector { content: 'tray-login .tray-input-invalid ~ .tray-label'; }
+:host .tray-input-invalid ~ .tray-label {
     color: $input-error-txt;
 }
-
-.tray-input-disabled {
-    background-color: #efefef;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-

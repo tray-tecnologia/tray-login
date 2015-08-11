@@ -66,7 +66,7 @@
                     thisElement.shadowRoot.getElementById('screen-2').style.display = 'block';
                 },
                 error: function(request, type) {
-                    console.error(request, type);
+                    console.error('Error: ' + request.status + ' - ' + request.statusText);
                 }
             });
         });

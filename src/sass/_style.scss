@@ -1,8 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900);
 /**
  * Base
  */
-
+polyfill-next-selector { content: 'tray-login, tray-login *'; }
 :host,
 :host * {
     color: #909090;
@@ -78,6 +77,7 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
     /**
      * Well
      */
+    polyfill-next-selector { content: 'tray-login .tray-well'; }
     :host .tray-well {
         background-color: #ebebeb;
         border-radius: 3px;
@@ -89,56 +89,9 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
     }
 
     /**
-     * Forms
-     */
-
-    .tray-input-group {
-        display: block;
-        margin-bottom: 11px;
-        position: relative;
-    }
-
-    .tray-label {
-        left: 12px;
-        height: 15px;
-        position: absolute;
-        top: 16px;
-    }
-
-        .tray-label svg {
-            fill: currentColor;
-            float: left;
-            height: 15px;
-            margin-right: 11px;
-            padding: 0;
-            width: 15px;
-        }
-
-    .tray-input {
-        background: #ffffff;
-        border: 1px solid #e0dcdc;
-        border-radius: 3px;
-        color: #c7c7c7;
-        display: block;
-        font-size: 14px;
-        font-weight: 300;
-        height: 47px;
-        line-height: 14px;
-        padding: 13px 0 14px;
-        text-indent: 36px;
-        width: 100%;
-    }
-
-    .tray-input:focus {
-        outline: none;
-        border-color: #c0c0c0;
-        border-width: 2px;
-        color: #909090;
-    }
-
-    /**
      * Buttons
      */
+    polyfill-next-selector { content: 'tray-login .tray-btn-primary, tray-login .tray-btn-default, tray-login .tray-btn-facebook, tray-login .tray-btn-otp'; }
     :host .tray-btn-primary,
     :host .tray-btn-default,
     :host .tray-btn-facebook,
@@ -156,17 +109,20 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
         padding: 0;
     }
 
+    polyfill-next-selector { content: 'tray-login .tray-btn-facebook'; }
     :host .tray-btn-facebook {
         background-color: #3b5998;
         border-bottom-color: #243f77;
     }
 
+    polyfill-next-selector { content: 'tray-login .tray-btn-otp'; }
     :host .tray-btn-otp {
         background-color: #52447c;
         border-bottom-color: #3d3160;
         font-size: 13px;
     }
 
+    polyfill-next-selector { content: 'tray-login .tray-btn-default, tray-login .tray-btn-default:hover, tray-login .tray-btn-default:active'; }
     :host .tray-btn-default,
     :host .tray-btn-default:hover,
     :host .tray-btn-default:active {
@@ -176,6 +132,7 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
         color: #bcbcbc;
     }
 
+    polyfill-next-selector { content: 'tray-login .tray-btn-primary, tray-login .tray-btn-primary:hover, tray-login .tray-btn-primary:active, tray-login .tray-btn-facebook, tray-login .tray-btn-facebook:hover, tray-login .tray-btn-facebook:active, tray-login .tray-btn-otp, tray-login .tray-btn-otp:hover, tray-login .tray-btn-otp:active'; }
     :host .tray-btn-primary,
     :host .tray-btn-primary:hover,
     :host .tray-btn-primary:active,
