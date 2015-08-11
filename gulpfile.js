@@ -19,6 +19,8 @@ gulp.task('vulcanize', function () {
     gulp.src('./src/tray-login.html')
         .pipe(vulcanize({
         	inline: true,
+            inlineCss: true,
+            inlineScripts: true,
             excludes: [],
             stripExcludes: false
         }))

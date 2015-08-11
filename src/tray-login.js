@@ -60,10 +60,10 @@
                 url: urls.otp,
                 dataType: 'json',
                 success: function(response) {
-                    thisElement.shadowRoot.querySelector('#tray-email').innerHTML = response.data.email;
-                    thisElement.shadowRoot.querySelector('#input-email').value = response.data.email;
-                    thisElement.shadowRoot.querySelector('#screen-1').style.display = 'none';
-                    thisElement.shadowRoot.querySelector('#screen-2').style.display = 'block';
+                    thisElement.shadowRoot.getElementById('tray-email').innerHTML = response.data.email;
+                    thisElement.shadowRoot.getElementById('input-email').value = response.data.email;
+                    thisElement.shadowRoot.getElementById('screen-1').style.display = 'none';
+                    thisElement.shadowRoot.getElementById('screen-2').style.display = 'block';
                 },
                 error: function(request, type) {
                     console.error(request, type);
@@ -79,8 +79,8 @@
 
         this.otherOptionButton.addEventListener('click', function(event) {
             event.preventDefault();
-            thisElement.shadowRoot.querySelector('#screen-1').style.display = 'block';
-            thisElement.shadowRoot.querySelector('#screen-2').style.display = 'none';
+            thisElement.shadowRoot.getElementById('screen-1').style.display = 'block';
+            thisElement.shadowRoot.getElementById('screen-2').style.display = 'none';
         });
 
         return this;

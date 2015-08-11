@@ -5,6 +5,9 @@
     "Richard Oliveira dos Santos <rsantos@tray.net.br>"
   ],
   "description": "Tray Login - Web Component",
+  "main": [
+    "dist/tray-login.html"
+  ],
   "license": "MIT",
   "private": true,
   "ignore": [
