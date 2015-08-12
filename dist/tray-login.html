@@ -411,7 +411,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 url: urls.otp,
                 dataType: 'json',
                 success: function(response) {
@@ -470,7 +470,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
             event.preventDefault();
             var data = $(this).serialize();
             $.ajax({
-                type: 'POST',
+                type: 'GET',
                 data: data,
                 url: urls.otpLogin,
                 dataType: 'json',

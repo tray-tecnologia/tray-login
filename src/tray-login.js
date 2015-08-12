@@ -76,7 +76,7 @@
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 url: urls.otp,
                 dataType: 'json',
                 success: function(response) {
@@ -135,7 +135,7 @@
             event.preventDefault();
             var data = $(this).serialize();
             $.ajax({
-                type: 'POST',
+                type: 'GET',
                 data: data,
                 url: urls.otpLogin,
                 dataType: 'json',
