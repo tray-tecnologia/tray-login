@@ -141,8 +141,7 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.statusCode > 400) {
-                        thisElement.shadowRoot.querySelector('.tray-error-message').innerHTML = response.message;
-                        thisElement.shadowRoot.getElementById('input-code').classList.add('tray-input-invalid');
+                        thisElement.showErrorMessage(response);
                         $(document).trigger('tray-login', [response, 'error']);
                         return;
                     }
@@ -150,12 +149,18 @@
                     $(document).trigger('tray-login', [response, 'success']);
                 },
                 error: function(request, type) {
+                    thisElement.showErrorMessage($.parseJSON(request.responseText));
                     $(document).trigger('tray-login', [request, 'error']);
                 }
             });
         });
 
         return this;
+    };
+
+    trayLoginProto.showErrorMessage = function(response) {
+        thisElement.shadowRoot.querySelector('.tray-error-message').innerHTML = response.message;
+        thisElement.shadowRoot.getElementById('input-code').classList.add('tray-input-invalid');
     };
 
     /**
