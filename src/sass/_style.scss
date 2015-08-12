@@ -89,6 +89,14 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
     }
 
     /**
+     * Messages
+     */
+    polyfill-next-selector { content: 'tray-login .tray-error-message'; }
+    :host .tray-error-message {
+        color: $input-error-txt;
+    }
+
+    /**
      * Buttons
      */
     polyfill-next-selector { content: 'tray-login .tray-btn-primary, tray-login .tray-btn-default, tray-login .tray-btn-facebook, tray-login .tray-btn-otp'; }

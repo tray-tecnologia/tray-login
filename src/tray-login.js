@@ -10,7 +10,7 @@
      * Load the callback URL
      */
     $(document).on('tray-login', function(event, response, type) {
-        if (type === 'finished') {
+        if (type === 'success') {
             window.location = urls.callback;
         }
     });
@@ -36,9 +36,9 @@
      * Define API's urls
      */
     trayLoginProto.setUrls = function() {
-        urls.otp = $(this).attr('api-otp');
-        urls.otpLogin = $(this).attr('api-otp-login');
-        urls.callback = $(this).attr('url-callback');
+        urls.otp = this.getAttribute('api-otp');
+        urls.otpLogin = this.getAttribute('api-otp-login');
+        urls.callback = this.getAttribute('url-callback');
     };
 
     /**
@@ -48,6 +48,7 @@
         this.onCloseElement()
             .onOTPLogin()
             .onChooseOtherOption()
+            .onKeyUpCode()
             .onSubmitCode();
     };
 
@@ -75,7 +76,7 @@
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
             $.ajax({
-                type: 'POST',
+                type: 'GET',
                 url: urls.otp,
                 dataType: 'json',
                 success: function(response) {
@@ -110,6 +111,20 @@
     };
 
     /**
+     * Remove error elements when is typing
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.onKeyUpCode = function() {
+        this.inputCode = this.shadowRoot.getElementById('input-code');
+        this.inputCode.addEventListener('keyup', function() {
+            thisElement.shadowRoot.querySelector('.tray-error-message').innerHTML = '';
+            thisElement.shadowRoot.getElementById('input-code').classList.remove('tray-input-invalid');
+        });
+
+        return this;
+    },
+
+    /**
      * Event listener to the form submit
      * @return {object} trayLoginProto
      */
@@ -120,12 +135,19 @@
             event.preventDefault();
             var data = $(this).serialize();
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 data: data,
                 url: urls.otpLogin,
                 dataType: 'json',
                 success: function(response) {
-                    $(document).trigger('tray-login', [response, 'finished']);
+                    if (response.statusCode > 400) {
+                        thisElement.shadowRoot.querySelector('.tray-error-message').innerHTML = response.message;
+                        thisElement.shadowRoot.getElementById('input-code').classList.add('tray-input-invalid');
+                        $(document).trigger('tray-login', [response, 'error']);
+                        return;
+                    }
+
+                    $(document).trigger('tray-login', [response, 'success']);
                 },
                 error: function(request, type) {
                     $(document).trigger('tray-login', [request, 'error']);
