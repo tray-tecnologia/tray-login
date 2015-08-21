@@ -138,6 +138,7 @@ polyfill-next-selector {
 
 :host::before {
   background: #191919;
+  background: rgba(0, 0, 0, 0.7);
   content: "";
   display: block;
   position: fixed;
@@ -160,7 +161,7 @@ polyfill-next-selector {
 
 :host .tray-container {
   background: #fff;
-  border: 1px solid #191919;
+  border: 1px solid rgba(0, 0, 0, 0.7);
   min-height: 300px;
   width: 292px;
   position: absolute;
@@ -313,7 +314,7 @@ polyfill-next-selector {
         </div>
         <div id="screen-2">
             <h1 class="tray-title">Código de Segurança</h1>
-            <p class="tray-action">Informe o código de segurança recebido por e-mail.</p>
+            <p class="tray-action">Informe o código de segurança que enviamos para seu e-mail.</p>
             <div class="tray-well" id="tray-email"></div>
             <div class="tray-input-group">
                 <input type="hidden" id="input-email" name="email">
@@ -339,7 +340,8 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         template = thisDoc.querySelector('template').content,
         trayLoginProto = Object.create(HTMLElement.prototype),
         thisElement,
-        urls = {};
+        urls = {},
+        data = {};
 
     /**
      * Load the callback URL
@@ -364,6 +366,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         thisElement = this;
         this.addListeners();
         this.setUrls();
+        this.setData('email', this.getAttribute('data-email'));
         this.shadowRoot.querySelector('#screen-2').style.display = 'none';
     };
 
@@ -374,6 +377,24 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         urls.otp = this.getAttribute('api-otp');
         urls.otpLogin = this.getAttribute('api-otp-login');
         urls.callback = this.getAttribute('url-callback');
+    };
+
+    /**
+     * Set a data
+     * @param {string} key
+     * @param {string} val
+     */
+    trayLoginProto.setData = function(key, val) {
+        data[key] = val;
+    };
+
+    /**
+     * Get a data
+     * @param {string} key
+     * @return {string} - Value of the array key
+     */
+    trayLoginProto.getData = function(key) {
+        return data[key];
     };
 
     /**
@@ -410,16 +431,15 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
+            thisElement.shadowRoot.getElementById('tray-email').innerHTML = thisElement.getData('email');
+            thisElement.shadowRoot.getElementById('input-email').value = thisElement.getData('email');
+            thisElement.shadowRoot.getElementById('screen-1').style.display = 'none';
+            thisElement.shadowRoot.getElementById('screen-2').style.display = 'block';
             $.ajax({
                 type: 'POST',
                 url: urls.otp,
                 dataType: 'json',
-                success: function(response) {
-                    thisElement.shadowRoot.getElementById('tray-email').innerHTML = response.data.email;
-                    thisElement.shadowRoot.getElementById('input-email').value = response.data.email;
-                    thisElement.shadowRoot.getElementById('screen-1').style.display = 'none';
-                    thisElement.shadowRoot.getElementById('screen-2').style.display = 'block';
-                },
+                success: function(response) {},
                 error: function(request, type) {
                     console.error('Error: ' + request.status + ' - ' + request.statusText);
                 }
