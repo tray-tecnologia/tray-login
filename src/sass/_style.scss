@@ -12,6 +12,7 @@ polyfill-next-selector { content: 'tray-login, tray-login *'; }
 polyfill-next-selector { content: 'tray-login::before'; }
 :host::before {
     background: #191919;
+    background: rgba(0, 0, 0, .7);
     content: "";
     display: block;
     position: fixed;
@@ -32,7 +33,7 @@ polyfill-next-selector { content: 'tray-login *'; }
 polyfill-next-selector { content: 'tray-login .tray-container'; }
 :host .tray-container {
     background: #fff;
-    border: 1px solid #191919;
+    border: 1px solid rgba(0, 0, 0, .7);
     min-height: 300px;
     width: 292px;
     position: absolute;
