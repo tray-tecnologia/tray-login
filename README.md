@@ -38,6 +38,7 @@ $(document).on('tray-login', function(event, response, type) {
 
 ```HTML
 <tray-login
+	data-email="teste@tray.com.br"
     api-otp="/otp/"
     api-otp-login="/otp/login"
     url-callback="/callback.html">

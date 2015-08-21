@@ -95,8 +95,6 @@
         
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
-            var buttonContent = this.innerHTML;
-            // this.innerHTML = 'Aguarde, estamos enviando um código para o seu e-mail';
             thisElement.shadowRoot.getElementById('tray-email').innerHTML = thisElement.getData('email');
             thisElement.shadowRoot.getElementById('input-email').value = thisElement.getData('email');
             thisElement.shadowRoot.getElementById('screen-1').style.display = 'none';
@@ -105,9 +103,7 @@
                 type: 'POST',
                 url: urls.otp,
                 dataType: 'json',
-                success: function(response) {
-                    // success code
-                },
+                success: function(response) {},
                 error: function(request, type) {
                     console.error('Error: ' + request.status + ' - ' + request.statusText);
                 }
