@@ -4,7 +4,8 @@
         template = thisDoc.querySelector('template').content,
         trayLoginProto = Object.create(HTMLElement.prototype),
         thisElement,
-        urls = {};
+        urls = {},
+        data = {};
 
     /**
      * Load the callback URL
@@ -29,6 +30,7 @@
         thisElement = this;
         this.addListeners();
         this.setUrls();
+        this.setData('email', this.getAttribute('data-email'));
         this.shadowRoot.querySelector('#screen-2').style.display = 'none';
     };
 
@@ -39,6 +41,24 @@
         urls.otp = this.getAttribute('api-otp');
         urls.otpLogin = this.getAttribute('api-otp-login');
         urls.callback = this.getAttribute('url-callback');
+    };
+
+    /**
+     * Set a data
+     * @param {string} key
+     * @param {string} val
+     */
+    trayLoginProto.setData = function(key, val) {
+        data[key] = val;
+    };
+
+    /**
+     * Get a data
+     * @param {string} key
+     * @return {string} - Value of the array key
+     */
+    trayLoginProto.getData = function(key) {
+        return data[key];
     };
 
     /**
@@ -75,15 +95,18 @@
         
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
+            var buttonContent = this.innerHTML;
+            // this.innerHTML = 'Aguarde, estamos enviando um código para o seu e-mail';
+            thisElement.shadowRoot.getElementById('tray-email').innerHTML = thisElement.getData('email');
+            thisElement.shadowRoot.getElementById('input-email').value = thisElement.getData('email');
+            thisElement.shadowRoot.getElementById('screen-1').style.display = 'none';
+            thisElement.shadowRoot.getElementById('screen-2').style.display = 'block';
             $.ajax({
                 type: 'POST',
                 url: urls.otp,
                 dataType: 'json',
                 success: function(response) {
-                    thisElement.shadowRoot.getElementById('tray-email').innerHTML = response.data.email;
-                    thisElement.shadowRoot.getElementById('input-email').value = response.data.email;
-                    thisElement.shadowRoot.getElementById('screen-1').style.display = 'none';
-                    thisElement.shadowRoot.getElementById('screen-2').style.display = 'block';
+                    // success code
                 },
                 error: function(request, type) {
                     console.error('Error: ' + request.status + ' - ' + request.statusText);
