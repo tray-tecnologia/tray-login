@@ -23,6 +23,11 @@ polyfill-next-selector { content: 'tray-login::before'; }
     z-index: 9998;
 }
 
+polyfill-next-selector { content: 'tray-login .tray-login-screens'; }
+:host .tray-login-screens {
+    display: none;
+}
+
 polyfill-next-selector { content: 'tray-login *'; }
 :host * {
     -webkit-box-sizing: border-box;

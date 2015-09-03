@@ -4,6 +4,7 @@
         template = thisDoc.querySelector('template').content,
         trayLoginProto = Object.create(HTMLElement.prototype),
         thisElement,
+        screensSelectors = '#main, #otp',
         urls = {},
         data = {};
 
@@ -31,7 +32,7 @@
         this.addListeners();
         this.setUrls();
         this.setData('email', this.getAttribute('data-email'));
-        this.shadowRoot.querySelector('#screen-2').style.display = 'none';
+        this.openScreen('main');
     };
 
     /**
@@ -72,6 +73,15 @@
             .onSubmitCode();
     };
 
+    trayLoginProto.openScreen = function(screenID) {
+        $(thatDoc).trigger('tray-login#' + screenID);
+        var screens = thisElement.shadowRoot.querySelectorAll(screensSelectors);
+        for (var i = screens.length - 1; i >= 0; i--) {
+            screens[i].style.display = 'none';
+        };
+        this.shadowRoot.getElementById(screenID).style.display = 'block';
+    };
+
     /**
      * When click in the close button
      */
@@ -91,14 +101,13 @@
      * @return {object} trayLoginProto
      */
     trayLoginProto.onOTPLogin = function() {
-        this.OTPButton = this.shadowRoot.getElementById('login-otp');
+        this.OTPButton = this.shadowRoot.getElementById('tray-login-otp');
         
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
             thisElement.shadowRoot.getElementById('tray-email').innerHTML = thisElement.getData('email');
             thisElement.shadowRoot.getElementById('input-email').value = thisElement.getData('email');
-            thisElement.shadowRoot.getElementById('screen-1').style.display = 'none';
-            thisElement.shadowRoot.getElementById('screen-2').style.display = 'block';
+            thisElement.openScreen('otp');
             $.ajax({
                 type: 'POST',
                 url: urls.otp,
@@ -122,8 +131,7 @@
 
         this.otherOptionButton.addEventListener('click', function(event) {
             event.preventDefault();
-            thisElement.shadowRoot.getElementById('screen-1').style.display = 'block';
-            thisElement.shadowRoot.getElementById('screen-2').style.display = 'none';
+            thisElement.openScreen('main');
         });
 
         return this;

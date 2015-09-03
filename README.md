@@ -14,7 +14,14 @@ url-callback  | URL de callback caso o login esteja correto
 
 ## Eventos
 
-Em caso de sucesso ou em caso de falha, é disparado um evento no documento principal.
+Lista de eventos disparados pelo componente.
+
+Evento          | Descrição
+--------        | -----------
+tray-login      | Dispara quando finalizou o processo de login
+tray-login#main | Dispara quando abre a tela inicial do componente
+tray-login#otp  | Dispara quando abre a tela do OTP
+
 Exemplo de utilização do evento:
 ```js
 $(document).on('tray-login', function(event, response, type) {
