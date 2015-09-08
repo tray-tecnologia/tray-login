@@ -29,8 +29,8 @@
         var clone = thatDoc.importNode(template, true);
         shadowRoot.appendChild(clone);
         thisElement = this;
-        this.addListeners();
         this.setUrls();
+        this.addListeners();
         this.setData('email', this.getAttribute('data-email'));
         this.openScreen('main');
     };
@@ -42,6 +42,7 @@
         urls.otp = this.getAttribute('api-otp');
         urls.otpLogin = this.getAttribute('api-otp-login');
         urls.callback = this.getAttribute('url-callback');
+        urls.facebook = this.getAttribute('url-facebook');
     };
 
     /**
@@ -68,6 +69,7 @@
     trayLoginProto.addListeners = function() {
         this.onCloseElement()
             .onOTPLogin()
+            .onFacebookLogin()
             .onChooseOtherOption()
             .onKeyUpCode()
             .onSubmitCode();
@@ -116,6 +118,30 @@
                 error: function(request, type) {
                     console.error('Error: ' + request.status + ' - ' + request.statusText);
                 }
+            });
+        });
+
+        return this;
+    };
+
+    /**
+     * Try to login with Facebook
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.onFacebookLogin = function() {
+        this.facebookButton = this.shadowRoot.getElementById('tray-login-facebook');
+
+        if (!urls.facebook) {
+            this.facebookButton.style.display = 'none';
+        }
+
+        this.facebookButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            $.get(urls.facebook, function(response) {
+                if (!response.data.url) {
+                    return false;
+                }
+                window.open(response.data.url, "Facebook", "width=400,height=500,toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no");
             });
         });
 

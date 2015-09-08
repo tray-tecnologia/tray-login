@@ -39,7 +39,6 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
 :host .tray-container {
     background: #fff;
     border: 1px solid rgba(0, 0, 0, .7);
-    min-height: 300px;
     width: 292px;
     position: absolute;
     left: calc(50% - 146px);
