@@ -9,35 +9,55 @@
             </symbol>
         </defs>
     </svg>
-    <form class="tray-container" action="" id="login-form">
+    <div class="tray-container">
         <button class="tray-close">X</button>
         <div class="tray-login-screens" id="main">
             <h1 class="tray-title">Alterar informações</h1>
             <p class="tray-action">Escolha uma das opções para se identificar:</p>
             <div class="tray-actions">
-                <button class="tray-btn-primary">E-mail e senha da loja</button>
+                <button class="tray-btn-primary" id="tray-login-email">E-mail e senha da loja</button>
                 <button class="tray-btn-facebook" id="tray-login-facebook">facebook</button>
                 <button class="tray-btn-otp" id="tray-login-otp">Receber código de segurança por e-mail</button>
             </div>
         </div>
         <div class="tray-login-screens" id="otp">
-            <h1 class="tray-title">Código de Segurança</h1>
-            <p class="tray-action">Informe o código de segurança que enviamos para seu e-mail.</p>
-            <div class="tray-well" id="tray-email"></div>
-            <div class="tray-input-group">
-                <input type="hidden" id="input-email" name="email">
-                <input class="tray-input empty" type="text" name="code" id="input-code" type="text" required>
-                <label for="input-code" class="tray-label">
-                    <svg><use xlink:href="#ch-icon-locked2"></use></svg>Código de segurança
-                </label>
-                <p class="tray-error-message"></p>
-            </div>
-            <div class="tray-actions">
-                <button class="tray-btn-primary">Continuar</button>
-                <button class="tray-btn-default" id="login-other-option">Escolher outra opção</button>
-            </div>
+            <form id="form-otp">
+                <h1 class="tray-title">Código de Segurança</h1>
+                <p class="tray-action">Informe o código de segurança que enviamos para seu e-mail.</p>
+                <div class="tray-well" data-element="tray-email"></div>
+                <div class="tray-input-group">
+                    <input type="hidden" id="input-email" name="email">
+                    <input class="tray-input empty" type="text" name="code" id="input-code" type="text" required>
+                    <label for="input-code" class="tray-label">
+                        <svg><use xlink:href="#ch-icon-locked2"></use></svg>Código de segurança
+                    </label>
+                    <p class="tray-error-message"></p>
+                </div>
+                <div class="tray-actions">
+                    <button class="tray-btn-primary" id="otp-submit">Continuar</button>
+                    <button class="tray-btn-default" data-element="login-other-option">Escolher outra opção</button>
+                </div>
+            </form>
         </div>
-    </form>
+        <div class="tray-login-screens" id="email-password">
+            <form id="form-password">
+                <h1 class="tray-title">E-mail e senha da loja</h1>
+                <p class="tray-action">Informe sua senha.</p>
+                <div class="tray-well" data-element="tray-email"></div>
+                <div class="tray-input-group ch-vspace-lg">
+                    <button class="tray-login-hide-password" id="hide-password">Ocultar</button>
+                    <input class="tray-input empty" type="text" name="password" id="input-password" type="text" required>
+                    <label for="input-password" class="tray-label">
+                        <svg><use xlink:href="#ch-icon-locked2"></use></svg>Senha
+                    </label>
+                </div>
+                <div class="tray-actions">
+                    <button class="tray-btn-primary" id="password-submit">Continuar</button>
+                    <button class="tray-btn-default" data-element="login-other-option">Escolher outra opção</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </template>
 
 <script src="../bower_components/zepto/dist/zepto.min.js"></script>

@@ -104,3 +104,20 @@ polyfill-next-selector { content: 'tray-login .tray-input-invalid ~ .tray-label'
 :host .tray-input-invalid ~ .tray-label {
     color: $input-error-txt;
 }
+
+polyfill-next-selector { content: 'tray-login .tray-login-hide-password'; }
+:host .tray-login-hide-password {
+    border: 0;
+    background-color: transparent;
+    color: $input-txt;
+    display: none;
+    font-size: 10px;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    outline-width: 0;
+    right: 10px;
+    top: 12px;
+    text-transform: uppercase;
+}

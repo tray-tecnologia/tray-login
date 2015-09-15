@@ -4,7 +4,7 @@
         template = thisDoc.querySelector('template').content,
         trayLoginProto = Object.create(HTMLElement.prototype),
         thisElement,
-        screensSelectors = '#main, #otp',
+        screensSelectors = '#main, #otp, #email-password',
         urls = {},
         data = {};
 
@@ -29,6 +29,7 @@
         var clone = thatDoc.importNode(template, true);
         shadowRoot.appendChild(clone);
         thisElement = this;
+        this.addElements();
         this.setUrls();
         this.addListeners();
         this.setData('email', this.getAttribute('data-email'));
@@ -43,6 +44,7 @@
         urls.otpLogin = this.getAttribute('api-otp-login');
         urls.callback = this.getAttribute('url-callback');
         urls.facebook = this.getAttribute('url-facebook');
+        urls.password = this.getAttribute('url-password');
     };
 
     /**
@@ -68,6 +70,7 @@
      */
     trayLoginProto.addListeners = function() {
         this.onCloseElement()
+            .onPasswordLogin()
             .onOTPLogin()
             .onFacebookLogin()
             .onChooseOtherOption()
@@ -75,6 +78,20 @@
             .onSubmitCode();
     };
 
+    /**
+     * Cache elements in the DOM
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.addElements = function() {
+        this.formOTP = this.shadowRoot.getElementById('form-otp');
+        this.formPassword = this.shadowRoot.getElementById('form-password');
+        return this;
+    };
+
+    /**
+     * Open a screen and close others
+     * @return {object} trayLoginProto
+     */
     trayLoginProto.openScreen = function(screenID) {
         $(thatDoc).trigger('tray-login#' + screenID);
         var screens = thisElement.shadowRoot.querySelectorAll(screensSelectors);
@@ -82,10 +99,13 @@
             screens[i].style.display = 'none';
         };
         this.shadowRoot.getElementById(screenID).style.display = 'block';
+
+        return this;
     };
 
     /**
      * When click in the close button
+     * @return {object} trayLoginProto
      */
     trayLoginProto.onCloseElement = function() {
         this.closeButton = this.shadowRoot.querySelector('.tray-close');
@@ -93,6 +113,104 @@
         this.closeButton.addEventListener('click', function(event) {
             event.preventDefault();
             thisElement.style.display = 'none';
+        });
+
+        return this;
+    };
+
+    /**
+     * Listen the button that open the password's screen
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.onPasswordLogin = function() {
+        this.passwordButton = this.shadowRoot.getElementById('tray-login-email');
+        this.passwordButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            thisElement.openScreen('email-password')
+                .showEmails()
+                .onHidePassword();
+        });
+
+        this.onPasswordSubmit();
+
+        return this;
+    };
+
+    /**
+     * Listen submit when is trying to login with e-mail and password
+     */
+    trayLoginProto.onPasswordSubmit = function() {
+        this.formPassword.addEventListener('submit', function(event) {
+            event.preventDefault();
+            var data = $(thisElement.formOTP).serialize();
+            $.ajax({
+                type: 'POST',
+                url: urls.password,
+                data: data,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.statusCode > 400) {
+                        thisElement.showErrorMessage(response);
+                        $(document).trigger('tray-login', [response, 'error']);
+                        return;
+                    }
+
+                    $(document).trigger('tray-login', [response, 'success']);
+                },
+                error: function(request, type) {
+                    $(document).trigger('tray-login', [request, 'error']);
+                    console.error('Error: ' + request.status + ' - ' + request.statusText);
+                }
+            });
+        });
+    };
+
+    /**
+     * Show e-mails in the DOM
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.showEmails = function() {
+        var emails = thisElement.shadowRoot.querySelectorAll('[data-element="tray-email"]');
+        for (var i = emails.length - 1; i >= 0; i--) {
+            emails[i].innerHTML = thisElement.getData('email');
+            emails[i].value = thisElement.getData('email');
+        };
+        return this;
+    };
+
+    /**
+     * When user is typing the password
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.onKeyUpPassword = function() {
+        var inputPassword = thisElement.shadowRoot.getElementById('input-password');
+
+        inputPassword.addEventListener('keyup', function(event) {
+            if (this.value.length > 0) {
+                thisElement.hidePasswordButton.style.display = 'block';
+            } else {
+                thisElement.hidePasswordButton.style.display = 'none';
+            }
+        });
+
+        return this;
+    };
+
+    /**
+     * When clicks on the button "hide"
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.onHidePassword = function() {
+        this.onKeyUpPassword();
+        this.hidePasswordButton = this.shadowRoot.getElementById('hide-password');
+        this.hidePasswordButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            var inputPassword = thisElement.shadowRoot.getElementById('input-password');
+            if (inputPassword.getAttribute('type') === 'text') {
+                inputPassword.setAttribute('type', 'password');
+            } else {
+                inputPassword.setAttribute('type', 'text');
+            }
         });
 
         return this;
@@ -107,7 +225,7 @@
         
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
-            thisElement.shadowRoot.getElementById('tray-email').innerHTML = thisElement.getData('email');
+            thisElement.showEmails();
             thisElement.shadowRoot.getElementById('input-email').value = thisElement.getData('email');
             thisElement.openScreen('otp');
             $.ajax({
@@ -153,12 +271,14 @@
      * @return {object} trayLoginProto
      */
     trayLoginProto.onChooseOtherOption = function() {
-        this.otherOptionButton = this.shadowRoot.getElementById('login-other-option');
+        this.otherOptionButton = this.shadowRoot.querySelectorAll('[data-element="login-other-option"]');
 
-        this.otherOptionButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            thisElement.openScreen('main');
-        });
+        for (var i = this.otherOptionButton.length - 1; i >= 0; i--) {
+            this.otherOptionButton[i].addEventListener('click', function(event) {
+                event.preventDefault();
+                thisElement.openScreen('main');
+            });
+        };
 
         return this;
     };
@@ -182,9 +302,7 @@
      * @return {object} trayLoginProto
      */
     trayLoginProto.onSubmitCode = function() {
-        this.loginForm = this.shadowRoot.getElementById('login-form');
-
-        this.loginForm.addEventListener('submit', function(event) {
+        this.formOTP.addEventListener('submit', function(event) {
             event.preventDefault();
             var data = $(this).serialize();
             $.ajax({
@@ -211,6 +329,9 @@
         return this;
     };
 
+    /**
+     * Show error messages to the user
+     */
     trayLoginProto.showErrorMessage = function(response) {
         thisElement.shadowRoot.querySelector('.tray-error-message').innerHTML = response.message;
         thisElement.shadowRoot.getElementById('input-code').classList.add('tray-input-invalid');
