@@ -1,6 +1,18 @@
 <html><head><meta charset="UTF-8"><template>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,900">
     <style>
+.ch-vspace-sm {
+  margin-bottom: 10px !important; }
+
+.ch-vspace-md {
+  margin-bottom: 15px !important; }
+
+.ch-vspace-lg {
+  margin-bottom: 25px !important; }
+
+.ch-vspace-xlg {
+  margin-bottom: 45px !important; }
+
 polyfill-next-selector {
   content: 'tray-login .tray-input-group'; }
 
@@ -120,6 +132,24 @@ polyfill-next-selector {
 
 :host .tray-input-invalid ~ .tray-label {
   color: #ef6262; }
+
+polyfill-next-selector {
+  content: 'tray-login .tray-login-hide-password'; }
+
+:host .tray-login-hide-password {
+  border: 0;
+  background-color: transparent;
+  color: #c7c7c7;
+  display: none;
+  font-size: 10px;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  outline-width: 0;
+  right: 10px;
+  top: 12px;
+  text-transform: uppercase; }
 
 /**
  * Base
@@ -306,35 +336,55 @@ polyfill-next-selector {
             </symbol>
         </defs>
     </svg>
-    <form class="tray-container" action="" id="login-form">
+    <div class="tray-container">
         <button class="tray-close">X</button>
         <div class="tray-login-screens" id="main">
             <h1 class="tray-title">Alterar informações</h1>
             <p class="tray-action">Escolha uma das opções para se identificar:</p>
             <div class="tray-actions">
-                <button class="tray-btn-primary">E-mail e senha da loja</button>
+                <button class="tray-btn-primary" id="tray-login-email">E-mail e senha da loja</button>
                 <button class="tray-btn-facebook" id="tray-login-facebook">facebook</button>
                 <button class="tray-btn-otp" id="tray-login-otp">Receber código de segurança por e-mail</button>
             </div>
         </div>
         <div class="tray-login-screens" id="otp">
-            <h1 class="tray-title">Código de Segurança</h1>
-            <p class="tray-action">Informe o código de segurança que enviamos para seu e-mail.</p>
-            <div class="tray-well" id="tray-email"></div>
-            <div class="tray-input-group">
-                <input type="hidden" id="input-email" name="email">
-                <input class="tray-input empty" type="text" name="code" id="input-code" required="">
-                <label for="input-code" class="tray-label">
-                    <svg><use xlink:href="#ch-icon-locked2"></use></svg>Código de segurança
-                </label>
-                <p class="tray-error-message"></p>
-            </div>
-            <div class="tray-actions">
-                <button class="tray-btn-primary">Continuar</button>
-                <button class="tray-btn-default" id="login-other-option">Escolher outra opção</button>
-            </div>
+            <form id="form-otp">
+                <h1 class="tray-title">Código de Segurança</h1>
+                <p class="tray-action">Informe o código de segurança que enviamos para seu e-mail.</p>
+                <div class="tray-well" data-element="tray-email"></div>
+                <div class="tray-input-group">
+                    <input type="hidden" id="input-email" name="email">
+                    <input class="tray-input empty" type="text" name="code" id="input-code" required="">
+                    <label for="input-code" class="tray-label">
+                        <svg><use xlink:href="#ch-icon-locked2"></use></svg>Código de segurança
+                    </label>
+                    <p class="tray-error-message"></p>
+                </div>
+                <div class="tray-actions">
+                    <button class="tray-btn-primary" id="otp-submit">Continuar</button>
+                    <button class="tray-btn-default" data-element="login-other-option">Escolher outra opção</button>
+                </div>
+            </form>
         </div>
-    </form>
+        <div class="tray-login-screens" id="email-password">
+            <form id="form-password">
+                <h1 class="tray-title">E-mail e senha da loja</h1>
+                <p class="tray-action">Informe sua senha.</p>
+                <div class="tray-well" data-element="tray-email"></div>
+                <div class="tray-input-group ch-vspace-lg">
+                    <button class="tray-login-hide-password" id="hide-password">Ocultar</button>
+                    <input class="tray-input empty" type="text" name="password" id="input-password" required="">
+                    <label for="input-password" class="tray-label">
+                        <svg><use xlink:href="#ch-icon-locked2"></use></svg>Senha
+                    </label>
+                </div>
+                <div class="tray-actions">
+                    <button class="tray-btn-primary" id="password-submit">Continuar</button>
+                    <button class="tray-btn-default" data-element="login-other-option">Escolher outra opção</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </template>
 
 <script>/* Zepto 1.1.6 - zepto event ajax form ie - zeptojs.com/license */
@@ -345,7 +395,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         template = thisDoc.querySelector('template').content,
         trayLoginProto = Object.create(HTMLElement.prototype),
         thisElement,
-        screensSelectors = '#main, #otp',
+        screensSelectors = '#main, #otp, #email-password',
         urls = {},
         data = {};
 
@@ -370,6 +420,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         var clone = thatDoc.importNode(template, true);
         shadowRoot.appendChild(clone);
         thisElement = this;
+        this.addElements();
         this.setUrls();
         this.addListeners();
         this.setData('email', this.getAttribute('data-email'));
@@ -384,6 +435,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         urls.otpLogin = this.getAttribute('api-otp-login');
         urls.callback = this.getAttribute('url-callback');
         urls.facebook = this.getAttribute('url-facebook');
+        urls.password = this.getAttribute('url-password');
     };
 
     /**
@@ -409,6 +461,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      */
     trayLoginProto.addListeners = function() {
         this.onCloseElement()
+            .onPasswordLogin()
             .onOTPLogin()
             .onFacebookLogin()
             .onChooseOtherOption()
@@ -416,6 +469,20 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
             .onSubmitCode();
     };
 
+    /**
+     * Cache elements in the DOM
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.addElements = function() {
+        this.formOTP = this.shadowRoot.getElementById('form-otp');
+        this.formPassword = this.shadowRoot.getElementById('form-password');
+        return this;
+    };
+
+    /**
+     * Open a screen and close others
+     * @return {object} trayLoginProto
+     */
     trayLoginProto.openScreen = function(screenID) {
         $(thatDoc).trigger('tray-login#' + screenID);
         var screens = thisElement.shadowRoot.querySelectorAll(screensSelectors);
@@ -423,10 +490,13 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
             screens[i].style.display = 'none';
         };
         this.shadowRoot.getElementById(screenID).style.display = 'block';
+
+        return this;
     };
 
     /**
      * When click in the close button
+     * @return {object} trayLoginProto
      */
     trayLoginProto.onCloseElement = function() {
         this.closeButton = this.shadowRoot.querySelector('.tray-close');
@@ -434,6 +504,104 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         this.closeButton.addEventListener('click', function(event) {
             event.preventDefault();
             thisElement.style.display = 'none';
+        });
+
+        return this;
+    };
+
+    /**
+     * Listen the button that open the password's screen
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.onPasswordLogin = function() {
+        this.passwordButton = this.shadowRoot.getElementById('tray-login-email');
+        this.passwordButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            thisElement.openScreen('email-password')
+                .showEmails()
+                .onHidePassword();
+        });
+
+        this.onPasswordSubmit();
+
+        return this;
+    };
+
+    /**
+     * Listen submit when is trying to login with e-mail and password
+     */
+    trayLoginProto.onPasswordSubmit = function() {
+        this.formPassword.addEventListener('submit', function(event) {
+            event.preventDefault();
+            var data = $(thisElement.formOTP).serialize();
+            $.ajax({
+                type: 'POST',
+                url: urls.password,
+                data: data,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.statusCode > 400) {
+                        thisElement.showErrorMessage(response);
+                        $(document).trigger('tray-login', [response, 'error']);
+                        return;
+                    }
+
+                    $(document).trigger('tray-login', [response, 'success']);
+                },
+                error: function(request, type) {
+                    $(document).trigger('tray-login', [request, 'error']);
+                    console.error('Error: ' + request.status + ' - ' + request.statusText);
+                }
+            });
+        });
+    };
+
+    /**
+     * Show e-mails in the DOM
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.showEmails = function() {
+        var emails = thisElement.shadowRoot.querySelectorAll('[data-element="tray-email"]');
+        for (var i = emails.length - 1; i >= 0; i--) {
+            emails[i].innerHTML = thisElement.getData('email');
+            emails[i].value = thisElement.getData('email');
+        };
+        return this;
+    };
+
+    /**
+     * When user is typing the password
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.onKeyUpPassword = function() {
+        var inputPassword = thisElement.shadowRoot.getElementById('input-password');
+
+        inputPassword.addEventListener('keyup', function(event) {
+            if (this.value.length > 0) {
+                thisElement.hidePasswordButton.style.display = 'block';
+            } else {
+                thisElement.hidePasswordButton.style.display = 'none';
+            }
+        });
+
+        return this;
+    };
+
+    /**
+     * When clicks on the button "hide"
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.onHidePassword = function() {
+        this.onKeyUpPassword();
+        this.hidePasswordButton = this.shadowRoot.getElementById('hide-password');
+        this.hidePasswordButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            var inputPassword = thisElement.shadowRoot.getElementById('input-password');
+            if (inputPassword.getAttribute('type') === 'text') {
+                inputPassword.setAttribute('type', 'password');
+            } else {
+                inputPassword.setAttribute('type', 'text');
+            }
         });
 
         return this;
@@ -448,7 +616,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
-            thisElement.shadowRoot.getElementById('tray-email').innerHTML = thisElement.getData('email');
+            thisElement.showEmails();
             thisElement.shadowRoot.getElementById('input-email').value = thisElement.getData('email');
             thisElement.openScreen('otp');
             $.ajax({
@@ -494,12 +662,14 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onChooseOtherOption = function() {
-        this.otherOptionButton = this.shadowRoot.getElementById('login-other-option');
+        this.otherOptionButton = this.shadowRoot.querySelectorAll('[data-element="login-other-option"]');
 
-        this.otherOptionButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            thisElement.openScreen('main');
-        });
+        for (var i = this.otherOptionButton.length - 1; i >= 0; i--) {
+            this.otherOptionButton[i].addEventListener('click', function(event) {
+                event.preventDefault();
+                thisElement.openScreen('main');
+            });
+        };
 
         return this;
     };
@@ -523,9 +693,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onSubmitCode = function() {
-        this.loginForm = this.shadowRoot.getElementById('login-form');
-
-        this.loginForm.addEventListener('submit', function(event) {
+        this.formOTP.addEventListener('submit', function(event) {
             event.preventDefault();
             var data = $(this).serialize();
             $.ajax({
@@ -552,6 +720,9 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         return this;
     };
 
+    /**
+     * Show error messages to the user
+     */
     trayLoginProto.showErrorMessage = function(response) {
         thisElement.shadowRoot.querySelector('.tray-error-message').innerHTML = response.message;
         thisElement.shadowRoot.getElementById('input-code').classList.add('tray-input-invalid');
