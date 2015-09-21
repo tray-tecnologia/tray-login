@@ -372,11 +372,13 @@ polyfill-next-selector {
                 <p class="tray-action">Informe sua senha.</p>
                 <div class="tray-well" data-element="tray-email"></div>
                 <div class="tray-input-group ch-vspace-lg">
+                    <input type="hidden" data-element="tray-email" name="email">
                     <button class="tray-login-hide-password" id="hide-password">Ocultar</button>
                     <input class="tray-input empty" type="text" name="password" id="input-password" required="">
                     <label for="input-password" class="tray-label">
                         <svg><use xlink:href="#ch-icon-locked2"></use></svg>Senha
                     </label>
+                    <p class="tray-error-message"></p>
                 </div>
                 <div class="tray-actions">
                     <button class="tray-btn-primary" id="password-submit">Continuar</button>
@@ -397,7 +399,15 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         thisElement,
         screensSelectors = '#main, #otp, #email-password',
         urls = {},
-        data = {};
+        data = {},
+        selectors = {
+            errorMessage: '.tray-error-message',
+            inputInvalid: '.tray-input-invalid'
+        },
+        classes = {
+            errorMessage: 'tray-error-message',
+            inputInvalid: 'tray-input-invalid'
+        };
 
     /**
      * Load the callback URL
@@ -488,8 +498,10 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         var screens = thisElement.shadowRoot.querySelectorAll(screensSelectors);
         for (var i = screens.length - 1; i >= 0; i--) {
             screens[i].style.display = 'none';
-        };
+        }
         this.shadowRoot.getElementById(screenID).style.display = 'block';
+
+        this.cleanErrorMessage();
 
         return this;
     };
@@ -533,7 +545,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
     trayLoginProto.onPasswordSubmit = function() {
         this.formPassword.addEventListener('submit', function(event) {
             event.preventDefault();
-            var data = $(thisElement.formOTP).serialize();
+            var data = $(thisElement.formPassword).serialize();
             $.ajax({
                 type: 'POST',
                 url: urls.password,
@@ -550,7 +562,8 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
                 },
                 error: function(request, type) {
                     $(document).trigger('tray-login', [request, 'error']);
-                    console.error('Error: ' + request.status + ' - ' + request.statusText);
+                    thisElement.showErrorMessage($.parseJSON(request.responseText));
+                    console.error('Tray Login Error: ' + request.status + ' - ' + request.statusText);
                 }
             });
         });
@@ -565,7 +578,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         for (var i = emails.length - 1; i >= 0; i--) {
             emails[i].innerHTML = thisElement.getData('email');
             emails[i].value = thisElement.getData('email');
-        };
+        }
         return this;
     };
 
@@ -582,6 +595,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
             } else {
                 thisElement.hidePasswordButton.style.display = 'none';
             }
+            thisElement.cleanErrorMessage();
         });
 
         return this;
@@ -625,7 +639,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
                 dataType: 'json',
                 success: function(response) {},
                 error: function(request, type) {
-                    console.error('Error: ' + request.status + ' - ' + request.statusText);
+                    console.error('Tray Login Error: ' + request.status + ' - ' + request.statusText);
                 }
             });
         });
@@ -669,7 +683,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
                 event.preventDefault();
                 thisElement.openScreen('main');
             });
-        };
+        }
 
         return this;
     };
@@ -724,8 +738,26 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      * Show error messages to the user
      */
     trayLoginProto.showErrorMessage = function(response) {
-        thisElement.shadowRoot.querySelector('.tray-error-message').innerHTML = response.message;
+        var errorElements = thisElement.shadowRoot.querySelectorAll('.tray-error-message');
+        for (var i = errorElements.length - 1; i >= 0; i--) {
+            errorElements[i].innerHTML = response.message;
+        };
+
         thisElement.shadowRoot.getElementById('input-code').classList.add('tray-input-invalid');
+        thisElement.shadowRoot.getElementById('input-password').classList.add('tray-input-invalid');
+    };
+
+    /**
+     * Clean error messages to the user
+     */
+    trayLoginProto.cleanErrorMessage = function(response) {
+        var errorElements = thisElement.shadowRoot.querySelectorAll('.tray-error-message');
+        for (var i = errorElements.length - 1; i >= 0; i--) {
+            errorElements[i].innerHTML = '';
+        };
+
+        thisElement.shadowRoot.getElementById('input-code').classList.remove('tray-input-invalid');
+        thisElement.shadowRoot.getElementById('input-password').classList.remove('tray-input-invalid');
     };
 
     /**

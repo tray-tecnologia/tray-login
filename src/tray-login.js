@@ -97,8 +97,10 @@
         var screens = thisElement.shadowRoot.querySelectorAll(screensSelectors);
         for (var i = screens.length - 1; i >= 0; i--) {
             screens[i].style.display = 'none';
-        };
+        }
         this.shadowRoot.getElementById(screenID).style.display = 'block';
+
+        this.cleanErrorMessage();
 
         return this;
     };
@@ -142,7 +144,7 @@
     trayLoginProto.onPasswordSubmit = function() {
         this.formPassword.addEventListener('submit', function(event) {
             event.preventDefault();
-            var data = $(thisElement.formOTP).serialize();
+            var data = $(thisElement.formPassword).serialize();
             $.ajax({
                 type: 'POST',
                 url: urls.password,
@@ -159,7 +161,8 @@
                 },
                 error: function(request, type) {
                     $(document).trigger('tray-login', [request, 'error']);
-                    console.error('Error: ' + request.status + ' - ' + request.statusText);
+                    thisElement.showErrorMessage($.parseJSON(request.responseText));
+                    console.error('Tray Login Error: ' + request.status + ' - ' + request.statusText);
                 }
             });
         });
@@ -174,7 +177,7 @@
         for (var i = emails.length - 1; i >= 0; i--) {
             emails[i].innerHTML = thisElement.getData('email');
             emails[i].value = thisElement.getData('email');
-        };
+        }
         return this;
     };
 
@@ -191,6 +194,7 @@
             } else {
                 thisElement.hidePasswordButton.style.display = 'none';
             }
+            thisElement.cleanErrorMessage();
         });
 
         return this;
@@ -234,7 +238,7 @@
                 dataType: 'json',
                 success: function(response) {},
                 error: function(request, type) {
-                    console.error('Error: ' + request.status + ' - ' + request.statusText);
+                    console.error('Tray Login Error: ' + request.status + ' - ' + request.statusText);
                 }
             });
         });
@@ -278,7 +282,7 @@
                 event.preventDefault();
                 thisElement.openScreen('main');
             });
-        };
+        }
 
         return this;
     };
@@ -333,8 +337,26 @@
      * Show error messages to the user
      */
     trayLoginProto.showErrorMessage = function(response) {
-        thisElement.shadowRoot.querySelector('.tray-error-message').innerHTML = response.message;
+        var errorElements = thisElement.shadowRoot.querySelectorAll('.tray-error-message');
+        for (var i = errorElements.length - 1; i >= 0; i--) {
+            errorElements[i].innerHTML = response.message;
+        };
+
         thisElement.shadowRoot.getElementById('input-code').classList.add('tray-input-invalid');
+        thisElement.shadowRoot.getElementById('input-password').classList.add('tray-input-invalid');
+    };
+
+    /**
+     * Clean error messages to the user
+     */
+    trayLoginProto.cleanErrorMessage = function(response) {
+        var errorElements = thisElement.shadowRoot.querySelectorAll('.tray-error-message');
+        for (var i = errorElements.length - 1; i >= 0; i--) {
+            errorElements[i].innerHTML = '';
+        };
+
+        thisElement.shadowRoot.getElementById('input-code').classList.remove('tray-input-invalid');
+        thisElement.shadowRoot.getElementById('input-password').classList.remove('tray-input-invalid');
     };
 
     /**

@@ -45,11 +45,13 @@
                 <p class="tray-action">Informe sua senha.</p>
                 <div class="tray-well" data-element="tray-email"></div>
                 <div class="tray-input-group ch-vspace-lg">
+                    <input type="hidden" data-element="tray-email" name="email">
                     <button class="tray-login-hide-password" id="hide-password">Ocultar</button>
                     <input class="tray-input empty" type="text" name="password" id="input-password" type="text" required>
                     <label for="input-password" class="tray-label">
                         <svg><use xlink:href="#ch-icon-locked2"></use></svg>Senha
                     </label>
+                    <p class="tray-error-message"></p>
                 </div>
                 <div class="tray-actions">
                     <button class="tray-btn-primary" id="password-submit">Continuar</button>
