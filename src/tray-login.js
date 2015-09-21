@@ -6,7 +6,8 @@
         thisElement,
         screensSelectors = '#main, #otp, #email-password',
         urls = {},
-        data = {};
+        data = {},
+        messages = {};
 
     /**
      * Load the callback URL
@@ -31,6 +32,7 @@
         thisElement = this;
         this.addElements();
         this.setUrls();
+        this.setMessages();
         this.addListeners();
         this.setData('email', this.getAttribute('data-email'));
         this.openScreen('main');
@@ -45,6 +47,29 @@
         urls.callback = this.getAttribute('url-callback');
         urls.facebook = this.getAttribute('url-facebook');
         urls.password = this.getAttribute('url-password');
+    };
+
+    /**
+     * Set messages
+     */
+    trayLoginProto.setMessages = function() {
+        this.messages = $.parseJSON(this.getAttribute('messages'));
+        this.applyMessages();
+    };
+
+    /**
+     * Apply messages in the DOM
+     */
+    trayLoginProto.applyMessages = function() {
+        for (key in this.messages) {
+            if (this.messages.hasOwnProperty(key)) {
+                var elements = this.shadowRoot.querySelectorAll('[custom-text="' + key + '"]');
+                var message = this.messages[key];
+                for (var i = elements.length - 1; i >= 0; i--) {
+                    elements[i].innerHTML = this.messages[key];
+                };
+            }
+        }
     };
 
     /**
@@ -207,14 +232,20 @@
     trayLoginProto.onHidePassword = function() {
         this.onKeyUpPassword();
         this.hidePasswordButton = this.shadowRoot.getElementById('hide-password');
+        var hideText = this.hidePasswordButton.innerHTML;
+        var showText = this.hidePasswordButton.getAttribute('data-text-toggle');
+
         this.hidePasswordButton.addEventListener('click', function(event) {
             event.preventDefault();
             var inputPassword = thisElement.shadowRoot.getElementById('input-password');
             if (inputPassword.getAttribute('type') === 'text') {
                 inputPassword.setAttribute('type', 'password');
-            } else {
-                inputPassword.setAttribute('type', 'text');
+                this.innerHTML = showText;
+                return;
             }
+
+            inputPassword.setAttribute('type', 'text');
+            this.innerHTML = hideText;
         });
 
         return this;

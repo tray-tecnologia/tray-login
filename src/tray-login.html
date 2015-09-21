@@ -13,7 +13,7 @@
         <button class="tray-close">X</button>
         <div class="tray-login-screens" id="main">
             <h1 class="tray-title">Alterar informações</h1>
-            <p class="tray-action">Escolha uma das opções para se identificar:</p>
+            <p class="tray-action" custom-text="main-action">Escolha uma das opções para se identificar:</p>
             <div class="tray-actions">
                 <button class="tray-btn-primary" id="tray-login-email">E-mail e senha da loja</button>
                 <button class="tray-btn-facebook" id="tray-login-facebook">facebook</button>
@@ -46,7 +46,7 @@
                 <div class="tray-well" data-element="tray-email"></div>
                 <div class="tray-input-group ch-vspace-lg">
                     <input type="hidden" data-element="tray-email" name="email">
-                    <button class="tray-login-hide-password" id="hide-password">Ocultar</button>
+                    <button class="tray-login-hide-password" id="hide-password" data-text-toggle="Mostrar">Ocultar</button>
                     <input class="tray-input empty" type="text" name="password" id="input-password" type="text" required>
                     <label for="input-password" class="tray-label">
                         <svg><use xlink:href="#ch-icon-locked2"></use></svg>Senha

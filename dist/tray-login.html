@@ -340,7 +340,7 @@ polyfill-next-selector {
         <button class="tray-close">X</button>
         <div class="tray-login-screens" id="main">
             <h1 class="tray-title">Alterar informações</h1>
-            <p class="tray-action">Escolha uma das opções para se identificar:</p>
+            <p class="tray-action" custom-text="main-action">Escolha uma das opções para se identificar:</p>
             <div class="tray-actions">
                 <button class="tray-btn-primary" id="tray-login-email">E-mail e senha da loja</button>
                 <button class="tray-btn-facebook" id="tray-login-facebook">facebook</button>
@@ -373,7 +373,7 @@ polyfill-next-selector {
                 <div class="tray-well" data-element="tray-email"></div>
                 <div class="tray-input-group ch-vspace-lg">
                     <input type="hidden" data-element="tray-email" name="email">
-                    <button class="tray-login-hide-password" id="hide-password">Ocultar</button>
+                    <button class="tray-login-hide-password" id="hide-password" data-text-toggle="Mostrar">Ocultar</button>
                     <input class="tray-input empty" type="text" name="password" id="input-password" required="">
                     <label for="input-password" class="tray-label">
                         <svg><use xlink:href="#ch-icon-locked2"></use></svg>Senha
@@ -400,14 +400,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         screensSelectors = '#main, #otp, #email-password',
         urls = {},
         data = {},
-        selectors = {
-            errorMessage: '.tray-error-message',
-            inputInvalid: '.tray-input-invalid'
-        },
-        classes = {
-            errorMessage: 'tray-error-message',
-            inputInvalid: 'tray-input-invalid'
-        };
+        messages = {};
 
     /**
      * Load the callback URL
@@ -432,6 +425,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         thisElement = this;
         this.addElements();
         this.setUrls();
+        this.setMessages();
         this.addListeners();
         this.setData('email', this.getAttribute('data-email'));
         this.openScreen('main');
@@ -446,6 +440,29 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         urls.callback = this.getAttribute('url-callback');
         urls.facebook = this.getAttribute('url-facebook');
         urls.password = this.getAttribute('url-password');
+    };
+
+    /**
+     * Set messages
+     */
+    trayLoginProto.setMessages = function() {
+        this.messages = $.parseJSON(this.getAttribute('messages'));
+        this.applyMessages();
+    };
+
+    /**
+     * Apply messages in the DOM
+     */
+    trayLoginProto.applyMessages = function() {
+        for (key in this.messages) {
+            if (this.messages.hasOwnProperty(key)) {
+                var elements = this.shadowRoot.querySelectorAll('[custom-text="' + key + '"]');
+                var message = this.messages[key];
+                for (var i = elements.length - 1; i >= 0; i--) {
+                    elements[i].innerHTML = this.messages[key];
+                };
+            }
+        }
     };
 
     /**
@@ -608,14 +625,20 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
     trayLoginProto.onHidePassword = function() {
         this.onKeyUpPassword();
         this.hidePasswordButton = this.shadowRoot.getElementById('hide-password');
+        var hideText = this.hidePasswordButton.innerHTML;
+        var showText = this.hidePasswordButton.getAttribute('data-text-toggle');
+
         this.hidePasswordButton.addEventListener('click', function(event) {
             event.preventDefault();
             var inputPassword = thisElement.shadowRoot.getElementById('input-password');
             if (inputPassword.getAttribute('type') === 'text') {
                 inputPassword.setAttribute('type', 'password');
-            } else {
-                inputPassword.setAttribute('type', 'text');
+                this.innerHTML = showText;
+                return;
             }
+
+            inputPassword.setAttribute('type', 'text');
+            this.innerHTML = hideText;
         });
 
         return this;
