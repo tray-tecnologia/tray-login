@@ -27,4 +27,4 @@ gulp.task('vulcanize', function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['vulcanize', 'sass']);
+gulp.task('default', ['sass', 'vulcanize']);
