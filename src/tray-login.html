@@ -27,7 +27,7 @@
                 <div class="tray-well" data-element="tray-email"></div>
                 <div class="tray-input-group">
                     <input type="hidden" id="input-email" name="email">
-                    <input class="tray-input empty" type="text" name="code" id="input-code" type="text" required>
+                    <input class="tray-input empty" autocomplete="off" type="text" name="code" id="input-code" type="text" required>
                     <label for="input-code" class="tray-label">
                         <svg><use xlink:href="#ch-icon-locked2"></use></svg>Código de segurança
                     </label>
@@ -47,7 +47,7 @@
                 <div class="tray-input-group ch-vspace-lg">
                     <input type="hidden" data-element="tray-email" name="email">
                     <button class="tray-login-hide-password" type="button" id="hide-password" data-text-toggle="Mostrar">Ocultar</button>
-                    <input class="tray-input empty" type="text" name="password" id="input-password" type="text" required>
+                    <input class="tray-input empty" autocomplete="off" type="text" name="password" id="input-password" type="text" required>
                     <label for="input-password" class="tray-label">
                         <svg><use xlink:href="#ch-icon-locked2"></use></svg>Senha
                     </label>
@@ -63,4 +63,6 @@
 </template>
 
 <script src="../bower_components/zepto/dist/zepto.min.js"></script>
+<script src="../bower_components/breakjs/dist/break.bundle.min.js"></script>
 <script src="../src/tray-login.js"></script>
+<script src="../src/js/password.js"></script>

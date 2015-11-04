@@ -18,10 +18,11 @@ gulp.task('watch', function() {
 gulp.task('vulcanize', function () {
     gulp.src('./src/tray-login.html')
         .pipe(vulcanize({
-        	inline: true,
+            inline: true,
             inlineCss: true,
             inlineScripts: true,
             excludes: [],
+            stripComments: true,
             stripExcludes: false
         }))
         .pipe(gulp.dest('dist'));

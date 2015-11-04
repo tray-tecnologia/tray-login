@@ -1,13 +1,16 @@
+var trayLoginProto = {},
+    thisElement;
+
 ;(function($, window, document, undefined) {
     var thatDoc = document,
         thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument,
         template = thisDoc.querySelector('template').content,
-        trayLoginProto = Object.create(HTMLElement.prototype),
-        thisElement,
         screensSelectors = '#main, #otp, #email-password',
         urls = {},
         data = {},
         messages = {};
+
+    trayLoginProto = Object.create(HTMLElement.prototype);
 
     /**
      * Load the callback URL
@@ -156,6 +159,8 @@
             thisElement.openScreen('email-password')
                 .showEmails()
                 .onHidePassword();
+
+            thisElement.byPassword.init();
         });
 
         this.onPasswordSubmit();
@@ -257,7 +262,7 @@
      */
     trayLoginProto.onOTPLogin = function() {
         this.OTPButton = this.shadowRoot.getElementById('tray-login-otp');
-        
+
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
             thisElement.showEmails();
