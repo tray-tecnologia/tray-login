@@ -102,6 +102,14 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
     }
 
     /**
+     * Alerts
+     */
+    polyfill-next-selector { content: 'tray-login .tray-general-error-alert'; }
+    :host .tray-general-error-alert {
+        color: $input-error-txt;
+    }
+
+    /**
      * Buttons
      */
     polyfill-next-selector { content: 'tray-login .tray-btn-primary, tray-login .tray-btn-default, tray-login .tray-btn-facebook, tray-login .tray-btn-otp'; }
