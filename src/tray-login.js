@@ -143,6 +143,7 @@ var trayLoginProto = {},
         this.closeButton.addEventListener('click', function(event) {
             event.preventDefault();
             thisElement.style.display = 'none';
+            $(document).trigger('tray-login#close');
         });
 
         return this;

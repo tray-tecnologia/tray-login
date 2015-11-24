@@ -16,36 +16,41 @@ url-callback  | URL de callback caso o login esteja correto
 
 Lista de eventos disparados pelo componente.
 
-Evento          | Descrição
---------        | -----------
-tray-login      | Dispara quando finalizou o processo de login
-tray-login#main | Dispara quando abre a tela inicial do componente
-tray-login#otp  | Dispara quando abre a tela do OTP
+Evento           | Descrição
+--------         | -----------
+tray-login       | Dispara quando finalizou o processo de login
+tray-login#main  | Dispara quando abre a tela inicial do componente
+tray-login#otp   | Dispara quando abre a tela do OTP
+tray-login#close | Dispara quando fecha o componente
 
 Exemplo de utilização do evento:
 ```js
 $(document).on('tray-login', function(event, response, type) {
-    if (type === 'finished') {
+    if (type === 'success') {
         console.log('Success!');
     } else {
         console.error('Error!');
     }
 });
+
+$(document).on('tray-login#close', function() {
+    console.log('Closed!');
+});
 ```
 
 ## Uso
 
-1. Adicione o polyfill e importe o componente no `<head>`:
+1 - Adicione o polyfill e importe o componente no `<head>`:
 ```HTML
 <script src="bower_components/webcomponentsjs/webcomponentsjs.min.js">
 <link rel="import" href="dist/tray-login.html">
 ```
 
-2. Adicione o elemento no seu HTML substituindo as URLs da aplicação.
+2 - Adicione o elemento no seu HTML substituindo as URLs da aplicação.
 
 ```HTML
 <tray-login
-	data-email="teste@tray.com.br"
+    data-email="teste@tray.com.br"
     api-otp="/otp/"
     api-otp-login="/otp/login"
     url-callback="/callback.html">
