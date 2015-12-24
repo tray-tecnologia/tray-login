@@ -10,6 +10,9 @@ Atributo      | Descrição
 --------      | -----------
 api-otp       | URL de geração do código (POST, params: email)
 api-otp-login | URL de login (GET, params: email, code)
+url-facebook  | URL de login do Facebook
+url-password  | URL de login por e-mail/senha (POST, params: email, password)
+url-password-recovery | URL de recuperação de senha (POST, params: email)
 url-callback  | URL de callback caso o login esteja correto
 
 ## Eventos
@@ -53,6 +56,9 @@ $(document).on('tray-login#close', function() {
     data-email="teste@tray.com.br"
     api-otp="/otp/"
     api-otp-login="/otp/login"
+    url-facebook="/login/facebook"
+    url-password="/login/password"
+    url-password-recovery="/login/recovery"
     url-callback="/callback.html">
 </tray-login>
 ```

@@ -390,6 +390,7 @@ polyfill-next-selector {
                     <p class="tray-error-message"></p>
                 </div>
                 <div class="tray-actions">
+                    <button class="tray-btn-default" type="button" id="password-recovery">Recuperar senha</button>
                     <button class="tray-btn-primary" type="submit" id="password-submit">Continuar</button>
                     <button class="tray-btn-default" data-element="login-other-option">Escolher outra opção</button>
                 </div>
@@ -453,6 +454,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         urls.callback = this.getAttribute('url-callback');
         urls.facebook = this.getAttribute('url-facebook');
         urls.password = this.getAttribute('url-password');
+        urls.passwordRecovery = this.getAttribute('url-password-recovery');
     };
 
     /**
@@ -505,6 +507,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
             .onOTPLogin()
             .onFacebookLogin()
             .onChooseOtherOption()
+            .onPasswordRecovery()
             .onKeyUpCode()
             .onSubmitCode();
     };
@@ -723,6 +726,44 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
                 thisElement.openScreen('main');
             });
         }
+
+        return this;
+    };
+
+    /**
+     * Listen click on password recovery
+     */
+    trayLoginProto.onPasswordRecovery = function() {
+        this.passRecoveryButton = thisElement.shadowRoot.getElementById('password-recovery');
+
+        if (!urls.passwordRecovery) {
+            this.passRecoveryButton.style.display = 'none';
+            return this;
+        }
+
+        this.passRecoveryButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: urls.passwordRecovery,
+                data: { email: trayLoginProto.getData('email') },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.statusCode > 400) {
+                        thisElement.showErrorMessage(response);
+                        return;
+                    }
+
+                    var message = thisElement.shadowRoot.querySelector('#form-password .tray-action');
+                    message.innerHTML = response.data.message;
+
+                    thisElement.shadowRoot.getElementById('input-password').focus();
+                },
+                error: function(request, type) {
+                    thisElement.showErrorMessage(request);
+                }
+            });
+        });
 
         return this;
     };
