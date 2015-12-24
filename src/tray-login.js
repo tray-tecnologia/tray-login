@@ -50,6 +50,7 @@ var trayLoginProto = {},
         urls.callback = this.getAttribute('url-callback');
         urls.facebook = this.getAttribute('url-facebook');
         urls.password = this.getAttribute('url-password');
+        urls.passwordRecovery = this.getAttribute('url-password-recovery');
     };
 
     /**
@@ -102,6 +103,7 @@ var trayLoginProto = {},
             .onOTPLogin()
             .onFacebookLogin()
             .onChooseOtherOption()
+            .onPasswordRecovery()
             .onKeyUpCode()
             .onSubmitCode();
     };
@@ -320,6 +322,44 @@ var trayLoginProto = {},
                 thisElement.openScreen('main');
             });
         }
+
+        return this;
+    };
+
+    /**
+     * Listen click on password recovery
+     */
+    trayLoginProto.onPasswordRecovery = function() {
+        this.passRecoveryButton = thisElement.shadowRoot.getElementById('password-recovery');
+
+        if (!urls.passwordRecovery) {
+            this.passRecoveryButton.style.display = 'none';
+            return this;
+        }
+
+        this.passRecoveryButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: urls.passwordRecovery,
+                data: { email: trayLoginProto.getData('email') },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.statusCode > 400) {
+                        thisElement.showErrorMessage(response);
+                        return;
+                    }
+
+                    var message = thisElement.shadowRoot.querySelector('#form-password .tray-action');
+                    message.innerHTML = response.data.message;
+
+                    thisElement.shadowRoot.getElementById('input-password').focus();
+                },
+                error: function(request, type) {
+                    thisElement.showErrorMessage(request);
+                }
+            });
+        });
 
         return this;
     };
