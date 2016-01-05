@@ -15,7 +15,8 @@ var trayLoginProto = {},
     /**
      * Load the callback URL
      */
-    $(document).on('tray-login', function(event, response, type) {
+    $(window).on('tray-login', function(event) {
+        var type = event.detail.type;
         if (type === 'success') {
             window.location = urls.callback;
         }
@@ -39,6 +40,23 @@ var trayLoginProto = {},
         this.addListeners();
         this.setData('email', this.getAttribute('data-email'));
         this.openScreen('main');
+    };
+
+    /**
+     * Trigger a custom event
+     * @param {string} eventName
+     * @param {object} eventResponse
+     * @param {string} eventType - options: success|error
+     */
+    trayLoginProto.triggerCustomEvent = function(eventName, eventResponse, eventType) {
+        var event = new CustomEvent(eventName, {
+            detail: {
+                response: eventResponse,
+                type: eventType,
+            },
+        });
+
+        window.dispatchEvent(event);
     };
 
     /**
@@ -186,14 +204,14 @@ var trayLoginProto = {},
                 success: function(response) {
                     if (response.statusCode > 400) {
                         thisElement.showErrorMessage(response);
-                        $(document).trigger('tray-login', [response, 'error']);
+                        trayLoginProto.triggerCustomEvent('tray-login', response, 'error');
                         return;
                     }
 
-                    $(document).trigger('tray-login', [response, 'success']);
+                    trayLoginProto.triggerCustomEvent('tray-login', response, 'success');
                 },
                 error: function(request, type) {
-                    $(document).trigger('tray-login', [request, 'error']);
+                    trayLoginProto.triggerCustomEvent('tray-login', request, 'error');
                     thisElement.showErrorMessage($.parseJSON(request.responseText));
                     console.error('Tray Login Error: ' + request.status + ' - ' + request.statusText);
                 }
@@ -394,15 +412,15 @@ var trayLoginProto = {},
                 success: function(response) {
                     if (response.statusCode > 400) {
                         thisElement.showErrorMessage(response);
-                        $(document).trigger('tray-login', [response, 'error']);
+                        trayLoginProto.triggerCustomEvent('tray-login', response, 'error');
                         return;
                     }
 
-                    $(document).trigger('tray-login', [response, 'success']);
+                    trayLoginProto.triggerCustomEvent('tray-login', response, 'success');
                 },
                 error: function(request, type) {
                     thisElement.showErrorMessage($.parseJSON(request.responseText));
-                    $(document).trigger('tray-login', [request, 'error']);
+                    trayLoginProto.triggerCustomEvent('tray-login', request, 'error');
                 }
             });
         });
