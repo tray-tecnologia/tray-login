@@ -28,7 +28,9 @@ tray-login#close | Dispara quando fecha o componente
 
 Exemplo de utilização do evento:
 ```js
-$(document).on('tray-login', function(event, response, type) {
+$(window).on('tray-login', function(event) {
+    var response = event.detail.response;
+    var type = event.detail.type;
     if (type === 'success') {
         console.log('Success!');
     } else {
@@ -36,10 +38,25 @@ $(document).on('tray-login', function(event, response, type) {
     }
 });
 
-$(document).on('tray-login#close', function() {
+$(window).on('tray-login#close', function() {
     console.log('Closed!');
 });
 ```
+
+Mudamos a forma como recuperamos os parâmetros do evento:
+```diff
+- $(document).on('tray-login', function(event, response, type) {
++ $(window).on('tray-login', function(event) {
++    var response = event.detail.response;
++    var type = event.detail.type;
+    if (type === 'success') {
+        console.log('Success!');
+    } else {
+        console.error('Error!');
+    }
+});
+```
+
 
 ## Uso
 
