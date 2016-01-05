@@ -55,7 +55,6 @@ var trayLoginProto = {},
                 type: eventType,
             },
         });
-
         window.dispatchEvent(event);
     };
 
@@ -175,6 +174,11 @@ var trayLoginProto = {},
      */
     trayLoginProto.onPasswordLogin = function() {
         this.passwordButton = this.shadowRoot.getElementById('tray-login-email');
+        
+        if (!urls.password){
+            this.passwordButton.style.display = 'none';
+        }
+        
         this.passwordButton.addEventListener('click', function(event) {
             event.preventDefault();
             thisElement.openScreen('email-password')
@@ -283,6 +287,10 @@ var trayLoginProto = {},
      */
     trayLoginProto.onOTPLogin = function() {
         this.OTPButton = this.shadowRoot.getElementById('tray-login-otp');
+        
+        if (!urls.otp) {
+            this.OTPButton.style.display = 'none';
+        }
 
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
