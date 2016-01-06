@@ -99,6 +99,7 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
     polyfill-next-selector { content: 'tray-login .tray-error-message'; }
     :host .tray-error-message {
         color: $input-error-txt;
+        & > strong { color: $input-error-txt; }
     }
 
     /**
