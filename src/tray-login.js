@@ -328,7 +328,8 @@ var trayLoginProto = {},
                 if (!response.data.url) {
                     return false;
                 }
-                window.open(response.data.url, "Facebook", "width=400,height=500,toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no");
+
+                thatDoc.location = response.data.url;
             });
         });
 
