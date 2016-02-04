@@ -186,6 +186,7 @@ var trayLoginProto = {},
                 .onHidePassword();
 
             thisElement.byPassword.init();
+            trayLoginProto.triggerCustomEvent('tray-login-click', 'tray-password-submit');
         });
 
         this.onPasswordSubmit();
@@ -218,7 +219,7 @@ var trayLoginProto = {},
                     trayLoginProto.triggerCustomEvent('tray-login', request, 'error');
                     thisElement.showErrorMessage($.parseJSON(request.responseText));
                     console.error('Tray Login Error: ' + request.status + ' - ' + request.statusText);
-                }
+                },
             });
         });
     };
@@ -304,6 +305,9 @@ var trayLoginProto = {},
                 success: function(response) {},
                 error: function(request, type) {
                     console.error('Tray Login Error: ' + request.status + ' - ' + request.statusText);
+                },
+                beforeSend: function(response)  {
+                    trayLoginProto.triggerCustomEvent('tray-login-click', 'tray-random-code');
                 }
             });
         });
@@ -331,6 +335,7 @@ var trayLoginProto = {},
 
                 thatDoc.location = response.data.url;
             });
+            trayLoginProto.triggerCustomEvent('tray-login-click', 'tray-login-facebook');
         });
 
         return this;
@@ -384,7 +389,10 @@ var trayLoginProto = {},
                 },
                 error: function(request, type) {
                     thisElement.showErrorMessage(request);
-                }
+                },
+                beforeSend: function(response)  {
+                    trayLoginProto.triggerCustomEvent('tray-login-click', 'tray-password-recover');
+                },
             });
         });
 
