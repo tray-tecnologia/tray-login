@@ -1,44 +1,32 @@
 <html><head><meta charset="UTF-8"><template>
     <style>
-.ch-vspace-sm {
+tray-login .ch-vspace-sm {
   margin-bottom: 10px !important; }
 
-.ch-vspace-md {
+tray-login .ch-vspace-md {
   margin-bottom: 15px !important; }
 
-.ch-vspace-lg {
+tray-login .ch-vspace-lg {
   margin-bottom: 25px !important; }
 
-.ch-vspace-xlg {
+tray-login .ch-vspace-xlg {
   margin-bottom: 45px !important; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-input-group'; }
-
-:host .tray-input-group {
+tray-login .tray-input-group {
   display: block;
   margin-bottom: 11px;
   position: relative; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-input-group.row .tray-label'; }
-
-:host .tray-input-group.row .tray-label {
+tray-login .tray-input-group.row .tray-label {
   left: 27px; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-input-group .tray-label'; }
-
-:host .tray-input-group .tray-label {
+tray-login .tray-input-group .tray-label {
   left: 12px;
   height: 15px;
   position: absolute;
   top: 16px; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-input-group .tray-label svg'; }
-
-:host .tray-input-group .tray-label svg {
+tray-login .tray-input-group .tray-label svg {
   fill: currentColor;
   float: left;
   height: 15px;
@@ -46,10 +34,7 @@ polyfill-next-selector {
   padding: 0;
   width: 15px; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-input'; }
-
-:host .tray-input {
+tray-login .tray-input {
   background: #fff;
   border: 1px solid #e0dcdc;
   border-radius: 3px;
@@ -63,79 +48,49 @@ polyfill-next-selector {
   text-indent: 36px;
   width: 100%; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-input:focus'; }
-
-:host .tray-input:focus {
+tray-login .tray-input:focus {
   outline: none;
   border-color: #c0c0c0;
   border-width: 2px;
   color: #909090; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-label'; }
-
-:host .tray-label {
+tray-login .tray-label {
   color: #c7c7c7;
   display: block;
   font-size: 14px;
   font-weight: 300;
   line-height: 14px; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-input:focus + .tray-label'; }
-
-:host .tray-input:focus + .tray-label {
+tray-login .tray-input:focus + .tray-label {
   color: #c7c7c7; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-input:valid + .tray-label, tray-login .tray-input:not(.empty) + .tray-label'; }
-
-:host .tray-input:valid + .tray-label,
-:host .tray-input:not(.empty) + .tray-label {
+tray-login .tray-input:valid + .tray-label,
+tray-login .tray-input:not(.empty) + .tray-label {
   color: #909090;
   height: 15px;
   width: 15px;
   overflow: hidden; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-input.empty:not([required]) + .tray-label'; }
-
-:host .tray-input.empty:not([required]) + .tray-label {
+tray-login .tray-input.empty:not([required]) + .tray-label {
   color: #c7c7c7;
   width: auto !important;
   height: auto !important; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-input:not(.empty):invalid'; }
-
-:host .tray-input:not(.empty):invalid {
+tray-login .tray-input:not(.empty):invalid {
   border-color: #f3989c;
   color: #ef6262; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-input:not(.empty):invalid + .tray-label'; }
-
-:host .tray-input:not(.empty):invalid + .tray-label {
+tray-login .tray-input:not(.empty):invalid + .tray-label {
   color: #ef6262; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-input-invalid'; }
-
-:host .tray-input-invalid {
+tray-login .tray-input-invalid {
   border-color: #f3989c;
   color: #ef6262; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-input-invalid ~ .tray-label'; }
-
-:host .tray-input-invalid ~ .tray-label {
+tray-login .tray-input-invalid ~ .tray-label {
   color: #ef6262; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-login-hide-password'; }
-
-:host .tray-login-hide-password {
+tray-login .tray-login-hide-password {
   border: 0;
   background-color: transparent;
   color: #c7c7c7;
@@ -153,19 +108,13 @@ polyfill-next-selector {
 /**
  * Base
  */
-polyfill-next-selector {
-  content: 'tray-login, tray-login *'; }
-
-:host,
-:host * {
+tray-login,
+tray-login * {
   color: #909090;
   font-family: Lato, Helvetica, sans-serif;
   font-size: 14px; }
 
-polyfill-next-selector {
-  content: 'tray-login::before'; }
-
-:host::before {
+tray-login::before {
   background: #191919;
   background: rgba(0, 0, 0, 0.7);
   content: "";
@@ -177,24 +126,15 @@ polyfill-next-selector {
   width: 100%;
   z-index: 9998; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-login-screens'; }
-
-:host .tray-login-screens {
+tray-login .tray-login-screens {
   display: none; }
 
-polyfill-next-selector {
-  content: 'tray-login *'; }
-
-:host * {
+tray-login * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-container'; }
-
-:host .tray-container {
+tray-login .tray-container {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.7);
   width: 292px;
@@ -204,10 +144,7 @@ polyfill-next-selector {
   padding: 12px;
   z-index: 9999; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-close'; }
-
-:host .tray-close {
+tray-login .tray-close {
   background: #fff;
   border: 2px solid #bababa;
   border-radius: 50%;
@@ -222,30 +159,21 @@ polyfill-next-selector {
   height: 21px;
   width: 21px; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-title'; }
-
-:host .tray-title {
+tray-login .tray-title {
   color: #8f8f8f;
   font-weight: 900;
   font-size: 19px;
   margin-top: 23px;
   margin-bottom: 25px; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-action'; }
-
-:host .tray-action {
+tray-login .tray-action {
   font-size: 14px;
   margin-bottom: 15px; }
 
 /**
      * Well
      */
-polyfill-next-selector {
-  content: 'tray-login .tray-well'; }
-
-:host .tray-well {
+tray-login .tray-well {
   background-color: #ebebeb;
   border-radius: 3px;
   border: 1px solid #efeded;
@@ -257,37 +185,25 @@ polyfill-next-selector {
 /**
      * Messages
      */
-polyfill-next-selector {
-  content: 'tray-login .tray-error-message'; }
-
-:host .tray-error-message {
+tray-login .tray-error-message {
   color: #ef6262; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-error-message strong'; }
-
-:host .tray-error-message strong {
+tray-login .tray-error-message strong {
   color: #ef6262; }
 
 /**
      * Alerts
      */
-polyfill-next-selector {
-  content: 'tray-login .tray-general-error-alert'; }
-
-:host .tray-general-error-alert {
+tray-login .tray-general-error-alert {
   color: #ef6262; }
 
 /**
      * Buttons
      */
-polyfill-next-selector {
-  content: 'tray-login .tray-btn-primary, tray-login .tray-btn-default, tray-login .tray-btn-facebook, tray-login .tray-btn-otp'; }
-
-:host .tray-btn-primary,
-:host .tray-btn-default,
-:host .tray-btn-facebook,
-:host .tray-btn-otp {
+tray-login .tray-btn-primary,
+tray-login .tray-btn-default,
+tray-login .tray-btn-facebook,
+tray-login .tray-btn-otp {
   background: #6ABF57;
   display: block;
   width: 100%;
@@ -300,44 +216,32 @@ polyfill-next-selector {
   margin-bottom: 13px;
   padding: 0; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-btn-facebook'; }
-
-:host .tray-btn-facebook {
+tray-login .tray-btn-facebook {
   background-color: #3b5998;
   border-bottom-color: #243f77; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-btn-otp'; }
-
-:host .tray-btn-otp {
+tray-login .tray-btn-otp {
   background-color: #52447c;
   border-bottom-color: #3d3160;
   font-size: 13px; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-btn-default, tray-login .tray-btn-default:hover, tray-login .tray-btn-default:active'; }
-
-:host .tray-btn-default,
-:host .tray-btn-default:hover,
-:host .tray-btn-default:active {
+tray-login .tray-btn-default,
+tray-login .tray-btn-default:hover,
+tray-login .tray-btn-default:active {
   background-color: #fff;
   border: 1px solid #d3d1d1;
   border-bottom-width: 3px;
   color: #bcbcbc; }
 
-polyfill-next-selector {
-  content: 'tray-login .tray-btn-primary, tray-login .tray-btn-primary:hover, tray-login .tray-btn-primary:active, tray-login .tray-btn-facebook, tray-login .tray-btn-facebook:hover, tray-login .tray-btn-facebook:active, tray-login .tray-btn-otp, tray-login .tray-btn-otp:hover, tray-login .tray-btn-otp:active'; }
-
-:host .tray-btn-primary,
-:host .tray-btn-primary:hover,
-:host .tray-btn-primary:active,
-:host .tray-btn-facebook,
-:host .tray-btn-facebook:hover,
-:host .tray-btn-facebook:active,
-:host .tray-btn-otp,
-:host .tray-btn-otp:hover,
-:host .tray-btn-otp:active {
+tray-login .tray-btn-primary,
+tray-login .tray-btn-primary:hover,
+tray-login .tray-btn-primary:active,
+tray-login .tray-btn-facebook,
+tray-login .tray-btn-facebook:hover,
+tray-login .tray-btn-facebook:active,
+tray-login .tray-btn-otp,
+tray-login .tray-btn-otp:hover,
+tray-login .tray-btn-otp:active {
   color: #fff;
   text-decoration: none; }
 
@@ -432,17 +336,12 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         }
     });
 
-    if (window.ShadowDOMPolyfill) {
-        WebComponents.ShadowCSS.shimStyling(template, 'tray-login');
-    }
-
     /**
      * Executes when element was created
      */
     trayLoginProto.createdCallback = function() {
-        var shadowRoot = this.createShadowRoot();
         var clone = thatDoc.importNode(template, true);
-        shadowRoot.appendChild(clone);
+        this.appendChild(clone);
         thisElement = this;
         this.addElements();
         this.setUrls();
@@ -494,7 +393,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
     trayLoginProto.applyMessages = function() {
         for (key in this.messages) {
             if (this.messages.hasOwnProperty(key)) {
-                var elements = this.shadowRoot.querySelectorAll('[custom-text="' + key + '"]');
+                var elements = thatDoc.querySelectorAll('[custom-text="' + key + '"]');
                 var message = this.messages[key];
                 for (var i = elements.length - 1; i >= 0; i--) {
                     elements[i].innerHTML = this.messages[key];
@@ -540,8 +439,8 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.addElements = function() {
-        this.formOTP = this.shadowRoot.getElementById('form-otp');
-        this.formPassword = this.shadowRoot.getElementById('form-password');
+        this.formOTP = thatDoc.getElementById('form-otp');
+        this.formPassword = thatDoc.getElementById('form-password');
         return this;
     };
 
@@ -551,11 +450,11 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      */
     trayLoginProto.openScreen = function(screenID) {
         $(thatDoc).trigger('tray-login#' + screenID);
-        var screens = thisElement.shadowRoot.querySelectorAll(screensSelectors);
+        var screens = thatDoc.querySelectorAll(screensSelectors);
         for (var i = screens.length - 1; i >= 0; i--) {
             screens[i].style.display = 'none';
         }
-        this.shadowRoot.getElementById(screenID).style.display = 'block';
+        thatDoc.getElementById(screenID).style.display = 'block';
 
         this.cleanErrorMessage();
 
@@ -567,7 +466,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onCloseElement = function() {
-        this.closeButton = this.shadowRoot.querySelector('.tray-close');
+        this.closeButton = thatDoc.querySelector('.tray-close');
 
         this.closeButton.addEventListener('click', function(event) {
             event.preventDefault();
@@ -583,7 +482,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onPasswordLogin = function() {
-        this.passwordButton = this.shadowRoot.getElementById('tray-login-email');
+        this.passwordButton = thatDoc.getElementById('tray-login-email');
         
         if (!urls.password){
             this.passwordButton.style.display = 'none';
@@ -639,7 +538,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.showEmails = function() {
-        var emails = thisElement.shadowRoot.querySelectorAll('[data-element="tray-email"]');
+        var emails = thatDoc.querySelectorAll('[data-element="tray-email"]');
         for (var i = emails.length - 1; i >= 0; i--) {
             emails[i].innerHTML = thisElement.getData('email');
             emails[i].value = thisElement.getData('email');
@@ -652,7 +551,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onKeyUpPassword = function() {
-        var inputPassword = thisElement.shadowRoot.getElementById('input-password');
+        var inputPassword = thatDoc.getElementById('input-password');
 
         inputPassword.addEventListener('keyup', function(event) {
             if (this.value.length > 0) {
@@ -672,13 +571,13 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      */
     trayLoginProto.onHidePassword = function() {
         this.onKeyUpPassword();
-        this.hidePasswordButton = this.shadowRoot.getElementById('hide-password');
+        this.hidePasswordButton = thatDoc.getElementById('hide-password');
         var hideText = this.hidePasswordButton.innerHTML;
         var showText = this.hidePasswordButton.getAttribute('data-text-toggle');
 
         this.hidePasswordButton.addEventListener('click', function(event) {
             event.preventDefault();
-            var inputPassword = thisElement.shadowRoot.getElementById('input-password');
+            var inputPassword = thatDoc.getElementById('input-password');
             if (inputPassword.getAttribute('type') === 'text') {
                 inputPassword.setAttribute('type', 'password');
                 this.innerHTML = showText;
@@ -697,7 +596,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onOTPLogin = function() {
-        this.OTPButton = this.shadowRoot.getElementById('tray-login-otp');
+        this.OTPButton = thatDoc.getElementById('tray-login-otp');
         
         if (!urls.otp) {
             this.OTPButton.style.display = 'none';
@@ -706,7 +605,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
             thisElement.showEmails();
-            thisElement.shadowRoot.getElementById('input-email').value = thisElement.getData('email');
+            thatDoc.getElementById('input-email').value = thisElement.getData('email');
             thisElement.openScreen('otp');
             $.ajax({
                 type: 'POST',
@@ -730,7 +629,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onFacebookLogin = function() {
-        this.facebookButton = this.shadowRoot.getElementById('tray-login-facebook');
+        this.facebookButton = thatDoc.getElementById('tray-login-facebook');
 
         if (!urls.facebook) {
             this.facebookButton.style.display = 'none';
@@ -756,7 +655,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onChooseOtherOption = function() {
-        this.otherOptionButton = this.shadowRoot.querySelectorAll('[data-element="login-other-option"]');
+        this.otherOptionButton = thatDoc.querySelectorAll('[data-element="login-other-option"]');
 
         for (var i = this.otherOptionButton.length - 1; i >= 0; i--) {
             this.otherOptionButton[i].addEventListener('click', function(event) {
@@ -772,7 +671,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      * Listen click on password recovery
      */
     trayLoginProto.onPasswordRecovery = function() {
-        this.passRecoveryButton = thisElement.shadowRoot.getElementById('password-recovery');
+        this.passRecoveryButton = thatDoc.getElementById('password-recovery');
 
         if (!urls.passwordRecovery) {
             this.passRecoveryButton.style.display = 'none';
@@ -792,10 +691,10 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
                         return;
                     }
 
-                    var message = thisElement.shadowRoot.querySelector('#form-password .tray-action');
+                    var message = thatDoc.querySelector('#form-password .tray-action');
                     message.innerHTML = response.data.message;
 
-                    thisElement.shadowRoot.getElementById('input-password').focus();
+                    thatDoc.getElementById('input-password').focus();
                 },
                 error: function(request, type) {
                     thisElement.showErrorMessage(request);
@@ -814,10 +713,10 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onKeyUpCode = function() {
-        this.inputCode = this.shadowRoot.getElementById('input-code');
+        this.inputCode = thatDoc.getElementById('input-code');
         this.inputCode.addEventListener('keyup', function() {
-            thisElement.shadowRoot.querySelector('.tray-error-message').innerHTML = '';
-            thisElement.shadowRoot.getElementById('input-code').classList.remove('tray-input-invalid');
+            thatDoc.querySelector('.tray-error-message').innerHTML = '';
+            thatDoc.getElementById('input-code').classList.remove('tray-input-invalid');
         });
 
         return this;
@@ -859,26 +758,26 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      * Show error messages to the user
      */
     trayLoginProto.showErrorMessage = function(response) {
-        var errorElements = thisElement.shadowRoot.querySelectorAll('.tray-error-message');
+        var errorElements = thatDoc.querySelectorAll('.tray-error-message');
         for (var i = errorElements.length - 1; i >= 0; i--) {
             errorElements[i].innerHTML = response.message;
         };
 
-        thisElement.shadowRoot.getElementById('input-code').classList.add('tray-input-invalid');
-        thisElement.shadowRoot.getElementById('input-password').classList.add('tray-input-invalid');
+        thatDoc.getElementById('input-code').classList.add('tray-input-invalid');
+        thatDoc.getElementById('input-password').classList.add('tray-input-invalid');
     };
 
     /**
      * Clean error messages to the user
      */
     trayLoginProto.cleanErrorMessage = function(response) {
-        var errorElements = thisElement.shadowRoot.querySelectorAll('.tray-error-message');
+        var errorElements = thatDoc.querySelectorAll('.tray-error-message');
         for (var i = errorElements.length - 1; i >= 0; i--) {
             errorElements[i].innerHTML = '';
         };
 
-        thisElement.shadowRoot.getElementById('input-code').classList.remove('tray-input-invalid');
-        thisElement.shadowRoot.getElementById('input-password').classList.remove('tray-input-invalid');
+        thatDoc.getElementById('input-code').classList.remove('tray-input-invalid');
+        thatDoc.getElementById('input-password').classList.remove('tray-input-invalid');
     };
 
     /**
@@ -925,7 +824,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
          */
         changePasswordType: function() {
             if (this.layout.atLeast('desktop')) {
-                _this.shadowRoot.getElementById('hide-password').dispatchEvent(new Event('click'));
+                document.getElementById('hide-password').dispatchEvent(new Event('click'));
             }
 
             return this;

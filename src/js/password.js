@@ -33,7 +33,7 @@
          */
         changePasswordType: function() {
             if (this.layout.atLeast('desktop')) {
-                _this.shadowRoot.getElementById('hide-password').dispatchEvent(new Event('click'));
+                document.getElementById('hide-password').dispatchEvent(new Event('click'));
             }
 
             return this;
