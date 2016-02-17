@@ -62,7 +62,7 @@ Mudamos a forma como recuperamos os parâmetros do evento:
 
 1 - Adicione o polyfill e importe o componente no `<head>`:
 ```HTML
-<script src="bower_components/webcomponentsjs/webcomponentsjs.min.js">
+<script src="bower_components/webcomponentsjs/webcomponentsjs-lite.min.js">
 <link rel="import" href="dist/tray-login.html">
 ```
 

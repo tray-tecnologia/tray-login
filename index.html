@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tray Login Component</title>
-    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="dist/tray-login.html">
 </head>
 <body>
     <tray-login
-        api-otp="src/otp.json"
-        api-otp-login="src/login.json"
+        data-email="teste@tray.com.br"
+        api-otp="src/mock/otp.json"
+        api-otp-login="src/mock/otp.json"
+        url-facebook="/login/facebook"
+        url-password="src/mock/password.json"
+        url-password-recovery="/login/recovery"
         url-callback="callback.html">
     </tray-login>
 </body>

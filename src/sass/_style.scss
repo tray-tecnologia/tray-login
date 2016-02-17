@@ -1,16 +1,14 @@
 /**
  * Base
  */
-polyfill-next-selector { content: 'tray-login, tray-login *'; }
-:host,
-:host * {
+tray-login,
+tray-login * {
     color: #909090;
     font-family: Lato, Helvetica, sans-serif;
     font-size: 14px;
 }
 
-polyfill-next-selector { content: 'tray-login::before'; }
-:host::before {
+tray-login::before {
     background: #191919;
     background: rgba(0, 0, 0, .7);
     content: "";
@@ -23,20 +21,17 @@ polyfill-next-selector { content: 'tray-login::before'; }
     z-index: 9998;
 }
 
-polyfill-next-selector { content: 'tray-login .tray-login-screens'; }
-:host .tray-login-screens {
+tray-login .tray-login-screens {
     display: none;
 }
 
-polyfill-next-selector { content: 'tray-login *'; }
-:host * {
+tray-login * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-polyfill-next-selector { content: 'tray-login .tray-container'; }
-:host .tray-container {
+tray-login .tray-container {
     background: #fff;
     border: 1px solid rgba(0, 0, 0, .7);
     width: 292px;
@@ -47,8 +42,8 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
     z-index: 9999;
 }
 
-    polyfill-next-selector { content: 'tray-login .tray-close'; }
-    :host .tray-close {
+
+    tray-login .tray-close {
         background: #fff;
         border: 2px solid #bababa;
         border-radius: 50%;
@@ -64,8 +59,7 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
         width: 21px;
     }
 
-    polyfill-next-selector { content: 'tray-login .tray-title'; }
-    :host .tray-title {
+    tray-login .tray-title {
         color: #8f8f8f;
         font-weight: 900;
         font-size: 19px;
@@ -73,8 +67,7 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
         margin-bottom: 25px;
     }
 
-    polyfill-next-selector { content: 'tray-login .tray-action'; }
-    :host .tray-action {
+    tray-login .tray-action {
         font-size: 14px;
         margin-bottom: 15px;
     }
@@ -82,8 +75,7 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
     /**
      * Well
      */
-    polyfill-next-selector { content: 'tray-login .tray-well'; }
-    :host .tray-well {
+    tray-login .tray-well {
         background-color: #ebebeb;
         border-radius: 3px;
         border: 1px solid #efeded;
@@ -96,32 +88,28 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
     /**
      * Messages
      */
-    polyfill-next-selector { content: 'tray-login .tray-error-message'; }
-    :host .tray-error-message {
+    tray-login .tray-error-message {
         color: $input-error-txt;
     }
-    
-    polyfill-next-selector { content: 'tray-login .tray-error-message strong'; }
-    :host .tray-error-message strong {
+
+    tray-login .tray-error-message strong {
         color: $input-error-txt;
     }
 
     /**
      * Alerts
      */
-    polyfill-next-selector { content: 'tray-login .tray-general-error-alert'; }
-    :host .tray-general-error-alert {
+    tray-login .tray-general-error-alert {
         color: $input-error-txt;
     }
 
     /**
      * Buttons
      */
-    polyfill-next-selector { content: 'tray-login .tray-btn-primary, tray-login .tray-btn-default, tray-login .tray-btn-facebook, tray-login .tray-btn-otp'; }
-    :host .tray-btn-primary,
-    :host .tray-btn-default,
-    :host .tray-btn-facebook,
-    :host .tray-btn-otp {
+    tray-login .tray-btn-primary,
+    tray-login .tray-btn-default,
+    tray-login .tray-btn-facebook,
+    tray-login .tray-btn-otp {
         background: $btn-next-bg;
         display: block;
         width: 100%;
@@ -135,39 +123,35 @@ polyfill-next-selector { content: 'tray-login .tray-container'; }
         padding: 0;
     }
 
-    polyfill-next-selector { content: 'tray-login .tray-btn-facebook'; }
-    :host .tray-btn-facebook {
+    tray-login .tray-btn-facebook {
         background-color: #3b5998;
         border-bottom-color: #243f77;
     }
 
-    polyfill-next-selector { content: 'tray-login .tray-btn-otp'; }
-    :host .tray-btn-otp {
+    tray-login .tray-btn-otp {
         background-color: #52447c;
         border-bottom-color: #3d3160;
         font-size: 13px;
     }
 
-    polyfill-next-selector { content: 'tray-login .tray-btn-default, tray-login .tray-btn-default:hover, tray-login .tray-btn-default:active'; }
-    :host .tray-btn-default,
-    :host .tray-btn-default:hover,
-    :host .tray-btn-default:active {
+    tray-login .tray-btn-default,
+    tray-login .tray-btn-default:hover,
+    tray-login .tray-btn-default:active {
         background-color: #fff;
         border: 1px solid #d3d1d1;
         border-bottom-width: 3px;
         color: #bcbcbc;
     }
 
-    polyfill-next-selector { content: 'tray-login .tray-btn-primary, tray-login .tray-btn-primary:hover, tray-login .tray-btn-primary:active, tray-login .tray-btn-facebook, tray-login .tray-btn-facebook:hover, tray-login .tray-btn-facebook:active, tray-login .tray-btn-otp, tray-login .tray-btn-otp:hover, tray-login .tray-btn-otp:active'; }
-    :host .tray-btn-primary,
-    :host .tray-btn-primary:hover,
-    :host .tray-btn-primary:active,
-    :host .tray-btn-facebook,
-    :host .tray-btn-facebook:hover,
-    :host .tray-btn-facebook:active,
-    :host .tray-btn-otp,
-    :host .tray-btn-otp:hover,
-    :host .tray-btn-otp:active {
+    tray-login .tray-btn-primary,
+    tray-login .tray-btn-primary:hover,
+    tray-login .tray-btn-primary:active,
+    tray-login .tray-btn-facebook,
+    tray-login .tray-btn-facebook:hover,
+    tray-login .tray-btn-facebook:active,
+    tray-login .tray-btn-otp,
+    tray-login .tray-btn-otp:hover,
+    tray-login .tray-btn-otp:active {
         color: #fff;
         text-decoration: none;
     }

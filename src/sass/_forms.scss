@@ -1,26 +1,21 @@
-
-polyfill-next-selector { content: 'tray-login .tray-input-group'; }
-:host .tray-input-group {
+tray-login .tray-input-group {
     display: block;
     margin-bottom: 11px;
     position: relative;
 }
 
-polyfill-next-selector { content: 'tray-login .tray-input-group.row .tray-label'; }
-:host .tray-input-group.row .tray-label {
+tray-login .tray-input-group.row .tray-label {
     left: 27px;
 }
 
-    polyfill-next-selector { content: 'tray-login .tray-input-group .tray-label'; }
-    :host .tray-input-group .tray-label {
+    tray-login .tray-input-group .tray-label {
         left: 12px;
         height: 15px;
         position: absolute;
         top: 16px;
     }
 
-    polyfill-next-selector { content: 'tray-login .tray-input-group .tray-label svg'; }
-    :host .tray-input-group .tray-label svg {
+    tray-login .tray-input-group .tray-label svg {
         fill: currentColor;
         float: left;
         height: 15px;
@@ -29,8 +24,7 @@ polyfill-next-selector { content: 'tray-login .tray-input-group.row .tray-label'
         width: 15px;
     }
 
-polyfill-next-selector { content: 'tray-login .tray-input'; }
-:host .tray-input {
+tray-login .tray-input {
     background: $input-bg;
     border: 1px solid $input-bd;
     border-radius: 3px;
@@ -45,16 +39,14 @@ polyfill-next-selector { content: 'tray-login .tray-input'; }
     width: 100%;
 }
 
-polyfill-next-selector { content: 'tray-login .tray-input:focus'; }
-:host .tray-input:focus {
+tray-login .tray-input:focus {
     outline: none;
     border-color: $input-focus-bd;
     border-width: 2px;
     color: $input-focus-txt;
 }
 
-polyfill-next-selector { content: 'tray-login .tray-label'; }
-:host .tray-label {
+tray-login .tray-label {
     color: $input-txt;
     display: block;
     font-size: 14px;
@@ -62,51 +54,43 @@ polyfill-next-selector { content: 'tray-login .tray-label'; }
     line-height: 14px;
 }
 
-polyfill-next-selector { content: 'tray-login .tray-input:focus + .tray-label'; }
-:host .tray-input:focus + .tray-label {
+tray-login .tray-input:focus + .tray-label {
     color: $input-txt;
 }
 
-polyfill-next-selector { content: 'tray-login .tray-input:valid + .tray-label, tray-login .tray-input:not(.empty) + .tray-label'; }
-:host .tray-input:valid + .tray-label,
-:host .tray-input:not(.empty) + .tray-label {
+tray-login .tray-input:valid + .tray-label,
+tray-login .tray-input:not(.empty) + .tray-label {
     color: $input-focus-txt;
     height: 15px;
     width: 15px;
     overflow: hidden;
 }
 
-polyfill-next-selector { content: 'tray-login .tray-input.empty:not([required]) + .tray-label'; }
-:host .tray-input.empty:not([required]) + .tray-label {
+tray-login .tray-input.empty:not([required]) + .tray-label {
     color: $input-txt;
     width: auto !important;
     height: auto !important;
 }
 
-polyfill-next-selector { content: 'tray-login .tray-input:not(.empty):invalid'; }
-:host .tray-input:not(.empty):invalid {
+tray-login .tray-input:not(.empty):invalid {
     border-color: $input-error-bd;
     color: $input-error-txt;
 }
 
-polyfill-next-selector { content: 'tray-login .tray-input:not(.empty):invalid + .tray-label'; }
-:host .tray-input:not(.empty):invalid + .tray-label {
+tray-login .tray-input:not(.empty):invalid + .tray-label {
     color: $input-error-txt;
 }
 
-polyfill-next-selector { content: 'tray-login .tray-input-invalid'; }
-:host .tray-input-invalid {
+tray-login .tray-input-invalid {
     border-color: $input-error-bd;
     color: $input-error-txt;
 }
 
-polyfill-next-selector { content: 'tray-login .tray-input-invalid ~ .tray-label'; }
-:host .tray-input-invalid ~ .tray-label {
+tray-login .tray-input-invalid ~ .tray-label {
     color: $input-error-txt;
 }
 
-polyfill-next-selector { content: 'tray-login .tray-login-hide-password'; }
-:host .tray-login-hide-password {
+tray-login .tray-login-hide-password {
     border: 0;
     background-color: transparent;
     color: $input-txt;
