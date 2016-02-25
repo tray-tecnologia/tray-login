@@ -28,6 +28,20 @@ var trayLoginProto = {},
     trayLoginProto.createdCallback = function() {
         var clone = thatDoc.importNode(template, true);
         this.appendChild(clone);
+        this.initComponent();
+    };
+
+    /**
+     * Executes when some attribute was changed
+     */
+    trayLoginProto.attributeChangedCallback = function() {
+        this.initComponent();
+    };
+
+    /**
+     * Initialize the component
+     */
+    trayLoginProto.initComponent = function() {
         thisElement = this;
         this.addElements();
         this.setUrls();
@@ -169,11 +183,11 @@ var trayLoginProto = {},
      */
     trayLoginProto.onPasswordLogin = function() {
         this.passwordButton = thatDoc.getElementById('tray-login-email');
-        
+
         if (!urls.password){
             this.passwordButton.style.display = 'none';
         }
-        
+
         this.passwordButton.addEventListener('click', function(event) {
             event.preventDefault();
             thisElement.openScreen('email-password')
@@ -283,7 +297,7 @@ var trayLoginProto = {},
      */
     trayLoginProto.onOTPLogin = function() {
         this.OTPButton = thatDoc.getElementById('tray-login-otp');
-        
+
         if (!urls.otp) {
             this.OTPButton.style.display = 'none';
         }
