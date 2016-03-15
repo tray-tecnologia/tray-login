@@ -35,7 +35,7 @@ tray-login .tray-container {
     background: #fff;
     border: 1px solid rgba(0, 0, 0, .7);
     width: 292px;
-    position: absolute;
+    position: fixed;
     left: calc(50% - 146px);
     top: calc(50% - 150px);
     padding: 12px;
