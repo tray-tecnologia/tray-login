@@ -48,6 +48,7 @@ var trayLoginProto = {},
         this.setMessages();
         this.addListeners();
         this.setData('email', this.getAttribute('data-email'));
+        this.setData('cpf', this.getAttribute('data-cpf'));
         this.openScreen('main');
     };
 
@@ -192,6 +193,7 @@ var trayLoginProto = {},
             event.preventDefault();
             thisElement.openScreen('email-password')
                 .showEmails()
+                .showCpfs()
                 .onHidePassword();
 
             thisElement.byPassword.init();
@@ -240,8 +242,31 @@ var trayLoginProto = {},
     trayLoginProto.showEmails = function() {
         var emails = thatDoc.querySelectorAll('[data-element="tray-email"]');
         for (var i = emails.length - 1; i >= 0; i--) {
-            emails[i].innerHTML = thisElement.getData('email');
-            emails[i].value = thisElement.getData('email');
+            var email = thisElement.getData('email');
+            if (email) {
+                emails[i].innerHTML = email;
+                emails[i].value = email;
+            } else {
+                emails[i].style.display = 'none';
+            }
+        }
+        return this;
+    };
+
+    /**
+     * Show cpf in the DOM
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.showCpfs = function() {
+        var cpfs = thatDoc.querySelectorAll('[data-element="tray-cpf"]');
+        for (var i = cpfs.length - 1; i >= 0; i--) {
+            var cpf = thisElement.getData('cpf');
+            if (cpf) {
+                cpfs[i].innerHTML = cpf;
+                cpfs[i].value = cpf;
+            } else {
+                cpfs[i].style.display = 'none';
+            }
         }
         return this;
     };
