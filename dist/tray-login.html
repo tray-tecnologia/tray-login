@@ -261,7 +261,7 @@ tray-login .tray-btn-otp:active {
             <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
             <p class="tray-action" custom-text="main-action">Escolha uma das opções para se identificar:</p>
             <div class="tray-actions">
-                <button class="tray-btn-primary" id="tray-login-email">E-mail/CPF e senha da loja</button>
+                <button class="tray-btn-primary" id="tray-login-email">E-mail e senha da loja</button>
                 <button class="tray-btn-facebook" id="tray-login-facebook">facebook</button>
                 <button class="tray-btn-otp" id="tray-login-otp">Receber código de segurança por e-mail</button>
             </div>
@@ -287,7 +287,7 @@ tray-login .tray-btn-otp:active {
         </div>
         <div class="tray-login-screens" id="email-password">
             <form id="form-password">
-                <h1 class="tray-title">E-mail/CPF e senha da loja</h1>
+                <h1 class="tray-title">E-mail e senha da loja</h1>
                 <p class="tray-action">Informe sua senha.</p>
                 <div class="tray-well" data-element="tray-email"></div>
                 <div class="tray-well" data-element="tray-cpf"></div>
@@ -322,6 +322,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument,
         template = thisDoc.querySelector('template').content,
         screensSelectors = '#main, #otp, #email-password',
+        titleSelectors = '#tray-login-email, #email-password .tray-title',
         urls = {},
         data = {},
         messages = {};
@@ -366,6 +367,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         this.setData('email', this.getAttribute('data-email'));
         this.setData('cpf', this.getAttribute('data-cpf'));
         this.openScreen('main');
+        this.changeLabels();
     };
 
     /**
@@ -819,6 +821,15 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
 
         thatDoc.getElementById('input-code').classList.remove('tray-input-invalid');
         thatDoc.getElementById('input-password').classList.remove('tray-input-invalid');
+    };
+
+    /**
+     * Change email label if data-cpf exists
+     */
+    trayLoginProto.changeLabels = function() {
+        if (this.getData('cpf')) {
+            $(titleSelectors).text('CPF e senha da loja');
+        }
     };
 
     /**
