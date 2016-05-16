@@ -510,11 +510,12 @@ var trayLoginProto = {},
     /**
      * Change email label if data-cpf exists
      */
-    trayLoginProto.changeLabels = function(response) {
-        if (data.cpf){
+    trayLoginProto.changeLabels = function() {
+        if (this.getData('cpf')) {
             $(titleSelectors).text('CPF e senha da loja');
         }
     };
+
     /**
      * Register the element
      */
