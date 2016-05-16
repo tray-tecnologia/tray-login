@@ -6,6 +6,7 @@ var trayLoginProto = {},
         thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument,
         template = thisDoc.querySelector('template').content,
         screensSelectors = '#main, #otp, #email-password',
+        titleSelectors = '#tray-login-email, #email-password .tray-title',
         urls = {},
         data = {},
         messages = {};
@@ -50,6 +51,7 @@ var trayLoginProto = {},
         this.setData('email', this.getAttribute('data-email'));
         this.setData('cpf', this.getAttribute('data-cpf'));
         this.openScreen('main');
+        this.changeLabels();
     };
 
     /**
@@ -505,6 +507,14 @@ var trayLoginProto = {},
         thatDoc.getElementById('input-password').classList.remove('tray-input-invalid');
     };
 
+    /**
+     * Change email label if data-cpf exists
+     */
+    trayLoginProto.changeLabels = function(response) {
+        if (data.cpf){
+            $(titleSelectors).text('CPF e senha da loja');
+        }
+    };
     /**
      * Register the element
      */
