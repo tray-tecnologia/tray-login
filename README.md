@@ -8,6 +8,8 @@ Web Component para realizar login no Checkout das lojas da Tray.
 ## Atributos
 Atributo      | Descrição
 --------      | -----------
+data-email    | E-mail utilizado para login
+data-cpf      | CPF utilizado para login
 api-otp       | URL de geração do código (POST, params: email)
 api-otp-login | URL de login (GET, params: email, code)
 url-facebook  | URL de login do Facebook
