@@ -50,6 +50,7 @@ var trayLoginProto = {},
         this.addListeners();
         this.setData('email', this.getAttribute('data-email'));
         this.setData('cpf', this.getAttribute('data-cpf'));
+        this.setData('cnpj', this.getAttribute('data-cnpj'));
         this.openScreen('main');
         this.changeLabels();
     };
@@ -196,6 +197,7 @@ var trayLoginProto = {},
             thisElement.openScreen('email-password')
                 .showEmails()
                 .showCpfs()
+                .showCnpjs()
                 .onHidePassword();
 
             thisElement.byPassword.init();
@@ -268,6 +270,24 @@ var trayLoginProto = {},
                 cpfs[i].value = cpf;
             } else {
                 cpfs[i].style.display = 'none';
+            }
+        }
+        return this;
+    };
+
+    /**
+     * Show cnpj in the DOM
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.showCnpjs = function() {
+        var cnpjs = thatDoc.querySelectorAll('[data-element="tray-cnpj"]');
+        for (var i = cnpjs.length - 1; i >= 0; i--) {
+            var cnpj = thisElement.getData('cnpj');
+            if (cnpj) {
+                cnpjs[i].innerHTML = cnpj;
+                cnpjs[i].value = cnpj;
+            } else {
+                cnpjs[i].style.display = 'none';
             }
         }
         return this;
@@ -513,6 +533,8 @@ var trayLoginProto = {},
     trayLoginProto.changeLabels = function() {
         if (this.getData('cpf')) {
             $(titleSelectors).text('CPF e senha da loja');
+        } else if (this.getData('cnpj')) {
+            $(titleSelectors).text('CNPJ e senha da loja');
         }
     };
 
