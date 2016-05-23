@@ -291,9 +291,11 @@ tray-login .tray-btn-otp:active {
                 <p class="tray-action">Informe sua senha.</p>
                 <div class="tray-well" data-element="tray-email"></div>
                 <div class="tray-well" data-element="tray-cpf"></div>
+                <div class="tray-well" data-element="tray-cnpj"></div>
                 <div class="tray-input-group ch-vspace-lg">
                     <input type="hidden" data-element="tray-email" name="email">
                     <input type="hidden" data-element="tray-cpf" name="cpf">
+                    <input type="hidden" data-element="tray-cnpj" name="cnpj">
                     <button class="tray-login-hide-password" type="button" id="hide-password" data-text-toggle="Mostrar">Ocultar</button>
                     <input class="tray-input empty" autocomplete="off" type="text" name="password" id="input-password" required="">
                     <label for="input-password" class="tray-label">
@@ -366,6 +368,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         this.addListeners();
         this.setData('email', this.getAttribute('data-email'));
         this.setData('cpf', this.getAttribute('data-cpf'));
+        this.setData('cnpj', this.getAttribute('data-cnpj'));
         this.openScreen('main');
         this.changeLabels();
     };
@@ -512,6 +515,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
             thisElement.openScreen('email-password')
                 .showEmails()
                 .showCpfs()
+                .showCnpjs()
                 .onHidePassword();
 
             thisElement.byPassword.init();
@@ -584,6 +588,24 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
                 cpfs[i].value = cpf;
             } else {
                 cpfs[i].style.display = 'none';
+            }
+        }
+        return this;
+    };
+
+    /**
+     * Show cnpj in the DOM
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.showCnpjs = function() {
+        var cnpjs = thatDoc.querySelectorAll('[data-element="tray-cnpj"]');
+        for (var i = cnpjs.length - 1; i >= 0; i--) {
+            var cnpj = thisElement.getData('cnpj');
+            if (cnpj) {
+                cnpjs[i].innerHTML = cnpj;
+                cnpjs[i].value = cnpj;
+            } else {
+                cnpjs[i].style.display = 'none';
             }
         }
         return this;
@@ -829,6 +851,8 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
     trayLoginProto.changeLabels = function() {
         if (this.getData('cpf')) {
             $(titleSelectors).text('CPF e senha da loja');
+        } else if (this.getData('cnpj')) {
+            $(titleSelectors).text('CNPJ e senha da loja');
         }
     };
 
