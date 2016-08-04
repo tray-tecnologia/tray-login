@@ -5,9 +5,9 @@ var trayLoginProto = {},
     var thatDoc = document,
         thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument,
         template = thisDoc.querySelector('template').content,
-        screensSelectors = '#main, #otp, #email-password',
+        screensSelectors = '#identify, #main, #otp, #email-password',
         titleSelectors = '#tray-login-email, #email-password .tray-title',
-        urls = {},
+        loginMethods = [],
         data = {},
         messages = {};
 
@@ -19,7 +19,7 @@ var trayLoginProto = {},
     $(window).on('tray-login', function(event) {
         var type = event.detail.type;
         if (type === 'success') {
-            window.location = urls.callback;
+            window.location = thisElement.routes.methods.route('callback');
         }
     });
 
@@ -45,13 +45,20 @@ var trayLoginProto = {},
     trayLoginProto.initComponent = function() {
         thisElement = this;
         this.addElements();
-        this.setUrls();
+        this.setLoginMethods();
         this.setMessages();
         this.addListeners();
         this.setData('email', this.getAttribute('data-email'));
         this.setData('cpf', this.getAttribute('data-cpf'));
         this.setData('cnpj', this.getAttribute('data-cnpj'));
-        this.openScreen('main');
+
+        if (this.getData('email') || this.getData('cpf') || this.getData('cnpj')) {
+            this.openScreen('main');
+        } else {
+            this.openScreen('identify');
+            this.identify.methods.init();
+        }
+
         this.changeLabels();
     };
 
@@ -72,15 +79,28 @@ var trayLoginProto = {},
     };
 
     /**
-     * Define API's urls
+     * Set the available methods
+     * 
      */
-    trayLoginProto.setUrls = function() {
-        urls.otp = this.getAttribute('api-otp');
-        urls.otpLogin = this.getAttribute('api-otp-login');
-        urls.callback = this.getAttribute('url-callback');
-        urls.facebook = this.getAttribute('url-facebook');
-        urls.password = this.getAttribute('url-password');
-        urls.passwordRecovery = this.getAttribute('url-password-recovery');
+    trayLoginProto.setLoginMethods = function() {
+        loginMethods = this.getAttribute('data-login-methods');
+    };
+
+    trayLoginProto.setLoginCallback = function() {
+        this.routes.methods.setRoute('callback', this.getAttribute('callback'));
+    };
+
+    trayLoginProto.setStoreId = function() {
+        this.setData('store', this.getAttribute('store'));
+    };
+
+    /**
+     * Check if a method is available
+     * @param {string} method
+     * @return {boolean}
+     */
+    trayLoginProto.hasLoginMethod = function(method) {
+        return loginMethods.indexOf(method) > -1;
     };
 
     /**
@@ -188,7 +208,7 @@ var trayLoginProto = {},
     trayLoginProto.onPasswordLogin = function() {
         this.passwordButton = thatDoc.getElementById('tray-login-email');
 
-        if (!urls.password){
+        if (!this.hasLoginMethod('password')) {
             this.passwordButton.style.display = 'none';
         }
 
@@ -218,7 +238,7 @@ var trayLoginProto = {},
             var data = $(thisElement.formPassword).serialize();
             $.ajax({
                 type: 'POST',
-                url: urls.password,
+                url: thisElement.routes.methods.route('password'),
                 data: data,
                 dataType: 'json',
                 success: function(response) {
@@ -345,7 +365,7 @@ var trayLoginProto = {},
     trayLoginProto.onOTPLogin = function() {
         this.OTPButton = thatDoc.getElementById('tray-login-otp');
 
-        if (!urls.otp) {
+        if (!this.hasLoginMethod('otp')) {
             this.OTPButton.style.display = 'none';
         }
 
@@ -356,7 +376,7 @@ var trayLoginProto = {},
             thisElement.openScreen('otp');
             $.ajax({
                 type: 'POST',
-                url: urls.otp,
+                url: thisElement.routes.methods.route('otp'),
                 dataType: 'json',
                 success: function(response) {},
                 error: function(request, type) {
@@ -378,13 +398,14 @@ var trayLoginProto = {},
     trayLoginProto.onFacebookLogin = function() {
         this.facebookButton = thatDoc.getElementById('tray-login-facebook');
 
-        if (!urls.facebook) {
+        if (!this.hasLoginMethod('facebook')) {
+            console.log('vamo esconder', this.facebookButton);
             this.facebookButton.style.display = 'none';
         }
 
         this.facebookButton.addEventListener('click', function(event) {
             event.preventDefault();
-            $.get(urls.facebook, function(response) {
+            $.get(thisElement.routes.methods.route('facebook'), function(response) {
                 if (!response.data.url) {
                     return false;
                 }
@@ -407,7 +428,10 @@ var trayLoginProto = {},
         for (var i = this.otherOptionButton.length - 1; i >= 0; i--) {
             this.otherOptionButton[i].addEventListener('click', function(event) {
                 event.preventDefault();
-                thisElement.openScreen('main');
+                thisElement.openScreen('identify');
+                thisElement.removeAttribute('data-email');
+                thisElement.removeAttribute('data-cpf');
+                thisElement.removeAttribute('data-cnpj');
             });
         }
 
@@ -420,7 +444,7 @@ var trayLoginProto = {},
     trayLoginProto.onPasswordRecovery = function() {
         this.passRecoveryButton = thatDoc.getElementById('password-recovery');
 
-        if (!urls.passwordRecovery) {
+        if (!this.hasLoginMethod('password')) {
             this.passRecoveryButton.style.display = 'none';
             return this;
         }
@@ -429,7 +453,7 @@ var trayLoginProto = {},
             event.preventDefault();
             $.ajax({
                 type: 'POST',
-                url: urls.passwordRecovery,
+                url: thisElement.routes.methods.route('password_recovery'),
                 data: { email: trayLoginProto.getData('email') },
                 dataType: 'json',
                 success: function(response) {
@@ -480,7 +504,7 @@ var trayLoginProto = {},
             $.ajax({
                 type: 'GET',
                 data: data,
-                url: urls.otpLogin,
+                url: thisElement.routes.methods.route('otp_login'),
                 dataType: 'json',
                 success: function(response) {
                     if (response.statusCode > 400) {

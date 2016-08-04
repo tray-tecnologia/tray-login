@@ -10,13 +10,32 @@
     </svg>
     <div class="tray-container">
         <button class="tray-close">X</button>
+
+        <div class="tray-login-screens" id="identify">
+            <form id="form-identify">
+                <h1 class="tray-title">Identifique-se</h1>
+                <p class="tray-action">Informe seu e-mail ou CPF/CNPJ</p>
+                <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
+                <div class="tray-input-group">
+                    <label for="input-code" class="tray-label">
+                        <svg><use xlink:href="#ch-icon-locked2"></use></svg>
+                    </label>
+                    <input class="tray-input empty" autocomplete="off" type="text" name="identify" id="input-identify" required>
+                    <p class="tray-error-message" id="message-identify"></p>
+                </div>
+                <div class="tray-actions">
+                    <button class="tray-btn-primary" id="tray-login-identify" type="submit">Continuar</button>
+                    <button class="tray-btn-facebook" id="tray-login-facebook">facebook</button>
+                </div>
+            </form>
+        </div>
+
         <div class="tray-login-screens" id="main">
             <h1 class="tray-title">Alterar informações</h1>
             <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
             <p class="tray-action" custom-text="main-action">Escolha uma das opções para se identificar:</p>
             <div class="tray-actions">
                 <button class="tray-btn-primary" id="tray-login-email">E-mail e senha da loja</button>
-                <button class="tray-btn-facebook" id="tray-login-facebook">facebook</button>
                 <button class="tray-btn-otp" id="tray-login-otp">Receber código de segurança por e-mail</button>
             </div>
         </div>
@@ -69,5 +88,8 @@
 
 <script src="../bower_components/zepto/dist/zepto.min.js"></script>
 <script src="../bower_components/breakjs/dist/break.bundle.min.js"></script>
+<script src="../node_modules/cpf_cnpj/build/cpf_cnpj.min.js"></script>
 <script src="../src/tray-login.js"></script>
+<script src="../src/js/routes.js"></script>
 <script src="../src/js/password.js"></script>
+<script src="../src/js/identify.js"></script>

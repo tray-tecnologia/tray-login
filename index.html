@@ -8,16 +8,25 @@
     <link rel="import" href="dist/tray-login.html">
 </head>
 <body>
+    <h1>Tray Login</h1>
+
+    <!--
     <tray-login
         data-email="teste@tray.com.br"
-        data-cpf="54166297201"
-        data-cnpj="81817586000183"
         api-otp="src/mock/otp.json"
         api-otp-login="src/mock/otp.json"
         url-facebook="/login/facebook"
         url-password="src/mock/password_error.json"
         url-password-recovery="/login/recovery"
         url-callback="callback.html">
+    </tray-login>
+    -->
+
+    <tray-login
+        data-login-methods="['password', 'facebook', 'otp']"
+        data-callback="/index.html"
+        data-store="351572"
+        data-texts="{}">
     </tray-login>
 </body>
 </html>
