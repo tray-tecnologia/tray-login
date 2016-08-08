@@ -1,4 +1,4 @@
-(function($, window, document, _this) {
+(function($, window, document) {
 
     /**
      * Routes
@@ -23,7 +23,9 @@
 
         methods: {
             /**
-             * Init the module
+             * Return route URL
+             * @param {string} name - Route's name
+             * @return {string|false} - Return route's URL or false
              */
             route: function(name) {
                 if (!name) {
@@ -33,6 +35,11 @@
                 return self.routes[name];
             },
 
+            /**
+             * Add/update a named route
+             * @param {string} name
+             * @param {string} url
+             */
             setRoute: function(name, url) {
                 if (!name || !url) {
                     return false;
@@ -43,4 +50,4 @@
         },
     };
 
-})(Zepto, window, document, thisElement);
+})(Zepto, window, document);

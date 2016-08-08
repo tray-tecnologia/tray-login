@@ -20,6 +20,7 @@
                     <label for="input-code" class="tray-label">
                         <svg><use xlink:href="#ch-icon-locked2"></use></svg>
                     </label>
+                    <input type="hidden" data-element="tray-store" name="store_id">
                     <input class="tray-input empty" data-element="tray-email" autocomplete="off" type="text" name="identify" id="input-identify" required>
                     <p class="tray-error-message" id="message-identify"></p>
                 </div>
@@ -46,6 +47,7 @@
                 <p class="tray-action">Informe o código de segurança que enviamos para seu e-mail.</p>
                 <div class="tray-well" data-element="tray-email"></div>
                 <div class="tray-input-group">
+                    <input type="hidden" data-element="tray-store" name="store_id">
                     <input type="hidden" id="input-email" name="email">
                     <input class="tray-input empty" autocomplete="off" type="tel" name="code" id="input-code" required>
                     <label for="input-code" class="tray-label">
@@ -67,6 +69,7 @@
                 <div class="tray-well" data-element="tray-cpf"></div>
                 <div class="tray-well" data-element="tray-cnpj"></div>
                 <div class="tray-input-group ch-vspace-lg">
+                    <input type="hidden" data-element="tray-store" name="store_id">
                     <input type="hidden" data-element="tray-email" name="email">
                     <input type="hidden" data-element="tray-cpf" name="cpf">
                     <input type="hidden" data-element="tray-cnpj" name="cnpj">

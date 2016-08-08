@@ -42,6 +42,7 @@ var trayLoginProto = {},
         this.setData('email', this.getAttribute('data-email'));
         this.setData('cpf', this.getAttribute('data-cpf'));
         this.setData('cnpj', this.getAttribute('data-cnpj'));
+        this.setData('store', this.getAttribute('data-store'));
 
         if (this.getData('email') || this.getData('cpf') || this.getData('cnpj')) {
             this.openScreen('main');
@@ -51,6 +52,7 @@ var trayLoginProto = {},
         }
 
         this.changeLabels();
+        this.bindValues('[data-element="tray-store"]', 'store');
     };
 
     /**
@@ -71,17 +73,22 @@ var trayLoginProto = {},
 
     /**
      * Set the available methods
-     * 
      */
     trayLoginProto.setLoginMethods = function() {
-        loginMethods = this.getAttribute('data-methods');
+        loginMethods = this.getAttribute('data-methods') || ['facebook', 'password', 'otp'];
     };
 
+    /**
+     * Set login callback
+     */
     trayLoginProto.setLoginCallback = function() {
         this.setData('callback', this.getAttribute('data-callback'));
         this.routes.methods.setRoute('callback', this.getData('callback'));
     };
 
+    /**
+     * Set store ID
+     */
     trayLoginProto.setStoreId = function() {
         this.setData('store', this.getAttribute('store'));
     };
@@ -250,6 +257,32 @@ var trayLoginProto = {},
                 },
             });
         });
+    };
+
+
+    /**
+     * Add/Update values in the DOM
+     * @param {string} elementSelector
+     * @param {string} data
+     * @return {object} trayLoginProto
+     *
+     * @example
+     * this.bindValues('[data-element="tray-store"]', 'store');
+     * this.bindValues('[data-element="tray-email"]', 'email');
+     */
+    trayLoginProto.bindValues = function(elementSelector, data) {
+        var elements = thatDoc.querySelectorAll(elementSelector);
+        for (var i = elements.length - 1; i >= 0; i--) {
+            var value = thisElement.getData(data);
+            if (value) {
+                elements[i].innerHTML = value;
+                elements[i].value = value;
+            } else {
+                elements[i].style.display = 'none';
+            }
+        }
+
+        return this;
     };
 
     /**
