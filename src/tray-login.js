@@ -14,16 +14,6 @@ var trayLoginProto = {},
     trayLoginProto = Object.create(HTMLElement.prototype);
 
     /**
-     * Load the callback URL
-     */
-    $(window).on('tray-login', function(event) {
-        var type = event.detail.type;
-        if (type === 'success') {
-            window.location = thisElement.routes.methods.route('callback');
-        }
-    });
-
-    /**
      * Executes when element was created
      */
     trayLoginProto.createdCallback = function() {
@@ -46,6 +36,7 @@ var trayLoginProto = {},
         thisElement = this;
         this.addElements();
         this.setLoginMethods();
+        this.setLoginCallback();
         this.setMessages();
         this.addListeners();
         this.setData('email', this.getAttribute('data-email'));
@@ -83,11 +74,12 @@ var trayLoginProto = {},
      * 
      */
     trayLoginProto.setLoginMethods = function() {
-        loginMethods = this.getAttribute('data-login-methods');
+        loginMethods = this.getAttribute('data-methods');
     };
 
     trayLoginProto.setLoginCallback = function() {
-        this.routes.methods.setRoute('callback', this.getAttribute('callback'));
+        this.setData('callback', this.getAttribute('data-callback'));
+        this.routes.methods.setRoute('callback', this.getData('callback'));
     };
 
     trayLoginProto.setStoreId = function() {
@@ -107,7 +99,7 @@ var trayLoginProto = {},
      * Set messages
      */
     trayLoginProto.setMessages = function() {
-        this.messages = $.parseJSON(this.getAttribute('messages'));
+        this.messages = $.parseJSON(this.getAttribute('data-texts'));
         this.applyMessages();
     };
 
@@ -242,13 +234,14 @@ var trayLoginProto = {},
                 data: data,
                 dataType: 'json',
                 success: function(response) {
-                    if (response.statusCode > 400) {
+                    if (response && response.statusCode > 400) {
                         thisElement.showErrorMessage(response);
                         trayLoginProto.triggerCustomEvent('tray-login', response, 'error');
                         return;
                     }
 
                     trayLoginProto.triggerCustomEvent('tray-login', response, 'success');
+                    thisElement.redirectOnSuccess(response.data.token);
                 },
                 error: function(request, type) {
                     trayLoginProto.triggerCustomEvent('tray-login', request, 'error');
@@ -396,24 +389,25 @@ var trayLoginProto = {},
      * @return {object} trayLoginProto
      */
     trayLoginProto.onFacebookLogin = function() {
-        this.facebookButton = thatDoc.getElementById('tray-login-facebook');
+        this.facebookButton = thatDoc.querySelectorAll('[data-element="tray-login-facebook"]');
 
         if (!this.hasLoginMethod('facebook')) {
-            console.log('vamo esconder', this.facebookButton);
             this.facebookButton.style.display = 'none';
         }
 
-        this.facebookButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            $.get(thisElement.routes.methods.route('facebook'), function(response) {
-                if (!response.data.url) {
-                    return false;
-                }
+        for (var i = this.facebookButton.length - 1; i >= 0; i--) {
+            this.facebookButton[i].addEventListener('click', function(event) {
+                event.preventDefault();
+                $.get(thisElement.routes.methods.route('facebook'), function(response) {
+                    if (!response.data.url) {
+                        return false;
+                    }
 
-                thatDoc.location = response.data.url;
+                    thatDoc.location = response.data.url;
+                });
+                trayLoginProto.triggerCustomEvent('tray-login-click', 'tray-login-facebook');
             });
-            trayLoginProto.triggerCustomEvent('tray-login-click', 'tray-login-facebook');
-        });
+        }
 
         return this;
     };
@@ -514,6 +508,7 @@ var trayLoginProto = {},
                     }
 
                     trayLoginProto.triggerCustomEvent('tray-login', response, 'success');
+                    thisElement.redirectOnSuccess(response.data.token);
                 },
                 error: function(request, type) {
                     thisElement.showErrorMessage($.parseJSON(request.responseText));
@@ -523,6 +518,21 @@ var trayLoginProto = {},
         });
 
         return this;
+    };
+
+    /**
+     * Redirect to callback url
+     * @param {string} token
+     */
+    trayLoginProto.redirectOnSuccess = function(token) {
+        var redirectParam = '?token=' + token;
+        var callback = thisElement.routes.methods.route('callback');
+
+        if (callback.indexOf('?') > -1) {
+            redirectParam = '&token=' + token;
+        }
+
+        window.location = callback + redirectParam;
     };
 
     /**

@@ -8,14 +8,13 @@ Web Component para realizar login no Checkout das lojas da Tray.
 ## Atributos
 Atributo      | Descrição
 --------      | -----------
-data-email    | E-mail utilizado para login
-data-cpf      | CPF utilizado para login
-api-otp       | URL de geração do código (POST, params: email)
-api-otp-login | URL de login (GET, params: email, code)
-url-facebook  | URL de login do Facebook
-url-password  | URL de login por e-mail/senha (POST, params: email, password)
-url-password-recovery | URL de recuperação de senha (POST, params: email)
-url-callback  | URL de callback caso o login esteja correto
+data-store    | ID da loja
+data-methods | Tipos de login que você deseja utilizar
+data-callback | URL de callback caso o login esteja correto
+data-texts    | Textos personalizados (opcional)
+data-email    | E-mail utilizado para login (opcional)
+data-cpf      | CPF utilizado para login (opcional)
+data-cnpj     | CNPJ utilizado para login (opcional)
 
 ## Eventos
 
@@ -24,6 +23,7 @@ Lista de eventos disparados pelo componente.
 Evento           | Descrição
 --------         | -----------
 tray-login       | Dispara quando finalizou o processo de login
+tray-login#identify | Dispara quando abre a tela de identificação
 tray-login#main  | Dispara quando abre a tela inicial do componente
 tray-login#otp   | Dispara quando abre a tela do OTP
 tray-login#close | Dispara quando fecha o componente
@@ -72,13 +72,10 @@ Mudamos a forma como recuperamos os parâmetros do evento:
 
 ```HTML
 <tray-login
-    data-email="teste@tray.com.br"
-    api-otp="/otp/"
-    api-otp-login="/otp/login"
-    url-facebook="/login/facebook"
-    url-password="/login/password"
-    url-password-recovery="/login/recovery"
-    url-callback="/callback.html">
+    data-login-methods="['password', 'facebook', 'otp']"
+    data-callback="/callback.html"
+    data-store="351572"
+    data-texts="{}">
 </tray-login>
 ```
 

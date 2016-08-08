@@ -20,12 +20,12 @@
                     <label for="input-code" class="tray-label">
                         <svg><use xlink:href="#ch-icon-locked2"></use></svg>
                     </label>
-                    <input class="tray-input empty" autocomplete="off" type="text" name="identify" id="input-identify" required>
+                    <input class="tray-input empty" data-element="tray-email" autocomplete="off" type="text" name="identify" id="input-identify" required>
                     <p class="tray-error-message" id="message-identify"></p>
                 </div>
                 <div class="tray-actions">
                     <button class="tray-btn-primary" id="tray-login-identify" type="submit">Continuar</button>
-                    <button class="tray-btn-facebook" id="tray-login-facebook">facebook</button>
+                    <button class="tray-btn-facebook" data-element="tray-login-facebook">facebook</button>
                 </div>
             </form>
         </div>
@@ -37,6 +37,7 @@
             <div class="tray-actions">
                 <button class="tray-btn-primary" id="tray-login-email">E-mail e senha da loja</button>
                 <button class="tray-btn-otp" id="tray-login-otp">Receber código de segurança por e-mail</button>
+                <button class="tray-btn-facebook" data-element="tray-login-facebook">facebook</button>
             </div>
         </div>
         <div class="tray-login-screens" id="otp">
