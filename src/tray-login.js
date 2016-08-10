@@ -5,23 +5,14 @@ var trayLoginProto = {},
     var thatDoc = document,
         thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument,
         template = thisDoc.querySelector('template').content,
-        screensSelectors = '#main, #otp, #email-password',
+        screensSelectors = '#identify, #main, #otp, #email-password',
         titleSelectors = '#tray-login-email, #email-password .tray-title',
-        urls = {},
+        loginMethods = [],
         data = {},
-        messages = {};
+        messages = {}
+        initialized = false;
 
     trayLoginProto = Object.create(HTMLElement.prototype);
-
-    /**
-     * Load the callback URL
-     */
-    $(window).on('tray-login', function(event) {
-        var type = event.detail.type;
-        if (type === 'success') {
-            window.location = urls.callback;
-        }
-    });
 
     /**
      * Executes when element was created
@@ -45,14 +36,31 @@ var trayLoginProto = {},
     trayLoginProto.initComponent = function() {
         thisElement = this;
         this.addElements();
-        this.setUrls();
+        this.setLoginMethods();
+        this.setLoginCallback();
         this.setMessages();
-        this.addListeners();
+
+        if (!initialized) {
+            this.addListeners();
+            initialized = true;
+        }
+
         this.setData('email', this.getAttribute('data-email'));
         this.setData('cpf', this.getAttribute('data-cpf'));
         this.setData('cnpj', this.getAttribute('data-cnpj'));
-        this.openScreen('main');
+        this.setData('store', this.getAttribute('data-store'));
+        this.setData('session', this.getAttribute('data-session'));
+
+        if (this.getData('email') || this.getData('cpf') || this.getData('cnpj')) {
+            this.openScreen('main');
+        } else if(this.hasLoginMethod('identify')) {
+            this.openScreen('identify');
+            this.identify.methods.init();
+        }
+
         this.changeLabels();
+        this.bindValues('[data-element="tray-store"]', 'store');
+        this.bindValues('[data-element="tray-session"]', 'session');
     };
 
     /**
@@ -72,22 +80,40 @@ var trayLoginProto = {},
     };
 
     /**
-     * Define API's urls
+     * Set the available methods
      */
-    trayLoginProto.setUrls = function() {
-        urls.otp = this.getAttribute('api-otp');
-        urls.otpLogin = this.getAttribute('api-otp-login');
-        urls.callback = this.getAttribute('url-callback');
-        urls.facebook = this.getAttribute('url-facebook');
-        urls.password = this.getAttribute('url-password');
-        urls.passwordRecovery = this.getAttribute('url-password-recovery');
+    trayLoginProto.setLoginMethods = function() {
+        loginMethods = this.getAttribute('data-methods') || ['facebook', 'password', 'otp'];
+    };
+
+    /**
+     * Set login callback
+     */
+    trayLoginProto.setLoginCallback = function() {
+        this.setData('callback', this.getAttribute('data-callback'));
+    };
+
+    /**
+     * Set store ID
+     */
+    trayLoginProto.setStoreId = function() {
+        this.setData('store', this.getAttribute('store'));
+    };
+
+    /**
+     * Check if a method is available
+     * @param {string} method
+     * @return {boolean}
+     */
+    trayLoginProto.hasLoginMethod = function(method) {
+        return loginMethods.indexOf(method) > -1;
     };
 
     /**
      * Set messages
      */
     trayLoginProto.setMessages = function() {
-        this.messages = $.parseJSON(this.getAttribute('messages'));
+        this.messages = $.parseJSON(this.getAttribute('data-texts'));
         this.applyMessages();
     };
 
@@ -188,7 +214,7 @@ var trayLoginProto = {},
     trayLoginProto.onPasswordLogin = function() {
         this.passwordButton = thatDoc.getElementById('tray-login-email');
 
-        if (!urls.password){
+        if (!this.hasLoginMethod('password')) {
             this.passwordButton.style.display = 'none';
         }
 
@@ -218,17 +244,18 @@ var trayLoginProto = {},
             var data = $(thisElement.formPassword).serialize();
             $.ajax({
                 type: 'POST',
-                url: urls.password,
+                url: thisElement.routes.methods.route('password'),
                 data: data,
                 dataType: 'json',
                 success: function(response) {
-                    if (response.statusCode > 400) {
+                    if (response && response.statusCode > 400) {
                         thisElement.showErrorMessage(response);
                         trayLoginProto.triggerCustomEvent('tray-login', response, 'error');
                         return;
                     }
 
                     trayLoginProto.triggerCustomEvent('tray-login', response, 'success');
+                    thisElement.redirectOnSuccess(response.data.token);
                 },
                 error: function(request, type) {
                     trayLoginProto.triggerCustomEvent('tray-login', request, 'error');
@@ -237,6 +264,32 @@ var trayLoginProto = {},
                 },
             });
         });
+    };
+
+
+    /**
+     * Add/Update values in the DOM
+     * @param {string} elementSelector
+     * @param {string} data
+     * @return {object} trayLoginProto
+     *
+     * @example
+     * this.bindValues('[data-element="tray-store"]', 'store');
+     * this.bindValues('[data-element="tray-email"]', 'email');
+     */
+    trayLoginProto.bindValues = function(elementSelector, data) {
+        var elements = thatDoc.querySelectorAll(elementSelector);
+        for (var i = elements.length - 1; i >= 0; i--) {
+            var value = thisElement.getData(data);
+            if (value) {
+                elements[i].innerHTML = value;
+                elements[i].value = value;
+            } else {
+                elements[i].style.display = 'none';
+            }
+        }
+
+        return this;
     };
 
     /**
@@ -345,7 +398,7 @@ var trayLoginProto = {},
     trayLoginProto.onOTPLogin = function() {
         this.OTPButton = thatDoc.getElementById('tray-login-otp');
 
-        if (!urls.otp) {
+        if (!this.hasLoginMethod('otp')) {
             this.OTPButton.style.display = 'none';
         }
 
@@ -353,12 +406,20 @@ var trayLoginProto = {},
             event.preventDefault();
             thisElement.showEmails();
             thatDoc.getElementById('input-email').value = thisElement.getData('email');
-            thisElement.openScreen('otp');
+
+            var data = {
+                email: thisElement.getData('email'),
+                store_id: thisElement.getData('store'),
+            };
+
             $.ajax({
                 type: 'POST',
-                url: urls.otp,
+                url: thisElement.routes.methods.route('otp'),
+                data: data,
                 dataType: 'json',
-                success: function(response) {},
+                success: function(response) {
+                    thisElement.openScreen('otp');
+                },
                 error: function(request, type) {
                     console.error('Tray Login Error: ' + request.status + ' - ' + request.statusText);
                 },
@@ -376,23 +437,33 @@ var trayLoginProto = {},
      * @return {object} trayLoginProto
      */
     trayLoginProto.onFacebookLogin = function() {
-        this.facebookButton = thatDoc.getElementById('tray-login-facebook');
+        this.facebookButton = thatDoc.querySelectorAll('[data-element="tray-login-facebook"]');
 
-        if (!urls.facebook) {
-            this.facebookButton.style.display = 'none';
-        }
+        for (var i = this.facebookButton.length - 1; i >= 0; i--) {
+            if (!this.hasLoginMethod('facebook')) {
+                this.facebookButton[i].style.display = 'none';
+            }
 
-        this.facebookButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            $.get(urls.facebook, function(response) {
-                if (!response.data.url) {
-                    return false;
-                }
+            this.facebookButton[i].addEventListener('click', function(event) {
+                event.preventDefault();
 
-                thatDoc.location = response.data.url;
+                var data = {
+                    store_id: thisElement.getAttribute('data-store'),
+                    session_id: thisElement.getAttribute('data-session'),
+                    crossdm: encodeURIComponent(document.location.origin),
+                    callback: thisElement.getAttribute('data-callback'),
+                };
+
+                $.get(thisElement.routes.methods.route('facebook'), data, function(response) {
+                    if (!response.data.url) {
+                        return false;
+                    }
+
+                    thatDoc.location = response.data.url;
+                });
+                trayLoginProto.triggerCustomEvent('tray-login-click', 'tray-login-facebook');
             });
-            trayLoginProto.triggerCustomEvent('tray-login-click', 'tray-login-facebook');
-        });
+        }
 
         return this;
     };
@@ -407,7 +478,14 @@ var trayLoginProto = {},
         for (var i = this.otherOptionButton.length - 1; i >= 0; i--) {
             this.otherOptionButton[i].addEventListener('click', function(event) {
                 event.preventDefault();
-                thisElement.openScreen('main');
+                if (thisElement.hasLoginMethod('identify')) {
+                    thisElement.openScreen('identify');
+                    thisElement.removeAttribute('data-email');
+                    thisElement.removeAttribute('data-cpf');
+                    thisElement.removeAttribute('data-cnpj');
+                } else {
+                    thisElement.openScreen('main');
+                }
             });
         }
 
@@ -420,7 +498,7 @@ var trayLoginProto = {},
     trayLoginProto.onPasswordRecovery = function() {
         this.passRecoveryButton = thatDoc.getElementById('password-recovery');
 
-        if (!urls.passwordRecovery) {
+        if (!this.hasLoginMethod('password')) {
             this.passRecoveryButton.style.display = 'none';
             return this;
         }
@@ -429,7 +507,7 @@ var trayLoginProto = {},
             event.preventDefault();
             $.ajax({
                 type: 'POST',
-                url: urls.passwordRecovery,
+                url: thisElement.routes.methods.route('password_recovery'),
                 data: { email: trayLoginProto.getData('email') },
                 dataType: 'json',
                 success: function(response) {
@@ -480,7 +558,7 @@ var trayLoginProto = {},
             $.ajax({
                 type: 'GET',
                 data: data,
-                url: urls.otpLogin,
+                url: thisElement.routes.methods.route('otp_login'),
                 dataType: 'json',
                 success: function(response) {
                     if (response.statusCode > 400) {
@@ -490,6 +568,7 @@ var trayLoginProto = {},
                     }
 
                     trayLoginProto.triggerCustomEvent('tray-login', response, 'success');
+                    thisElement.redirectOnSuccess(response.data.token);
                 },
                 error: function(request, type) {
                     thisElement.showErrorMessage($.parseJSON(request.responseText));
@@ -499,6 +578,25 @@ var trayLoginProto = {},
         });
 
         return this;
+    };
+
+    /**
+     * Redirect to callback url
+     * @param {string} token
+     */
+    trayLoginProto.redirectOnSuccess = function(token) {
+        var redirectParam = '?token=' + token;
+        var callback = thisElement.getAttribute('data-callback');
+
+        if (!callback) {
+            return;
+        }
+
+        if (callback.indexOf('?') > -1) {
+            redirectParam = '&token=' + token;
+        }
+
+        window.location = callback + redirectParam;
     };
 
     /**

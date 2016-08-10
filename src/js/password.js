@@ -8,10 +8,20 @@
         layout: {},
 
         /**
+         * Initialized once
+         */
+        initialized: false,
+
+        /**
          * Init the module
          */
         init: function() {
+            if (this.initialized) {
+                return;
+            }
+
             this.configureBreakPoints().changePasswordType();
+            this.initialized = true;
         },
 
         /**
