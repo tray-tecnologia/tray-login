@@ -409,7 +409,10 @@ var trayLoginProto = {},
 
             var data = {
                 email: thisElement.getData('email'),
+                cpf: thisElement.getData('cpf'),
+                cnpj: thisElement.getData('cnpj'),
                 store_id: thisElement.getData('store'),
+                session_id: thisElement.getData('session'),
             };
 
             $.ajax({
@@ -505,10 +508,19 @@ var trayLoginProto = {},
 
         this.passRecoveryButton.addEventListener('click', function(event) {
             event.preventDefault();
+
+            var data = {
+                email: trayLoginProto.getData('email'),
+                cpf: trayLoginProto.getData('cpf'),
+                cnpj: trayLoginProto.getData('cnpj'),
+                store_id: trayLoginProto.getData('store'),
+                session_id: trayLoginProto.getData('session'),
+            };
+
             $.ajax({
                 type: 'POST',
                 url: thisElement.routes.methods.route('password_recovery'),
-                data: { email: trayLoginProto.getData('email') },
+                data: data,
                 dataType: 'json',
                 success: function(response) {
                     if (response.statusCode > 400) {
@@ -554,7 +566,16 @@ var trayLoginProto = {},
     trayLoginProto.onSubmitCode = function() {
         this.formOTP.addEventListener('submit', function(event) {
             event.preventDefault();
-            var data = $(this).serialize();
+
+            var data = {
+                email: thisElement.getData('email'),
+                cpf: thisElement.getData('cpf'),
+                cnpj: thisElement.getData('cnpj'),
+                store_id: thisElement.getData('store'),
+                session_id: thisElement.getData('session'),
+                code: thatDoc.getElementById('input-code').value,
+            };
+
             $.ajax({
                 type: 'GET',
                 data: data,
