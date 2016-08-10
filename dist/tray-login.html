@@ -753,7 +753,10 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
 
             var data = {
                 email: thisElement.getData('email'),
+                cpf: thisElement.getData('cpf'),
+                cnpj: thisElement.getData('cnpj'),
                 store_id: thisElement.getData('store'),
+                session_id: thisElement.getData('session'),
             };
 
             $.ajax({
@@ -783,11 +786,11 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
     trayLoginProto.onFacebookLogin = function() {
         this.facebookButton = thatDoc.querySelectorAll('[data-element="tray-login-facebook"]');
 
-        if (!this.hasLoginMethod('facebook')) {
-            this.facebookButton.style.display = 'none';
-        }
-
         for (var i = this.facebookButton.length - 1; i >= 0; i--) {
+            if (!this.hasLoginMethod('facebook')) {
+                this.facebookButton[i].style.display = 'none';
+            }
+
             this.facebookButton[i].addEventListener('click', function(event) {
                 event.preventDefault();
 
@@ -849,10 +852,19 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
 
         this.passRecoveryButton.addEventListener('click', function(event) {
             event.preventDefault();
+
+            var data = {
+                email: trayLoginProto.getData('email'),
+                cpf: trayLoginProto.getData('cpf'),
+                cnpj: trayLoginProto.getData('cnpj'),
+                store_id: trayLoginProto.getData('store'),
+                session_id: trayLoginProto.getData('session'),
+            };
+
             $.ajax({
                 type: 'POST',
                 url: thisElement.routes.methods.route('password_recovery'),
-                data: { email: trayLoginProto.getData('email') },
+                data: data,
                 dataType: 'json',
                 success: function(response) {
                     if (response.statusCode > 400) {
@@ -898,7 +910,16 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
     trayLoginProto.onSubmitCode = function() {
         this.formOTP.addEventListener('submit', function(event) {
             event.preventDefault();
-            var data = $(this).serialize();
+
+            var data = {
+                email: thisElement.getData('email'),
+                cpf: thisElement.getData('cpf'),
+                cnpj: thisElement.getData('cnpj'),
+                store_id: thisElement.getData('store'),
+                session_id: thisElement.getData('session'),
+                code: thatDoc.getElementById('input-code').value,
+            };
+
             $.ajax({
                 type: 'GET',
                 data: data,
