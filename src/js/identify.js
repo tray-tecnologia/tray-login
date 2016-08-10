@@ -115,13 +115,14 @@
              * Check if an user has an account
              * @param {string} user_input
              */
-            hasAccount: function(user_input) {
+            hasAccount: function(formData) {
+                var userInput = self.elms.identifyInput.value;
                 var dataType,
                     data,
-                    type = this.getLoginType(user_input);
+                    type = this.getLoginType(userInput);
 
                 dataType = 'data-' + type;
-                data = '?' + type + '=' + user_input;
+                data = formData + '&' + type + '=' + userInput;
 
                 $.ajax({
                     type: 'GET',
@@ -130,7 +131,7 @@
                     dataType: 'json',
                     success: function(response){
                         if (response.data && response.data.hasAccount) {
-                            thisElement.setAttribute(dataType, user_input);
+                            thisElement.setAttribute(dataType, userInput);
                             return;
                         }
 
@@ -169,7 +170,7 @@
                         return;
                     }
 
-                    self.methods.hasAccount(self.elms.identifyInput.value);
+                    self.methods.hasAccount($(this).serialize());
                 });
 
                 return this;

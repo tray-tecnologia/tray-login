@@ -84,32 +84,32 @@ var passwordRecovery = {
 };
 
 var mocks = {
-    "/login/api/login/has_account": function (req, res) {
+    "/checkout/has-account": function (req, res) {
         res.setHeader("Content-Type", "application/json");
         res.end(JSON.stringify(hasAccountSuccess));
     },
 
-    "/login/api/login/password": function (req, res) {
+    "/checkout/password": function (req, res) {
         res.setHeader("Content-Type", "application/json");
         res.end(JSON.stringify(passwordSuccess));
     },
 
-    "/login/api/login/service/generateCode": function (req, res) {
+    "/checkout/otp-generate": function (req, res) {
         res.setHeader("Content-Type", "application/json");
         res.end(JSON.stringify(otpGenerate));
     },
 
-    "/login/api/login/securitycode": function (req, res) {
+    "/checkout/otp": function (req, res) {
         res.setHeader("Content-Type", "application/json");
         res.end(JSON.stringify(otpSuccess));
     },
 
-    "/login/api/login/facebook/url": function (req, res) {
+    "/checkout/facebook/url": function (req, res) {
         res.setHeader("Content-Type", "application/json");
         res.end(JSON.stringify(facebook));
     },
 
-    "/login/api/recover-password": function (req, res) {
+    "/checkout/recover-password": function (req, res) {
         res.setHeader("Content-Type", "application/json");
         res.end(JSON.stringify(passwordRecovery));
     },
