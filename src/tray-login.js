@@ -439,11 +439,11 @@ var trayLoginProto = {},
     trayLoginProto.onFacebookLogin = function() {
         this.facebookButton = thatDoc.querySelectorAll('[data-element="tray-login-facebook"]');
 
-        if (!this.hasLoginMethod('facebook')) {
-            this.facebookButton.style.display = 'none';
-        }
-
         for (var i = this.facebookButton.length - 1; i >= 0; i--) {
+            if (!this.hasLoginMethod('facebook')) {
+                this.facebookButton[i].style.display = 'none';
+            }
+
             this.facebookButton[i].addEventListener('click', function(event) {
                 event.preventDefault();
 
