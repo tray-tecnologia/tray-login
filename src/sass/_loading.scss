@@ -1,0 +1,82 @@
+// Variables
+$modal-content-width: 300px;
+$modal-background: rgba(255, 255, 255, .7);
+$modal-icon: #7f7f7f;
+
+$loading-height: 60px;
+$loading-width: $loading-height / 2;
+
+$gradient-color-1: #000;
+$gradient-color-2: rgba(0, 0, 0, 0);
+
+@keyframes loading-rotate {
+
+    0% {
+        @include rotate(0);
+    }
+
+    100% {
+        @include rotate(360deg);
+    }
+
+}
+
+tray-login {
+
+    .tray-loading {
+        @include display-flex();
+        align-items: center;
+        background: $modal-background;
+        height: 100%;
+        justify-content: center;
+        left: 0;
+        overflow: hidden;
+        position: absolute;
+        text-align: center;
+        text-transform: lowercase;
+        top: 0;
+        opacity: 1;
+        width: 100%;
+        z-index: 1;
+
+        &.tray-loading-hidden {
+            opacity: 0 !important;
+            z-index: -1;
+        }
+    }
+
+    .tray-loading-mask {
+        @include transform-origin($loading-width $loading-width);
+        animation: loading-rotate 1.2s infinite linear;
+        height: $loading-height;
+        left: 50%;
+        margin-left: -$loading-width;
+        margin-top: -$loading-width;
+        -webkit-mask-image: -webkit-linear-gradient(top, $gradient-color-1, $gradient-color-2);
+        overflow: hidden;
+        position: absolute;
+        top: 50%;
+        width: $loading-width;
+    }
+
+    .tray-loading-line {
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .5);
+        height: 60px;
+        width: 60px;
+    }
+
+    .tray-loading-icon,
+    .tray-loading-icon:hover {
+        @include rotate(0);
+        fill: $modal-icon;
+        height: 30px;
+        width: 30px;
+        position: absolute;
+        left: calc(50% - 15px);
+        top: calc(50% - 15px);
+    }
+}
+
+
+

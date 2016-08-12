@@ -161,7 +161,24 @@ var trayLoginProto = {},
             .onChooseOtherOption()
             .onPasswordRecovery()
             .onKeyUpCode()
-            .onSubmitCode();
+            .onSubmitCode()
+            .ajaxMiddleware();
+    };
+
+    /**
+     * Ajax middleware loading
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.ajaxMiddleware = function() {
+        $(thatDoc).on('ajaxBeforeSend', function(e, xhr, options){
+            thisElement.loading.classList.remove('tray-loading-hidden');
+        });
+
+        $(thatDoc).on('ajaxStop', function(e, xhr, options){
+            thisElement.loading.classList.add('tray-loading-hidden');
+        });
+
+        return this;
     };
 
     /**
@@ -171,6 +188,7 @@ var trayLoginProto = {},
     trayLoginProto.addElements = function() {
         this.formOTP = thatDoc.getElementById('form-otp');
         this.formPassword = thatDoc.getElementById('form-password');
+        this.loading = thatDoc.getElementById('tray-login-loading');
         return this;
     };
 

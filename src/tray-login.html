@@ -2,7 +2,7 @@
     <link rel="import" type="css" href="../dist/tray-login.css">
     <svg display="none" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <defs>
-            <symbol id="ch-icon-locked2" viewBox="0 0 1024 1024">
+            <symbol id="tray-icon-locked" viewBox="0 0 1024 1024">
                 <title>locked2</title>
                 <path class="path1" d="M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"></path>
             </symbol>
@@ -10,6 +10,12 @@
     </svg>
     <div class="tray-container">
         <button class="tray-close">X</button>
+        <div class="tray-loading tray-loading-hidden" id="tray-login-loading">
+            <div class="tray-loading-mask">
+                <div class="tray-loading-line"></div>
+            </div>
+            <svg class="tray-loading-icon"><use xlink:href="#tray-icon-locked"></use></svg>
+        </div>
         <div class="tray-login-screens" id="identify">
             <form id="form-identify">
                 <h1 class="tray-title">Identifique-se</h1>
@@ -17,11 +23,11 @@
                 <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
                 <div class="tray-input-group">
                     <label for="input-code" class="tray-label">
-                        <svg><use xlink:href="#ch-icon-locked2"></use></svg>
+                        <svg><use xlink:href="#tray-icon-locked"></use></svg>
                     </label>
                     <input type="hidden" data-element="tray-session" name="session_id">
                     <input type="hidden" data-element="tray-store" name="store_id">
-                    <input class="tray-input empty" data-element="tray-email" autocomplete="off" type="text" name="identify" id="input-identify" required>
+                    <input class="tray-input empty" data-element="tray-email" type="text" name="identify" id="input-identify" required>
                     <p class="tray-error-message" id="message-identify"></p>
                 </div>
                 <div class="tray-actions">
@@ -30,7 +36,6 @@
                 </div>
             </form>
         </div>
-
         <div class="tray-login-screens" id="main">
             <h1 class="tray-title">Alterar informações</h1>
             <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
@@ -52,7 +57,7 @@
                     <input type="hidden" id="input-email" name="email">
                     <input class="tray-input empty" autocomplete="off" type="tel" name="code" id="input-code" required>
                     <label for="input-code" class="tray-label">
-                        <svg><use xlink:href="#ch-icon-locked2"></use></svg>Código de segurança
+                        <svg><use xlink:href="#tray-icon-locked"></use></svg>Código de segurança
                     </label>
                     <p class="tray-error-message"></p>
                 </div>
@@ -69,7 +74,7 @@
                 <div class="tray-well" data-element="tray-email"></div>
                 <div class="tray-well" data-element="tray-cpf"></div>
                 <div class="tray-well" data-element="tray-cnpj"></div>
-                <div class="tray-input-group ch-vspace-lg">
+                <div class="tray-input-group tray-vspace-lg">
                     <input type="hidden" data-element="tray-session" name="session_id">
                     <input type="hidden" data-element="tray-store" name="store_id">
                     <input type="hidden" data-element="tray-email" name="email">
@@ -78,7 +83,7 @@
                     <button class="tray-login-hide-password" type="button" id="hide-password" data-text-toggle="Mostrar">Ocultar</button>
                     <input class="tray-input empty" autocomplete="off" type="text" name="password" id="input-password" type="text" required>
                     <label for="input-password" class="tray-label">
-                        <svg><use xlink:href="#ch-icon-locked2"></use></svg>Senha
+                        <svg><use xlink:href="#tray-icon-locked"></use></svg>Senha
                     </label>
                     <p class="tray-error-message"></p>
                 </div>

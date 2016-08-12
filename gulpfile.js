@@ -109,7 +109,7 @@ var mocks = {
         res.end(JSON.stringify(facebook));
     },
 
-    "/checkout/recover-password": function (req, res) {
+    "/checkout/password-recovery": function (req, res) {
         res.setHeader("Content-Type", "application/json");
         res.end(JSON.stringify(passwordRecovery));
     },
@@ -122,10 +122,16 @@ gulp.task('server', () => {
         },
         middleware: function (req, res, next) {
             var url = req.url.split('?')[0];
-            if (mocks[url]) {
-                mocks[url](req, res);
+            if (!mocks[url]) {
+                next();
             }
-            next();
+
+            setTimeout(function() {
+                if (mocks[url]) {
+                    mocks[url](req, res);
+                    next();
+                }
+            }, 2000);
         },
         open: false,
         files: [
