@@ -9,7 +9,7 @@ Web Component para realizar login no Checkout das lojas da Tray.
 Atributo      | Descrição
 --------      | -----------
 data-store    | ID da loja
-data-methods | Tipos de login que você deseja utilizar
+data-methods  | Tipos de login que você deseja utilizar, opções: ['facebook', 'password', 'otp', 'identify']
 data-callback | URL de callback caso o login esteja correto
 data-texts    | Textos personalizados (opcional)
 data-email    | E-mail utilizado para login (opcional)
@@ -20,13 +20,13 @@ data-cnpj     | CNPJ utilizado para login (opcional)
 
 Lista de eventos disparados pelo componente.
 
-Evento           | Descrição
---------         | -----------
-tray-login       | Dispara quando finalizou o processo de login
+Evento              | Descrição
+--------            | -----------
+tray-login          | Dispara quando finalizou o processo de login
 tray-login#identify | Dispara quando abre a tela de identificação
-tray-login#main  | Dispara quando abre a tela inicial do componente
-tray-login#otp   | Dispara quando abre a tela do OTP
-tray-login#close | Dispara quando fecha o componente
+tray-login#main     | Dispara quando abre a tela inicial do componente
+tray-login#otp      | Dispara quando abre a tela do OTP
+tray-login#close    | Dispara quando fecha o componente
 
 Exemplo de utilização do evento:
 ```js
@@ -46,11 +46,11 @@ $(window).on('tray-login#close', function() {
 ```
 
 Mudamos a forma como recuperamos os parâmetros do evento:
-```diff
-- $(document).on('tray-login', function(event, response, type) {
-+ $(window).on('tray-login', function(event) {
-+    var response = event.detail.response;
-+    var type = event.detail.type;
+```js
+$(window).on('tray-login', function(event) {
+    var response = event.detail.response;
+    var type = event.detail.type;
+
     if (type === 'success') {
         console.log('Success!');
     } else {
@@ -72,7 +72,7 @@ Mudamos a forma como recuperamos os parâmetros do evento:
 
 ```HTML
 <tray-login
-    data-login-methods="['password', 'facebook', 'otp']"
+    data-methods="['password', 'facebook', 'otp', 'identify']"
     data-callback="/callback.html"
     data-store="351572"
     data-texts="{}">
@@ -85,7 +85,13 @@ Para configurar o ambiente de dev, execute:
 ```sh
 npm install
 bower install
-gulp watch
+cd bower_components/zeptojs
+npm run-script dist
+```
+
+Agora que o ambiente está configurado, execute na raiz:
+```sh
+npm start
 ```
 
 Não altere os arquivos da pasta `dist/`, é apenas o build. O `dist/tray-login.html` deverá existir no controle de versão.
