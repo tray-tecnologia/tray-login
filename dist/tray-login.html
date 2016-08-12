@@ -1,15 +1,15 @@
 <html><head><meta charset="UTF-8"><template>
     <style>
-tray-login .ch-vspace-sm {
+tray-login .tray-vspace-sm {
   margin-bottom: 10px !important; }
 
-tray-login .ch-vspace-md {
+tray-login .tray-vspace-md {
   margin-bottom: 15px !important; }
 
-tray-login .ch-vspace-lg {
+tray-login .tray-vspace-lg {
   margin-bottom: 25px !important; }
 
-tray-login .ch-vspace-xlg {
+tray-login .tray-vspace-xlg {
   margin-bottom: 45px !important; }
 
 tray-login .tray-input-group {
@@ -105,18 +105,105 @@ tray-login .tray-login-hide-password {
   top: 12px;
   text-transform: uppercase; }
 
+@keyframes loading-rotate {
+  0% {
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+    transform: rotate(0); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+tray-login .tray-loading {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  text-transform: lowercase;
+  top: 0;
+  opacity: 1;
+  width: 100%;
+  z-index: 1; }
+  tray-login .tray-loading.tray-loading-hidden {
+    opacity: 0 !important;
+    z-index: -1; }
+
+tray-login .tray-loading-mask {
+  -webkit-transform-origin: 30px 30px;
+  -moz-transform-origin: 30px 30px;
+  -ms-transform-origin: 30px 30px;
+  -o-transform-origin: 30px 30px;
+  transform-origin: 30px 30px;
+  animation: loading-rotate 1.2s infinite linear;
+  height: 60px;
+  left: 50%;
+  margin-left: -30px;
+  margin-top: -30px;
+  -webkit-mask-image: -webkit-linear-gradient(top, #000, transparent);
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  width: 30px; }
+
+tray-login .tray-loading-line {
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+  height: 60px;
+  width: 60px; }
+
+tray-login .tray-loading-icon,
+tray-login .tray-loading-icon:hover {
+  -webkit-transform: rotate(0);
+  -moz-transform: rotate(0);
+  -o-transform: rotate(0);
+  -ms-transform: rotate(0);
+  transform: rotate(0);
+  fill: #7f7f7f;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  left: calc(50% - 15px);
+  top: calc(50% - 15px); }
+
 /**
  * Base
  */
-tray-login,
-tray-login * {
-  color: #909090;
-  font-family: Lato, Helvetica, sans-serif;
-  font-size: 14px; }
+tray-login a,
+tray-login a:hover,
+tray-login a:focus,
+tray-login input,
+tray-login input:hover,
+tray-login input:focus,
+tray-login select,
+tray-login select:hover,
+tray-login select:focus,
+tray-login label,
+tray-login label:hover,
+tray-login div,
+tray-login button,
+tray-login button:hover,
+tray-login button:focus,
+tray-login svg,
+tray-login svg:hover {
+  transition: all .3s linear; }
 
 tray-login::before {
   background: #191919;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   content: "";
   display: block;
   position: fixed;
@@ -132,11 +219,14 @@ tray-login .tray-login-screens {
 tray-login * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  color: #909090;
+  font-family: Lato, Helvetica, sans-serif;
+  font-size: 14px; }
 
 tray-login .tray-container {
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.5);
   width: 292px;
   position: fixed;
   left: calc(50% - 146px);
@@ -170,9 +260,6 @@ tray-login .tray-action {
   font-size: 14px;
   margin-bottom: 15px; }
 
-/**
-     * Well
-     */
 tray-login .tray-well {
   background-color: #ebebeb;
   border-radius: 3px;
@@ -182,24 +269,15 @@ tray-login .tray-well {
   padding: 15px 10px;
   text-align: center; }
 
-/**
-     * Messages
-     */
 tray-login .tray-error-message {
   color: #ef6262; }
 
 tray-login .tray-error-message strong {
   color: #ef6262; }
 
-/**
-     * Alerts
-     */
 tray-login .tray-general-error-alert {
   color: #ef6262; }
 
-/**
-     * Buttons
-     */
 tray-login .tray-btn-primary,
 tray-login .tray-btn-default,
 tray-login .tray-btn-facebook,
@@ -215,15 +293,27 @@ tray-login .tray-btn-otp {
   font-weight: bold;
   margin-bottom: 13px;
   padding: 0; }
+  tray-login .tray-btn-primary:hover,
+  tray-login .tray-btn-default:hover,
+  tray-login .tray-btn-facebook:hover,
+  tray-login .tray-btn-otp:hover {
+    background: #51a43f;
+    border-color: #407a32; }
 
 tray-login .tray-btn-facebook {
   background-color: #3b5998;
   border-bottom-color: #243f77; }
+  tray-login .tray-btn-facebook:hover {
+    background-color: #2d4373;
+    border-color: #182a50; }
 
 tray-login .tray-btn-otp {
   background-color: #52447c;
   border-bottom-color: #3d3160;
   font-size: 13px; }
+  tray-login .tray-btn-otp:hover {
+    background-color: #3c325b;
+    border-color: #28203e; }
 
 tray-login .tray-btn-default,
 tray-login .tray-btn-default:hover,
@@ -248,7 +338,7 @@ tray-login .tray-btn-otp:active {
 </style>
     <svg display="none" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <defs>
-            <symbol id="ch-icon-locked2" viewBox="0 0 1024 1024">
+            <symbol id="tray-icon-locked" viewBox="0 0 1024 1024">
                 <title>locked2</title>
                 <path class="path1" d="M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"></path>
             </symbol>
@@ -256,6 +346,12 @@ tray-login .tray-btn-otp:active {
     </svg>
     <div class="tray-container">
         <button class="tray-close">X</button>
+        <div class="tray-loading tray-loading-hidden" id="tray-login-loading">
+            <div class="tray-loading-mask">
+                <div class="tray-loading-line"></div>
+            </div>
+            <svg class="tray-loading-icon"><use xlink:href="#tray-icon-locked"></use></svg>
+        </div>
         <div class="tray-login-screens" id="identify">
             <form id="form-identify">
                 <h1 class="tray-title">Identifique-se</h1>
@@ -263,11 +359,11 @@ tray-login .tray-btn-otp:active {
                 <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
                 <div class="tray-input-group">
                     <label for="input-code" class="tray-label">
-                        <svg><use xlink:href="#ch-icon-locked2"></use></svg>
+                        <svg><use xlink:href="#tray-icon-locked"></use></svg>
                     </label>
                     <input type="hidden" data-element="tray-session" name="session_id">
                     <input type="hidden" data-element="tray-store" name="store_id">
-                    <input class="tray-input empty" data-element="tray-email" autocomplete="off" type="text" name="identify" id="input-identify" required="">
+                    <input class="tray-input empty" data-element="tray-email" type="text" name="identify" id="input-identify" required="">
                     <p class="tray-error-message" id="message-identify"></p>
                 </div>
                 <div class="tray-actions">
@@ -276,7 +372,6 @@ tray-login .tray-btn-otp:active {
                 </div>
             </form>
         </div>
-
         <div class="tray-login-screens" id="main">
             <h1 class="tray-title">Alterar informações</h1>
             <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
@@ -298,7 +393,7 @@ tray-login .tray-btn-otp:active {
                     <input type="hidden" id="input-email" name="email">
                     <input class="tray-input empty" autocomplete="off" type="tel" name="code" id="input-code" required="">
                     <label for="input-code" class="tray-label">
-                        <svg><use xlink:href="#ch-icon-locked2"></use></svg>Código de segurança
+                        <svg><use xlink:href="#tray-icon-locked"></use></svg>Código de segurança
                     </label>
                     <p class="tray-error-message"></p>
                 </div>
@@ -315,7 +410,7 @@ tray-login .tray-btn-otp:active {
                 <div class="tray-well" data-element="tray-email"></div>
                 <div class="tray-well" data-element="tray-cpf"></div>
                 <div class="tray-well" data-element="tray-cnpj"></div>
-                <div class="tray-input-group ch-vspace-lg">
+                <div class="tray-input-group tray-vspace-lg">
                     <input type="hidden" data-element="tray-session" name="session_id">
                     <input type="hidden" data-element="tray-store" name="store_id">
                     <input type="hidden" data-element="tray-email" name="email">
@@ -324,7 +419,7 @@ tray-login .tray-btn-otp:active {
                     <button class="tray-login-hide-password" type="button" id="hide-password" data-text-toggle="Mostrar">Ocultar</button>
                     <input class="tray-input empty" autocomplete="off" type="text" name="password" id="input-password" required="">
                     <label for="input-password" class="tray-label">
-                        <svg><use xlink:href="#ch-icon-locked2"></use></svg>Senha
+                        <svg><use xlink:href="#tray-icon-locked"></use></svg>Senha
                     </label>
                     <p class="tray-error-message"></p>
                 </div>
@@ -505,7 +600,24 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
             .onChooseOtherOption()
             .onPasswordRecovery()
             .onKeyUpCode()
-            .onSubmitCode();
+            .onSubmitCode()
+            .ajaxMiddleware();
+    };
+
+    /**
+     * Ajax middleware loading
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.ajaxMiddleware = function() {
+        $(thatDoc).on('ajaxBeforeSend', function(e, xhr, options){
+            thisElement.loading.classList.remove('tray-loading-hidden');
+        });
+
+        $(thatDoc).on('ajaxStop', function(e, xhr, options){
+            thisElement.loading.classList.add('tray-loading-hidden');
+        });
+
+        return this;
     };
 
     /**
@@ -515,6 +627,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
     trayLoginProto.addElements = function() {
         this.formOTP = thatDoc.getElementById('form-otp');
         this.formPassword = thatDoc.getElementById('form-password');
+        this.loading = thatDoc.getElementById('tray-login-loading');
         return this;
     };
 
