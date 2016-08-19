@@ -39,6 +39,7 @@ var trayLoginProto = {},
         this.addElements();
         this.setLoginMethods();
         this.setLoginCallback();
+        this.preventDefaultMessages();
         this.setMessages();
 
         if (!initialized) {
@@ -111,13 +112,18 @@ var trayLoginProto = {},
     };
 
     /**
+     * Prevent Default Message
+     */
+    trayLoginProto.preventDefaultMessages = function() {
+        $('input, select, textarea').on("invalid", function(e) {
+            e.preventDefault();
+        });
+    };
+
+    /**
      * Set messages
      */
     trayLoginProto.setMessages = function() {
-        $('input, select, textarea').on("invalid", function(e) {
-            e.preventDefault();
-        });
-
         this.messages = $.parseJSON(this.getAttribute('data-texts'));
         this.applyMessages();
     };

@@ -482,6 +482,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         this.addElements();
         this.setLoginMethods();
         this.setLoginCallback();
+        this.preventDefaultMessages();
         this.setMessages();
 
         if (!initialized) {
@@ -554,13 +555,18 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
     };
 
     /**
+     * Prevent Default Message
+     */
+    trayLoginProto.preventDefaultMessages = function() {
+        $('input, select, textarea').on("invalid", function(e) {
+            e.preventDefault();
+        });
+    };
+
+    /**
      * Set messages
      */
     trayLoginProto.setMessages = function() {
-        $('input, select, textarea').on("invalid", function(e) {
-            e.preventDefault();
-        });
-
         this.messages = $.parseJSON(this.getAttribute('data-texts'));
         this.applyMessages();
     };
