@@ -6,6 +6,7 @@ var trayLoginProto = {},
         thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument,
         template = thisDoc.querySelector('template').content,
         screensSelectors = '#identify, #main, #otp, #email-password',
+        currentScreen = {},
         titleSelectors = '#tray-login-email, #email-password .tray-title',
         loginMethods = [],
         data = {},
@@ -38,6 +39,7 @@ var trayLoginProto = {},
         this.addElements();
         this.setLoginMethods();
         this.setLoginCallback();
+        this.preventDefaultMessages();
         this.setMessages();
 
         if (!initialized) {
@@ -107,6 +109,15 @@ var trayLoginProto = {},
      */
     trayLoginProto.hasLoginMethod = function(method) {
         return loginMethods.indexOf(method) > -1;
+    };
+
+    /**
+     * Prevent Default Message
+     */
+    trayLoginProto.preventDefaultMessages = function() {
+        $('input, select, textarea').on("invalid", function(e) {
+            e.preventDefault();
+        });
     };
 
     /**
@@ -197,6 +208,7 @@ var trayLoginProto = {},
      * @return {object} trayLoginProto
      */
     trayLoginProto.openScreen = function(screenID) {
+        currentScreen = screenID;
         $(thatDoc).trigger('tray-login#' + screenID);
         var screens = thatDoc.querySelectorAll(screensSelectors);
         for (var i = screens.length - 1; i >= 0; i--) {
@@ -321,6 +333,7 @@ var trayLoginProto = {},
             if (email) {
                 emails[i].innerHTML = email;
                 emails[i].value = email;
+                emails[i].style.display = 'block';
             } else {
                 emails[i].style.display = 'none';
             }
@@ -339,6 +352,7 @@ var trayLoginProto = {},
             if (cpf) {
                 cpfs[i].innerHTML = cpf;
                 cpfs[i].value = cpf;
+                cpfs[i].style.display = 'block';
             } else {
                 cpfs[i].style.display = 'none';
             }
@@ -357,6 +371,7 @@ var trayLoginProto = {},
             if (cnpj) {
                 cnpjs[i].innerHTML = cnpj;
                 cnpjs[i].value = cnpj;
+                cnpjs[i].style.display = 'block';
             } else {
                 cnpjs[i].style.display = 'none';
             }
@@ -495,18 +510,23 @@ var trayLoginProto = {},
      */
     trayLoginProto.onChooseOtherOption = function() {
         this.otherOptionButton = thatDoc.querySelectorAll('[data-element="login-other-option"]');
-
         for (var i = this.otherOptionButton.length - 1; i >= 0; i--) {
+
+            if (thisElement.hasLoginMethod('identify')) {
+                this.otherOptionButton[i].classList.remove('tray-btn-hidden');
+            }
+
             this.otherOptionButton[i].addEventListener('click', function(event) {
                 event.preventDefault();
-                if (thisElement.hasLoginMethod('identify')) {
-                    thisElement.openScreen('identify');
-                    thisElement.removeAttribute('data-email');
-                    thisElement.removeAttribute('data-cpf');
-                    thisElement.removeAttribute('data-cnpj');
-                } else {
-                    thisElement.openScreen('main');
+                if (thisElement.hasLoginMethod('identify') && currentScreen === 'main') {
+                        thisElement.openScreen('identify');
+                        thisElement.removeAttribute('data-email');
+                        thisElement.removeAttribute('data-cpf');
+                        thisElement.removeAttribute('data-cnpj');
+                        return;
                 }
+
+                thisElement.openScreen('main');
             });
         }
 
@@ -672,6 +692,8 @@ var trayLoginProto = {},
             $(titleSelectors).text('CPF e senha da loja');
         } else if (this.getData('cnpj')) {
             $(titleSelectors).text('CNPJ e senha da loja');
+        } else if(this.getData('email')) {
+            $(titleSelectors).text('E-mail e senha da loja');
         }
     };
 
