@@ -27,7 +27,7 @@
                     </label>
                     <input type="hidden" data-element="tray-session" name="session_id">
                     <input type="hidden" data-element="tray-store" name="store_id">
-                    <input class="tray-input empty" data-element="tray-email" type="text" name="identify" id="input-identify" required>
+                    <input class="tray-input empty" type="text" name="identify" id="input-identify" required>
                     <p class="tray-error-message" id="message-identify"></p>
                 </div>
                 <div class="tray-actions">
@@ -37,13 +37,14 @@
             </form>
         </div>
         <div class="tray-login-screens" id="main">
-            <h1 class="tray-title">Alterar informações</h1>
+            <h1 class="tray-title">Autenticação</h1>
             <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
             <p class="tray-action" custom-text="main-action">Escolha uma das opções para se identificar:</p>
             <div class="tray-actions">
                 <button class="tray-btn-primary" id="tray-login-email">E-mail e senha da loja</button>
                 <button class="tray-btn-otp" id="tray-login-otp">Receber código de segurança por e-mail</button>
                 <button class="tray-btn-facebook" data-element="tray-login-facebook">facebook</button>
+                <button class="tray-btn-default tray-btn-hidden" data-element="login-other-option">Voltar</button>
             </div>
         </div>
         <div class="tray-login-screens" id="otp">
