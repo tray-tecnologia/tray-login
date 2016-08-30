@@ -1,21 +1,6 @@
-tray-login .tray-input-group {
-    display: block;
-    margin-bottom: 11px;
-    position: relative;
-}
+tray-login {
 
-tray-login .tray-input-group.row .tray-label {
-    left: 27px;
-}
-
-    tray-login .tray-input-group .tray-label {
-        left: 12px;
-        height: 15px;
-        position: absolute;
-        top: 16px;
-    }
-
-    tray-login .tray-input-group .tray-label svg {
+    svg {
         fill: currentColor;
         float: left;
         height: 15px;
@@ -24,84 +9,109 @@ tray-login .tray-input-group.row .tray-label {
         width: 15px;
     }
 
-tray-login .tray-input {
-    background: $input-bg;
-    border: 1px solid $input-bd;
-    border-radius: 3px;
-    color: $input-focus-txt;
-    display: block;
-    font-size: 14px;
-    font-weight: 300;
-    height: 47px;
-    line-height: 14px;
-    padding: 13px 0 14px;
-    text-indent: 36px;
-    width: 100%;
-}
+    .tray-input-group {
+        display: block;
+        margin-bottom: 11px;
+        position: relative;
 
-tray-login .tray-input:focus {
-    outline: none;
-    border-color: $input-focus-bd;
-    border-width: 2px;
-    color: $input-focus-txt;
-}
+        &.row {
 
-tray-login .tray-label {
-    color: $input-txt;
-    display: block;
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 14px;
-}
+            .tray-label{
+                left: 27px;
+            }
+        }
+    }
 
-tray-login .tray-input:focus + .tray-label {
-    color: $input-txt;
-}
+    .tray-input {
+        background: $input-bg;
+        border: 1px solid $input-bd;
+        border-radius: 3px;
+        color: $input-focus-txt;
+        display: block;
+        font-size: 14px;
+        font-weight: 300;
+        height: 47px;
+        line-height: 14px;
+        padding: 13px 0 14px;
+        text-indent: 36px;
+        width: 100%;
 
-tray-login .tray-input:valid + .tray-label,
-tray-login .tray-input:not(.empty) + .tray-label {
-    color: $input-focus-txt;
-    height: 15px;
-    width: 15px;
-    overflow: hidden;
-}
+        &:focus {
+            outline: none;
+            border-color: $input-focus-bd;
+            border-width: 2px;
+            color: $input-focus-txt;
+            & + .tray-label {
+                color: $input-txt;
+            }
+        }
 
-tray-login .tray-input.empty:not([required]) + .tray-label {
-    color: $input-txt;
-    width: auto !important;
-    height: auto !important;
-}
+        &:valid {
+            & + .tray-label{
+                color: $input-focus-txt;
+                height: 15px;
+                width: 15px;
+                overflow: hidden;
+            }
 
-tray-login .tray-input:not(.empty):invalid {
-    border-color: $input-error-bd;
-    color: $input-error-txt;
-}
+            & ~ .tray-icon-checked {
+                opacity: 1;
+            }
+        }
 
-tray-login .tray-input:not(.empty):invalid + .tray-label {
-    color: $input-error-txt;
-}
+        &:not(.empty) {
+            &:invalid {
+                border-color: $input-error-bd;
+                color: $input-error-txt;
 
-tray-login .tray-input-invalid {
-    border-color: $input-error-bd;
-    color: $input-error-txt;
-}
+                & ~ .tray-label svg {
+                    fill: $input-error-txt;
+                }
+            }
+        }
 
-tray-login .tray-input-invalid ~ .tray-label {
-    color: $input-error-txt;
-}
+        &.empty:not([required]) + .tray-label {
+            color: $input-txt;
+            width: auto !important;
+            height: auto !important;
+        }
 
-tray-login .tray-login-hide-password {
-    border: 0;
-    background-color: transparent;
-    color: $input-txt;
-    display: none;
-    font-size: 10px;
-    height: 25px;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    outline-width: 0;
-    right: 10px;
-    top: 12px;
-    text-transform: uppercase;
+    }
+
+    .tray-label {
+        left: 12px;
+        height: 15px;
+        position: absolute;
+        top: 16px;
+    }
+
+    .tray-login-hide-password {
+        border: 0;
+        background-color: transparent;
+        color: $input-txt;
+        display: none;
+        font-size: 10px;
+        height: 25px;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        outline-width: 0;
+        right: 10px;
+        top: 12px;
+        text-transform: uppercase;
+    }
+
+    .empty {
+        border-color: $input-bd;
+        color: $input-txt;
+    }
+
+    .tray-icon-checked {
+        position: absolute;
+        right: 0;
+        top: 15px;
+        fill: $btn-next-bg;
+        opacity: 0;
+        transition: all ease 500ms;
+    }
 }
