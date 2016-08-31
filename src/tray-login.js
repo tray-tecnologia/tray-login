@@ -12,6 +12,7 @@ var trayLoginProto = {},
         data = {},
         messages = {}
         initialized = false;
+        initializedPassLogin = false;
 
     trayLoginProto = Object.create(HTMLElement.prototype);
 
@@ -253,8 +254,12 @@ var trayLoginProto = {},
             thisElement.openScreen('email-password')
                 .showEmails()
                 .showCpfs()
-                .showCnpjs()
-                .onHidePassword();
+                .showCnpjs();
+
+            if(!initializedPassLogin) {
+                thisElement.onHidePassword();
+                initializedPassLogin = true;
+            }
 
             thisElement.byPassword.init();
             trayLoginProto.triggerCustomEvent('tray-login-click', 'tray-password-submit');
