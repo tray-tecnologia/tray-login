@@ -54,7 +54,7 @@ tray-login {
                 overflow: hidden;
             }
 
-            & ~ .tray-icon-checked {
+            &:not(.empty) ~ .tray-icon-checked {
                 opacity: 1;
             }
         }
