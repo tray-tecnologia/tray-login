@@ -77,14 +77,12 @@
              */
             changeLabel: function(input){
                 var regex = /^\d+$/;
-
                 var emailLabel = self.elms.identifyLabel.children[0];
                 var documentLabel = self.elms.identifyLabel.children[1];
 
                 if (regex.test(input.value)) {
                     emailLabel.setAttribute('display','none');
                     documentLabel.setAttribute('display','block');
-
                     return;
                 }
 
