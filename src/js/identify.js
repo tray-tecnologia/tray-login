@@ -43,7 +43,7 @@
                     identifyForm: document.getElementById('form-identify'),
                     identifyButton: document.getElementById('tray-login-identify'),
                     identifyInput: document.getElementById('input-identify'),
-                    identifyLabel: document.getElementsByTagName('label')[0].children[0].children[0],
+                    identifyLabel: document.getElementsByTagName('label')[0],
                     identifyMessage: document.getElementById('message-identify'),
                 };
             },
@@ -77,12 +77,19 @@
              */
             changeLabel: function(input){
                 var regex = /^\d+$/;
-                if (regex.test(input.value)){
-                    self.elms.identifyLabel.setAttribute('xlink:href','#tray-icon-cpf');
+
+                var emailLabel = self.elms.identifyLabel.children[0];
+                var documentLabel = self.elms.identifyLabel.children[1];
+
+                if (regex.test(input.value)) {
+                    emailLabel.setAttribute('display','none');
+                    documentLabel.setAttribute('display','block');
+
                     return;
                 }
 
-                self.elms.identifyLabel.setAttribute('xlink:href','#tray-icon-mail');
+                emailLabel.setAttribute('display','block');
+                documentLabel.setAttribute('display','none');
             },
 
             /**
