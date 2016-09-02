@@ -8,6 +8,9 @@
 
         elms: {},
 
+        classes: {
+            empty: 'empty',
+        },
         /**
          * Initialize once
          */
@@ -40,25 +43,51 @@
                     identifyForm: document.getElementById('form-identify'),
                     identifyButton: document.getElementById('tray-login-identify'),
                     identifyInput: document.getElementById('input-identify'),
+                    identifyLabel: document.getElementsByTagName('label')[0],
                     identifyMessage: document.getElementById('message-identify'),
                 };
             },
 
             /**
-             * Check if input is valid
+             * Check if input is valid and set them
              * @param {object} input DOM element
              * @return {boolean}
              */
             checkInput: function(input) {
                 if (!input || !input.value) {
+                    input.classList.add(self.classes.empty);
                     return false;
                 }
 
+                input.setCustomValidity('invalid');
+                input.classList.remove(self.classes.empty);
+
                 if (CPF.isValid(input.value) || CNPJ.isValid(input.value) || this.isValidEmail(input.value)) {
+                    input.setCustomValidity('');
                     return true;
                 }
 
                 return false;
+            },
+
+            /**
+             * Change label according input data
+             * @param {string} email
+             * @return {bool}
+             */
+            changeLabel: function(input){
+                var regex = /^\d+$/;
+                var emailLabel = self.elms.identifyLabel.children[0];
+                var documentLabel = self.elms.identifyLabel.children[1];
+
+                if (regex.test(input.value)) {
+                    emailLabel.setAttribute('display','none');
+                    documentLabel.setAttribute('display','block');
+                    return;
+                }
+
+                emailLabel.setAttribute('display','block');
+                documentLabel.setAttribute('display','none');
             },
 
             /**
@@ -161,7 +190,6 @@
             onIdentifySubmit: function() {
                 self.elms.identifyForm.addEventListener('submit', function(event) {
                     event.preventDefault();
-
                     if (!self.methods.checkInput(self.elms.identifyInput)) {
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
@@ -199,6 +227,7 @@
              */
             onIdentifyKeyUp: function() {
                 self.elms.identifyInput.addEventListener('keyup', function(event) {
+                    self.methods.changeLabel(this);
                     if (self.methods.checkInput(this) && event.keyCode !== 13) {
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,

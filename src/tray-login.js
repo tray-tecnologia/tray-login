@@ -12,6 +12,7 @@ var trayLoginProto = {},
         data = {},
         messages = {}
         initialized = false;
+        initializedPassLogin = false;
 
     trayLoginProto = Object.create(HTMLElement.prototype);
 
@@ -255,7 +256,6 @@ var trayLoginProto = {},
                 .showCpfs()
                 .showCnpjs()
                 .onHidePassword();
-
             thisElement.byPassword.init();
             trayLoginProto.triggerCustomEvent('tray-login-click', 'tray-password-submit');
         });
@@ -403,6 +403,11 @@ var trayLoginProto = {},
      * @return {object} trayLoginProto
      */
     trayLoginProto.onHidePassword = function() {
+        if(initializedPassLogin) {
+            return this;
+        }
+        initializedPassLogin = true;
+
         this.onKeyUpPassword();
         this.hidePasswordButton = thatDoc.getElementById('hide-password');
         var hideText = this.hidePasswordButton.innerHTML;
