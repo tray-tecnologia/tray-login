@@ -56,6 +56,7 @@ var trayLoginProto = {},
 
         if (this.getData('email') || this.getData('cpf') || this.getData('cnpj')) {
             this.openScreen('main');
+            console.log(thisElement.routes);
         } else if(this.hasLoginMethod('identify')) {
             this.openScreen('identify');
             this.identify.methods.init();
