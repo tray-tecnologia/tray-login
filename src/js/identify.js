@@ -43,7 +43,7 @@
                     identifyForm: document.getElementById('form-identify'),
                     identifyButton: document.getElementById('tray-login-identify'),
                     identifyInput: document.getElementById('input-identify'),
-                    identifyLabel: document.getElementsByTagName('label')[0],
+                    identifyLabel: document.getElementById('label-identify'),
                     identifyMessage: document.getElementById('message-identify'),
                 };
             },
