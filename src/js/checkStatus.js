@@ -23,33 +23,33 @@
                 }
                 self.initialized = true;
 
-                this.checkLogin();
+                this.checkEmail();
             },
 
             /**
              * Check Login
              * @param {string} user_input
              */
-            checkLogin: function() {
-                console.log(this);
+            checkEmail: function() {
+                var storeId = thisElement.getData('store');
+                var email = thisElement.getData('email');
+                var data = 'store_id=' + storeId + '&' + 'email=' + email;
+
                 $.ajax({
                     type: 'GET',
                     url: thisElement.routes.methods.route('check_status'),
-                    data: '',
+                    data: data,
                     dataType: 'json',
                     success: function(response){
                         if (response.data.message) {
+                            thisElement.setAttribute('data-methods', '["facebook"]');
                             thisElement.setAttribute('data-texts', JSON.stringify({
-                                'general-error-alert': response.data.message,
+                                'main-action': '',
                             }));
 
-                            thisElement.setAttribute('data-methods', '["facebook"]');
+                            thisElement.showErrorMessage(response.data);
+                            blockedUser = true;
                         }
-                    },
-                    error: function(xhr, type){
-                        thisElement.setAttribute('data-texts',JSON.stringify({
-                            'general-error-alert': 'xaxa',
-                        }));
                     }
                 });
             },
