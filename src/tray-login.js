@@ -13,6 +13,7 @@ var trayLoginProto = {},
         messages = {}
         initialized = false;
         initializedPassLogin = false;
+        blockedUser = false;
 
     trayLoginProto = Object.create(HTMLElement.prototype);
 
@@ -37,8 +38,8 @@ var trayLoginProto = {},
      */
     trayLoginProto.initComponent = function() {
         thisElement = this;
-        this.addElements();
         this.setLoginMethods();
+        this.addElements();
         this.setLoginCallback();
         this.preventDefaultMessages();
         this.setMessages();
@@ -56,7 +57,7 @@ var trayLoginProto = {},
 
         if (this.getData('email') || this.getData('cpf') || this.getData('cnpj')) {
             this.openScreen('main');
-            console.log(thisElement.routes);
+            this.checkStatus.methods.init();
         } else if(this.hasLoginMethod('identify')) {
             this.openScreen('identify');
             this.identify.methods.init();
@@ -202,9 +203,48 @@ var trayLoginProto = {},
         this.formOTP = thatDoc.getElementById('form-otp');
         this.formPassword = thatDoc.getElementById('form-password');
         this.loading = thatDoc.getElementById('tray-login-loading');
+
+        //Buttons
+        this.passwordButton = thatDoc.getElementById('tray-login-email');
+        this.OTPButton = thatDoc.getElementById('tray-login-otp');
+        this.facebookButton = thatDoc.querySelectorAll('[data-element="tray-login-facebook"]');
+        this.otherOptionButton = thatDoc.querySelectorAll('[data-element="login-other-option"]');
+        this.passRecoveryButton = thatDoc.getElementById('password-recovery');
+
+
+        this.handleElements();
+
         return this;
     };
 
+    trayLoginProto.handleElements = function() {
+        if (!this.hasLoginMethod('password')) {
+            this.passwordButton.style.display = 'none';
+        }
+
+        if (!this.hasLoginMethod('otp')) {
+            this.OTPButton.style.display = 'none';
+        }
+
+        if (!this.hasLoginMethod('facebook')) {
+            for (var i = this.facebookButton.length - 1; i >= 0; i--) {
+                this.facebookButton[i].style.display = 'none';
+            }
+        }
+
+        if (!this.hasLoginMethod('password')) {
+            this.passRecoveryButton.style.display = 'none';
+            return this;
+        }
+
+        if (thisElement.hasLoginMethod('identify')) {
+            for (var j = this.otherOptionButton.length - 1; j >= 0; j--) {
+                this.otherOptionButton[j].classList.remove('tray-btn-hidden');
+            }
+        }
+
+        return this;
+    },
     /**
      * Open a screen and close others
      * @return {object} trayLoginProto
@@ -244,8 +284,6 @@ var trayLoginProto = {},
      * @return {object} trayLoginProto
      */
     trayLoginProto.onPasswordLogin = function() {
-        this.passwordButton = thatDoc.getElementById('tray-login-email');
-
         if (!this.hasLoginMethod('password')) {
             this.passwordButton.style.display = 'none';
         }
@@ -435,12 +473,6 @@ var trayLoginProto = {},
      * @return {object} trayLoginProto
      */
     trayLoginProto.onOTPLogin = function() {
-        this.OTPButton = thatDoc.getElementById('tray-login-otp');
-
-        if (!this.hasLoginMethod('otp')) {
-            this.OTPButton.style.display = 'none';
-        }
-
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
             thisElement.showEmails();
@@ -479,13 +511,7 @@ var trayLoginProto = {},
      * @return {object} trayLoginProto
      */
     trayLoginProto.onFacebookLogin = function() {
-        this.facebookButton = thatDoc.querySelectorAll('[data-element="tray-login-facebook"]');
-
         for (var i = this.facebookButton.length - 1; i >= 0; i--) {
-            if (!this.hasLoginMethod('facebook')) {
-                this.facebookButton[i].style.display = 'none';
-            }
-
             this.facebookButton[i].addEventListener('click', function(event) {
                 event.preventDefault();
 
@@ -515,21 +541,16 @@ var trayLoginProto = {},
      * @return {object} trayLoginProto
      */
     trayLoginProto.onChooseOtherOption = function() {
-        this.otherOptionButton = thatDoc.querySelectorAll('[data-element="login-other-option"]');
         for (var i = this.otherOptionButton.length - 1; i >= 0; i--) {
-
-            if (thisElement.hasLoginMethod('identify')) {
-                this.otherOptionButton[i].classList.remove('tray-btn-hidden');
-            }
-
             this.otherOptionButton[i].addEventListener('click', function(event) {
                 event.preventDefault();
-                if (thisElement.hasLoginMethod('identify') && currentScreen === 'main') {
+                if (thisElement.hasLoginMethod('identify') && currentScreen === 'main' || blockedUser){
                         thisElement.openScreen('identify');
                         thisElement.removeAttribute('data-email');
                         thisElement.removeAttribute('data-cpf');
                         thisElement.removeAttribute('data-cnpj');
-                        return;
+
+                        return this;
                 }
 
                 thisElement.openScreen('main');
@@ -543,13 +564,6 @@ var trayLoginProto = {},
      * Listen click on password recovery
      */
     trayLoginProto.onPasswordRecovery = function() {
-        this.passRecoveryButton = thatDoc.getElementById('password-recovery');
-
-        if (!this.hasLoginMethod('password')) {
-            this.passRecoveryButton.style.display = 'none';
-            return this;
-        }
-
         this.passRecoveryButton.addEventListener('click', function(event) {
             event.preventDefault();
 
