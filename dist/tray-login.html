@@ -381,6 +381,7 @@ tray-login .tray-btn-hidden {
         <div class="tray-login-screens" id="main">
             <h1 class="tray-title">Autenticação</h1>
             <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
+            <p class="tray-error-message" id="message-main"></p>
             <p class="tray-action" custom-text="main-action">Escolha uma das opções para se identificar:</p>
             <div class="tray-actions">
                 <button class="tray-btn-primary" id="tray-login-email">E-mail e senha da loja</button>
@@ -465,6 +466,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         messages = {}
         initialized = false;
         initializedPassLogin = false;
+        blockedUser = false;
 
     trayLoginProto = Object.create(HTMLElement.prototype);
 
@@ -489,8 +491,8 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      */
     trayLoginProto.initComponent = function() {
         thisElement = this;
-        this.addElements();
         this.setLoginMethods();
+        this.addElements();
         this.setLoginCallback();
         this.preventDefaultMessages();
         this.setMessages();
@@ -508,6 +510,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
 
         if (this.getData('email') || this.getData('cpf') || this.getData('cnpj')) {
             this.openScreen('main');
+            this.checkStatus.methods.init();
         } else if(this.hasLoginMethod('identify')) {
             this.openScreen('identify');
             this.identify.methods.init();
@@ -653,9 +656,48 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         this.formOTP = thatDoc.getElementById('form-otp');
         this.formPassword = thatDoc.getElementById('form-password');
         this.loading = thatDoc.getElementById('tray-login-loading');
+
+        //Buttons
+        this.passwordButton = thatDoc.getElementById('tray-login-email');
+        this.OTPButton = thatDoc.getElementById('tray-login-otp');
+        this.facebookButton = thatDoc.querySelectorAll('[data-element="tray-login-facebook"]');
+        this.otherOptionButton = thatDoc.querySelectorAll('[data-element="login-other-option"]');
+        this.passRecoveryButton = thatDoc.getElementById('password-recovery');
+
+
+        this.handleElements();
+
         return this;
     };
 
+    trayLoginProto.handleElements = function() {
+        if (!this.hasLoginMethod('password')) {
+            this.passwordButton.style.display = 'none';
+        }
+
+        if (!this.hasLoginMethod('otp')) {
+            this.OTPButton.style.display = 'none';
+        }
+
+        if (!this.hasLoginMethod('facebook')) {
+            for (var i = this.facebookButton.length - 1; i >= 0; i--) {
+                this.facebookButton[i].style.display = 'none';
+            }
+        }
+
+        if (!this.hasLoginMethod('password')) {
+            this.passRecoveryButton.style.display = 'none';
+            return this;
+        }
+
+        if (thisElement.hasLoginMethod('identify')) {
+            for (var j = this.otherOptionButton.length - 1; j >= 0; j--) {
+                this.otherOptionButton[j].classList.remove('tray-btn-hidden');
+            }
+        }
+
+        return this;
+    },
     /**
      * Open a screen and close others
      * @return {object} trayLoginProto
@@ -695,8 +737,6 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onPasswordLogin = function() {
-        this.passwordButton = thatDoc.getElementById('tray-login-email');
-
         if (!this.hasLoginMethod('password')) {
             this.passwordButton.style.display = 'none';
         }
@@ -886,12 +926,6 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onOTPLogin = function() {
-        this.OTPButton = thatDoc.getElementById('tray-login-otp');
-
-        if (!this.hasLoginMethod('otp')) {
-            this.OTPButton.style.display = 'none';
-        }
-
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
             thisElement.showEmails();
@@ -930,13 +964,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onFacebookLogin = function() {
-        this.facebookButton = thatDoc.querySelectorAll('[data-element="tray-login-facebook"]');
-
         for (var i = this.facebookButton.length - 1; i >= 0; i--) {
-            if (!this.hasLoginMethod('facebook')) {
-                this.facebookButton[i].style.display = 'none';
-            }
-
             this.facebookButton[i].addEventListener('click', function(event) {
                 event.preventDefault();
 
@@ -966,21 +994,16 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onChooseOtherOption = function() {
-        this.otherOptionButton = thatDoc.querySelectorAll('[data-element="login-other-option"]');
         for (var i = this.otherOptionButton.length - 1; i >= 0; i--) {
-
-            if (thisElement.hasLoginMethod('identify')) {
-                this.otherOptionButton[i].classList.remove('tray-btn-hidden');
-            }
-
             this.otherOptionButton[i].addEventListener('click', function(event) {
                 event.preventDefault();
-                if (thisElement.hasLoginMethod('identify') && currentScreen === 'main') {
+                if (thisElement.hasLoginMethod('identify') && currentScreen === 'main' || blockedUser){
                         thisElement.openScreen('identify');
                         thisElement.removeAttribute('data-email');
                         thisElement.removeAttribute('data-cpf');
                         thisElement.removeAttribute('data-cnpj');
-                        return;
+
+                        return this;
                 }
 
                 thisElement.openScreen('main');
@@ -994,13 +1017,6 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * Listen click on password recovery
      */
     trayLoginProto.onPasswordRecovery = function() {
-        this.passRecoveryButton = thatDoc.getElementById('password-recovery');
-
-        if (!this.hasLoginMethod('password')) {
-            this.passRecoveryButton.style.display = 'none';
-            return this;
-        }
-
         this.passRecoveryButton.addEventListener('click', function(event) {
             event.preventDefault();
 
@@ -1178,6 +1194,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
             "otp": "/checkout/otp-generate",
             "otp_login": "/checkout/otp",
             "facebook": "/checkout/facebook/url",
+            "check_status": "/checkout/check-status"
         },
 
         /**
@@ -1509,6 +1526,67 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
                 });
 
                 return this;
+            },
+        },
+
+    };
+
+})(Zepto, window, document, thisElement);
+</script>
+<script>(function($, window, document, _this) {
+    'use strict';
+    var self;
+    /**
+     * Identify
+     */
+    trayLoginProto.checkStatus = self = {
+
+        elms: {},
+
+        /**
+         * Initialize once
+         */
+        initialized: false,
+
+        methods: {
+            /**
+             * Init the module
+             */
+            init: function() {
+                if (self.initialized) {
+                    return;
+                }
+                self.initialized = true;
+
+                this.checkEmail();
+            },
+
+            /**
+             * Check Login
+             * @param {string} user_input
+             */
+            checkEmail: function() {
+                var storeId = thisElement.getData('store');
+                var email = thisElement.getData('email');
+                var data = 'store_id=' + storeId + '&' + 'email=' + email;
+
+                $.ajax({
+                    type: 'GET',
+                    url: thisElement.routes.methods.route('check_status'),
+                    data: data,
+                    dataType: 'json',
+                    success: function(response){
+                        if (response.data.message) {
+                            thisElement.setAttribute('data-methods', '["facebook"]');
+                            thisElement.setAttribute('data-texts', JSON.stringify({
+                                'main-action': '',
+                            }));
+
+                            thisElement.showErrorMessage(response.data);
+                            blockedUser = true;
+                        }
+                    }
+                });
             },
         },
 
