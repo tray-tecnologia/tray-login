@@ -237,6 +237,7 @@ var trayLoginProto = {},
 
         if (!this.hasLoginMethod('facebook')) {
             this.$facebookButton.hide();
+        }
 
         if (!thisElement.hasLoginMethod('identify')) {
             this.$otherOptionButton.hide();

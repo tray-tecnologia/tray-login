@@ -672,9 +672,8 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         this.passwordButton.style.display = 'block';
         this.OTPButton.style.display = 'block';
         this.passRecoveryButton.style.display = 'block';
-        console.log(this.$facebookButton);
-        this.$facebookButton[0].style.display = 'block';
-        this.$otherOptionButton[0].style.display = 'block';
+        this.$facebookButton.show();
+        this.$otherOptionButton.show();
 
 
         if (!this.hasLoginMethod('password')) {
@@ -690,11 +689,11 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         }
 
         if (!this.hasLoginMethod('facebook')) {
-            this.$facebookButton[0].style.display = 'none';
+            this.$facebookButton.hide();
         }
 
         if (!thisElement.hasLoginMethod('identify')) {
-            this.$otherOptionButton[0].style.display = 'none';
+            this.$otherOptionButton.hide();
         }
 
         return this;
