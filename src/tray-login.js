@@ -219,8 +219,8 @@ var trayLoginProto = {},
         this.passwordButton.style.display = 'block';
         this.OTPButton.style.display = 'block';
         this.passRecoveryButton.style.display = 'block';
-        this.$facebookButton[0].style.display = 'block';
-        this.$otherOptionButton[0].style.display = 'block';
+        this.$facebookButton.show();
+        this.$otherOptionButton.show();
 
 
         if (!this.hasLoginMethod('password')) {
@@ -236,11 +236,10 @@ var trayLoginProto = {},
         }
 
         if (!this.hasLoginMethod('facebook')) {
-            this.$facebookButton[0].style.display = 'none';
-        }
+            this.$facebookButton.hide();
 
         if (!thisElement.hasLoginMethod('identify')) {
-            this.$otherOptionButton[0].style.display = 'none';
+            this.$otherOptionButton.hide();
         }
 
         return this;
