@@ -307,6 +307,8 @@ var trayLoginProto = {},
         this.formPassword.addEventListener('submit', function(event) {
             event.preventDefault();
             var data = $(thisElement.formPassword).serialize();
+            var dataMethods = thisElement.hasLoginMethod('identify') ? '["facebook", "identify"]' : '["facebook"]';
+
             $.ajax({
                 type: 'POST',
                 url: thisElement.routes.methods.route('password'),
@@ -323,6 +325,10 @@ var trayLoginProto = {},
                     thisElement.redirectOnSuccess(response.data.token);
                 },
                 error: function(request, type) {
+                    if(request.status < 404) {
+                        thisElement.setAttribute('data-methods', dataMethods);
+                    }
+
                     trayLoginProto.triggerCustomEvent('tray-login', request, 'error');
                     thisElement.showErrorMessage($.parseJSON(request.responseText));
                     console.error('Tray Login Error: ' + request.status + ' - ' + request.statusText);
