@@ -463,10 +463,9 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         titleSelectors = '#tray-login-email, #email-password .tray-title',
         loginMethods = [],
         data = {},
-        messages = {}
-        initialized = false;
+        messages = {},
+        initialized = false,
         initializedPassLogin = false;
-        blockedUser = false;
 
     trayLoginProto = Object.create(HTMLElement.prototype);
 
@@ -483,7 +482,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * Executes when some attribute was changed
      */
     trayLoginProto.attributeChangedCallback = function() {
-        this.initComponent();
+        thisElement.initComponent();
     };
 
     /**
@@ -496,6 +495,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         this.setLoginCallback();
         this.preventDefaultMessages();
         this.setMessages();
+        this.changeLabels();
 
         if (!initialized) {
             this.addListeners();
@@ -516,7 +516,6 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
             this.identify.methods.init();
         }
 
-        this.changeLabels();
         this.bindValues('[data-element="tray-store"]', 'store');
         this.bindValues('[data-element="tray-session"]', 'session');
     };
@@ -588,13 +587,13 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * Apply messages in the DOM
      */
     trayLoginProto.applyMessages = function() {
-        for (key in this.messages) {
+        for (var key in this.messages) {
             if (this.messages.hasOwnProperty(key)) {
                 var elements = thatDoc.querySelectorAll('[custom-text="' + key + '"]');
                 var message = this.messages[key];
                 for (var i = elements.length - 1; i >= 0; i--) {
                     elements[i].innerHTML = this.messages[key];
-                };
+                }
             }
         }
     };
@@ -656,21 +655,27 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         this.formOTP = thatDoc.getElementById('form-otp');
         this.formPassword = thatDoc.getElementById('form-password');
         this.loading = thatDoc.getElementById('tray-login-loading');
-
-        //Buttons
         this.passwordButton = thatDoc.getElementById('tray-login-email');
         this.OTPButton = thatDoc.getElementById('tray-login-otp');
-        this.facebookButton = thatDoc.querySelectorAll('[data-element="tray-login-facebook"]');
-        this.otherOptionButton = thatDoc.querySelectorAll('[data-element="login-other-option"]');
         this.passRecoveryButton = thatDoc.getElementById('password-recovery');
-
-
+        this.$facebookButton = $(".tray-btn-facebook");
+        this.$otherOptionButton = $('[data-element="login-other-option"]');
         this.handleElements();
-
         return this;
     };
 
+    /**
+     * Handle display and show buttons
+     * @return {object} trayLoginProto
+     */
     trayLoginProto.handleElements = function() {
+        this.passwordButton.style.display = 'block';
+        this.OTPButton.style.display = 'block';
+        this.passRecoveryButton.style.display = 'block';
+        this.$facebookButton[0].style.display = 'block';
+        this.$otherOptionButton[0].style.display = 'block';
+
+
         if (!this.hasLoginMethod('password')) {
             this.passwordButton.style.display = 'none';
         }
@@ -679,21 +684,16 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
             this.OTPButton.style.display = 'none';
         }
 
-        if (!this.hasLoginMethod('facebook')) {
-            for (var i = this.facebookButton.length - 1; i >= 0; i--) {
-                this.facebookButton[i].style.display = 'none';
-            }
-        }
-
         if (!this.hasLoginMethod('password')) {
             this.passRecoveryButton.style.display = 'none';
-            return this;
         }
 
-        if (thisElement.hasLoginMethod('identify')) {
-            for (var j = this.otherOptionButton.length - 1; j >= 0; j--) {
-                this.otherOptionButton[j].classList.remove('tray-btn-hidden');
-            }
+        if (!this.hasLoginMethod('facebook')) {
+            this.$facebookButton[0].style.display = 'none';
+        }
+
+        if (!thisElement.hasLoginMethod('identify')) {
+            this.$otherOptionButton[0].style.display = 'none';
         }
 
         return this;
@@ -737,10 +737,6 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onPasswordLogin = function() {
-        if (!this.hasLoginMethod('password')) {
-            this.passwordButton.style.display = 'none';
-        }
-
         this.passwordButton.addEventListener('click', function(event) {
             event.preventDefault();
             thisElement.openScreen('email-password')
@@ -964,8 +960,8 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onFacebookLogin = function() {
-        for (var i = this.facebookButton.length - 1; i >= 0; i--) {
-            this.facebookButton[i].addEventListener('click', function(event) {
+        for (var i = this.$facebookButton.length - 1; i >= 0; i--) {
+            this.$facebookButton[i].addEventListener('click', function(event) {
                 event.preventDefault();
 
                 var data = {
@@ -994,18 +990,21 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onChooseOtherOption = function() {
-        for (var i = this.otherOptionButton.length - 1; i >= 0; i--) {
-            this.otherOptionButton[i].addEventListener('click', function(event) {
+        for (var i = this.$otherOptionButton.length - 1; i >= 0; i--) {
+            this.$otherOptionButton[i].addEventListener('click', function(event) {
                 event.preventDefault();
-                if (thisElement.hasLoginMethod('identify') && currentScreen === 'main' || blockedUser){
+                if (thisElement.hasLoginMethod('identify') && currentScreen === 'main' || thisElement.checkStatus.blockedUser){
                         thisElement.openScreen('identify');
                         thisElement.removeAttribute('data-email');
                         thisElement.removeAttribute('data-cpf');
                         thisElement.removeAttribute('data-cnpj');
 
+                        if(thisElement.checkStatus.blockedUser){
+                            thisElement.checkStatus.methods.resetLogin();
+                        }
+
                         return this;
                 }
-
                 thisElement.openScreen('main');
             });
         }
@@ -1138,7 +1137,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         var errorElements = thatDoc.querySelectorAll('.tray-error-message');
         for (var i = errorElements.length - 1; i >= 0; i--) {
             errorElements[i].innerHTML = response.message;
-        };
+        }
 
         thatDoc.getElementById('input-code').classList.add('tray-input-invalid');
         thatDoc.getElementById('input-password').classList.add('tray-input-invalid');
@@ -1151,7 +1150,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         var errorElements = thatDoc.querySelectorAll('.tray-error-message');
         for (var i = errorElements.length - 1; i >= 0; i--) {
             errorElements[i].innerHTML = '';
-        };
+        }
 
         thatDoc.getElementById('input-code').classList.remove('tray-input-invalid');
         thatDoc.getElementById('input-password').classList.remove('tray-input-invalid');
@@ -1537,7 +1536,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
     'use strict';
     var self;
     /**
-     * Identify
+     * checkStatus
      */
     trayLoginProto.checkStatus = self = {
 
@@ -1547,28 +1546,78 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
          * Initialize once
          */
         initialized: false,
+        blockedUser: false,
+        loginMethods: [],
 
         methods: {
             /**
              * Init the module
              */
             init: function() {
-                if (self.initialized) {
-                    return;
+                if(!self.initialized){
+                    this.setElements();
+                    this.getLoginMethods();
+                    self.initialized = true;
                 }
-                self.initialized = true;
 
-                this.checkEmail();
+                this.checkStatus();
+            },
+
+            /**
+             * Set DOM elements
+             */
+            setElements: function() {
+                self.elms = {
+                    identifyInput: document.getElementById('input-identify'),
+                };
+            },
+
+            /**
+             * Get initial login methods for reset
+             */
+            getLoginMethods: function() {
+                self.loginMethods = thisElement.getAttribute('data-methods');
+            },
+
+            /**
+             * Check user input for mount data
+             * @return {string} input
+             */
+            getUserInput: function() {
+                var input = 'email';
+
+                if (thisElement.getData('cpf')) {
+                    input = 'cpf';
+                }
+
+                if (thisElement.getData('cnpj')) {
+                    input = 'cnpj';
+                }
+
+                return input;
+            },
+
+            /**
+             * Reset Login Methods
+             */
+            resetLogin: function() {
+                thisElement.setAttribute('data-methods', self.loginMethods);
+                thisElement.setAttribute('data-texts', JSON.stringify({
+                    'general-error-alert': '',
+                    'main-action': 'Escolha uma das opções para se identificar:'
+                }));
+                self.elms.identifyInput.setCustomValidity('invalid');
             },
 
             /**
              * Check Login
              * @param {string} user_input
              */
-            checkEmail: function() {
+            checkStatus: function() {
                 var storeId = thisElement.getData('store');
-                var email = thisElement.getData('email');
-                var data = 'store_id=' + storeId + '&' + 'email=' + email;
+                var userInput = this.getUserInput();
+                var data = 'store_id=' + storeId + '&' + userInput + '=' + thisElement.getData(userInput);
+                var dataMethods = thisElement.hasLoginMethod('identify') ? '["facebook", "identify"]' : '["facebook"]';
 
                 $.ajax({
                     type: 'GET',
@@ -1577,13 +1626,13 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
                     dataType: 'json',
                     success: function(response){
                         if (response.data.message) {
-                            thisElement.setAttribute('data-methods', '["facebook"]');
+                            thisElement.setAttribute('data-methods', dataMethods);
                             thisElement.setAttribute('data-texts', JSON.stringify({
+                                'general-error-alert': response.data.message,
                                 'main-action': '',
                             }));
 
-                            thisElement.showErrorMessage(response.data);
-                            blockedUser = true;
+                            self.blockedUser = true;
                         }
                     }
                 });
