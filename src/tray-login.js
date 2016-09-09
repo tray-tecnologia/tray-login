@@ -222,7 +222,6 @@ var trayLoginProto = {},
         this.$facebookButton.show();
         this.$otherOptionButton.show();
 
-
         if (!this.hasLoginMethod('password')) {
             this.passwordButton.style.display = 'none';
         }
@@ -239,7 +238,7 @@ var trayLoginProto = {},
             this.$facebookButton.hide();
         }
 
-        if (!thisElement.hasLoginMethod('identify')) {
+        if (!thisElement.hasLoginMethod('identify') && currentScreen == 'main') {
             this.$otherOptionButton.hide();
         }
 
@@ -253,11 +252,13 @@ var trayLoginProto = {},
         currentScreen = screenID;
         $(thatDoc).trigger('tray-login#' + screenID);
         var screens = thatDoc.querySelectorAll(screensSelectors);
+
         for (var i = screens.length - 1; i >= 0; i--) {
             screens[i].style.display = 'none';
         }
-        thatDoc.getElementById(screenID).style.display = 'block';
 
+        thatDoc.getElementById(screenID).style.display = 'block';
+        this.handleElements();
         this.cleanErrorMessage();
 
         return this;
