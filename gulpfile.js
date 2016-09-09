@@ -83,6 +83,21 @@ var passwordRecovery = {
     "statusCode": 200
 };
 
+var checkStatusSucess = {
+    "data": {
+        blocked: false
+    },
+    "statusCode": 200
+};
+
+var checkStatusFail = {
+    "data": {
+        blocked: true,
+        message: "Por motivos de segurança bloqueamos o acesso por e-mail e senha durante 60 minutos.",
+    },
+    "statusCode": 200
+};
+
 var mocks = {
     "/checkout/has-account": function (req, res) {
         res.setHeader("Content-Type", "application/json");
@@ -91,7 +106,7 @@ var mocks = {
 
     "/checkout/password": function (req, res) {
         res.setHeader("Content-Type", "application/json");
-        res.end(JSON.stringify(passwordSuccess));
+        res.end(JSON.stringify(passwordFail));
     },
 
     "/checkout/otp-generate": function (req, res) {
@@ -112,6 +127,11 @@ var mocks = {
     "/checkout/password-recovery": function (req, res) {
         res.setHeader("Content-Type", "application/json");
         res.end(JSON.stringify(passwordRecovery));
+    },
+
+    "/checkout/check-status": function (req, res) {
+        res.setHeader("Content-Type", "application/json");
+        res.end(JSON.stringify(checkStatusFail));
     },
 };
 

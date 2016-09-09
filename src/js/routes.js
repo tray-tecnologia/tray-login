@@ -13,6 +13,7 @@
             "otp": "/checkout/otp-generate",
             "otp_login": "/checkout/otp",
             "facebook": "/checkout/facebook/url",
+            "check_status": "/checkout/check-status"
         },
 
         /**

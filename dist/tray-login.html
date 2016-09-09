@@ -381,6 +381,7 @@ tray-login .tray-btn-hidden {
         <div class="tray-login-screens" id="main">
             <h1 class="tray-title">Autenticação</h1>
             <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
+            <p class="tray-error-message" id="message-main"></p>
             <p class="tray-action" custom-text="main-action">Escolha uma das opções para se identificar:</p>
             <div class="tray-actions">
                 <button class="tray-btn-primary" id="tray-login-email">E-mail e senha da loja</button>
@@ -462,8 +463,8 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         titleSelectors = '#tray-login-email, #email-password .tray-title',
         loginMethods = [],
         data = {},
-        messages = {}
-        initialized = false;
+        messages = {},
+        initialized = false,
         initializedPassLogin = false;
 
     trayLoginProto = Object.create(HTMLElement.prototype);
@@ -481,7 +482,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * Executes when some attribute was changed
      */
     trayLoginProto.attributeChangedCallback = function() {
-        this.initComponent();
+        thisElement.initComponent();
     };
 
     /**
@@ -489,11 +490,12 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      */
     trayLoginProto.initComponent = function() {
         thisElement = this;
-        this.addElements();
         this.setLoginMethods();
+        this.addElements();
         this.setLoginCallback();
         this.preventDefaultMessages();
         this.setMessages();
+        this.changeLabels();
 
         if (!initialized) {
             this.addListeners();
@@ -508,12 +510,12 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
 
         if (this.getData('email') || this.getData('cpf') || this.getData('cnpj')) {
             this.openScreen('main');
+            this.checkStatus.methods.init();
         } else if(this.hasLoginMethod('identify')) {
             this.openScreen('identify');
             this.identify.methods.init();
         }
 
-        this.changeLabels();
         this.bindValues('[data-element="tray-store"]', 'store');
         this.bindValues('[data-element="tray-session"]', 'session');
     };
@@ -585,13 +587,13 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * Apply messages in the DOM
      */
     trayLoginProto.applyMessages = function() {
-        for (key in this.messages) {
+        for (var key in this.messages) {
             if (this.messages.hasOwnProperty(key)) {
                 var elements = thatDoc.querySelectorAll('[custom-text="' + key + '"]');
                 var message = this.messages[key];
                 for (var i = elements.length - 1; i >= 0; i--) {
                     elements[i].innerHTML = this.messages[key];
-                };
+                }
             }
         }
     };
@@ -653,9 +655,49 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         this.formOTP = thatDoc.getElementById('form-otp');
         this.formPassword = thatDoc.getElementById('form-password');
         this.loading = thatDoc.getElementById('tray-login-loading');
+        this.passwordButton = thatDoc.getElementById('tray-login-email');
+        this.OTPButton = thatDoc.getElementById('tray-login-otp');
+        this.passRecoveryButton = thatDoc.getElementById('password-recovery');
+        this.$facebookButton = $(".tray-btn-facebook");
+        this.$otherOptionButton = $('[data-element="login-other-option"]');
+        this.handleElements();
         return this;
     };
 
+    /**
+     * Handle display and show buttons
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.handleElements = function() {
+        this.passwordButton.style.display = 'block';
+        this.OTPButton.style.display = 'block';
+        this.passRecoveryButton.style.display = 'block';
+        this.$facebookButton.show();
+        this.$otherOptionButton.show();
+
+
+        if (!this.hasLoginMethod('password')) {
+            this.passwordButton.style.display = 'none';
+        }
+
+        if (!this.hasLoginMethod('otp')) {
+            this.OTPButton.style.display = 'none';
+        }
+
+        if (!this.hasLoginMethod('password')) {
+            this.passRecoveryButton.style.display = 'none';
+        }
+
+        if (!this.hasLoginMethod('facebook')) {
+            this.$facebookButton.hide();
+        }
+
+        if (!thisElement.hasLoginMethod('identify')) {
+            this.$otherOptionButton.hide();
+        }
+
+        return this;
+    },
     /**
      * Open a screen and close others
      * @return {object} trayLoginProto
@@ -695,12 +737,6 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onPasswordLogin = function() {
-        this.passwordButton = thatDoc.getElementById('tray-login-email');
-
-        if (!this.hasLoginMethod('password')) {
-            this.passwordButton.style.display = 'none';
-        }
-
         this.passwordButton.addEventListener('click', function(event) {
             event.preventDefault();
             thisElement.openScreen('email-password')
@@ -724,6 +760,8 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         this.formPassword.addEventListener('submit', function(event) {
             event.preventDefault();
             var data = $(thisElement.formPassword).serialize();
+            var dataMethods = thisElement.hasLoginMethod('identify') ? '["facebook", "identify"]' : '["facebook"]';
+
             $.ajax({
                 type: 'POST',
                 url: thisElement.routes.methods.route('password'),
@@ -740,6 +778,10 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
                     thisElement.redirectOnSuccess(response.data.token);
                 },
                 error: function(request, type) {
+                    if(request.status < 404) {
+                        thisElement.setAttribute('data-methods', dataMethods);
+                    }
+
                     trayLoginProto.triggerCustomEvent('tray-login', request, 'error');
                     thisElement.showErrorMessage($.parseJSON(request.responseText));
                     console.error('Tray Login Error: ' + request.status + ' - ' + request.statusText);
@@ -886,12 +928,6 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onOTPLogin = function() {
-        this.OTPButton = thatDoc.getElementById('tray-login-otp');
-
-        if (!this.hasLoginMethod('otp')) {
-            this.OTPButton.style.display = 'none';
-        }
-
         this.OTPButton.addEventListener('click', function(event) {
             event.preventDefault();
             thisElement.showEmails();
@@ -930,14 +966,8 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onFacebookLogin = function() {
-        this.facebookButton = thatDoc.querySelectorAll('[data-element="tray-login-facebook"]');
-
-        for (var i = this.facebookButton.length - 1; i >= 0; i--) {
-            if (!this.hasLoginMethod('facebook')) {
-                this.facebookButton[i].style.display = 'none';
-            }
-
-            this.facebookButton[i].addEventListener('click', function(event) {
+        for (var i = this.$facebookButton.length - 1; i >= 0; i--) {
+            this.$facebookButton[i].addEventListener('click', function(event) {
                 event.preventDefault();
 
                 var data = {
@@ -966,23 +996,21 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * @return {object} trayLoginProto
      */
     trayLoginProto.onChooseOtherOption = function() {
-        this.otherOptionButton = thatDoc.querySelectorAll('[data-element="login-other-option"]');
-        for (var i = this.otherOptionButton.length - 1; i >= 0; i--) {
-
-            if (thisElement.hasLoginMethod('identify')) {
-                this.otherOptionButton[i].classList.remove('tray-btn-hidden');
-            }
-
-            this.otherOptionButton[i].addEventListener('click', function(event) {
+        for (var i = this.$otherOptionButton.length - 1; i >= 0; i--) {
+            this.$otherOptionButton[i].addEventListener('click', function(event) {
                 event.preventDefault();
-                if (thisElement.hasLoginMethod('identify') && currentScreen === 'main') {
+                if (thisElement.hasLoginMethod('identify') && currentScreen === 'main' || thisElement.checkStatus.blockedUser){
                         thisElement.openScreen('identify');
                         thisElement.removeAttribute('data-email');
                         thisElement.removeAttribute('data-cpf');
                         thisElement.removeAttribute('data-cnpj');
-                        return;
-                }
 
+                        if(thisElement.checkStatus.blockedUser){
+                            thisElement.checkStatus.methods.resetLogin();
+                        }
+
+                        return this;
+                }
                 thisElement.openScreen('main');
             });
         }
@@ -994,13 +1022,6 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      * Listen click on password recovery
      */
     trayLoginProto.onPasswordRecovery = function() {
-        this.passRecoveryButton = thatDoc.getElementById('password-recovery');
-
-        if (!this.hasLoginMethod('password')) {
-            this.passRecoveryButton.style.display = 'none';
-            return this;
-        }
-
         this.passRecoveryButton.addEventListener('click', function(event) {
             event.preventDefault();
 
@@ -1122,7 +1143,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         var errorElements = thatDoc.querySelectorAll('.tray-error-message');
         for (var i = errorElements.length - 1; i >= 0; i--) {
             errorElements[i].innerHTML = response.message;
-        };
+        }
 
         thatDoc.getElementById('input-code').classList.add('tray-input-invalid');
         thatDoc.getElementById('input-password').classList.add('tray-input-invalid');
@@ -1135,7 +1156,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         var errorElements = thatDoc.querySelectorAll('.tray-error-message');
         for (var i = errorElements.length - 1; i >= 0; i--) {
             errorElements[i].innerHTML = '';
-        };
+        }
 
         thatDoc.getElementById('input-code').classList.remove('tray-input-invalid');
         thatDoc.getElementById('input-password').classList.remove('tray-input-invalid');
@@ -1178,6 +1199,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
             "otp": "/checkout/otp-generate",
             "otp_login": "/checkout/otp",
             "facebook": "/checkout/facebook/url",
+            "check_status": "/checkout/check-status"
         },
 
         /**
@@ -1509,6 +1531,117 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
                 });
 
                 return this;
+            },
+        },
+
+    };
+
+})(Zepto, window, document, thisElement);
+</script>
+<script>(function($, window, document, _this) {
+    'use strict';
+    var self;
+    /**
+     * checkStatus
+     */
+    trayLoginProto.checkStatus = self = {
+
+        elms: {},
+
+        /**
+         * Initialize once
+         */
+        initialized: false,
+        blockedUser: false,
+        loginMethods: [],
+
+        methods: {
+            /**
+             * Init the module
+             */
+            init: function() {
+                if(!self.initialized){
+                    this.setElements();
+                    this.getLoginMethods();
+                    self.initialized = true;
+                }
+
+                this.checkStatus();
+            },
+
+            /**
+             * Set DOM elements
+             */
+            setElements: function() {
+                self.elms = {
+                    identifyInput: document.getElementById('input-identify'),
+                };
+            },
+
+            /**
+             * Get initial login methods for reset
+             */
+            getLoginMethods: function() {
+                self.loginMethods = thisElement.getAttribute('data-methods');
+            },
+
+            /**
+             * Check user input for mount data
+             * @return {string} input
+             */
+            getUserInput: function() {
+                var input = 'email';
+
+                if (thisElement.getData('cpf')) {
+                    input = 'cpf';
+                }
+
+                if (thisElement.getData('cnpj')) {
+                    input = 'cnpj';
+                }
+
+                return input;
+            },
+
+            /**
+             * Reset Login Methods
+             */
+            resetLogin: function() {
+                thisElement.setAttribute('data-methods', self.loginMethods);
+                thisElement.setAttribute('data-texts', JSON.stringify({
+                    'general-error-alert': '',
+                    'main-action': 'Escolha uma das opções para se identificar:'
+                }));
+                self.elms.identifyInput.setCustomValidity('invalid');
+            },
+
+            /**
+             * Check Login
+             * @param {string} user_input
+             */
+            checkStatus: function() {
+                var storeId = thisElement.getData('store');
+                var userInput = this.getUserInput();
+                var data = 'store_id=' + storeId + '&' + userInput + '=' + thisElement.getData(userInput);
+                var dataMethods = thisElement.hasLoginMethod('identify') ? '["facebook", "identify"]' : '["facebook"]';
+
+                $.ajax({
+                    type: 'GET',
+                    url: thisElement.routes.methods.route('check_status'),
+                    data: data,
+                    dataType: 'json',
+                    success: function(response){
+                        if (response.data.message) {
+                            thisElement.setAttribute('data-methods', dataMethods);
+                            thisElement.setAttribute('data-texts', JSON.stringify({
+                                'general-error-alert': response.data.message,
+                                'main-action': '',
+                            }));
+
+                            self.blockedUser = true;
+                        }
+                    }
+                });
             },
         },
 
