@@ -65,6 +65,7 @@ var trayLoginProto = {},
 
         this.bindValues('[data-element="tray-store"]', 'store');
         this.bindValues('[data-element="tray-session"]', 'session');
+        this.handleCloseButton();
     };
 
     /**
@@ -264,6 +265,17 @@ var trayLoginProto = {},
         return this;
     };
 
+    /**
+     * Open a screen and close others
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.handleCloseButton = function() {
+        this.closeButton = thatDoc.querySelector('.tray-close');
+
+        if (this.messages != null && this.messages.closeButton) {
+            this.closeButton.style.display = 'none';
+        }
+    };
     /**
      * When click in the close button
      * @return {object} trayLoginProto
