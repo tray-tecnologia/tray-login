@@ -166,13 +166,13 @@
 
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'Usuário não encontrado, faça seu cadastro.',
+                            message: 'Usu&aacute;rio n&atilde;o encontrado, fa&ccedil;a seu cadastro.',
                         });
                     },
                     error: function(xhr, type){
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'Não foi possível verificar seu cadastro, tente novamente.',
+                            message: 'N&atilde;o foi poss&iacute;vel verificar seu cadastro, tente novamente.',
                         });
                     }
                 });
@@ -193,7 +193,7 @@
                     if (!self.methods.checkInput(self.elms.identifyInput)) {
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'Dados inválidos, digite novamente!',
+                            message: 'Dados inv&aacute;lidos, digite novamente!',
                         });
                         return;
                     }
@@ -213,7 +213,7 @@
                     if (!self.methods.checkInput(self.elms.identifyInput)) {
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'Dados inválidos, digite novamente!',
+                            message: 'Dados inv&aacute;lidos, digite novamente!',
                         });
                     }
                 });

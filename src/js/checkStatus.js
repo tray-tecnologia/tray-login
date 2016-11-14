@@ -70,7 +70,7 @@
                 thisElement.setAttribute('data-methods', self.loginMethods);
                 thisElement.setAttribute('data-texts', JSON.stringify({
                     'general-error-alert': '',
-                    'main-action': 'Escolha uma das opções para se identificar:'
+                    'main-action': 'Escolha uma das op&ccedil;&etilde;s para se identificar:'
                 }));
                 self.elms.identifyInput.setCustomValidity('invalid');
             },
