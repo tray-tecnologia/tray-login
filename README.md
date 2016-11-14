@@ -89,7 +89,7 @@ cd bower_components/zeptojs
 npm run-script dist
 ```
 
-Em ambientes linux é necessario fazer o downgrade da dependencia vulcanize do pacote gulp-vulcanize, neste caso siga os passos abaixo:
+Em ambientes Linux é necessário fazer o downgrade da dependência vulcanize do pacote gulp-vulcanize, neste caso siga os passos abaixo:
 
 - Abra o arquivo `node_modules/gulp-vulcanize/package.json`
 - Altere a linha 55 `"^1.9.1"` para a versão fixa, `1.14.0`
