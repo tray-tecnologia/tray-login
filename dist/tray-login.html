@@ -1473,13 +1473,13 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
 
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'Usuário não encontrado, faça seu cadastro.',
+                            message: 'Usu&aacute;rio n&atilde;o encontrado, fa&ccedil;a seu cadastro.',
                         });
                     },
                     error: function(xhr, type){
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'Não foi possível verificar seu cadastro, tente novamente.',
+                            message: 'N&atilde;o foi poss&iacute;vel verificar seu cadastro, tente novamente.',
                         });
                     }
                 });
@@ -1500,7 +1500,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
                     if (!self.methods.checkInput(self.elms.identifyInput)) {
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'Dados inválidos, digite novamente!',
+                            message: 'Dados inv&aacute;lidos, digite novamente!',
                         });
                         return;
                     }
@@ -1520,7 +1520,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
                     if (!self.methods.checkInput(self.elms.identifyInput)) {
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'Dados inválidos, digite novamente!',
+                            message: 'Dados inv&aacute;lidos, digite novamente!',
                         });
                     }
                 });
@@ -1623,7 +1623,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
                 thisElement.setAttribute('data-methods', self.loginMethods);
                 thisElement.setAttribute('data-texts', JSON.stringify({
                     'general-error-alert': '',
-                    'main-action': 'Escolha uma das opções para se identificar:'
+                    'main-action': 'Escolha uma das op&ccedil;&etilde;s para se identificar:'
                 }));
                 self.elms.identifyInput.setCustomValidity('invalid');
             },
