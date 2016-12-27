@@ -9,26 +9,12 @@
 </head>
 <body>
     <h1>Tray Login</h1>
-
-    <!--
-    v1
-    <tray-login
-        data-email="teste@tray.com.br"
-        api-otp="src/mock/otp.json"
-        api-otp-login="src/mock/otp.json"
-        url-facebook="/login/facebook"
-        url-password="src/mock/password_error.json"
-        url-password-recovery="/login/recovery"
-        url-callback="callback.html">
-    </tray-login>
-    -->
-    v2
     <tray-login
         data-store="351572"
         data-session="123"
         data-methods="['password', 'facebook', 'otp', 'identify']"
-        data-callback="/callback.html"
-        data-texts="{}">
+        data-texts='{"main-action":"Mensagem!", "general-error-alert": "Erro!"}'
+        data-callback="/callback.html">
     </tray-login>
 </body>
 </html>

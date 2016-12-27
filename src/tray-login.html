@@ -12,12 +12,12 @@
         </div>
         <div class="tray-login-screens" id="identify">
             <form id="form-identify">
-                <h1 class="tray-title">Identifique-se</h1>
-                <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
+                <h1 class="tray-title" data-default-text="identify-title"></h1>
+                <span class="tray-general-error-alert" custom-text="general-error-alert" data-default-text="identify-title"></span>
                 <div class="tray-input-group">
                     <input type="hidden" data-element="tray-session" name="session_id">
                     <input type="hidden" data-element="tray-store" name="store_id">
-                    <input class="tray-input tray-input-invalid empty" type="text" name="identify" id="input-identify" placeholder="E-mail ou CPF/CNPJ (números)" required>
+                    <input class="tray-input tray-input-invalid empty" type="text" name="identify" id="input-identify" data-attr-text="placeholder:identify-input" required>
                     <label for="input-identify" id="label-identify" class="tray-label">
                         <svg class="tray-icon-mail" viewBox="0 0 1024 1024" >
                             <path class="path1" d="M989.252 147.388h-954.573c-19.183 0-34.748 15.565-34.748 34.748v675.021c0 19.183 15.565 34.748 34.748 34.748h954.573c19.183 0 34.748-15.565 34.748-34.748v-675.021c-0.068-19.183-15.565-34.748-34.748-34.748zM954.505 822.409h-885.077v-605.525h885.077v605.525z"></path>
@@ -42,51 +42,50 @@
                     <p class="tray-error-message" id="message-identify"></p>
                 </div>
                 <div class="tray-actions">
-                    <button class="tray-btn-primary" id="tray-login-identify" type="submit">Continuar</button>
+                    <button class="tray-btn-primary" id="tray-login-identify" type="submit" data-default-text="identify-button"></button>
                     <button class="tray-btn-facebook" data-element="tray-login-facebook">facebook</button>
                 </div>
             </form>
         </div>
         <div class="tray-login-screens" id="main">
-            <h1 class="tray-title">Autenticação</h1>
+            <h1 class="tray-title" data-default-text="main-title"></h1>
             <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
             <p class="tray-error-message" id="message-main"></p>
-            <p class="tray-action" custom-text="main-action">Escolha uma das opções para se identificar:</p>
+            <p class="tray-action" custom-text="main-action" data-default-text="main-action"></p>
             <div class="tray-actions">
-                <button class="tray-btn-primary" id="tray-login-email">E-mail e senha da loja</button>
-                <button class="tray-btn-otp" id="tray-login-otp">Receber código de segurança por e-mail</button>
+                <button class="tray-btn-primary" id="tray-login-email" data-default-text="password-button"></button>
+                <button class="tray-btn-otp" id="tray-login-otp" data-default-text="otp-receive"></button>
                 <button class="tray-btn-facebook" data-element="tray-login-facebook">facebook</button>
-                <button class="tray-btn-default tray-btn-hidden" data-element="login-other-option">Voltar</button>
+                <button class="tray-btn-default tray-btn-hidden" data-element="login-other-option" data-default-text="go-back"></button>
             </div>
         </div>
         <div class="tray-login-screens" id="otp">
             <form id="form-otp">
-                <h1 class="tray-title">Código de Segurança</h1>
-                <p class="tray-action">Informe o código de segurança que enviamos para seu e-mail.</p>
+                <h1 class="tray-title" data-default-text="otp-title"></h1>
+                <p class="tray-action" data-default-text="otp-action"></p>
                 <div class="tray-well" data-element="tray-email"></div>
                 <div class="tray-input-group">
                     <input type="hidden" data-element="tray-session" name="session_id">
                     <input type="hidden" id="otp-input-store" data-element="tray-store" name="store_id">
                     <input type="hidden" id="input-email" name="email">
                     <input class="tray-input empty" autocomplete="off" type="tel" name="code" id="input-code" required>
-                    <label for="input-code" class="tray-label">
+                    <label for="input-code" class="tray-label" data-default-text="otp-input-label">
                         <svg class="tray-icon-locked" viewBox="0 0 1024 1024">
                             <path class="path1" d="M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"></path>
                         </svg>
-                        Código de segurança
                     </label>
                     <p class="tray-error-message"></p>
                 </div>
                 <div class="tray-actions">
-                    <button class="tray-btn-primary" id="otp-submit">Continuar</button>
-                    <button class="tray-btn-default" data-element="login-other-option">Escolher outra opção</button>
+                    <button class="tray-btn-primary" id="otp-submit" data-default-text="otp-button"></button>
+                    <button class="tray-btn-default" data-element="login-other-option" data-default-text="other-option"></button>
                 </div>
             </form>
         </div>
         <div class="tray-login-screens" id="email-password">
             <form id="form-password">
-                <h1 class="tray-title">E-mail e senha da loja</h1>
-                <p class="tray-action">Informe sua senha.</p>
+                <h1 class="tray-title" data-default-text="password-title"></h1>
+                <p class="tray-action" data-default-text="password-action"></p>
                 <div class="tray-well" data-element="tray-email"></div>
                 <div class="tray-well" data-element="tray-cpf"></div>
                 <div class="tray-well" data-element="tray-cnpj"></div>
@@ -96,20 +95,20 @@
                     <input type="hidden" data-element="tray-email" name="email">
                     <input type="hidden" data-element="tray-cpf" name="cpf">
                     <input type="hidden" data-element="tray-cnpj" name="cnpj">
-                    <button class="tray-login-hide-password" type="button" id="hide-password" data-text-toggle="Mostrar">Ocultar</button>
+                    <button class="tray-login-hide-password" type="button" id="hide-password" data-default-text="password-hide"
+                    data-attr-text="data-text-toggle:password-show"></button>
                     <input class="tray-input empty" autocomplete="off" type="text" name="password" id="input-password" required>
-                    <label for="input-password" class="tray-label">
+                    <label for="input-password" class="tray-label" data-default-text="password-input-label">
                         <svg class="tray-icon-locked" viewBox="0 0 1024 1024">
                             <path class="path1" d="M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"></path>
                         </svg>
-                        Senha
                     </label>
                     <p class="tray-error-message"></p>
                 </div>
                 <div class="tray-actions">
-                    <button class="tray-btn-primary" type="submit" id="password-submit">Continuar</button>
-                    <button class="tray-btn-default" type="button" id="password-recovery">Esqueci ou não tenho senha</button>
-                    <button class="tray-btn-default" data-element="login-other-option">Escolher outra opção</button>
+                    <button class="tray-btn-primary" type="submit" id="password-submit" data-default-text="password-button"></button>
+                    <button class="tray-btn-default" type="button" id="password-recovery" data-default-text="password-forget"></button>
+                    <button class="tray-btn-default" data-element="login-other-option" data-default-text="other-option"></button>
                 </div>
             </form>
         </div>
@@ -121,6 +120,7 @@
 <script src="../node_modules/cpf_cnpj/build/cpf_cnpj.min.js"></script>
 <script src="../src/tray-login.js"></script>
 <script src="../src/js/routes.js"></script>
+<script src="../src/js/langs.js"></script>
 <script src="../src/js/password.js"></script>
 <script src="../src/js/identify.js"></script>
 <script src="../src/js/checkStatus.js"></script>

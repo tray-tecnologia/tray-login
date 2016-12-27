@@ -46,6 +46,7 @@ var trayLoginProto = {},
 
         if (!initialized) {
             this.addListeners();
+            this.langs.methods.get();
             initialized = true;
         }
 
