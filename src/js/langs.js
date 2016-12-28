@@ -11,8 +11,8 @@
             get: function() {
                 var params = { store_id: thisElement.getAttribute('data-store') } ;
                 $.get(thisElement.routes.methods.route('langs'), params, function(response) {
-                    if (response) {
-                        var texts = response;
+                    if (response && response.data) {
+                        var texts = response.data;
                         thisElement.setDefaultTexts(texts);
                         self.methods.updateDefaultText(texts);
                         self.methods.updateAttrs(texts);
@@ -69,7 +69,7 @@
             checkHasCustomText: function(element) {
                 var customTextKey = element.getAttribute('custom-text');
 
-                if (!customTextKey) {
+                if (!customTextKey || !thisElement.messages) {
                     return false;
                 }
 
