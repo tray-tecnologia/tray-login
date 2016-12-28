@@ -11,8 +11,9 @@
             get: function() {
                 var params = { store_id: thisElement.getAttribute('data-store') } ;
                 $.get(thisElement.routes.methods.route('langs'), params, function(response) {
-                    if (response && response.data) {
-                        var texts = response.data.login;
+                    if (response) {
+                        var texts = response;
+                        thisElement.setDefaultTexts(texts);
                         self.methods.updateDefaultText(texts);
                         self.methods.updateAttrs(texts);
                     }

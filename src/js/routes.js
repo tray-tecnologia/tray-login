@@ -14,7 +14,7 @@
             "otp_login": "/checkout/otp",
             "facebook": "/checkout/facebook/url",
             "check_status": "/checkout/check-status",
-            "langs": "/checkout/langs",
+            "langs": "/checkout/langs/login_component",
         },
 
         /**

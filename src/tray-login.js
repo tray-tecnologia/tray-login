@@ -10,6 +10,7 @@ var trayLoginProto = {},
         titleSelectors = '#tray-login-email, #email-password .tray-title',
         loginMethods = [],
         data = {},
+        defaultTexts = {},
         messages = {},
         initialized = false,
         initializedPassLogin = false;
@@ -145,6 +146,22 @@ var trayLoginProto = {},
                 }
             }
         }
+    };
+
+    /**
+     * Set default texts
+     * @param {object} texts - Texts returned by API
+     */
+    trayLoginProto.setDefaultTexts = function(texts) {
+        defaultTexts = texts;
+    };
+
+    /**
+     * Get default texts
+     * @param {string} key - Index of the object defaultTexts
+     */
+    trayLoginProto.getDefaultTexts = function(key) {
+        return defaultTexts[key] || '';
     };
 
     /**
