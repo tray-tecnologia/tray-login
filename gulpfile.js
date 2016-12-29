@@ -111,9 +111,9 @@ var langs = {
     "otp-action": "Informe o código de segurança que enviamos para seu e-mail.",
     "otp-receive": "Receber código de segurança por e-mail",
     "otp-input-label": "Código de segurança",
-    "otp-button": "Continuar",
     "other-option": "Escolher outra opção",
     "go-back": "Voltar",
+    'proceed': 'Continuar',
 };
 
 var checkStatusFail = {

@@ -745,11 +745,11 @@ var trayLoginProto = {},
      */
     trayLoginProto.changeLabels = function() {
         if (this.getData('cpf')) {
-            $(titleSelectors).text('CPF e senha da loja');
+            $(titleSelectors).text(this.getDefaultTexts('password-button-cpf'));
         } else if (this.getData('cnpj')) {
-            $(titleSelectors).text('CNPJ e senha da loja');
+            $(titleSelectors).text(this.getDefaultTexts('password-button-cnpj'));
         } else if(this.getData('email')) {
-            $(titleSelectors).text('E-mail e senha da loja');
+            $(titleSelectors).text(this.getDefaultTexts('password-button'));
         }
     };
 
