@@ -10,6 +10,7 @@ var trayLoginProto = {},
         titleSelectors = '#tray-login-email, #email-password .tray-title',
         loginMethods = [],
         data = {},
+        defaultTexts = {},
         messages = {},
         initialized = false,
         initializedPassLogin = false;
@@ -46,6 +47,7 @@ var trayLoginProto = {},
 
         if (!initialized) {
             this.addListeners();
+            this.langs.methods.get();
             initialized = true;
         }
 
@@ -144,6 +146,22 @@ var trayLoginProto = {},
                 }
             }
         }
+    };
+
+    /**
+     * Set default texts
+     * @param {object} texts - Texts returned by API
+     */
+    trayLoginProto.setDefaultTexts = function(texts) {
+        defaultTexts = texts;
+    };
+
+    /**
+     * Get default texts
+     * @param {string} key - Index of the object defaultTexts
+     */
+    trayLoginProto.getDefaultTexts = function(key) {
+        return defaultTexts[key] || '';
     };
 
     /**
@@ -727,11 +745,11 @@ var trayLoginProto = {},
      */
     trayLoginProto.changeLabels = function() {
         if (this.getData('cpf')) {
-            $(titleSelectors).text('CPF e senha da loja');
+            $(titleSelectors).text(this.getDefaultTexts('password-button-cpf'));
         } else if (this.getData('cnpj')) {
-            $(titleSelectors).text('CNPJ e senha da loja');
+            $(titleSelectors).text(this.getDefaultTexts('password-button-cnpj'));
         } else if(this.getData('email')) {
-            $(titleSelectors).text('E-mail e senha da loja');
+            $(titleSelectors).text(this.getDefaultTexts('password-button'));
         }
     };
 
