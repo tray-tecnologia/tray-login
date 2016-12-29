@@ -91,29 +91,41 @@ var checkStatusSucess = {
 };
 
 var langs = {
-    "identify-title": "Identifique-se",
-    "identify-input": "E-mail ou CPF/CNPJ (números)",
-    "identify-error-not-found": "Não foi possível verificar seu cadastro, tente novamente.",
-    "identify-data-invalid": "Dados inválidos, digite novamente!",
-    "main-title": "Autenticação",
-    "main-action": "Escolha uma das opções para se identificar:",
-    "identify-button": "Continuar",
-    "password-title": "E-mail e senha da loja",
-    "password-button": "E-mail e senha da loja",
-    "password-button-cpf": "CPF e senha da loja",
-    "password-button-cnpj": "CNPJ e senha da loja",
-    "password-action": "Informe sua senha.",
-    "password-hide": "Ocultar",
-    "password-show": "Mostrar",
-    "password-input-label": "Senha",
-    "password-forget": "Esqueci ou não tenho senha",
-    "otp-title": "Código de Segurança",
-    "otp-action": "Informe o código de segurança que enviamos para seu e-mail.",
-    "otp-receive": "Receber código de segurança por e-mail",
-    "otp-input-label": "Código de segurança",
-    "other-option": "Escolher outra opção",
-    "go-back": "Voltar",
-    'proceed': 'Continuar',
+    "data": {
+        // identify screen
+        "identify-title": "Identifique-se",
+        "identify-input": "E-mail ou CPF/CNPJ (números)",
+        "identify-error-not-found": "Não foi possível verificar seu cadastro, tente novamente.",
+        "identify-data-invalid": "Dados inválidos, digite novamente!",
+        "identify-button": "Continuar",
+        // errors
+        "identify-data-invalid": "Dados inv&aacute;lidos, digite novamente!",
+        "identify-error": "N&atilde;o foi poss&iacute;vel verificar seu cadastro, tente novamente.",
+        "identify-not-found": "Usu&aacute;rio n&atilde;o encontrado, fa&ccedil;a seu cadastro.",
+        // main screen
+        "main-title": "Autenticação",
+        "main-action": "Escolha uma das opções para se identificar:",
+        // password screen
+        "password-title": "E-mail e senha da loja",
+        "password-button": "E-mail e senha da loja",
+        "password-button-cpf": "CPF e senha da loja",
+        "password-button-cnpj": "CNPJ e senha da loja",
+        "password-action": "Informe sua senha.",
+        "password-hide": "Ocultar",
+        "password-show": "Mostrar",
+        "password-input-label": "Senha",
+        "password-forget": "Esqueci ou não tenho senha",
+        // opt screen
+        "otp-title": "Código de Segurança",
+        "otp-action": "Informe o código de segurança que enviamos para seu e-mail.",
+        "otp-receive": "Receber código de segurança por e-mail",
+        "otp-input-label": "Código de segurança",
+        // general texts
+        "other-option": "Escolher outra opção",
+        "go-back": "Voltar",
+        'proceed': 'Continuar',
+    },
+    "statusCode": 200,
 };
 
 var checkStatusFail = {
