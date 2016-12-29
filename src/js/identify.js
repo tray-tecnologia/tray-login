@@ -166,7 +166,7 @@
 
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: trayLoginProto.langs.methods.getDefaultTexts('identify-not-found'),
+                            message: trayLoginProto.langs.methods.getDefaultTexts('identify-error-not-found'),
                         });
                     },
                     error: function(xhr, type){
