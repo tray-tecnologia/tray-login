@@ -1,4 +1,4 @@
-(function($, window, document, _this) {
+(function($, window, document) {
     'use strict';
     var self;
     /**
@@ -166,13 +166,13 @@
 
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'Usu&aacute;rio n&atilde;o encontrado, fa&ccedil;a seu cadastro.',
+                            message: trayLoginProto.langs.methods.getDefaultTexts('identify-error-not-found'),
                         });
                     },
                     error: function(xhr, type){
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'N&atilde;o foi poss&iacute;vel verificar seu cadastro, tente novamente.',
+                            message: trayLoginProto.langs.methods.getDefaultTexts('identify-error'),
                         });
                     }
                 });
@@ -193,7 +193,7 @@
                     if (!self.methods.checkInput(self.elms.identifyInput)) {
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'Dados inv&aacute;lidos, digite novamente!',
+                            message: trayLoginProto.langs.methods.getDefaultTexts('identify-data-invalid'),
                         });
                         return;
                     }
@@ -207,13 +207,13 @@
             /**
              * Listen input blur
              * @return {object} events
-             */
+            */
             onIdentifyBlur: function() {
                 self.elms.identifyInput.addEventListener('blur', function() {
                     if (!self.methods.checkInput(self.elms.identifyInput)) {
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'Dados inv&aacute;lidos, digite novamente!',
+                            message: trayLoginProto.langs.methods.getDefaultTexts('identify-data-invalid'),
                         });
                     }
                 });
@@ -242,4 +242,4 @@
 
     };
 
-})(Zepto, window, document, thisElement);
+})(Zepto, window, document);

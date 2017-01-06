@@ -344,7 +344,7 @@ tray-login .tray-btn-hidden {
         <div class="tray-login-screens" id="identify">
             <form id="form-identify">
                 <h1 class="tray-title" data-default-text="identify-title"></h1>
-                <span class="tray-general-error-alert" custom-text="general-error-alert" data-default-text="identify-title"></span>
+                <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
                 <div class="tray-input-group">
                     <input type="hidden" data-element="tray-session" name="session_id">
                     <input type="hidden" data-element="tray-store" name="store_id">
@@ -373,7 +373,7 @@ tray-login .tray-btn-hidden {
                     <p class="tray-error-message" id="message-identify"></p>
                 </div>
                 <div class="tray-actions">
-                    <button class="tray-btn-primary" id="tray-login-identify" type="submit" data-default-text="identify-button"></button>
+                    <button class="tray-btn-primary" id="tray-login-identify" type="submit" data-default-text="proceed"></button>
                     <button class="tray-btn-facebook" data-element="tray-login-facebook">facebook</button>
                 </div>
             </form>
@@ -461,7 +461,6 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         titleSelectors = '#tray-login-email, #email-password .tray-title',
         loginMethods = [],
         data = {},
-        defaultTexts = {},
         messages = {},
         initialized = false,
         initializedPassLogin = false;
@@ -494,7 +493,6 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         this.setLoginCallback();
         this.preventDefaultMessages();
         this.setMessages();
-        this.changeLabels();
 
         if (!initialized) {
             this.addListeners();
@@ -508,10 +506,12 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         this.setData('store', this.getAttribute('data-store'));
         this.setData('session', this.getAttribute('data-session'));
 
+        this.changeLabels();
+
         if (this.getData('email') || this.getData('cpf') || this.getData('cnpj')) {
             this.openScreen('main');
             this.checkStatus.methods.init();
-        } else if(this.hasLoginMethod('identify')) {
+        } else if (this.hasLoginMethod('identify')) {
             this.openScreen('identify');
             this.identify.methods.init();
         }
@@ -597,22 +597,6 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
                 }
             }
         }
-    };
-
-    /**
-     * Set default texts
-     * @param {object} texts - Texts returned by API
-     */
-    trayLoginProto.setDefaultTexts = function(texts) {
-        defaultTexts = texts;
-    };
-
-    /**
-     * Get default texts
-     * @param {string} key - Index of the object defaultTexts
-     */
-    trayLoginProto.getDefaultTexts = function(key) {
-        return defaultTexts[key] || '';
     };
 
     /**
@@ -708,7 +692,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
             this.$facebookButton.hide();
         }
 
-        if (!thisElement.hasLoginMethod('identify') && currentScreen == 'main') {
+        if (!this.hasLoginMethod('identify') && currentScreen == 'main') {
             this.$otherOptionButton.hide();
         }
 
@@ -1196,11 +1180,11 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      */
     trayLoginProto.changeLabels = function() {
         if (this.getData('cpf')) {
-            $(titleSelectors).text(this.getDefaultTexts('password-button-cpf'));
+            $(titleSelectors).text(this.langs.methods.getDefaultTexts('password-button-cpf'));
         } else if (this.getData('cnpj')) {
-            $(titleSelectors).text(this.getDefaultTexts('password-button-cnpj'));
-        } else if(this.getData('email')) {
-            $(titleSelectors).text(this.getDefaultTexts('password-button'));
+            $(titleSelectors).text(this.langs.methods.getDefaultTexts('password-button-cnpj'));
+        } else if (this.getData('email')) {
+            $(titleSelectors).text(this.langs.methods.getDefaultTexts('password-button'));
         }
     };
 
@@ -1274,6 +1258,11 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
      */
     var self;
     trayLoginProto.langs = self = {
+        /**
+         * Store default texts returned by API
+         * @type {object}
+         */
+        defaultTexts: {},
         methods: {
             /**
              * Get all langs and call methods that update the view
@@ -1283,11 +1272,28 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
                 $.get(thisElement.routes.methods.route('langs'), params, function(response) {
                     if (response && response.data) {
                         var texts = response.data;
-                        thisElement.setDefaultTexts(texts);
+                        self.methods.setDefaultTexts(texts);
                         self.methods.updateDefaultText(texts);
                         self.methods.updateAttrs(texts);
                     }
                 });
+            },
+
+            /**
+             * Set default texts
+             * @param {object} texts
+             */
+            setDefaultTexts: function(texts) {
+                self.defaultTexts = texts;
+            },
+
+            /**
+             * Get default texts
+             * @param {string} key - Object index
+             * @return {string} text or empty string
+             */
+            getDefaultTexts: function(key) {
+                return self.defaultTexts[key] || '';
             },
 
             /**
@@ -1404,7 +1410,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
 
 })(Zepto, window, document, thisElement);
 </script>
-<script>(function($, window, document, _this) {
+<script>(function($, window, document) {
     'use strict';
     var self;
     /**
@@ -1572,13 +1578,13 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
 
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'Usu&aacute;rio n&atilde;o encontrado, fa&ccedil;a seu cadastro.',
+                            message: trayLoginProto.langs.methods.getDefaultTexts('identify-error-not-found'),
                         });
                     },
                     error: function(xhr, type){
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'N&atilde;o foi poss&iacute;vel verificar seu cadastro, tente novamente.',
+                            message: trayLoginProto.langs.methods.getDefaultTexts('identify-error'),
                         });
                     }
                 });
@@ -1599,7 +1605,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
                     if (!self.methods.checkInput(self.elms.identifyInput)) {
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'Dados inv&aacute;lidos, digite novamente!',
+                            message: trayLoginProto.langs.methods.getDefaultTexts('identify-data-invalid'),
                         });
                         return;
                     }
@@ -1613,13 +1619,13 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
             /**
              * Listen input blur
              * @return {object} events
-             */
+            */
             onIdentifyBlur: function() {
                 self.elms.identifyInput.addEventListener('blur', function() {
                     if (!self.methods.checkInput(self.elms.identifyInput)) {
                         self.methods.handleValidation({
                             input: self.elms.identifyInput,
-                            message: 'Dados inv&aacute;lidos, digite novamente!',
+                            message: trayLoginProto.langs.methods.getDefaultTexts('identify-data-invalid'),
                         });
                     }
                 });
@@ -1648,7 +1654,7 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
 
     };
 
-})(Zepto, window, document, thisElement);
+})(Zepto, window, document);
 </script>
 <script>(function($, window, document, _this) {
     'use strict';

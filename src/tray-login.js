@@ -10,7 +10,6 @@ var trayLoginProto = {},
         titleSelectors = '#tray-login-email, #email-password .tray-title',
         loginMethods = [],
         data = {},
-        defaultTexts = {},
         messages = {},
         initialized = false,
         initializedPassLogin = false;
@@ -43,7 +42,6 @@ var trayLoginProto = {},
         this.setLoginCallback();
         this.preventDefaultMessages();
         this.setMessages();
-        this.changeLabels();
 
         if (!initialized) {
             this.addListeners();
@@ -57,10 +55,12 @@ var trayLoginProto = {},
         this.setData('store', this.getAttribute('data-store'));
         this.setData('session', this.getAttribute('data-session'));
 
+        this.changeLabels();
+
         if (this.getData('email') || this.getData('cpf') || this.getData('cnpj')) {
             this.openScreen('main');
             this.checkStatus.methods.init();
-        } else if(this.hasLoginMethod('identify')) {
+        } else if (this.hasLoginMethod('identify')) {
             this.openScreen('identify');
             this.identify.methods.init();
         }
@@ -146,22 +146,6 @@ var trayLoginProto = {},
                 }
             }
         }
-    };
-
-    /**
-     * Set default texts
-     * @param {object} texts - Texts returned by API
-     */
-    trayLoginProto.setDefaultTexts = function(texts) {
-        defaultTexts = texts;
-    };
-
-    /**
-     * Get default texts
-     * @param {string} key - Index of the object defaultTexts
-     */
-    trayLoginProto.getDefaultTexts = function(key) {
-        return defaultTexts[key] || '';
     };
 
     /**
@@ -257,7 +241,7 @@ var trayLoginProto = {},
             this.$facebookButton.hide();
         }
 
-        if (!thisElement.hasLoginMethod('identify') && currentScreen == 'main') {
+        if (!this.hasLoginMethod('identify') && currentScreen == 'main') {
             this.$otherOptionButton.hide();
         }
 
@@ -745,11 +729,11 @@ var trayLoginProto = {},
      */
     trayLoginProto.changeLabels = function() {
         if (this.getData('cpf')) {
-            $(titleSelectors).text(this.getDefaultTexts('password-button-cpf'));
+            $(titleSelectors).text(this.langs.methods.getDefaultTexts('password-button-cpf'));
         } else if (this.getData('cnpj')) {
-            $(titleSelectors).text(this.getDefaultTexts('password-button-cnpj'));
-        } else if(this.getData('email')) {
-            $(titleSelectors).text(this.getDefaultTexts('password-button'));
+            $(titleSelectors).text(this.langs.methods.getDefaultTexts('password-button-cnpj'));
+        } else if (this.getData('email')) {
+            $(titleSelectors).text(this.langs.methods.getDefaultTexts('password-button'));
         }
     };
 

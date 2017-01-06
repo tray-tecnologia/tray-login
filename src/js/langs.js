@@ -4,6 +4,11 @@
      */
     var self;
     trayLoginProto.langs = self = {
+        /**
+         * Store default texts returned by API
+         * @type {object}
+         */
+        defaultTexts: {},
         methods: {
             /**
              * Get all langs and call methods that update the view
@@ -13,11 +18,28 @@
                 $.get(thisElement.routes.methods.route('langs'), params, function(response) {
                     if (response && response.data) {
                         var texts = response.data;
-                        thisElement.setDefaultTexts(texts);
+                        self.methods.setDefaultTexts(texts);
                         self.methods.updateDefaultText(texts);
                         self.methods.updateAttrs(texts);
                     }
                 });
+            },
+
+            /**
+             * Set default texts
+             * @param {object} texts
+             */
+            setDefaultTexts: function(texts) {
+                self.defaultTexts = texts;
+            },
+
+            /**
+             * Get default texts
+             * @param {string} key - Object index
+             * @return {string} text or empty string
+             */
+            getDefaultTexts: function(key) {
+                return self.defaultTexts[key] || '';
             },
 
             /**
