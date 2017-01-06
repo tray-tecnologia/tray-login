@@ -43,6 +43,8 @@ var trayLoginProto = {},
         this.preventDefaultMessages();
         this.setMessages();
 
+        this.routes.prefix = this.getAttribute('data-route-prefix') || this.routes.prefix;
+
         if (!initialized) {
             this.addListeners();
             this.langs.methods.get();

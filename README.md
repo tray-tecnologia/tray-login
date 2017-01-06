@@ -1,5 +1,5 @@
 # Tray Login Component
-Web Component para realizar login no Checkout das lojas da Tray.
+Web Component para realizar login nas lojas da Tray.
 
 ## Instalação
 
@@ -15,6 +15,7 @@ data-texts    | Textos personalizados (opcional)
 data-email    | E-mail utilizado para login (opcional)
 data-cpf      | CPF utilizado para login (opcional)
 data-cnpj     | CNPJ utilizado para login (opcional)
+data-route-prefix | Prefixo da rota das APIS, ex: /checkout
 
 ## Eventos
 

@@ -6,15 +6,16 @@
      */
     var self;
     trayLoginProto.routes = self = {
+        prefix: 'checkout',
         routes: {
-            "has_account": "/checkout/has-account",
-            "password": "/checkout/password",
-            "password_recovery": "/checkout/password-recovery",
-            "otp": "/checkout/otp-generate",
-            "otp_login": "/checkout/otp",
-            "facebook": "/checkout/facebook/url",
-            "check_status": "/checkout/check-status",
-            "langs": "/checkout/langs/login_component",
+            "has_account": "/has-account",
+            "password": "/password",
+            "password_recovery": "/password-recovery",
+            "otp": "/otp-generate",
+            "otp_login": "/otp",
+            "facebook": "/facebook/url",
+            "check_status": "/check-status",
+            "langs": "/langs/login_component",
         },
 
         /**
@@ -33,7 +34,7 @@
                     return false;
                 }
 
-                return self.routes[name];
+                return '/' + self.prefix + self.routes[name];
             },
 
             /**
