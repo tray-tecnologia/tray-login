@@ -15,10 +15,9 @@ data-texts    | Textos personalizados (opcional)
 data-email    | E-mail utilizado para login (opcional)
 data-cpf      | CPF utilizado para login (opcional)
 data-cnpj     | CNPJ utilizado para login (opcional)
-data-route-prefix | Prefixo da rota das APIS, ex: /checkout
+data-route-prefix | Prefixo da rota das APIs, ex: checkout
 
 ## Eventos
-
 Lista de eventos disparados pelo componente.
 
 Evento              | Descrição
@@ -75,6 +74,7 @@ $(window).on('tray-login', function(event) {
 <tray-login
     data-methods="['password', 'facebook', 'otp', 'identify']"
     data-callback="/callback.html"
+    data-route-prefix="checkout"
     data-store="351572"
     data-texts="{}">
 </tray-login>
