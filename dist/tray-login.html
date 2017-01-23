@@ -519,7 +519,6 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
 
         this.bindValues('[data-element="tray-store"]', 'store');
         this.bindValues('[data-element="tray-session"]', 'session');
-        this.handleCloseButton();
     };
 
     /**
@@ -699,6 +698,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
 
         return this;
     },
+
     /**
      * Open a screen and close others
      * @return {object} trayLoginProto
@@ -719,17 +719,6 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         return this;
     };
 
-    /**
-     * Open a screen and close others
-     * @return {object} trayLoginProto
-     */
-    trayLoginProto.handleCloseButton = function() {
-        this.closeButton = thatDoc.querySelector('.tray-close');
-
-        if (this.messages != null && this.messages.closeButton) {
-            this.closeButton.style.display = 'none';
-        }
-    };
     /**
      * When click in the close button
      * @return {object} trayLoginProto
