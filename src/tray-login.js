@@ -675,15 +675,19 @@ var trayLoginProto = {},
      * @param {string} token
      */
     trayLoginProto.redirectOnSuccess = function(token) {
-        var redirectParam = '?token=' + token;
         var callback = thisElement.getAttribute('data-callback');
 
         if (!callback) {
             return;
         }
 
-        if (callback.indexOf('?') > -1) {
-            redirectParam = '&token=' + token;
+        var redirectParam = '';
+
+        if (token) {
+            redirectParam = '?token=' + token;
+            if (callback.indexOf('?') > -1) {
+                redirectParam = '&token=' + token;
+            }
         }
 
         window.location = callback + redirectParam;
