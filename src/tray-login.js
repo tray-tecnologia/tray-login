@@ -5,7 +5,7 @@ var trayLoginProto = {},
     var thatDoc = document,
         thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument,
         template = thisDoc.querySelector('template').content,
-        screensSelectors = '#identify, #main, #otp, #email-password',
+        screensSelectors = '#identify, #main, #otp, #email-password, #password',
         currentScreen = {},
         titleSelectors = '#tray-login-email, #email-password .tray-title',
         loginMethods = [],
@@ -176,6 +176,7 @@ var trayLoginProto = {},
             .onOTPLogin()
             .onFacebookLogin()
             .onChooseOtherOption()
+            .onPasswordForget()
             .onPasswordRecovery()
             .onKeyUpCode()
             .onSubmitCode()
@@ -208,6 +209,7 @@ var trayLoginProto = {},
         this.loading = thatDoc.getElementById('tray-login-loading');
         this.passwordButton = thatDoc.getElementById('tray-login-email');
         this.OTPButton = thatDoc.getElementById('tray-login-otp');
+        this.passForgetButton = thatDoc.getElementById('password-forget');
         this.passRecoveryButton = thatDoc.getElementById('password-recovery');
         this.$facebookButton = $(".tray-btn-facebook");
         this.$otherOptionButton = $('[data-element="login-other-option"]');
@@ -572,6 +574,17 @@ var trayLoginProto = {},
     };
 
     /**
+     *  Listen click on password forget
+     */
+    trayLoginProto.onPasswordForget = function (){
+        this.passForgetButton.addEventListener('click', function(event) {
+            thisElement.openScreen('password');
+        });
+
+        return this;
+    };
+
+    /**
      * Listen click on password recovery
      */
     trayLoginProto.onPasswordRecovery = function() {
@@ -597,9 +610,7 @@ var trayLoginProto = {},
                         return;
                     }
 
-                    var message = thatDoc.querySelector('#form-password .tray-action');
-                    message.innerHTML = response.data.message;
-
+                    thisElement.openScreen('email-password');
                     thatDoc.getElementById('input-password').focus();
                 },
                 error: function(request, type) {
