@@ -5,7 +5,7 @@ var trayLoginProto = {},
     var thatDoc = document,
         thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument,
         template = thisDoc.querySelector('template').content,
-        screensSelectors = '#identify, #main, #otp, #email-password, #password',
+        screensSelectors = '#identify, #main, #otp, #email-password, #new-password',
         currentScreen = {},
         titleSelectors = '#tray-login-email, #email-password .tray-title',
         loginMethods = [],
@@ -578,7 +578,7 @@ var trayLoginProto = {},
      */
     trayLoginProto.onPasswordForget = function (){
         this.passForgetButton.addEventListener('click', function(event) {
-            thisElement.openScreen('password');
+            thisElement.openScreen('new-password');
         });
 
         return this;
