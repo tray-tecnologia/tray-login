@@ -455,18 +455,17 @@ tray-login .tray-btn-hidden {
                 </div>
             </form>
         </div>
-        <div class="tray-login-screens" id="password">
-            <h1 class="tray-title tray-txt-center">
+        <div class="tray-login-screens" id="new-password">
+            <h1 class="tray-title tray-txt-center" data-default-text="new-password-title">
                 <svg class="tray-icon-mail" viewBox="0 0 1024 1024">
                     <path class="path1" d="M989.252 147.388h-954.573c-19.183 0-34.748 15.565-34.748 34.748v675.021c0 19.183 15.565 34.748 34.748 34.748h954.573c19.183 0 34.748-15.565 34.748-34.748v-675.021c-0.068-19.183-15.565-34.748-34.748-34.748zM954.505 822.409h-885.077v-605.525h885.077v605.525z"></path>
                     <path class="path2" d="M160.427 380.45l333.346 205.414c5.598 3.413 11.878 5.188 18.227 5.188s12.629-1.707 18.227-5.188l333.346-205.414c16.316-10.035 21.436-31.471 11.332-47.787-10.035-16.316-31.471-21.436-47.787-11.332l-315.119 194.15-315.119-194.15c-16.316-10.035-37.683-4.983-47.787 11.332s-5.052 37.683 11.332 47.787z"></path>
                 </svg>
-                Acesse o seu e-mail e cadastre uma nova senha
             </h1>
             <div class="tray-well" data-element="tray-email"></div>
             <p class="tray-error-message"></p>
             <div class="tray-actions">
-                <button class="tray-btn-primary" type="button" id="password-recovery">Cadastrei uma nova senha</button>
+                <button class="tray-btn-primary" type="button" id="password-recovery" data-default-text="new-password-submit"></button>
                 <button class="tray-btn-default" data-element="login-other-option" data-default-text="other-option"></button>
             </div>
         </div>
@@ -484,7 +483,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
     var thatDoc = document,
         thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument,
         template = thisDoc.querySelector('template').content,
-        screensSelectors = '#identify, #main, #otp, #email-password, #password',
+        screensSelectors = '#identify, #main, #otp, #email-password, #new-password',
         currentScreen = {},
         titleSelectors = '#tray-login-email, #email-password .tray-title',
         loginMethods = [],
@@ -1057,7 +1056,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
      */
     trayLoginProto.onPasswordForget = function (){
         this.passForgetButton.addEventListener('click', function(event) {
-            thisElement.openScreen('password');
+            thisElement.openScreen('new-password');
         });
 
         return this;
