@@ -120,6 +120,9 @@ var langs = {
         "otp-action": "Informe o código de segurança que enviamos para seu e-mail.",
         "otp-receive": "Receber código de segurança por e-mail",
         "otp-input-label": "Código de segurança",
+        // new password screen
+        "new-password-title": "Acesse o seu e-mail e cadastre uma nova senha",
+        "new-password-submit": "Cadastrei uma nova senha",
         // general texts
         "other-option": "Escolher outra opção",
         "go-back": "Voltar",
