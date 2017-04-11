@@ -87,11 +87,25 @@ tray-login {
         font-size: 19px;
         margin-top: 23px;
         margin-bottom: 25px;
+
+        svg {
+            float: none;
+            display: block;
+            margin: 0 auto 25px;
+            padding: 0;
+            width: 60px;
+            height: 60px;
+        }
     }
 
     .tray-action {
         font-size: 14px;
         margin-bottom: 15px;
+    }
+
+    .tray-link {
+        text-decoration: underline;
+        cursor: pointer;
     }
 
     // Well

@@ -12,6 +12,9 @@ tray-login .tray-vspace-lg {
 tray-login .tray-vspace-xlg {
   margin-bottom: 45px !important; }
 
+tray-login .tray-txt-center {
+  text-align: center !important; }
+
 tray-login svg {
   fill: currentColor;
   float: left;
@@ -246,10 +249,21 @@ tray-login .tray-title {
   font-size: 19px;
   margin-top: 23px;
   margin-bottom: 25px; }
+  tray-login .tray-title svg {
+    float: none;
+    display: block;
+    margin: 0 auto 25px;
+    padding: 0;
+    width: 60px;
+    height: 60px; }
 
 tray-login .tray-action {
   font-size: 14px;
   margin-bottom: 15px; }
+
+tray-login .tray-link {
+  text-decoration: underline;
+  cursor: pointer; }
 
 tray-login .tray-well {
   background-color: #ebebeb;
@@ -434,12 +448,26 @@ tray-login .tray-btn-hidden {
                     </label>
                     <p class="tray-error-message"></p>
                 </div>
-                <div class="tray-actions">
+                <div class="tray-actions tray-txt-center">
                     <button class="tray-btn-primary" type="submit" id="password-submit" data-default-text="proceed"></button>
-                    <button class="tray-btn-default" type="button" id="password-recovery" data-default-text="password-forget"></button>
                     <button class="tray-btn-default" data-element="login-other-option" data-default-text="other-option"></button>
+                    <a class="tray-link" id="password-forget" data-default-text="password-forget"></a>
                 </div>
             </form>
+        </div>
+        <div class="tray-login-screens" id="new-password">
+            <h1 class="tray-title tray-txt-center" data-default-text="new-password-title">
+                <svg class="tray-icon-mail" viewBox="0 0 1024 1024">
+                    <path class="path1" d="M989.252 147.388h-954.573c-19.183 0-34.748 15.565-34.748 34.748v675.021c0 19.183 15.565 34.748 34.748 34.748h954.573c19.183 0 34.748-15.565 34.748-34.748v-675.021c-0.068-19.183-15.565-34.748-34.748-34.748zM954.505 822.409h-885.077v-605.525h885.077v605.525z"></path>
+                    <path class="path2" d="M160.427 380.45l333.346 205.414c5.598 3.413 11.878 5.188 18.227 5.188s12.629-1.707 18.227-5.188l333.346-205.414c16.316-10.035 21.436-31.471 11.332-47.787-10.035-16.316-31.471-21.436-47.787-11.332l-315.119 194.15-315.119-194.15c-16.316-10.035-37.683-4.983-47.787 11.332s-5.052 37.683 11.332 47.787z"></path>
+                </svg>
+            </h1>
+            <div class="tray-well" data-element="tray-email"></div>
+            <p class="tray-error-message"></p>
+            <div class="tray-actions">
+                <button class="tray-btn-primary" type="button" id="password-recovery" data-default-text="new-password-submit"></button>
+                <button class="tray-btn-default" data-element="login-other-option" data-default-text="other-option"></button>
+            </div>
         </div>
     </div>
 </template>
@@ -455,7 +483,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
     var thatDoc = document,
         thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument,
         template = thisDoc.querySelector('template').content,
-        screensSelectors = '#identify, #main, #otp, #email-password',
+        screensSelectors = '#identify, #main, #otp, #email-password, #new-password',
         currentScreen = {},
         titleSelectors = '#tray-login-email, #email-password .tray-title',
         loginMethods = [],
@@ -626,6 +654,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
             .onOTPLogin()
             .onFacebookLogin()
             .onChooseOtherOption()
+            .onPasswordForget()
             .onPasswordRecovery()
             .onKeyUpCode()
             .onSubmitCode()
@@ -658,6 +687,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         this.loading = thatDoc.getElementById('tray-login-loading');
         this.passwordButton = thatDoc.getElementById('tray-login-email');
         this.OTPButton = thatDoc.getElementById('tray-login-otp');
+        this.passForgetButton = thatDoc.getElementById('password-forget');
         this.passRecoveryButton = thatDoc.getElementById('password-recovery');
         this.$facebookButton = $(".tray-btn-facebook");
         this.$otherOptionButton = $('[data-element="login-other-option"]');
@@ -1022,45 +1052,53 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
     };
 
     /**
+     *  Listen click on password forget
+     */
+    trayLoginProto.onPasswordForget = function () {
+        this.passForgetButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                var data = {
+                    email: trayLoginProto.getData('email'),
+                    cpf: trayLoginProto.getData('cpf'),
+                    cnpj: trayLoginProto.getData('cnpj'),
+                    store_id: trayLoginProto.getData('store'),
+                    session_id: trayLoginProto.getData('session'),
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: thisElement.routes.methods.route('password_recovery'),
+                    data: data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.statusCode > 400) {
+                            thisElement.showErrorMessage(response);
+                            return;
+                        }
+
+                        thisElement.openScreen('new-password');
+                    },
+                    error: function(request, type) {
+                        thisElement.showErrorMessage(request);
+                    },
+                    beforeSend: function(response)  {
+                        trayLoginProto.triggerCustomEvent('tray-login-click', 'tray-password-recover');
+                    },
+            });
+        });
+
+        return this;
+    };
+
+    /**
      * Listen click on password recovery
      */
     trayLoginProto.onPasswordRecovery = function() {
         this.passRecoveryButton.addEventListener('click', function(event) {
             event.preventDefault();
-
-            var data = {
-                email: trayLoginProto.getData('email'),
-                cpf: trayLoginProto.getData('cpf'),
-                cnpj: trayLoginProto.getData('cnpj'),
-                store_id: trayLoginProto.getData('store'),
-                session_id: trayLoginProto.getData('session'),
-            };
-
-            $.ajax({
-                type: 'POST',
-                url: thisElement.routes.methods.route('password_recovery'),
-                data: data,
-                dataType: 'json',
-                success: function(response) {
-                    if (response.statusCode > 400) {
-                        thisElement.showErrorMessage(response);
-                        return;
-                    }
-
-                    var message = thatDoc.querySelector('#form-password .tray-action');
-                    message.innerHTML = response.data.message;
-
-                    thatDoc.getElementById('input-password').focus();
-                },
-                error: function(request, type) {
-                    thisElement.showErrorMessage(request);
-                },
-                beforeSend: function(response)  {
-                    trayLoginProto.triggerCustomEvent('tray-login-click', 'tray-password-recover');
-                },
-            });
+            thisElement.openScreen('email-password');
+            thatDoc.getElementById('input-password').focus();
         });
-
         return this;
     };
 
@@ -1076,7 +1114,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
         });
 
         return this;
-    },
+    };
 
     /**
      * Event listener to the form submit
