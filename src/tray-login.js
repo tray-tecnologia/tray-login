@@ -598,7 +598,10 @@ var trayLoginProto = {},
                             return;
                         }
 
-                        thisElement.openScreen('new-password');
+                        thisElement.openScreen('new-password')
+                            .showEmails()
+                            .showCpfs()
+                            .showCnpjs();
                     },
                     error: function(request, type) {
                         thisElement.showErrorMessage(request);
