@@ -1084,6 +1084,7 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
                                 .showCpfs()
                                 .showCnpjs()
                                 .onHidePassword();
+                            thisElement.byPassword.init();
                         },
                         error: function(request, type) {
                             thisElement.showErrorMessage(request);
