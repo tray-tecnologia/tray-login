@@ -605,6 +605,7 @@ var trayLoginProto = {},
                                 .showCpfs()
                                 .showCnpjs()
                                 .onHidePassword();
+                            thisElement.byPassword.init();
                         },
                         error: function(request, type) {
                             thisElement.showErrorMessage(request);
