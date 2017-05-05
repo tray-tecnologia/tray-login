@@ -1082,7 +1082,8 @@ var Zepto=function(){function D(t){return null==t?String(t):j[T.call(t)]||"objec
                             thisElement.openScreen('new-password')
                                 .showEmails()
                                 .showCpfs()
-                                .showCnpjs();
+                                .showCnpjs()
+                                .onHidePassword();
                         },
                         error: function(request, type) {
                             thisElement.showErrorMessage(request);
