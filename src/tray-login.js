@@ -603,7 +603,8 @@ var trayLoginProto = {},
                             thisElement.openScreen('new-password')
                                 .showEmails()
                                 .showCpfs()
-                                .showCnpjs();
+                                .showCnpjs()
+                                .onHidePassword();
                         },
                         error: function(request, type) {
                             thisElement.showErrorMessage(request);
