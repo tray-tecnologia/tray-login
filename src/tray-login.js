@@ -209,7 +209,7 @@ var trayLoginProto = {},
         this.loading = thatDoc.getElementById('tray-login-loading');
         this.passwordButton = thatDoc.getElementById('tray-login-email');
         this.OTPButton = thatDoc.getElementById('tray-login-otp');
-        this.passForgetButton = thatDoc.querySelectorAll('.password-forget');
+        this.passForgetButton = $('.password-forget');
         this.passRecoveryButton = thatDoc.getElementById('password-recovery');
         this.$facebookButton = $(".tray-btn-facebook");
         this.$otherOptionButton = $('[data-element="login-other-option"]');
@@ -577,46 +577,42 @@ var trayLoginProto = {},
      *  Listen click on password forget
      */
     trayLoginProto.onPasswordForget = function () {
+        this.passForgetButton.on('click', function(event) {
+            event.preventDefault();
+            var data = {
+                email: trayLoginProto.getData('email'),
+                cpf: trayLoginProto.getData('cpf'),
+                cnpj: trayLoginProto.getData('cnpj'),
+                store_id: trayLoginProto.getData('store'),
+                session_id: trayLoginProto.getData('session'),
+            };
 
-        this.passForgetButton.forEach(function(button) {
-            button.addEventListener('click', function(event) {
-                event.preventDefault();
-                    var data = {
-                        email: trayLoginProto.getData('email'),
-                        cpf: trayLoginProto.getData('cpf'),
-                        cnpj: trayLoginProto.getData('cnpj'),
-                        store_id: trayLoginProto.getData('store'),
-                        session_id: trayLoginProto.getData('session'),
-                    };
+            $.ajax({
+                type: 'POST',
+                url: thisElement.routes.methods.route('password_recovery'),
+                data: data,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.statusCode > 400) {
+                        thisElement.showErrorMessage(response);
+                        return;
+                    }
 
-                    $.ajax({
-                        type: 'POST',
-                        url: thisElement.routes.methods.route('password_recovery'),
-                        data: data,
-                        dataType: 'json',
-                        success: function(response) {
-                            if (response.statusCode > 400) {
-                                thisElement.showErrorMessage(response);
-                                return;
-                            }
-
-                            thisElement.openScreen('new-password')
-                                .showEmails()
-                                .showCpfs()
-                                .showCnpjs()
-                                .onHidePassword();
-                            thisElement.byPassword.init();
-                        },
-                        error: function(request, type) {
-                            thisElement.showErrorMessage(request);
-                        },
-                        beforeSend: function(response)  {
-                            trayLoginProto.triggerCustomEvent('tray-login-click', 'tray-password-recover');
-                        },
-                    });
-                });
-            }
-        );
+                    thisElement.openScreen('new-password')
+                        .showEmails()
+                        .showCpfs()
+                        .showCnpjs()
+                        .onHidePassword();
+                    thisElement.byPassword.init();
+                },
+                error: function(request, type) {
+                    thisElement.showErrorMessage(request);
+                },
+                beforeSend: function(response)  {
+                    trayLoginProto.triggerCustomEvent('tray-login-click', 'tray-password-recover');
+                },
+            });
+        });
         return this;
     };
 
