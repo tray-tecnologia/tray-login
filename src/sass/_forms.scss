@@ -32,7 +32,7 @@ tray-login {
         font-weight: 300;
         height: 47px;
         line-height: 14px;
-        padding: 13px 0 14px 36px;
+        padding: 13px 0 14px 36px !important; //!Important necessário devido aos seletores dos tema default [loja-temas]
         width: 100%;
 
         &:focus {
