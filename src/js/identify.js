@@ -127,17 +127,16 @@
              * @param {string} user_input
              */
             getLoginType: function(user_input) {
-                var type = 'cnpj';
-
                 if (this.isValidEmail(user_input)) {
-                    type = 'email';
+                    return 'email';
                 }
 
-                if (user_input.length === 11) {
-                    type = 'cpf';
+                var value = user_input.replace(/[^\d]+/g,'');
+                if (value.length === 11) {
+                    return 'cpf';
                 }
 
-                return type;
+                return 'cnpj';
             },
 
             /**
