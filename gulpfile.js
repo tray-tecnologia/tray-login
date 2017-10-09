@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var vulcanize = require('gulp-vulcanize');
+var htmlmin = require('gulp-htmlmin');
 var sass = require('gulp-sass');
 var browserSync = require('browser-sync');
 
@@ -216,6 +217,14 @@ gulp.task('vulcanize', function () {
             excludes: [],
             stripComments: true,
             stripExcludes: false
+        }))
+        .pipe(htmlmin({
+            minifyJS: true,
+            minifyCSS: true,
+            collapseWhitespace: true,
+            removeAttributeQuotes: true,
+            removeRedundantAttributes: true,
+            removeOptionalTags: true,
         }))
         .pipe(gulp.dest('dist'));
 });

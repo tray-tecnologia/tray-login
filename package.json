@@ -12,6 +12,7 @@
   "devDependencies": {
     "browser-sync": "^2.14.0",
     "gulp": "3.9.1",
+    "gulp-htmlmin": "^3.0.0",
     "gulp-sass": "2.1.1",
     "gulp-vulcanize": "6.1.0"
   },
