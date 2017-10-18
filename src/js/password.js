@@ -43,10 +43,21 @@
          */
         changePasswordType: function() {
             if (this.layout.atLeast('desktop')) {
+                this.setDefaultTypeAttribute();
                 document.getElementById('hide-password').dispatchEvent(new Event('click'));
             }
 
             return this;
+        },
+
+        /**
+         * Sets the default input type attribute
+         */
+        setDefaultTypeAttribute: function() {
+            var inputPassword = document.getElementById('input-password');
+            if (!inputPassword.getAttribute('type')) {
+                inputPassword.setAttribute('type', 'text');
+            }
         }
     };
 
