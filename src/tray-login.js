@@ -637,6 +637,9 @@ var trayLoginProto = {},
         this.inputCode.addEventListener('keyup', function() {
             thatDoc.querySelector('.tray-error-message').innerHTML = '';
             thatDoc.getElementById('input-code').classList.remove('tray-input-invalid');
+            if (/\D/g.test(this.value)) {
+                this.value = this.value.replace(/\D/g, '');
+            }
         });
 
         return this;
