@@ -128,6 +128,8 @@ var langs = {
         "other-option": "Escolher outra opção",
         "go-back": "Voltar",
         'proceed': 'Continuar',
+        // Blocked Screen
+        'blocked-user': 'Por motivos de segurança bloqueamos o acesso por e-mail e senha durante 60 minutos.',
     },
     "statusCode": 200,
 };
