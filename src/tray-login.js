@@ -28,14 +28,14 @@ var trayLoginProto = {},
     /**
      * Executes when some attribute was changed
      */
-    trayLoginProto.attributeChangedCallback = function() {
-        thisElement.initComponent();
+    trayLoginProto.attributeChangedCallback = function(attrName) {
+        thisElement.initComponent(attrName);
     };
 
     /**
      * Initialize the component
      */
-    trayLoginProto.initComponent = function() {
+    trayLoginProto.initComponent = function(attrName) {
         thisElement = this;
         this.setLoginMethods();
         this.addElements();
@@ -43,28 +43,30 @@ var trayLoginProto = {},
         this.preventDefaultMessages();
         this.setMessages();
 
-        this.routes.prefix = this.getAttribute('data-route-prefix') || this.routes.prefix;
-
-        if (!initialized) {
-            this.addListeners();
-            this.langs.methods.get();
-            initialized = true;
-        }
-
         this.setData('email', this.getAttribute('data-email'));
         this.setData('cpf', this.getAttribute('data-cpf'));
         this.setData('cnpj', this.getAttribute('data-cnpj'));
         this.setData('store', this.getAttribute('data-store'));
         this.setData('session', this.getAttribute('data-session'));
 
-        this.changeLabels();
+        this.routes.prefix = this.getAttribute('data-route-prefix') || this.routes.prefix;
+        if (!initialized) {
+            this.addListeners();
+            this.langs.methods.get();
+            this.checkStatus.init();
+            initialized = true;
+        }
 
         if (this.getData('email') || this.getData('cpf') || this.getData('cnpj')) {
             this.openScreen('main');
-            this.checkStatus.methods.init();
         } else if (this.hasLoginMethod('identify')) {
             this.openScreen('identify');
             this.identify.methods.init();
+        }
+
+        var userData = ['data-email', 'data-cpf', 'data-cnpj'];
+        if (userData.indexOf(attrName) !== -1) {
+            this.checkStatus.checkStatus();
         }
 
         this.bindValues('[data-element="tray-store"]', 'store');
@@ -554,14 +556,14 @@ var trayLoginProto = {},
         for (var i = this.$otherOptionButton.length - 1; i >= 0; i--) {
             this.$otherOptionButton[i].addEventListener('click', function(event) {
                 event.preventDefault();
-                if (thisElement.hasLoginMethod('identify') && currentScreen === 'main' || thisElement.checkStatus.blockedUser){
+                if (thisElement.hasLoginMethod('identify') && currentScreen === 'main') {
                         thisElement.openScreen('identify');
                         thisElement.removeAttribute('data-email');
                         thisElement.removeAttribute('data-cpf');
                         thisElement.removeAttribute('data-cnpj');
 
-                        if(thisElement.checkStatus.blockedUser){
-                            thisElement.checkStatus.methods.resetLogin();
+                        if (thisElement.checkStatus.blockedUser){
+                            thisElement.checkStatus.resetLogin();
                         }
 
                         return this;
