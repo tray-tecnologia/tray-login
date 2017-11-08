@@ -137,7 +137,6 @@ var trayLoginProto = {},
         $('tray-login').on('keydown', function(e) {
             if ((e.keyCode || e.which) == TAB) {
                 e.preventDefault();
-                this.focusInput();
             }
         });
     };
@@ -283,32 +282,14 @@ var trayLoginProto = {},
         thatDoc.getElementById(screenID).style.display = 'block';
         this.handleElements();
         this.cleanErrorMessage();
-        this.focusInput();
+
+        // Useful because autofocus attribute doesn't work on IOS Safari
+        var currentInput = $('.tray-input', '#' + screenID);
+        setTimeout(function() {
+            currentInput.focus();
+        }, 100);
 
         return this;
-    };
-
-    /**
-     * Focus on the visible input when the screen is opened
-     */
-    trayLoginProto.focusInput = function() {
-        var inputElements = thatDoc.querySelectorAll('.tray-input');
-        var input;
-        var isVisible;
-
-        for (var i = inputElements.length - 1; i >= 0; i--) {
-            isVisible = $(inputElements[i]).parents('.tray-login-screens').css('display') != 'none';
-
-            if (isVisible) {
-                input = inputElements[i];
-            }
-        }
-
-        if(!input) {
-            return false;
-        }
-
-        input.focus();
     };
 
     /**
