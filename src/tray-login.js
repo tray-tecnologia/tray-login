@@ -53,6 +53,7 @@ var trayLoginProto = {},
         this.routes.prefix = this.getAttribute('data-route-prefix') || this.routes.prefix;
         if (!initialized) {
             this.addListeners();
+            this.setContainerPosition();
             this.langs.methods.get();
             this.checkStatus.init();
             initialized = true;
@@ -90,6 +91,21 @@ var trayLoginProto = {},
         window.dispatchEvent(event);
     };
 
+    /**
+     * On iOS change container position
+     *
+     * This fix a wrong caret position for input field inside a fixed position parent
+     * More info: https://bugs.webkit.org/show_bug.cgi?id=176896
+     */
+    trayLoginProto.setContainerPosition = function() {
+        var isIos = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+
+        if (!isIos) {
+            return false;
+        }
+
+        $('.tray-container').css('position', 'absolute');
+    };
     /**
      * Set the available methods
      */
