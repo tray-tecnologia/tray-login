@@ -86,8 +86,8 @@ Para configurar o ambiente de dev, execute:
 ```sh
 npm install
 bower install
-cd bower_components/zeptojs
-npm run-script dist
+cd bower_components/zepto
+npm install && npm run-script dist
 ```
 
 Em ambientes Linux é necessário fazer o downgrade da dependência vulcanize do pacote gulp-vulcanize, neste caso siga os passos abaixo:
