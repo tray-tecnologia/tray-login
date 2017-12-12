@@ -50,6 +50,8 @@ var trayLoginProto = {},
         this.setData('store', this.getAttribute('data-store'));
         this.setData('session', this.getAttribute('data-session'));
 
+        this.changeLabels();
+
         this.routes.prefix = this.getAttribute('data-route-prefix') || this.routes.prefix;
         if (!initialized) {
             this.addListeners();
