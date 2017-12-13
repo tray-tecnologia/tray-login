@@ -102,3 +102,5 @@ npm start
 ```
 
 Não altere os arquivos da pasta `dist/`, é apenas o build. O `dist/tray-login.html` deverá existir no controle de versão.
+
+Após gerar uma nova tag, abra o `package.json` e altere o atributo `version` inserindo a nova tag criada.
