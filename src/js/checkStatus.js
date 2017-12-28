@@ -87,6 +87,7 @@
                 'main-action': trayLoginProto.langs.methods.getDefaultTexts('main-action'),
             }));
 
+            thisElement.openScreen('blocked');
             self.blockedUser = true;
         },
 

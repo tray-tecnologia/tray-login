@@ -44,19 +44,25 @@
         changePasswordType: function() {
             if (this.layout.atLeast('desktop')) {
                 this.setDefaultTypeAttribute();
-                document.getElementById('hide-password').dispatchEvent(new Event('click'));
-            }
+                var passwordButtons = document.querySelectorAll('.tray-login-hide-password');
 
-            return this;
+                for (i = 0; i < passwordButtons.length; i++) {
+                    passwordButtons[i].dispatchEvent(new Event('click'));
+                }
+
+                return this;
+            }
         },
 
         /**
          * Sets the default input type attribute
          */
         setDefaultTypeAttribute: function() {
-            var inputPassword = document.getElementById('input-password');
-            if (!inputPassword.getAttribute('type')) {
-                inputPassword.setAttribute('type', 'text');
+            var passwordButtons = document.querySelectorAll('.tray-login-hide-password');
+            for (i = 0; i < passwordButtons.length; i++) {
+                if (!passwordButtons[i].getAttribute('type')) {
+                    passwordButtons[i].setAttribute('type', 'text');
+                }
             }
         }
     };
