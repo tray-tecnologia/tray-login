@@ -52,13 +52,38 @@
             <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
             <p class="tray-error-message" id="message-main"></p>
             <p class="tray-action" custom-text="main-action" data-default-text="main-action"></p>
-            <div class="tray-actions tray-txt-center">
-                <button class="tray-btn-primary" id="tray-login-email" data-default-text="password-button"></button>
-                <button class="tray-btn-otp" id="tray-login-otp" data-default-text="otp-receive"></button>
-                <button class="tray-btn-facebook" data-element="tray-login-facebook">facebook</button>
-                <button class="tray-btn-default tray-btn-hidden" data-element="login-other-option" data-default-text="go-back"></button>
-                <a class="tray-link password-forget" data-default-text="password-forget"></a>
-            </div>
+            <div class="tray-well" data-element="tray-email"></div>
+            <div class="tray-well" data-element="tray-cpf"></div>
+            <div class="tray-well" data-element="tray-cnpj"></div>
+            <form id="form-password">
+                <div class="tray-input-group tray-vspace-lg">
+                    <input type="hidden" data-element="tray-session" name="session_id">
+                    <input type="hidden" data-element="tray-store" name="store_id">
+                    <input type="hidden" data-element="tray-email" name="email">
+                    <input type="hidden" data-element="tray-cpf" name="cpf">
+                    <input type="hidden" data-element="tray-cnpj" name="cnpj">
+                    <button class="tray-login-hide-password" type="button" id="hide-password" data-default-text="password-show"
+                    data-attr-text="data-text-toggle:password-show"></button>
+                    <input class="tray-input empty input-password" autocomplete="off" type="text" name="password"  id="input-password" required autofocus>
+                    <label for="input-password" class="tray-label" data-default-text="password-input-label">
+                        <svg class="tray-icon-locked" viewBox="0 0 1024 1024">
+                            <path class="path1" d="M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"></path>
+                        </svg>
+                    </label>
+                    <a class="tray-link password-forget" data-default-text="password-forget"></a>
+                    <div class="tray-actions tray-txt-center">
+                        <button class="tray-btn-primary" type="submit" id="password-submit" data-default-text="proceed"></button>
+                    </div>
+                </div>
+                <div class="tray-general-separator">
+                    <span>ou utilize uma das opções abaixo</span>
+                </div>
+                <div class="tray-actions tray-txt-center">
+                    <button class="tray-btn-otp" id="tray-login-otp" data-default-text="otp-receive"></button>
+                    <button class="tray-btn-facebook" data-element="tray-login-facebook">facebook</button>
+                    <button class="tray-btn-default tray-btn-hidden" data-element="login-other-option" data-default-text="go-back"></button>
+                </div>
+            </form>
         </div>
         <div class="tray-login-screens" id="otp">
             <form id="form-otp">
@@ -83,48 +108,64 @@
                 </div>
             </form>
         </div>
-        <div class="tray-login-screens" id="email-password">
-            <form id="form-password">
-                <h1 class="tray-title" data-default-text="password-title"></h1>
-                <p class="tray-action" data-default-text="password-action"></p>
+        <div class="tray-login-screens" id="new-password">
+            <div id="change-password">
+                <h1 class="tray-title tray-message tray-txt-center" data-default-text="new-password-title">
+
+                </h1>
+                <p class="tray-action">
+                    Você receberá um código de segurança em seu e-mail para validar sua nova senha.
+                </p>
                 <div class="tray-well" data-element="tray-email"></div>
-                <div class="tray-well" data-element="tray-cpf"></div>
-                <div class="tray-well" data-element="tray-cnpj"></div>
-                <div class="tray-input-group tray-vspace-lg">
-                    <input type="hidden" data-element="tray-session" name="session_id">
-                    <input type="hidden" data-element="tray-store" name="store_id">
-                    <input type="hidden" data-element="tray-email" name="email">
-                    <input type="hidden" data-element="tray-cpf" name="cpf">
-                    <input type="hidden" data-element="tray-cnpj" name="cnpj">
-                    <button class="tray-login-hide-password" type="button" id="hide-password" data-default-text="password-hide"
-                    data-attr-text="data-text-toggle:password-show"></button>
-                    <input class="tray-input empty" autocomplete="off" type="text" name="password" id="input-password" required autofocus>
-                    <label for="input-password" class="tray-label" data-default-text="password-input-label">
+                <div class="tray-input-group">
+                    <button class="tray-login-hide-password" type="button" data-default-text="password-show" data-attr-text="data-text-toggle:password-show"></button>
+                    <input class="tray-input input-password empty" autocomplete="off" type="text" name="new-password" id="new-password-input" required autofocus>
+                    <label for="new-password" class="tray-label" data-default-text="password-input-label">
                         <svg class="tray-icon-locked" viewBox="0 0 1024 1024">
                             <path class="path1" d="M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"></path>
                         </svg>
                     </label>
                     <p class="tray-error-message"></p>
                 </div>
-                <div class="tray-actions tray-txt-center">
-                    <button class="tray-btn-primary" type="submit" id="password-submit" data-default-text="proceed"></button>
-                    <button class="tray-btn-default" data-element="login-other-option" data-default-text="other-option"></button>
-                    <a class="tray-link password-forget" data-default-text="password-forget"></a>
+                <div class="tray-actions">
+                    <button class="tray-btn-primary" type="button" id="new-password-submit">Alterar Senha e continuar</button>
                 </div>
-            </form>
-        </div>
-        <div class="tray-login-screens" id="new-password">
-            <h1 class="tray-title tray-txt-center" data-default-text="new-password-title">
-                <svg class="tray-icon-mail" viewBox="0 0 1024 1024" >
-                    <path class="path1" d="M989.252 147.388h-954.573c-19.183 0-34.748 15.565-34.748 34.748v675.021c0 19.183 15.565 34.748 34.748 34.748h954.573c19.183 0 34.748-15.565 34.748-34.748v-675.021c-0.068-19.183-15.565-34.748-34.748-34.748zM954.505 822.409h-885.077v-605.525h885.077v605.525z"></path>
-                    <path class="path2" d="M160.427 380.45l333.346 205.414c5.598 3.413 11.878 5.188 18.227 5.188s12.629-1.707 18.227-5.188l333.346-205.414c16.316-10.035 21.436-31.471 11.332-47.787-10.035-16.316-31.471-21.436-47.787-11.332l-315.119 194.15-315.119-194.15c-16.316-10.035-37.683-4.983-47.787 11.332s-5.052 37.683 11.332 47.787z"></path>
-                </svg>
-            </h1>
-            <div class="tray-well" data-element="tray-email"></div>
-            <p class="tray-error-message"></p>
+            </div>
+            <div id="send-security-code">
+                <h1 class="tray-title tray-message tray-txt-center" data-default-text="new-password-title">
+                    <svg class="tray-icon-mail" viewBox="0 0 1024 1024">
+                        <path class="path1" d="M989.252 147.388h-954.573c-19.183 0-34.748 15.565-34.748 34.748v675.021c0 19.183 15.565 34.748 34.748 34.748h954.573c19.183 0 34.748-15.565 34.748-34.748v-675.021c-0.068-19.183-15.565-34.748-34.748-34.748zM954.505 822.409h-885.077v-605.525h885.077v605.525z"></path>
+                        <path class="path2" d="M160.427 380.45l333.346 205.414c5.598 3.413 11.878 5.188 18.227 5.188s12.629-1.707 18.227-5.188l333.346-205.414c16.316-10.035 21.436-31.471 11.332-47.787-10.035-16.316-31.471-21.436-47.787-11.332l-315.119 194.15-315.119-194.15c-16.316-10.035-37.683-4.983-47.787 11.332s-5.052 37.683 11.332 47.787z"></path>
+                    </svg>
+                </h1>
+                <div class="tray-well" data-element="tray-email"></div>
+                <div class="tray-input-group">
+                    <input class="tray-input empty" autocomplete="off" type="tel" name="code" id="password-security-code" maxlength="6" required>
+                    <label for="password-security-code" class="tray-label" data-default-text="otp-input-label">
+                        <svg class="tray-icon-locked" viewBox="0 0 1024 1024">
+                            <path class="path1" d="M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"></path>
+                        </svg>
+                    </label>
+                    <p class="tray-error-message"></p>
+                </div>
+                <div class="tray-actions">
+                    <button class="tray-btn-primary" type="button" id="security-code-submit">Enviar codigo de segurança</button>
+                </div>
+            </div>
             <div class="tray-actions">
-                <button class="tray-btn-primary" type="button" id="password-recovery" data-default-text="new-password-submit"></button>
-                <button class="tray-btn-default" data-element="login-other-option" data-default-text="other-option"></button>
+                <button id="back-to-main" class="tray-btn-primary" data-element="login-other-option">Continuar</button>
+                <button id="pass-other-option" class="tray-btn-default" data-element="login-other-option" data-default-text="other-option"></button>
+            </div>
+        </div>
+        <div class="tray-login-screens" id="blocked">
+            <h1 class="tray-title" data-default-text="main-title"></h1>
+            <span class="tray-general-error-alert" custom-text="general-error-alert"></span>
+            <p class="tray-error-message" id="message-main"></p>
+            <p class="tray-action" custom-text="main-action" data-default-text="main-action"></p>
+
+            <div class="tray-actions tray-txt-center">
+                <button class="tray-btn-facebook" data-element="tray-login-facebook">facebook</button>
+                <button class="tray-btn-default tray-btn-hidden" data-element="login-other-option" data-default-text="go-back"></button>
             </div>
         </div>
     </div>

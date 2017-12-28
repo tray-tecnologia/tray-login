@@ -180,7 +180,7 @@ var mocks = {
 
     "/checkout/check-status": function (req, res) {
         res.setHeader("Content-Type", "application/json");
-        res.end(JSON.stringify(checkStatusSucess));
+        res.end(JSON.stringify(checkStatusFail));
     },
 };
 
