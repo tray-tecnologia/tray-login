@@ -43,15 +43,14 @@
          */
         changePasswordType: function() {
             if (this.layout.atLeast('desktop')) {
-                this.setDefaultTypeAttribute();
                 var passwordButtons = document.querySelectorAll('.tray-login-hide-password');
-
                 for (i = 0; i < passwordButtons.length; i++) {
                     passwordButtons[i].dispatchEvent(new Event('click'));
+                    passwordButtons[i].dataset.defaultText = 'password-show'
                 }
-
-                return this;
             }
+
+            return this;
         },
 
         /**

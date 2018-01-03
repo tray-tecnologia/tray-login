@@ -91,6 +91,18 @@ var checkStatusSucess = {
     "statusCode": 200
 };
 
+var generateCodeSuccess = {
+    "data": {},
+    "statusCode": 200
+};
+
+var passUpdateSuccess = {
+    "data": {
+        message: 'Senha cadastrada com sucesso!'
+    },
+    "statusCode": 200
+};
+
 var langs = {
     "data": {
         // identify screen
@@ -103,9 +115,11 @@ var langs = {
         "identify-data-invalid": "Dados inv&aacute;lidos, digite novamente!",
         "identify-error": "N&atilde;o foi poss&iacute;vel verificar seu cadastro, tente novamente.",
         "identify-not-found": "Usu&aacute;rio n&atilde;o encontrado, fa&ccedil;a seu cadastro.",
+        "invalid-code": "Autenticação incorreta.",
         // main screen
         "main-title": "Autenticação",
         "main-action": "Escolha uma das opções para se identificar:",
+        "main-separator": "ou utilize uma das opções abaixo",
         // password screen
         "password-title": "E-mail e senha da loja",
         "password-button": "E-mail e senha da loja",
@@ -122,14 +136,18 @@ var langs = {
         "otp-receive": "Receber código de segurança por e-mail",
         "otp-input-label": "Código de segurança",
         // new password screen
-        "new-password-title": "Acesse o seu e-mail e cadastre uma nova senha",
-        "new-password-submit": "Cadastrei uma nova senha",
+        "new-password-label": 'Nova senha',
+        "new-password-title": "Cadastre uma nova senha",
+        'new-password-action': "Você receberá um código de segurança em seu e-mail para validar sua nova senha.",
+        'new-password-submit': "Salvar nova senha e continuar",
+        'new-password-code-submit': "Enviar codigo de segurança",
         // general texts
         "other-option": "Escolher outra opção",
         "go-back": "Voltar",
         'proceed': 'Continuar',
         // Blocked Screen
         'blocked-user': 'Por motivos de segurança bloqueamos o acesso por e-mail e senha durante 60 minutos.',
+        'invalid-password': 'A nova senha deve possuir no mínimo 6 caracteres',
     },
     "statusCode": 200,
 };
@@ -180,7 +198,17 @@ var mocks = {
 
     "/checkout/check-status": function (req, res) {
         res.setHeader("Content-Type", "application/json");
-        res.end(JSON.stringify(checkStatusFail));
+        res.end(JSON.stringify(checkStatusSucess));
+    },
+
+    "/checkout/generate-security-code": function (req, res) {
+        res.setHeader("Content-Type", "application/json");
+        res.end(JSON.stringify(generateCodeSuccess));
+    },
+
+    "/checkout/password-update": function (req, res) {
+        res.setHeader("Content-Type", "application/json");
+        res.end(JSON.stringify(passUpdateSuccess));
     },
 };
 
