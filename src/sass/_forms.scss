@@ -11,7 +11,7 @@ tray-login {
 
     .tray-input-group {
         display: block;
-        margin-bottom: 11px;
+        margin-bottom: 10px;
         position: relative;
 
         &.row {
@@ -34,6 +34,8 @@ tray-login {
         line-height: 14px;
         padding: 13px 0 14px 36px !important; //!Important necessário devido aos seletores dos tema default [loja-temas]
         width: 100%;
+        margin-bottom: 10px;
+
 
         &:focus {
             outline: none;
@@ -112,5 +114,39 @@ tray-login {
         fill: $btn-next-bg;
         opacity: 0;
         transition: all ease 500ms;
+    }
+
+    .tray-general-separator {
+        color: $input-txt;
+        display: block;
+        margin-bottom: 10px;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+
+        > span {
+            position: relative;
+            display: inline-block;
+
+            &:before,
+            &:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                width: 9999px;
+                height: 1px;
+                background: $input-txt;
+            }
+
+            &:before {
+                right: 100%;
+                margin-right: 5px;
+            }
+
+            &:after {
+                left: 100%;
+                margin-left: 5px;
+            }
+        }
     }
 }

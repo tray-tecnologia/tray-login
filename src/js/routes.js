@@ -10,7 +10,8 @@
         routes: {
             "has_account": "/has-account",
             "password": "/password",
-            "password_recovery": "/password-recovery",
+            "password_update": "/password-update",
+            "security_code": "/generate-security-code",
             "otp": "/otp-generate",
             "otp_login": "/otp",
             "facebook": "/facebook/url",
