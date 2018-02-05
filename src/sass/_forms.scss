@@ -116,6 +116,15 @@ tray-login {
         transition: all ease 500ms;
     }
 
+    .tray-input-invalid {
+        border-color: $input-error-bd;
+        color: $input-error-txt;
+
+        & ~ .tray-label svg {
+            fill: $input-error-txt;
+        }
+    }
+
     .tray-general-separator {
         color: $input-txt;
         display: block;
