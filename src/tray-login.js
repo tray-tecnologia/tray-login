@@ -94,6 +94,7 @@ var trayLoginProto = {},
                 type: eventType,
             },
         });
+
         window.dispatchEvent(event);
     };
 
@@ -243,6 +244,7 @@ var trayLoginProto = {},
         this.securityCodeButton = thatDoc.getElementById('security-code-submit');
         this.updateSuccessTitle = thatDoc.getElementById('password-update-success');
         this.proceedLogin = thatDoc.getElementById('proceed-login');
+        this.trayLoginHidePassword = thatDoc.getElementById('tray-login-hide-password');
         this.$facebookButton = $(".tray-btn-facebook");
         this.$otherOptionButton = $('[data-element="login-other-option"]');
         this.handleElements();
@@ -624,6 +626,11 @@ var trayLoginProto = {},
                         .showCpfs()
                         .showCnpjs()
                         .onNewpasswordScreen();
+
+                    thatDoc.getElementById('new-password-input').classList.remove('tray-input-invalid');
+                    thatDoc.getElementById('tray-login-hide-password').classList.remove('tray-input-invalid');
+                    thatDoc.getElementById('input-code').classList.remove('tray-input-invalid');
+                    thatDoc.getElementById('input-password').classList.remove('tray-input-invalid');
                 },
                 error: function(request, type) {
                     thisElement.showErrorMessage(request.message);
@@ -741,6 +748,7 @@ var trayLoginProto = {},
         this.inputCode = thatDoc.getElementById('input-code');
         this.inputCode.addEventListener('keyup', function() {
             thatDoc.querySelector('.tray-error-message').innerHTML = '';
+            thatDoc.getElementById('').classList.remove('tray-input-invalid');
             thatDoc.getElementById('input-code').classList.remove('tray-input-invalid');
             if (/\D/g.test(this.value)) {
                 this.value = this.value.replace(/\D/g, '');
@@ -825,6 +833,7 @@ var trayLoginProto = {},
             errorElements[i].innerHTML = message;
         }
 
+        thatDoc.getElementById('tray-login-hide-password').classList.add('tray-input-invalid');
         thatDoc.getElementById('input-code').classList.add('tray-input-invalid');
         thatDoc.getElementById('input-password').classList.add('tray-input-invalid');
         thatDoc.getElementById('new-password-input').classList.add('tray-input-invalid');
@@ -850,6 +859,7 @@ var trayLoginProto = {},
             errorElements[i].innerHTML = '';
         }
 
+        thatDoc.getElementById('tray-login-hide-password').classList.remove('tray-input-invalid');
         thatDoc.getElementById('input-code').classList.remove('tray-input-invalid');
         thatDoc.getElementById('input-password').classList.remove('tray-input-invalid');
     };
