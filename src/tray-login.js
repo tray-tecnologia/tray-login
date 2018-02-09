@@ -205,7 +205,8 @@ var trayLoginProto = {},
         .onSubmitCode()
         .onSecurityCodeCodeSubmit()
         .onHidePassword()
-        .ajaxMiddleware();
+        .ajaxMiddleware()
+        .onScreenResize();
     };
 
     /**
@@ -229,6 +230,7 @@ var trayLoginProto = {},
      * @return {object} trayLoginProto
      */
     trayLoginProto.addElements = function() {
+        this.loginContainer = thatDoc.querySelector('.tray-container'),
         this.formOTP = thatDoc.getElementById('form-otp');
         this.formPassword = thatDoc.getElementById('form-password');
         this.loading = thatDoc.getElementById('tray-login-loading');
@@ -475,6 +477,33 @@ var trayLoginProto = {},
     };
 
     /**
+     * Sets the component position.
+     *
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.setComponentPosition = function() {
+        var screenHeight = window.innerHeight;
+        var containerHeight = thisElement.loginContainer.clientHeight;
+
+        thisElement.loginContainer.style.top = 'calc(50% - ' + containerHeight / 2 + 'px)';
+
+        return this;
+    };
+
+    /**
+     * When user resize screen
+     * On mobile device when keyboard is open this event is triggered
+     * @return {object} trayLoginProto
+     */
+    trayLoginProto.onScreenResize = function() {
+        window.addEventListener('resize', function() {
+            thisElement.setComponentPosition();
+        });
+
+        return this;
+    };
+
+    /**
      * When clicks on the button "hide"
      * @return {object} trayLoginProto
      */
@@ -696,7 +725,7 @@ var trayLoginProto = {},
                 thisElement.securityCodeInput.classList.remove('empty');
                 return false;
             }
-            
+
             var data = {
                 email: trayLoginProto.getData('email'),
                 cpf: trayLoginProto.getData('cpf'),
