@@ -812,6 +812,7 @@ var trayLoginProto = {},
                 success: function(response) {
                     if (response.statusCode > 400) {
                         thisElement.showErrorMessage(response.message);
+
                         trayLoginProto.triggerCustomEvent('tray-login', response, 'error');
                         return;
                     }
@@ -819,9 +820,18 @@ var trayLoginProto = {},
                     trayLoginProto.triggerCustomEvent('tray-login', response, 'success');
                     thisElement.redirectOnSuccess(response.data.token);
                 },
-                error: function(request, type) {
-                    thisElement.showErrorMessage($.parseJSON(request.responseText).message);
-                    trayLoginProto.triggerCustomEvent('tray-login', request, 'error');
+                error: function(xhr, type, error) {
+                    var response = $.parseJSON(xhr.responseText);
+                    var blockedUser = response.statusCode == 403;
+
+                    thisElement.showErrorMessage(response.message);
+
+                    if (blockedUser) {
+                        thisElement.checkStatus.setBlockedUser(response.message);
+                        return;
+                    }
+
+                    trayLoginProto.triggerCustomEvent('tray-login', xhr, 'error');
                 }
             });
         });
