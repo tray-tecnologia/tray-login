@@ -1,0 +1,28 @@
+$general-input: $white;
+$input-error: $red;
+
+tray-login,
+.tray-login {
+    .tray-input {
+        background: #fff;
+        border: 1px solid #e0dcdc;
+        border-radius: 3px;
+        color: #909090;
+        display: block;
+        font-size: 14px;
+        font-weight: 300;
+        height: 47px;
+        line-height: 14px;
+        padding: 13px 0 14px 36px!important;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .tray-feedbacks {
+        margin-bottom: 10px;
+    }
+
+    .tray-error-message {
+        color: $input-error;
+    }
+}

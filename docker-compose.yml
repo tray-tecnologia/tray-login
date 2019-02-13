@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+### Front-end container (Node + Yarn)
+  tray_login:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    container_name: tray_login
+    volumes:
+      - ./:/var/www:cached
+    tty: true
+    ports:
+      - "8080:8080"
+    command: yarn serve
