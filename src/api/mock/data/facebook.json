@@ -1,0 +1,6 @@
+{
+    "data":{
+        "url":"https:\/\/www.facebook.com\/v2.12\/dialog\/oauth?client_id=954834467922279&state=035695de54f6404546bfa5545c74aeaf&response_type=code&sdk=php-sdk-5.7.0&redirect_uri=https%3A%2F%2Feasycheckout.tray.com.br%2Fcheckout%2Ffacebook%2Fauthorize%3Fstore_id%3D455870%26crossdm%3Dhttps%25253A%25252F%25252Fdouglas.commercesuite.com.br%26session_id%3Dl3uccon0epcnsfckjmps10hfi3%26callback%3Dhttps%253A%252F%252Fdouglas.commercesuite.com.br%252Fcheckout%253Fsession_id%253Dl3uccon0epcnsfckjmps10hfi3%2526store_id%253D455870&scope=email&display=popup"
+    },
+    "statusCode":200
+}

@@ -1,0 +1,29 @@
+.tray-login {
+    * {
+        box-sizing: border-box;
+    }
+    &__input {
+        background: #fff;
+        border: 1px solid #e0dcdc;
+        border-radius: 3px;
+        color: #909090;
+        display: block;
+        font-size: 14px;
+        font-weight: 300;
+        height: 47px;
+        line-height: 14px;
+        padding: 13px 0 14px 36px!important;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    &__feedbacks {
+        margin-bottom: 10px;
+
+        &__feedback {
+            &--error {
+                color: red;
+            }
+        }
+    }
+}

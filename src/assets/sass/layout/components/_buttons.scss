@@ -1,0 +1,40 @@
+.tray-login {
+    &__button {
+        background-color: #ffffff;
+        color: #bcbcbc;
+        display: block;
+        width: 100%;
+        text-decoration: none;
+        height: 48px;
+        border-radius: 3px;
+        border: 1px solid #d3d1d1;
+        border-bottom-width: 3px;
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        padding: 0;
+        cursor: pointer;
+
+        &--primary {
+            color: #fff;
+            background: #6abf57;
+            border-bottom-color: #539e41;
+
+            &:hover {
+                background: #51a43f;
+                border-color: #407a32;
+            }
+        }
+
+        &--facebook {
+            color: #fff;
+            background-color: #3b5998;
+            border-bottom-color: #243f77;
+
+            &:hover {
+                background-color: #2d4373;
+                border-color: #182a50;
+            }
+        }
+    }
+}
