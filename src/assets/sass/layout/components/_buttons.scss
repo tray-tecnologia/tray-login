@@ -1,0 +1,65 @@
+// buttons
+$btn-back-bg: $white;
+$btn-back-bd: #d3d1d1;
+$btn-back-txt: #bcbcbc;
+
+$btn-next-bg: #6ABF57;
+$btn-next-bd: #539E41;
+$btn-next-txt: $white;
+
+$btn-facebook-bg: #3b5998;
+$btn-facebook-bd: #243f77;
+
+tray-login,
+.tray-login {
+    .tray-btn-primary,
+    .tray-btn-default,
+    .tray-btn-facebook,
+    .tray-btn-otp {
+        background: $btn-next-bg;
+        display: block;
+        color: #fff;
+        cursor: pointer;
+        width: 100%;
+        height: 48px;
+        border-radius: 3px;
+        border: none;
+        border-bottom: 3px solid $btn-next-bd;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        padding: 0;
+
+        &:hover {
+            background: darken($btn-next-bg, 10%);
+            border-color: darken($btn-next-bd, 10%);
+        }
+    }
+
+    .tray-btn-facebook {
+        background-color: #3b5998;
+        border-bottom-color: #243f77;
+        margin-bottom: 0;
+
+        &:hover {
+            background-color: darken(#3b5998, 10%);
+            border-color: darken(#243f77, 10%);
+        }
+    }
+
+    .tray-close {
+        background: #fff;
+        border: 2px solid #bababa;
+        border-radius: 50%;
+        color: #bababa;
+        cursor: pointer;
+        float: right;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 1;
+        padding: 0;
+        margin: 0;
+        height: 21px;
+        width: 21px;
+    }
+}

@@ -1,0 +1,70 @@
+$color: $default-color;
+$background: $white;
+$overlay-color: rgba(0,0,0,.5);
+
+tray-login,
+.tray-login {
+    * {
+        box-sizing: border-box;
+    }
+
+    svg {
+        fill: currentColor;
+    }
+
+    // Transitions
+    a,
+    input,
+    select,
+    label,
+    div,
+    button,
+    svg,
+    svg {
+        transition: all .3s linear;
+
+        &:hover,
+        &:focus {
+            transition: all .3s linear;
+        }
+    }
+
+    color: $color;
+    font-family: Lato, Helvetica, sans-serif;
+    font-size: 14px;
+
+    &:before {
+        background: $overlay-color;
+        content: "";
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 9998;
+    }
+
+    .tray-container {
+        background: $background;
+        border: 1px solid $overlay-color;
+        width: 292px;
+        position: fixed;
+        left: calc(50% - 146px);
+        top: calc(50% - 220px);
+        padding: $default-gutter;
+        z-index: 9999;
+    }
+
+    .tray-close {
+        position: absolute;
+        right: $default-gutter;
+    }
+
+    .tray-title {
+        font-weight: 900;
+        font-size: 19px;
+        margin: 0 0 $default-margin;
+        display: block;
+    }
+}
