@@ -6,6 +6,8 @@
     <form action='POST' @submit.prevent="onSubmit">
       <input type="email" placeholder="Digite seu e-mail" class="tray-login__input"/>
       <button type="submit" class="tray-login__buton">Continuar</button>
+      <br/><br/>
+      {{ feedback }}
     </form>
   </div>
 </template>
@@ -13,14 +15,23 @@
 <script>
 export default {
   name: 'AppIdentify',
+  props: {
+    title: {
+      default: 'Identifique-se',
+      type: String,
+    },
+  },
   data() {
     return {
-      title: 'Identifique-se',
+      feedback: '',
     };
   },
   methods: {
     onSubmit() {
-      this.title = 'Ué ...';
+      this.feedback = 'Enviando ...';
+      setTimeout(() => {
+        this.feedback = '';
+      }, 600);
     },
   },
 };

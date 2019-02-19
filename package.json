@@ -4,14 +4,14 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target wc --name tray-login 'src/App.vue'",
+    "build": "vue-cli-service build --target wc --name tray-login 'src/main.js'",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit",
-    "postt-nstall": "yarn"
+    "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
     "@vue/web-component-wrapper": "^1.2.0",
+    "axios": "^0.18.0",
     "register-service-worker": "^1.5.2",
     "vue": "^2.5.22"
   },

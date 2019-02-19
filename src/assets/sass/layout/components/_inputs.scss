@@ -1,0 +1,18 @@
+.tray-login {
+    &__input {
+        border: 1px solid #ccc;
+        display: block;
+        margin-bottom: 15px;
+        width: 100%;
+        padding: 5px;
+    }
+
+    &__feedbacks {
+        &__feedback {
+
+            &--error {
+                color: red;
+            }
+        }
+    }
+}

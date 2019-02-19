@@ -1,5 +1,34 @@
 .tray-login {
-    width: 300px;
-    height: 300px;
-    margin: 0 auto;
+    color: #909090;
+    font-family: Lato,Helvetica,sans-serif;
+    font-size: 14px;
+
+    &:before {
+        background: #191919;
+        background: rgba(0,0,0,.5);
+        content: "";
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 9998;
+
+    }
+
+    &__container {
+        background: #fff;
+        border: 1px solid rgba(0,0,0,.5);
+        width: 292px;
+        position: fixed;
+        left: calc(50% - 146px);
+        top: calc(50% - 220px);
+        padding: 12px;
+        z-index: 9999;
+    }
+
+    &__button {
+        transition: all .3s linear;
+    }
 }

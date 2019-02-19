@@ -1,0 +1,27 @@
+.tray-login {
+    &__button {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        height: 48px;
+        border-radius: 3px;
+        border: none;
+        border-bottom: 3px solid #539e41;
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        padding: 0;
+        cursor: pointer;
+
+        &--facebook {
+            background-color: #3b5998;
+            border-bottom-color: #243f77;
+
+            &:hover {
+                background-color: #2d4373;
+                border-color: #182a50;
+            }
+        }
+    }
+}
