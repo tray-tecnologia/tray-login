@@ -3,19 +3,17 @@ Web Component para realizar login nas lojas da Tray.
 
 ## Instalação
 
-`bower install -S tray-tecnologia/tray-login`
+`npm install tray-login`
 
 ## Atributos
-Atributo      | Descrição
---------      | -----------
-data-store    | ID da loja
-data-methods  | Tipos de login que você deseja utilizar, opções: ['facebook', 'password', 'otp', 'identify']
-data-callback | URL de callback caso o login esteja correto
-data-texts    | Textos personalizados (opcional)
-data-email    | E-mail utilizado para login (opcional)
-data-cpf      | CPF utilizado para login (opcional)
-data-cnpj     | CNPJ utilizado para login (opcional)
-data-route-prefix | Prefixo da rota das APIs, ex: checkout
+Atributo        | Descrição
+--------        | -----------
+store           | ID da loja
+methods         | Tipos de login que você deseja utilizar, opções: ['facebook', 'password', 'otp']
+callback        | URL de callback caso o login esteja correto
+texts           | Textos personalizados (opcional)
+identification  | Identificação utilizada para login (opcional)
+
 
 ## Eventos
 Lista de eventos disparados pelo componente.
@@ -23,12 +21,31 @@ Lista de eventos disparados pelo componente.
 Evento              | Descrição
 --------            | -----------
 tray-login          | Dispara quando finalizou o processo de login
-tray-login#identify | Dispara quando abre a tela de identificação
-tray-login#main     | Dispara quando abre a tela inicial do componente
-tray-login#otp      | Dispara quando abre a tela do OTP
+tray-login#action   | Dispara sempre que uma ação é efetuada no componente
 tray-login#close    | Dispara quando fecha o componente
 
+
+## Uso
+
+1 - Adicione a bibilioteca vue e importe o componente no `<head>`:
+```HTML
+<script src="https://unpkg.com/vue"></script>
+<script src="dist/tray-login.min.js"></script>
+```
+
+2 - Adicione o elemento no seu HTML substituindo as URLs da aplicação.
+
+```HTML
+<tray-login
+    methods="['facebook']"
+    callback="/callback.html"
+    store="351572"
+    texts="{}">
+</tray-login>
+```
+
 Exemplo de utilização do evento:
+
 ```js
 $(window).on('tray-login', function(event) {
     var response = event.originalEvent.detail.response;
@@ -58,49 +75,29 @@ $(window).on('tray-login', function(event) {
     }
 });
 ```
-
-
-## Uso
-
-1 - Adicione o polyfill e importe o componente no `<head>`:
-```HTML
-<script src="bower_components/webcomponentsjs/webcomponentsjs-lite.min.js">
-<link rel="import" href="dist/tray-login.html">
-```
-
-2 - Adicione o elemento no seu HTML substituindo as URLs da aplicação.
-
-```HTML
-<tray-login
-    data-methods="['password', 'facebook', 'otp', 'identify']"
-    data-callback="/callback.html"
-    data-route-prefix="checkout"
-    data-store="351572"
-    data-texts="{}">
-</tray-login>
-```
-
 ## Contribuindo
 
-Para configurar o ambiente de dev, execute:
+Caso você possua o docker instalado juntamente com o docker-compose, execute o comando abaixo para levantar o container.
+
 ```sh
-npm install
-bower install
-cd bower_components/zepto
-npm install && npm run-script dist
+docker-compose up -d
 ```
 
-Em ambientes Linux é necessário fazer o downgrade da dependência vulcanize do pacote gulp-vulcanize, neste caso siga os passos abaixo:
+Utilizando o comando abaixo é possível entrar no container para configurar as dependencias.
 
-- Abra o arquivo `node_modules/gulp-vulcanize/package.json`
-- Altere a linha 55 `"^1.9.1"` para a versão fixa, `1.14.0`
-- Execute o comando `npm i` dentro de `node_modules/gulp-vulcanize/`
+```sh
+docker-compose exec tray_login bash
+```
+
+Para configurar o ambiente de dev, execute:
+
+```sh
+yarn
+```
 
 Agora que o ambiente está configurado, execute na raiz:
 ```sh
-npm start
+yarn serve
 ```
 
-Não altere os arquivos da pasta `dist/`, é apenas o build. O `dist/tray-login.html` deverá existir no controle de versão.
-
-Após gerar uma nova tag, abra o `package.json` e altere o atributo `version` inserindo a nova tag criada.
+Caso você esteja utilizando o docker o comando acima já é executado automaticamente ao levantar o ontainer

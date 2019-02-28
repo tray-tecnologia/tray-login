@@ -1,0 +1,11 @@
+@keyframes loading-rotate {
+
+    0% {
+        @include rotate(0);
+    }
+
+    100% {
+        @include rotate(360deg);
+    }
+
+}
