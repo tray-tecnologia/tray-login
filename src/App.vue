@@ -1,40 +1,45 @@
 <template>
-  <div id="tray-login" class="tray-login" v-show="showComponent">
+  <div id="tray-login" class="tray-login" ref="tray-login" v-show="showComponent">
     <div class="tray-container">
-      <button
-        ref="close-button"
-        class="tray-close"
-        @click="this.close">
+      <button class="tray-close"
+        @click="close">
         X
       </button>
-
-      <h1
-        class="tray-title tray-login__title">
-          Identifique - se
-      </h1>
-
-      <div class="tray-feedbacks" v-show="hasFeedback">
-        <div class="tray-error-message">
-          {{ errors[0] }}
-        </div>
-      </div>
-
-      <app-identification
-        v-if="false"
-        :identification="email"
+      <app-identification v-if="screen === 'Identification'"
+        :callback="callback"
+        :params="params"
         :texts="texts.identify">
+
+        <app-facebook-login v-if="facebookEnabled"
+          :callback="callback"
+          :defaultActions="defaultActions"
+          :params="params"
+          slot="app-facebook-login">
+        </app-facebook-login>
       </app-identification>
 
-      <app-facebook-login
-        v-if="facebookEnabled"
+      <app-main v-if="screen === 'Main'"
+        :callback="callback"
         :defaultActions="defaultActions"
-        :identification="identification"
-        :store="store"
-        :session="session"
-        :callback="callback">
-      </app-facebook-login>
+        :params="params"
+        :texts="texts.identify">
 
-      <section class="tray-loading" v-show="isLoading">
+        <app-facebook-login v-if="facebookEnabled"
+          :callback="callback"
+          :defaultActions="defaultActions"
+          :params="params"
+          slot="app-facebook-login">
+        </app-facebook-login>
+
+        <button v-if="identificationEnabled"
+          class="tray-btn-default"
+          @click="reset"
+          slot="back-step">
+          Voltar
+        </button>
+      </app-main>
+
+      <section class="tray-loading" v-show="loading">
         <div class="tray-loading-mask">
           <div class="tray-loading-line"></div>
         </div>
@@ -51,15 +56,17 @@
 import { mapState, mapActions } from 'vuex';
 import store from './store';
 
-import AppIdentification from './components/screens/Identification.vue';
 import AppFacebookLogin from './components/FacebookLogin.vue';
+import AppIdentification from './screens/Identification.vue';
+import AppMain from './screens/Main.vue';
 
 export default {
   store,
   name: 'TrayLogin',
   components: {
-    AppIdentification,
     AppFacebookLogin,
+    AppIdentification,
+    AppMain,
   },
   data() {
     return {
@@ -69,29 +76,34 @@ export default {
   props: {
     callback: {
       type: String,
+      default: '',
     },
     configurations: {
       type: [String, Array],
-      default: '["defaultActions"]',
-    },
-    email: {
-      type: String,
+      default() {
+        return ['default_actions'];
+      },
     },
     identification: {
       type: String,
+      default: '',
     },
     methods: {
       type: [String, Array],
-      default: '["facebook"]',
+      default() {
+        return ['facebook', 'identify'];
+      },
     },
     session: {
       type: String,
+      default: '',
     },
     store: {
       type: String,
+      default: '',
     },
     texts: {
-      type: Object,
+      type: [Object],
       default() {
         return {
           // identify screen
@@ -140,81 +152,124 @@ export default {
       },
     },
   },
+
+  mounted() {
+    this.initialize(this.identification);
+  },
+
+  watch: {
+    identification(identification) {
+      this.initialize(identification);
+    },
+  },
+
   computed: {
-    ...mapState({
-      errors: state => state.errors,
-      isLoading: state => state.loading,
-    }),
+    ...mapState([
+      'errors',
+      'loading',
+      'screen',
+    ]),
 
     /**
-     * Verifica se existem feedbacks a serem exibidos;
+     * Verifica se as ações padrão da plataforma devem ser disparadas
+     *
      * @return {boolean}
      */
-    hasFeedback() {
-      return Boolean(this.errors.length);
+    defaultActions() {
+      return this.configurations.indexOf('default_actions') !== -1;
     },
 
     /**
-     * Verifica se o facebook o modulo de login com o facebook
-     * deve ser exibido
+     * Verifica se o login com o facebook será utilizado
      *
      * @return {boolean}
      */
     facebookEnabled() {
-      return this.loginMethods.indexOf('facebook') !== -1;
+      return this.methods.indexOf('facebook') !== -1;
     },
 
     /**
-     * Retorna os métodos disponíveis para o login
-     * @return {array}
-     */
-    loginMethods() {
-      return this.parseArrayProperty('methods');
-    },
-
-    /**
-     * Verifica se o componente deverá disparar as ações default
+     * Verifica se o modulo de identificação será utilizado
+     *
      * @return {boolean}
      */
-    defaultActions() {
-      return this.parseArrayProperty('configurations').indexOf('defaultActions') !== -1;
+    identificationEnabled() {
+      return this.methods.indexOf('identify') !== -1;
+    },
+
+    /**
+     * Parametros que são utilizados em praticamente todas as requests
+     * para uma api da plataforma
+     * @return {object}
+     */
+    params() {
+      return {
+        session_id: this.session,
+        store_id: this.store,
+      };
     },
   },
+
   methods: {
-    ...mapActions(['setConfigurations']),
+    ...mapActions([
+      'setScreen',
+      'setIdentification',
+    ]),
+
+    /**
+     * Define a tela a ser exibida de acordo com a identificação
+     * definidas
+     *
+     * @param {string} identification
+     */
+    initialize(identification) {
+      this.setIdentification(identification);
+
+      if (identification) {
+        this.setScreen('Main');
+        return;
+      }
+
+      this.setScreen('Identification');
+    },
 
     /**
      * Fecha o componente
+     * @param {event}
      */
-    close() {
-      this.showComponent = false;
+    close(event) {
       this.$emitEvent.custom({
         name: 'close',
         details: {
-          type: 'click',
           action: 'close',
-          element: this.$refs['close-button'],
+          element: event.target,
+          type: event.type,
         },
       });
+
+      const trayLogin = document.querySelector('tray-login');
+      if (trayLogin && this.defaultActions) {
+        trayLogin.style.display = 'none';
+      }
     },
 
     /**
-     * Realiza o parse das propriedades
-     * @param {string} componentProperty
-     * @returns {array}
+     * Reseta o componente para que um novo login
+     * seja realizado
+     * @param {event}
      */
-    parseArrayProperty(componentProperty) {
-      if (!this[componentProperty] || typeof componentProperty !== 'string') {
-        return [];
-      }
+    reset(event) {
+      this.$emitEvent.custom({
+        name: 'reset',
+        details: {
+          action: 'reset',
+          element: event.target,
+          type: event.type,
+        },
+      });
 
-      const properties = this[componentProperty].replace(/\s/g, '');
-
-      try {
-        return JSON.parse(properties);
-      } catch (error) {
-        return [];
-      }
+      this.setScreen('Identification');
+      this.setIdentification('');
     },
   },
 };

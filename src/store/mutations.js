@@ -1,7 +1,23 @@
 export default {
   /**
+   * Remove todos os erros definidos na aplicação
+   * @param {object} state
+   */
+  clearErrors(state) {
+    state.errors = [];
+  },
+
+  /**
+   * Adiciona um erro geral a aplicação
+   * @param {object} state
+   * @param {string} error
+   */
+  setError(state, error) {
+    state.errors.push(error);
+  },
+
+  /**
    * Define a identificação do usuário
-   * e-mail | cpf | cnpj
    * @param {object} state
    * @param {string} identification
    */
@@ -14,16 +30,16 @@ export default {
    * @param {object} state
    * @param {boolean} loading
    */
-  setGeneralLoading(state, loading) {
+  setLoading(state, loading) {
     state.loading = loading;
   },
 
   /**
-   * Adiciona um erro geral a aplicação
+   * Define a tela do usuario
    * @param {object} state
-   * @param {string} error
+   * @param {string} screen
    */
-  setGeneralError(state, error) {
-    state.errors.push(error);
+  setScreen(state, screen) {
+    state.screen = screen;
   },
 };
