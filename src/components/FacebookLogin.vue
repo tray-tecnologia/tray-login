@@ -13,38 +13,52 @@ import { mapActions } from 'vuex';
 export default {
   name: 'AppFacebookLogin',
   props: {
-    callback: String,
-    defaultActions: Boolean,
+    callback: {
+      type: String,
+      default: '',
+    },
+    defaultActions: {
+      type: Boolean,
+      default: true,
+    },
     endpoint: {
       type: String,
       default: 'facebook/url',
     },
-    identification: String,
-    session: String,
-    store: String,
+    params: {
+      type: Object,
+      default() {
+        return {
+          session_id: '',
+          store_id: '',
+        };
+      },
+    },
   },
+
   methods: {
     ...mapActions([
       'facebookLogin',
+      'setLoading',
+      'setError',
     ]),
 
     /**
      * Realiza o login com o facebook
+     * @param {event} event
      */
-    doFacebookLogin() {
-      const payload = {
-        callback: this.callback,
-        crossdm: encodeURIComponent(document.location.origin),
-        endpoint: this.endpoint,
-        identification: this.identification,
-        store_id: this.store,
-        session_id: this.session,
-      };
+    doFacebookLogin(event, payload = {
+      ...this.params,
+      callback: this.callback,
+      endpoint: 'facebook/url',
+      crossdm: encodeURIComponent(document.location.origin),
+    }) {
+      this.setLoading(true);
 
       this.$emitEvent.action({
-        type: 'click',
         action: 'facebook-login',
-        element: this.$refs['facebook-button'],
+        element: event.target,
+        type: event.type,
       });
 
       this.facebookLogin(payload).then((response) => {
@@ -57,12 +71,20 @@ export default {
         if (this.defaultActions) {
           window.location = response.data.data.url;
         }
+
+        this.setLoading(false);
+
+        return response;
       }).catch((error) => {
         this.$emitEvent.login({
           response: error,
           type: 'error',
           method: 'facebook',
         });
+
+        this.setLoading(false);
+
+        throw error;
       });
     },
   },

@@ -39,11 +39,22 @@ tray-login,
     .tray-btn-facebook {
         background-color: #3b5998;
         border-bottom-color: #243f77;
-        margin-bottom: 0;
 
         &:hover {
             background-color: darken(#3b5998, 10%);
             border-color: darken(#243f77, 10%);
+        }
+    }
+
+    .tray-btn-default {
+        color: #bcbcbc;
+        background-color: #fff;
+        border: 1px solid #d3d1d1;
+        border-bottom-width: 3px;
+
+        &:hover {
+            background-color: darken(#fff, 5%);
+            border-color: darken(#d3d1d1, 10%);
         }
     }
 
@@ -57,7 +68,7 @@ tray-login,
         font-weight: 700;
         font-size: 12px;
         line-height: 1;
-        padding: 0;
+        padding: 3px 4px;
         margin: 0;
         height: 21px;
         width: 21px;

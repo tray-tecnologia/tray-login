@@ -3,6 +3,12 @@ $input-error: $red;
 
 tray-login,
 .tray-login {
+    .tray-input-group {
+        border: 0;
+        padding: 0;
+        position: relative;
+    }
+
     .tray-input {
         background: #fff;
         border: 1px solid #e0dcdc;
@@ -16,13 +22,92 @@ tray-login,
         padding: 13px 0 14px 36px!important;
         width: 100%;
         margin-bottom: 10px;
+        outline-width: 0;
+
+        &:focus {
+            outline: 0;
+            border-color: silver;
+            border-width: 2px;
+            color: #909090;
+        }
+    }
+
+    .tray-input-icon {
+        padding: 0;
+        margin: 0;
+        top: 15px;
+        left: 15px;
+        width: 15px;
+        position: absolute
     }
 
     .tray-feedbacks {
+        display: block;
+        font-size: 14px;
         margin-bottom: 10px;
     }
 
     .tray-error-message {
         color: $input-error;
+    }
+
+    .tray-well {
+        width: 100%;
+        display: block;
+        background-color: #ebebeb;
+        border-radius: 3px;
+        border: 1px solid #efeded;
+        color: #8f8f8f;
+        margin-bottom: 10px;
+        padding: 10px 10px;
+        text-align: center;
+    }
+
+    .tray-general-separator {
+        color: #c7c7c7;
+        display: block;
+        margin-bottom: 10px;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        display: block;
+    }
+
+    .tray-general-separator-line {
+        position: relative;
+        display: inline-block;
+
+        &:after,
+        &:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 9999px;
+            height: 1px;
+            background: #c7c7c7
+        }
+
+        &:before {
+            margin-right: 5px;
+            right: 100%;
+        }
+
+        &:after {
+            left: 100%;
+            margin-left: 5px;
+        }
+    }
+
+    .tray-login-hide-password {
+        border: 0;
+        cursor: pointer;
+        color: #c7c7c7;
+        font-size: 10px;
+        height: 25px;
+        position: absolute;
+        right: 10px;
+        top: 12px;
+        text-transform: uppercase;
+        outline-width: 0;
     }
 }
