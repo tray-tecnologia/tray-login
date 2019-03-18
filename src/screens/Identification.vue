@@ -150,7 +150,7 @@ export default {
           this.setError(this.texts.errors['not-found']);
           this.setLoading(false);
 
-          throw error;
+          return error;
         });
     },
   },

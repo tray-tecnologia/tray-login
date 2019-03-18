@@ -32,9 +32,7 @@
           placeholder="Senha"/>
       </fieldset>
       <small class="tray-feedbacks" v-show="errors.length">
-        <span class="tray-error-message">
-          {{ errors[0] }}
-        </span>
+        <span class="tray-error-message" v-html="lastError"></span>
       </small>
       <button
         class="tray-btn-primary"
@@ -99,20 +97,40 @@ export default {
       showPassword: false,
     };
   },
+  mounted() {
+    const payload = {
+      ...this.params,
+      endpoint: 'check-status',
+      identification: this.identification,
+      [this.identificationType]: this.identification,
+    };
+
+    this.setLoading(true);
+    this.checkUserStatus(payload).then((response) => {
+      if (response.data.data.blocked) {
+        this.setScreen('Blocked');
+      }
+
+      this.setLoading(false);
+    });
+  },
+
   computed: {
     ...mapState([
       'errors',
       'identification',
     ]),
 
-    ...mapGetters(['identificationType']),
+    ...mapGetters(['identificationType', 'lastError']),
   },
   methods: {
     ...mapActions([
+      'checkUserStatus',
       'clearErrors',
       'passwordLogin',
       'setError',
       'setLoading',
+      'setScreen',
       'redirect',
     ]),
 
@@ -153,10 +171,11 @@ export default {
               token: response.data.data.token,
             });
 
-            return;
+            return response;
           }
 
           this.setLoading(false);
+          return response;
         })
         .catch((error) => {
           this.$emitEvent.login({
@@ -165,10 +184,11 @@ export default {
             type: 'error',
           });
 
-          this.setError(this.texts.errors.incorrect);
+          const errorMessage = error.data.message || this.texts.errors.incorrect;
+          this.setError(errorMessage);
           this.setLoading(false);
 
-          throw error;
+          return error;
         });
     },
   },

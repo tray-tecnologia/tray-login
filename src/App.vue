@@ -39,6 +39,37 @@
         </button>
       </app-main>
 
+      <section v-if="screen === 'Blocked'">
+        <header>
+          <strong class="tray-title tray-login__title">
+            {{ texts['main-title'] || 'Autenticação' }}
+          </strong>
+          <p class="tray-action tray-error-message">
+            {{
+              texts['blocked-user'] ||
+              'Por motivos de segurança bloqueamos o acesso por e-mail e senha durante 60 minutos.'
+            }}
+          </p>
+        </header>
+
+        <p class="tray-action">
+          {{ texts['main-action'] || 'Não foi possível verificar seu cadastro, tente novamente.' }}
+        </p>
+        <app-facebook-login v-if="facebookEnabled"
+          :callback="callback"
+          :defaultActions="defaultActions"
+          :params="params"
+          slot="app-facebook-login">
+        </app-facebook-login>
+
+        <button v-if="identificationEnabled"
+          class="tray-btn-default"
+          @click="reset"
+          slot="back-step">
+          Voltar
+        </button>
+      </section>
+      
       <section class="tray-loading" v-show="loading">
         <div class="tray-loading-mask">
           <div class="tray-loading-line"></div>
@@ -212,6 +243,7 @@ export default {
 
   methods: {
     ...mapActions([
+      'clearErrors',
       'setScreen',
       'setIdentification',
     ]),
@@ -270,6 +302,7 @@ export default {
 
       this.setScreen('Identification');
       this.setIdentification('');
+      this.clearErrors();
     },
   },
 };
