@@ -3,6 +3,24 @@ import client from 'api-client';
 
 export default {
   /**
+   * Verifica o status do usuário
+   * @param {function} commit
+   */
+  checkUserStatus({ commit }, payload = {
+    endpoint: 'check-status',
+    identification: '',
+    identification_type: '',
+    store_id: '',
+  }) {
+    /* eslint no-unused-vars: ["error", { "args": "none" }] */
+    const { endpoint, ...params } = payload;
+
+    return client.checkUserStatus(endpoint, params)
+      .then(response => response)
+      .catch((error) => { throw error; });
+  },
+
+  /**
    * Dispara a ação para remover os erros da aplicação
    * @param {function} commit
    */
@@ -11,7 +29,7 @@ export default {
   },
 
   /**
-   * Dispara a ação para definir a identificação do usuario
+   * Verifica se o usuário possui uma conta
    * @param {function} commit
    * @param {object} payload
    */

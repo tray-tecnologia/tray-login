@@ -1,0 +1,9 @@
+{
+    "data": {
+        "data": {
+            "blocked": true,
+            "message": "Por motivos de segurança bloqueamos o acesso por senha durante 60 minutos."
+        }
+    },
+    "statusCode": 200
+}

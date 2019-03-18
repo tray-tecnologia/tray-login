@@ -84,7 +84,7 @@ export default {
 
         this.setLoading(false);
 
-        throw error;
+        return error;
       });
     },
   },
