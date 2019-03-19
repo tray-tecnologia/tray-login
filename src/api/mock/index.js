@@ -1,9 +1,13 @@
+import checkStatusSuccess from './data/check-status.json';
+import checkStatusBlocked from './data/check-status-blocked.json';
+
 import facebookResponse from './data/facebook.json';
-import hasAccountResponse from './data/has-account.json';
-import hasAccountResponseError from './data/error/has-account.json';
 
 import passwordLoginSucces from './data/password.json';
 import passwordLoginError from './data/error/password.json';
+
+import hasAccountResponse from './data/has-account.json';
+import hasAccountResponseError from './data/error/has-account.json';
 
 /**
  * Cria uma promisse para o mock desejado
@@ -11,7 +15,7 @@ import passwordLoginError from './data/error/password.json';
  * @param {number} delay em milisegundos
  */
 // eslint-disable-next-line
-const fetch = (mockData, delay = 0, isValid) => {
+const fetch = (mockData, delay = 0, isValid = true) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (!isValid) {
@@ -23,11 +27,31 @@ const fetch = (mockData, delay = 0, isValid) => {
   });
 };
 
+const users = [
+  'teste@tray.com.br',
+  'usuariobloqueado@tray.com.br',
+];
+
+const blockedusers = [
+  'usuariobloqueado@tray.com.br',
+];
+
 /**
  * Retorna os mocks com o delay definido
  * @return {obj} response
  */
 export default {
+  checkUserStatus(endpoint, params) {
+    const { identification } = params;
+    let mockData = checkStatusSuccess;
+
+    if (blockedusers.indexOf(identification) !== -1) {
+      mockData = checkStatusBlocked;
+    }
+
+    return fetch(mockData, 1000);
+  },
+
   facebookLogin() {
     return fetch(facebookResponse, 1000).then(response => response);
   },
@@ -37,7 +61,7 @@ export default {
     let isValid = false;
     let mockData = hasAccountResponseError;
 
-    if (identification === 'teste@tray.com.br') {
+    if (users.indexOf(identification) !== -1) {
       isValid = true;
       mockData = hasAccountResponse;
     }
