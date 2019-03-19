@@ -39,6 +39,10 @@
         </button>
       </app-main>
 
+      <app-recover-password :params="params" v-if="screen === 'RecoverPassword'">
+
+      </app-recover-password>
+
       <section v-if="screen === 'Blocked'">
         <header>
           <strong class="tray-title tray-login__title">
@@ -69,7 +73,7 @@
           Voltar
         </button>
       </section>
-      
+
       <section class="tray-loading" v-show="loading">
         <div class="tray-loading-mask">
           <div class="tray-loading-line"></div>
@@ -90,6 +94,7 @@ import store from './store';
 import AppFacebookLogin from './components/FacebookLogin.vue';
 import AppIdentification from './screens/Identification.vue';
 import AppMain from './screens/Main.vue';
+import AppRecoverPassword from './screens/RecoverPassword/Main.vue';
 
 export default {
   store,
@@ -98,6 +103,7 @@ export default {
     AppFacebookLogin,
     AppIdentification,
     AppMain,
+    AppRecoverPassword,
   },
   data() {
     return {
@@ -107,7 +113,7 @@ export default {
   props: {
     callback: {
       type: String,
-      default: '',
+      default: '/',
     },
     configurations: {
       type: [String, Array],
