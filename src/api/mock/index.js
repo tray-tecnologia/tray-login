@@ -3,19 +3,20 @@ import checkStatusBlocked from './data/check-status-blocked.json';
 
 import facebookResponse from './data/facebook.json';
 
-import passwordLoginSucces from './data/password.json';
-import passwordLoginError from './data/error/password.json';
+import securityCodeResponse from './data/generate-security-code.json';
 
 import hasAccountResponse from './data/has-account.json';
 import hasAccountResponseError from './data/error/has-account.json';
 
+import passwordLoginSucces from './data/password.json';
+import passwordLoginError from './data/error/password.json';
 /**
  * Cria uma promisse para o mock desejado
  * @param {json} mockData
  * @param {number} delay em milisegundos
  */
 // eslint-disable-next-line
-const fetch = (mockData, delay = 0, isValid = true) => {
+const fetch = (mockData, delay = delay, isValid = true) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (!isValid) {
@@ -36,9 +37,10 @@ const blockedusers = [
   'usuariobloqueado@tray.com.br',
 ];
 
+const delay = 300;
+
 /**
- * Retorna os mocks com o delay definido
- * @return {obj} response
+ * Exporta os mocks com o delay definido
  */
 export default {
   checkUserStatus(endpoint, params) {
@@ -49,11 +51,15 @@ export default {
       mockData = checkStatusBlocked;
     }
 
-    return fetch(mockData, 1000);
+    return fetch(mockData, delay);
   },
 
   facebookLogin() {
-    return fetch(facebookResponse, 1000).then(response => response);
+    return fetch(facebookResponse, delay).then(response => response);
+  },
+
+  generateSecurityCode() {
+    return fetch(securityCodeResponse, delay).then(response => response);
   },
 
   hasAccount(endpoint, params) {
@@ -66,7 +72,7 @@ export default {
       mockData = hasAccountResponse;
     }
 
-    return fetch(mockData, 1000, isValid);
+    return fetch(mockData, delay, isValid);
   },
 
   passwordLogin(endpoint, params) {
@@ -79,6 +85,6 @@ export default {
       mockData = passwordLoginSucces;
     }
 
-    return fetch(mockData, 1000, isValid);
+    return fetch(mockData, delay, isValid);
   },
 };

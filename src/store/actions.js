@@ -66,6 +66,25 @@ export default {
   },
 
   /**
+   * Gera um codigo de segurança
+   * @param {function} commit
+   * @param {object} payload
+   */
+  generateSecurityCode({ commit }, payload = {
+    endpoint: 'generate-security-code',
+    identification: '',
+    identification_type: '',
+    session_id: '',
+    store_id: '',
+  }) {
+    /* eslint no-unused-vars: ["error", { "args": "none" }] */
+    const { endpoint, ...params } = payload;
+    return client.generateSecurityCode(endpoint, params)
+      .then(response => response)
+      .catch((error) => { throw error; });
+  },
+
+  /**
    * Dispara a ação para realizar o login com senha
    * @param {function} commit
    * @param {object} payload
