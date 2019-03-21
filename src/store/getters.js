@@ -4,6 +4,7 @@ import { isValidCpf, isValidCnpj } from '@brazilian-utils/validators';
  * Retorna o tipo da identificação preenchida pelo usuário
  * @param {object} state
  */
+// eslint-disable-next-line
 export const identificationType = (state) => {
   let type = 'email';
 
@@ -17,10 +18,3 @@ export const identificationType = (state) => {
 
   return type;
 };
-
-/**
- * Retorna o ultimo erro definido na aplicação
- * @param {object} state
- * @return {string} html error
- */
-export const lastError = state => state.errors[state.errors.length - 1];

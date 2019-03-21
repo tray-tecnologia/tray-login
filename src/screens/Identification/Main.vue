@@ -23,9 +23,7 @@
           class="tray-input"/>
       </fieldset>
       <small class="tray-feedbacks" v-show="errors.length">
-        <span class="tray-error-message">
-          {{ errors[0] }}
-        </span>
+        <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
       </small>
       <button
         class="tray-btn-primary"
@@ -39,10 +37,20 @@
 </template>
 
 <script>
+import http from 'api-client';
 import { mapActions, mapState, mapGetters } from 'vuex';
+import utils from '@/mixins/utils';
+import screenHandler from '@/mixins/screenHandler';
 
 export default {
   name: 'AppIdentify',
+  mixins: [utils, screenHandler],
+  data() {
+    return {
+      errors: [],
+      loading: false,
+    };
+  },
   props: {
     endpoint: {
       type: String,
@@ -72,7 +80,6 @@ export default {
   },
   computed: {
     ...mapState([
-      'errors',
       'identification',
     ]),
 
@@ -94,13 +101,10 @@ export default {
   },
 
   methods: {
+    checkHasAccount: http.hasAccount,
+
     ...mapActions([
-      'clearErrors',
-      'checkHasAccount',
       'setIdentification',
-      'setLoading',
-      'setScreen',
-      'setError',
     ]),
 
     /**
@@ -141,7 +145,7 @@ export default {
       this.checkHasAccount(payload)
         .then((response) => {
           this.clearErrors();
-          this.setScreen('Main');
+          this.$parent.setScreen('Main');
           this.setLoading(false);
 
           return response;

@@ -1,6 +1,5 @@
 import Vue from 'vue';
-import { httpPlugin, eventBus } from '@/plugins';
-import store from './store';
+import { eventBus } from '@/plugins';
 
 /**
  * Componente centralizador
@@ -8,7 +7,6 @@ import store from './store';
 import App from './App.vue';
 
 Vue.config.productionTip = false;
-Vue.use(httpPlugin, { store });
 Vue.use(eventBus);
 
 if (process.env.NODE_ENV === 'development') {

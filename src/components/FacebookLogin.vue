@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import client from 'api-client';
 
 export default {
   name: 'AppFacebookLogin',
@@ -37,11 +37,7 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'facebookLogin',
-      'setLoading',
-      'setError',
-    ]),
+    facebookLogin: client.facebookLogin,
 
     /**
      * Realiza o login com o facebook
@@ -53,7 +49,7 @@ export default {
       endpoint: 'facebook/url',
       crossdm: encodeURIComponent(document.location.origin),
     }) {
-      this.setLoading(true);
+      this.$parent.setLoading(true);
 
       this.$emitEvent.action({
         action: 'facebook-login',
@@ -72,7 +68,7 @@ export default {
           window.location = response.data.data.url;
         }
 
-        this.setLoading(false);
+        this.$parent.setLoading(false);
 
         return response;
       }).catch((error) => {
@@ -82,7 +78,7 @@ export default {
           method: 'facebook',
         });
 
-        this.setLoading(false);
+        this.$parent.setLoading(false);
 
         return error;
       });
