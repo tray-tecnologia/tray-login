@@ -43,7 +43,14 @@ const delay = 300;
  * Exporta os mocks com o delay definido
  */
 export default {
-  checkUserStatus(endpoint, params) {
+  /**
+   * Mock para verificar o status do usúario
+   * @param {object} params
+   * @return {Promise}
+   */
+  checkUserStatus(params = {
+    identification: '',
+  }) {
     const { identification } = params;
     let mockData = checkStatusSuccess;
 
@@ -62,8 +69,16 @@ export default {
     return fetch(securityCodeResponse, delay).then(response => response);
   },
 
-  hasAccount(endpoint, params) {
+  /**
+   * Mock para verificar se existe uma conta cadastrada
+   * @param {object} payload
+   * @return {Promise}
+   */
+  hasAccount(params = {
+    identification: '',
+  }) {
     const { identification } = params;
+
     let isValid = false;
     let mockData = hasAccountResponseError;
 
@@ -75,7 +90,14 @@ export default {
     return fetch(mockData, delay, isValid);
   },
 
-  passwordLogin(endpoint, params) {
+  /**
+   * Mock para o login de senha
+   * @param {object} params
+   * @return {Promise}
+   */
+  passwordLogin(params = {
+    password: '',
+  }) {
     const { password } = params;
     let isValid = false;
     let mockData = passwordLoginError;

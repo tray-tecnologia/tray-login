@@ -18,7 +18,7 @@
         </app-facebook-login>
       </app-identification>
 
-      <app-main v-if="screen === 'Main'"
+      <app-login v-if="screen === 'Main'"
         :callback="callback"
         :defaultActions="defaultActions"
         :params="params"
@@ -37,11 +37,7 @@
           slot="back-step">
           Voltar
         </button>
-      </app-main>
-
-      <app-recover-password :params="params" v-if="screen === 'RecoverPassword'">
-
-      </app-recover-password>
+      </app-login>
 
       <section v-if="screen === 'Blocked'">
         <header>
@@ -88,13 +84,13 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import store from './store';
 
 import AppFacebookLogin from './components/FacebookLogin.vue';
-import AppIdentification from './screens/Identification.vue';
-import AppMain from './screens/Main.vue';
-import AppRecoverPassword from './screens/RecoverPassword/Main.vue';
+import AppIdentification from './screens/Identification/Main.vue';
+import AppLogin from './screens/Login/screens/Main.vue';
+import screenHandler from '@/mixins/screenHandler';
 
 export default {
   store,
@@ -102,11 +98,13 @@ export default {
   components: {
     AppFacebookLogin,
     AppIdentification,
-    AppMain,
-    AppRecoverPassword,
+    AppLogin,
   },
+  mixins: [screenHandler],
   data() {
     return {
+      loading: false,
+      screen: 'Identification',
       showComponent: true,
     };
   },
@@ -201,12 +199,6 @@ export default {
   },
 
   computed: {
-    ...mapState([
-      'errors',
-      'loading',
-      'screen',
-    ]),
-
     /**
      * Verifica se as ações padrão da plataforma devem ser disparadas
      *
@@ -249,8 +241,6 @@ export default {
 
   methods: {
     ...mapActions([
-      'clearErrors',
-      'setScreen',
       'setIdentification',
     ]),
 
