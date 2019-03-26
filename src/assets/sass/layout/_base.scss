@@ -63,12 +63,16 @@ tray-login,
 
     .tray-title {
         font-weight: 900;
-        font-size: 19px;
+        font-size: 18px;
         margin: 0 0 $default-margin;
         display: block;
     }
 
     .tray-action {
         margin: 0 0 $default-margin;
+    }
+
+    .tray-link {
+        color: $default-color;
     }
 }

@@ -1,0 +1,15 @@
+tray-login,
+.tray-login {
+    &__recover-password {
+        &__confirm-code {
+            &__icon {
+                width: 60px;
+                margin: 0 auto 10px;
+            }
+
+            &__title {
+                text-align: center;
+            }
+        }
+    }
+}

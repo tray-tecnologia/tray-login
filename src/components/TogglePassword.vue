@@ -13,7 +13,8 @@
         {{ showPassword ? 'OCULTAR' : 'MOSTRAR' }}
       </button>
     </label>
-    <input v-model="password"
+    <input v-bind:value="value"
+      v-on:input="$emit('input', $event.target.value)"
       :type="showPassword ? 'text' : 'password'"
       :id="id"
       class="tray-input"
@@ -25,6 +26,7 @@
 export default {
   name: 'AppTogglePassword',
   props: {
+    value: String,
     id: {
       type: String,
       default() {
@@ -34,7 +36,6 @@ export default {
   },
   data() {
     return {
-      password: '',
       showPassword: false,
     };
   },
