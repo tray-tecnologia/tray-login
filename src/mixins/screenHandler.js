@@ -3,6 +3,12 @@
  * o controle de cada tela
  */
 export default {
+  data() {
+    return {
+      errors: [],
+      loading: false,
+    };
+  },
   methods: {
     /**
      * Limpa os erros de login inválido

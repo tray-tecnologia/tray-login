@@ -1,13 +1,15 @@
 import Vue from 'vue';
-import { eventBus } from '@/plugins';
+import { httpPlugin, eventBus } from '@/plugins';
 
 /**
  * Componente centralizador
  */
 import App from './App.vue';
+import store from './store';
 
 Vue.config.productionTip = false;
 Vue.use(eventBus);
+httpPlugin({ store });
 
 if (process.env.NODE_ENV === 'development') {
   new Vue({
@@ -16,7 +18,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 /**
- * Exporta a aplicação para utilização wrapper do web-componet
+ * Exporta a aplicação como um web-componet
  * veja o comando de build no package.json
  */
 export default App;

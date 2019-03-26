@@ -1,6 +1,7 @@
 import eventBus from './event-bus';
+import httpPlugin from './http';
 
 export {
-  // eslint-disable-next-line
-  eventBus
+  httpPlugin,
+  eventBus,
 };

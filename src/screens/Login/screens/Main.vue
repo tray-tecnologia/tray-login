@@ -1,8 +1,7 @@
 <template>
   <section>
     <section v-if="screen === 'Main'"
-      id="tray-login-identify"
-      class="tray-login__identify">
+      id="tray-login-identify">
       <header>
         <strong class="tray-title tray-login__title">
           {{ texts.title }}
@@ -15,15 +14,14 @@
 
       <form method='POST'
         @submit.prevent="submit">
-        <app-toggle-password :ref="passwordRef" :id="passwordRef">
-
+        <app-toggle-password id="input-password"
+          v-model="password">
         </app-toggle-password>
         <small class="tray-feedbacks" v-show="errors.length">
           <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
         </small>
         <p class="tray-action">
-          <a v-if="false"
-            @click.prevent="setScreen('RecoverPassword')"
+          <a @click.prevent="setScreen('RecoverPassword')"
             class="tray-link"
             href="#">
             Esqueci ou não tenho senha
@@ -47,7 +45,8 @@
     </section>
 
     <app-recover-password v-if="screen === 'RecoverPassword'"
-      :params="params">
+      :params="params"
+      :callback="callback">
     </app-recover-password>
 
     <section class="tray-loading" v-show="loading">
@@ -64,15 +63,14 @@
 
 <script>
 import http from 'api-client';
-import { mapState, mapGetters } from 'vuex';
+import { mapActions, mapState, mapGetters } from 'vuex';
 import AppRecoverPassword from './RecoverPassword/screens/Main.vue';
 import AppTogglePassword from '@/components/TogglePassword.vue';
-import utils from '@/mixins/utils';
 import screenHandler from '@/mixins/screenHandler';
 
 export default {
   name: 'AppMain',
-  mixins: [utils, screenHandler],
+  mixins: [screenHandler],
   components: {
     AppTogglePassword,
     AppRecoverPassword,
@@ -115,10 +113,9 @@ export default {
   },
   data() {
     return {
-      passwordRef: 'input-password',
       loading: false,
+      password: '',
       showPassword: false,
-      screen: 'Main',
       errors: [],
     };
   },
@@ -145,12 +142,20 @@ export default {
       'identification',
     ]),
 
+    ...mapState('Login', [
+      'screen',
+    ]),
+
     ...mapGetters(['identificationType']),
   },
 
   methods: {
     checkUserStatus: http.checkUserStatus,
     passwordLogin: http.passwordLogin,
+
+    ...mapActions('Login', [
+      'setScreen',
+    ]),
 
     /**
      * Altera o atributo type do input password
@@ -167,7 +172,7 @@ export default {
     submit(event, payload = {
       ...this.params,
       endpoint: this.endpoint,
-      password: this.getChildrenData('AppTogglePassword', 'password'),
+      password: this.password,
       identification: this.identification,
       [this.identificationType]: this.identification,
     }) {
@@ -203,8 +208,6 @@ export default {
 
           this.setError(errorMessage);
           this.setLoading(false);
-
-          return error;
         });
     },
   },

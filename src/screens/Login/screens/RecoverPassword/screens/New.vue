@@ -1,5 +1,5 @@
 <template>
-  <form method='POST' @submit.prevent="submit">
+  <form class="tray-login__recover-password__new-password" method='POST' @submit.prevent="submit">
     <header>
       <strong class="tray-title tray-login__title">
         {{ texts.title }}
@@ -9,18 +9,23 @@
         {{ identification }}
       </label>
     </header>
-    <app-toggle-password :ref="newPasswordRef"
-      :id="newPasswordRef">
+    <app-toggle-password
+      v-model="passwordHandler"
+      id="recover-password">
     </app-toggle-password>
     <small class="tray-feedbacks" v-show="errors.length">
       <span class="tray-error-message" v-html="errors[errors.length - 1]">
       </span>
     </small>
-    <button
-      class="tray-btn-primary"
+    <button class="tray-btn-primary"
       type="submit"
       @click="dispatch">
       Continuar
+    </button>
+    <button class="tray-btn-primary"
+      type="reset"
+      @click="reset">
+      Escolher outra opção
     </button>
     <section class="tray-loading" v-show="loading">
       <div class="tray-loading-mask">
@@ -36,42 +41,35 @@
 
 <script>
 import client from 'api-client';
-import { mapState, mapGetters } from 'vuex';
-import AppTogglePassword from '@/components/TogglePassword.vue';
-import utils from '@/mixins/utils';
 import screenHandler from '@/mixins/screenHandler';
+import { mapState, mapActions } from 'vuex';
+import AppTogglePassword from '@/components/TogglePassword.vue';
 
 export default {
   name: 'AppNewPassword',
+  mixins: [screenHandler],
   components: {
     AppTogglePassword,
   },
-  mixins: [utils, screenHandler],
   props: {
     endpoint: {
       type: String,
       default: 'generate-security-code',
     },
+    identification: {
+      type: String,
+      default: '',
+    },
+    identificationType: {
+      type: String,
+      default: '',
+    },
     params: {
       type: Object,
       default() {
         return {
-          loading: false,
-          identification: '',
           session_id: '',
           store_id: '',
-        };
-      },
-    },
-    texts: {
-      type: Object,
-      default() {
-        return {
-          title: 'Recuperação de senha',
-          action: 'Você receberá um código de segurança em seu e-mail para validar sua nova senha.',
-          errors: {
-            'invalid-password': 'A nova senha deve possuir no mínimo 6 caracteres.',
-          },
         };
       },
     },
@@ -79,21 +77,44 @@ export default {
   data() {
     return {
       errors: [],
-      password: '',
-      newPasswordRef: 'recover-password',
-      showPassword: false,
       loading: false,
+      texts: {
+        title: 'Recuperação de senha',
+        action: 'Você receberá um código de segurança em seu e-mail para validar sua nova senha.',
+        errors: {
+          'invalid-password': 'A nova senha deve possuir no mínimo 6 caracteres.',
+        },
+      },
     };
   },
   computed: {
-    ...mapState([
-      'identification',
+    ...mapState('Login/RecoverPassword', [
+      'password',
     ]),
 
-    ...mapGetters(['identificationType']),
+    /**
+     * Estado mapeado da vuex,
+     * https://vuex.vuejs.org/guide/forms.html#two-way-computed-property
+     */
+    passwordHandler: {
+      get() {
+        return this.password;
+      },
+      set(password) {
+        return this.setPassword(password);
+      },
+    },
   },
   methods: {
     generateSecurityCode: client.generateSecurityCode,
+    ...mapActions('Login/RecoverPassword', {
+      setPassword: 'setPassword',
+      nextStep: 'setScreen',
+    }),
+
+    ...mapActions('Login', {
+      backTo: 'setScreen',
+    }),
 
     /**
      * Dispara o evento para identificar que
@@ -113,20 +134,21 @@ export default {
      * @param {string}
      * @return {boolean}
      */
-    checkValidity(password = this.$refs[this.newPasswordRef].password) {
+    checkValidity(password = this.password) {
       return password.length >= 6;
     },
 
     /**
-     * Exibe o proximo passo
-     * @param {string} nextStep
+     * Reseta o módulo de recuperação de senha
+     * @param {string}
      */
-    nextStep(nextStep = 'ConfirmCode') {
-      return this.$parent.setScreen(nextStep);
+    reset() {
+      this.setPassword('');
+      this.backTo('Main');
     },
 
     /**
-     * Envia os dados
+     * Gera um novo codigo de segurança
      * @param {object} event
      * @param {object} payload
      */
@@ -136,7 +158,7 @@ export default {
       [this.identificationType]: this.identification,
       endpoint: this.endpoint,
     }) {
-      if (!this.checkValidity()) {
+      if (!this.checkValidity(this.password)) {
         this.setError(this.texts.errors['invalid-password']);
         return;
       }
@@ -145,8 +167,7 @@ export default {
       this.generateSecurityCode(payload).then((response) => {
         this.setLoading(false);
 
-        // @doing
-        this.nextStep();
+        this.nextStep('ConfirmCode');
         return response;
       });
 

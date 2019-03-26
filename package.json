@@ -1,6 +1,6 @@
 {
   "name": "tray-login",
-  "version": "2.0.0-rc.5",
+  "version": "2.0.0-rc.6",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target wc --name tray-login 'src/main.js'",

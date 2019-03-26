@@ -2,7 +2,7 @@ import { http } from '@/plugins/http';
 
 export default {
   /**
-   * Realiza um get para o endpoint configurado
+   * Verifica se o usúario está bloqueado
    * @param {object} payload
    * @returns {Promise}
    */
@@ -17,7 +17,7 @@ export default {
   },
 
   /**
-   * Realiza um get para o endpoint configurado
+   * Realiza o login com o facebook
    * @param {string} endpoint
    * @param {object} params
    * @returns {Promise}
@@ -34,7 +34,7 @@ export default {
   },
 
   /**
-   * Realiza um get para o endpoint configurado
+   * Gera um novo codigo de segurança
    * @param {string} endpoint
    * @param {object} payload
    * @returns {Promise}
@@ -51,7 +51,7 @@ export default {
   },
 
   /**
-   * Realiza um get para o endpoint configurado
+   * Verifica se existe uma conta
    * @param {string} endpoint
    * @param {object} params
    * @returns {Promise}
@@ -67,7 +67,7 @@ export default {
   },
 
   /**
-   * Realiza um get para o endpoint configurado
+   * Efetua o Login
    * @param {string} endpoint
    * @param {object} params
    * @returns {Promise}
@@ -75,6 +75,23 @@ export default {
   passwordLogin(payload = {
     identification: '',
     endpoint: 'password',
+    session_id: '',
+    store_id: '',
+    identification_type: '',
+  }) {
+    const { endpoint, ...params } = payload;
+    return http.post(endpoint, params).then(response => response);
+  },
+
+  /**
+   * Atualiza a senha
+   * @param {string} endpoint
+   * @param {object} params
+   * @returns {Promise}
+   */
+  updatePassword(payload = {
+    identification: '',
+    endpoint: 'password-update',
     session_id: '',
     store_id: '',
     identification_type: '',

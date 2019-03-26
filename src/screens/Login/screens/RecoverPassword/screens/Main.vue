@@ -1,24 +1,39 @@
 <template>
-  <section id="tray-login-identify" class="tray-login__identify">
+  <section id="tray-login__recover-password" class="tray-login__recover-password">
     <app-new-password v-if="screen == 'New'"
+      :identification="identification"
+      :identificationType="identificationType"
       :params="this.params">
     </app-new-password>
-    <section v-if="screen == 'ConfirmCode'">
-      <h1>EM CONSTRUÇÃO</h1>
-    </section>
+    <app-confirm-code v-if="screen == 'ConfirmCode'"
+      :identification="identification"
+      :identificationType="identificationType"
+      :params="this.params"
+      :password="this.password">
+    </app-confirm-code>
+    <app-recover-password-login v-if="screen === 'Login'"
+      :callback="callback"
+      :identification="identification"
+      :identificationType="identificationType"
+      :params="this.params"
+      :password="this.password">
+    </app-recover-password-login>
   </section>
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex';
 import AppNewPassword from './New.vue';
-import screenHandler from '@/mixins/screenHandler';
+import AppConfirmCode from './ConfirmCode.vue';
+import AppRecoverPasswordLogin from './Login.vue';
 
 export default {
   name: 'AppRecoverPassword',
   components: {
     AppNewPassword,
+    AppConfirmCode,
+    AppRecoverPasswordLogin,
   },
-  mixins: [screenHandler],
   props: {
     params: {
       type: Object,
@@ -29,19 +44,21 @@ export default {
         };
       },
     },
-    texts: {
-      type: Object,
-      default() {
-        return {
-          'main-action': '',
-        };
-      },
+    callback: {
+      type: String,
+      default: '/',
     },
   },
-  data() {
-    return {
-      screen: 'New',
-    };
+  computed: {
+    ...mapState([
+      'identification',
+    ]),
+
+    ...mapGetters(['identificationType']),
+    ...mapState('Login/RecoverPassword', [
+      'screen',
+      'password',
+    ]),
   },
 };
 </script>

@@ -10,6 +10,9 @@ import hasAccountResponseError from './data/error/has-account.json';
 
 import passwordLoginSucces from './data/password.json';
 import passwordLoginError from './data/error/password.json';
+
+import passwordUpdateSucces from './data/password-update.json';
+import passwordUpdateError from './data/error/password-update.json';
 /**
  * Cria uma promisse para o mock desejado
  * @param {json} mockData
@@ -45,13 +48,13 @@ const delay = 300;
 export default {
   /**
    * Mock para verificar o status do usúario
-   * @param {object} params
+   * @param {object} payload
    * @return {Promise}
    */
-  checkUserStatus(params = {
+  checkUserStatus(payload = {
     identification: '',
   }) {
-    const { identification } = params;
+    const { identification } = payload;
     let mockData = checkStatusSuccess;
 
     if (blockedusers.indexOf(identification) !== -1) {
@@ -74,10 +77,10 @@ export default {
    * @param {object} payload
    * @return {Promise}
    */
-  hasAccount(params = {
+  hasAccount(payload = {
     identification: '',
   }) {
-    const { identification } = params;
+    const { identification } = payload;
 
     let isValid = false;
     let mockData = hasAccountResponseError;
@@ -92,19 +95,39 @@ export default {
 
   /**
    * Mock para o login de senha
-   * @param {object} params
+   * @param {object} payload
    * @return {Promise}
    */
-  passwordLogin(params = {
+  passwordLogin(payload = {
     password: '',
   }) {
-    const { password } = params;
+    const { password } = payload;
     let isValid = false;
     let mockData = passwordLoginError;
 
     if (password === 'senhacorreta') {
       isValid = true;
       mockData = passwordLoginSucces;
+    }
+
+    return fetch(mockData, delay, isValid);
+  },
+
+  /**
+   * Mock para o login de senha
+   * @param {object} payload
+   * @return {Promise}
+   */
+  updatePassword(payload = {
+    code: '',
+  }) {
+    const { code } = payload;
+    let isValid = false;
+    let mockData = passwordUpdateError;
+
+    if (code === 'ABC123') {
+      isValid = true;
+      mockData = passwordUpdateSucces;
     }
 
     return fetch(mockData, delay, isValid);
