@@ -76,15 +76,14 @@ export default {
       this.passwordLogin(payload)
         .then((response) => {
           this.$emitEvent.login({
-            details: {
-              response,
-              method: 'password',
-              type: 'success',
-            },
+            response,
+            method: 'password',
+            type: 'success',
           });
 
           if (this.callback) {
-            this.redirect(this.callback);
+            const { token } = response.data;
+            this.redirect(this.callback, token);
             return;
           }
 

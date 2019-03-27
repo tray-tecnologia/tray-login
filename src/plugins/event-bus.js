@@ -32,9 +32,14 @@ const emitEvent = {
 
   /**
    * Dispara um evento de login
-   * @param {object} payload
+   * @param {object} event
    */
-  login({ response, type, method } = {}) {
+  login(loginEvent = {
+    response: '',
+    type: '',
+    method: '',
+  }) {
+    const { response, type, method } = loginEvent;
     const event = new CustomEvent('tray-login', {
       detail: {
         response,

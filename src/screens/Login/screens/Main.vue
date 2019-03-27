@@ -39,7 +39,12 @@
           {{ texts.separator }}
         </span>
       </div>
-
+      <button
+        type="button"
+        class="tray-btn-primary tray-btn-otp"
+        @click.prevent="setScreen('Otp')">
+        Receber código de segurança por e-mail
+      </button>
       <slot name="app-facebook-login"></slot>
       <slot name="back-step"></slot>
     </section>
@@ -48,6 +53,13 @@
       :params="params"
       :callback="callback">
     </app-recover-password>
+
+    <app-otp-login v-if="screen === 'Otp'"
+      :callback="callback"
+      :identification="identification"
+      :identificationType="identificationType"
+      :params="params">
+    </app-otp-login>
 
     <section class="tray-loading" v-show="loading">
       <div class="tray-loading-mask">
@@ -65,15 +77,17 @@
 import http from 'api-client';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import AppRecoverPassword from './RecoverPassword/screens/Main.vue';
+import AppOtpLogin from './Otp/screens/Login.vue';
 import AppTogglePassword from '@/components/TogglePassword.vue';
 import screenHandler from '@/mixins/screenHandler';
 
 export default {
-  name: 'AppMain',
+  name: 'AppLogin',
   mixins: [screenHandler],
   components: {
     AppTogglePassword,
     AppRecoverPassword,
+    AppOtpLogin,
   },
   props: {
     callback: {
@@ -113,10 +127,8 @@ export default {
   },
   data() {
     return {
-      loading: false,
       password: '',
       showPassword: false,
-      errors: [],
     };
   },
   mounted() {

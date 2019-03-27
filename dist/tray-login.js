@@ -2666,14 +2666,17 @@ var emitEvent = {
 
   /**
    * Dispara um evento de login
-   * @param {object} payload
+   * @param {object} event
    */
   login() {
-    var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        response = _ref3.response,
-        type = _ref3.type,
-        method = _ref3.method;
-
+    var loginEvent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+      response: '',
+      type: '',
+      method: ''
+    };
+    var response = loginEvent.response,
+        type = loginEvent.type,
+        method = loginEvent.method;
     var event = new CustomEvent('tray-login', {
       detail: {
         response,
@@ -2741,7 +2744,7 @@ function http_install(_ref) {
 
 
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52085b9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=4c0b69e6&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e54033b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=4c0b69e6&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showComponent),expression:"showComponent"}],ref:"tray-login",staticClass:"tray-login",attrs:{"id":"tray-login"}},[_c('div',{staticClass:"tray-container"},[_c('button',{staticClass:"tray-close",on:{"click":_vm.close}},[_vm._v("\n      X\n    ")]),(_vm.screen === 'Identification')?_c('app-identification',{attrs:{"callback":_vm.callback,"params":_vm.params,"texts":_vm.texts.identify}},[(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":_vm.callback,"defaultActions":_vm.defaultActions,"params":_vm.params},slot:"app-facebook-login"}):_vm._e()],1):_vm._e(),(_vm.screen === 'Main')?_c('app-login',{attrs:{"callback":_vm.callback,"defaultActions":_vm.defaultActions,"params":_vm.params,"texts":_vm.texts.identify}},[(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":_vm.callback,"defaultActions":_vm.defaultActions,"params":_vm.params},slot:"app-facebook-login"}):_vm._e(),(_vm.identificationEnabled)?_c('button',{staticClass:"tray-btn-default",attrs:{"slot":"back-step"},on:{"click":_vm.reset},slot:"back-step"},[_vm._v("\n        Voltar\n      ")]):_vm._e()],1):_vm._e(),(_vm.screen === 'Blocked')?_c('section',[_c('header',[_c('strong',{staticClass:"tray-title tray-login__title"},[_vm._v("\n          "+_vm._s(_vm.texts['main-title'] || 'Autenticação')+"\n        ")]),_c('p',{staticClass:"tray-action tray-error-message"},[_vm._v("\n          "+_vm._s(_vm.texts['blocked-user'] ||
             'Por motivos de segurança bloqueamos o acesso por e-mail e senha durante 60 minutos.')+"\n        ")])]),_c('p',{staticClass:"tray-action"},[_vm._v("\n        "+_vm._s(_vm.texts['main-action'] || 'Não foi possível verificar seu cadastro, tente novamente.')+"\n      ")]),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":_vm.callback,"defaultActions":_vm.defaultActions,"params":_vm.params},slot:"app-facebook-login"}):_vm._e(),(_vm.identificationEnabled)?_c('button',{staticClass:"tray-btn-default",attrs:{"slot":"back-step"},on:{"click":_vm.reset},slot:"back-step"},[_vm._v("\n        Voltar\n      ")]):_vm._e()],1):_vm._e(),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading"},[_vm._m(0),_c('svg',{staticClass:"tray-loading-icon tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])])],1)])}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tray-loading-mask"},[_c('div',{staticClass:"tray-loading-line"})])}]
@@ -4018,7 +4021,7 @@ external_Vue_default.a.use(vuex_esm);
   getters: getters_namespaceObject,
   strict: "production" !== 'production'
 }));
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52085b9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FacebookLogin.vue?vue&type=template&id=259a2544&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e54033b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FacebookLogin.vue?vue&type=template&id=259a2544&
 var FacebookLoginvue_type_template_id_259a2544_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"facebook-button",staticClass:"tray-btn-facebook",on:{"click":_vm.doFacebookLogin}},[_vm._v("\n    Facebook\n")])}
 var FacebookLoginvue_type_template_id_259a2544_staticRenderFns = []
 
@@ -4156,7 +4159,30 @@ function _objectWithoutProperties(source, excluded) {
   },
 
   /**
-   * Efetua o Login
+   * Efetua o login utilizando o codigo OTP
+   * @param {string} endpoint
+   * @param {object} params
+   * @returns {Promise}
+   */
+  otpLogin() {
+    var payload = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+      identification: '',
+      endpoint: 'otp',
+      session_id: '',
+      store_id: '',
+      identification_type: ''
+    };
+
+    var endpoint = payload.endpoint,
+        params = _objectWithoutProperties(payload, ["endpoint"]);
+
+    return http_http.get(endpoint, {
+      params
+    }).then(response => response);
+  },
+
+  /**
+   * Efetua o login utilizando a senha
    * @param {string} endpoint
    * @param {object} params
    * @returns {Promise}
@@ -4304,7 +4330,7 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var FacebookLogin = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52085b9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Identification/Main.vue?vue&type=template&id=4a5e3fde&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e54033b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Identification/Main.vue?vue&type=template&id=4a5e3fde&
 var Mainvue_type_template_id_4a5e3fde_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"tray-login__identify",attrs:{"id":"tray-login-identify"}},[_c('header',[_c('strong',{staticClass:"tray-title tray-login__title"},[_vm._v("\n      "+_vm._s(_vm.texts.title)+"\n    ")])]),_c('form',{attrs:{"method":"POST"},on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_c('fieldset',{staticClass:"tray-input-group"},[_c('label',{attrs:{"for":"input-email"}},[_c('figure',{staticClass:"tray-input-icon"},[_c('svg',{staticClass:"tray-icon-mail",attrs:{"viewBox":"0 0 1024 1024","display":"block"}},[_c('path',{staticClass:"path1",attrs:{"d":"M989.252 147.388h-954.573c-19.183 0-34.748 15.565-34.748 34.748v675.021c0 19.183 15.565 34.748 34.748 34.748h954.573c19.183 0 34.748-15.565 34.748-34.748v-675.021c-0.068-19.183-15.565-34.748-34.748-34.748zM954.505 822.409h-885.077v-605.525h885.077v605.525z"}}),_c('path',{staticClass:"path2",attrs:{"d":"M160.427 380.45l333.346 205.414c5.598 3.413 11.878 5.188 18.227 5.188s12.629-1.707 18.227-5.188l333.346-205.414c16.316-10.035 21.436-31.471 11.332-47.787-10.035-16.316-31.471-21.436-47.787-11.332l-315.119 194.15-315.119-194.15c-16.316-10.035-37.683-4.983-47.787 11.332s-5.052 37.683 11.332 47.787z"}})])])]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.computedIdentification),expression:"computedIdentification"}],staticClass:"tray-input",attrs:{"type":"text","id":"input-email","placeholder":"E-mail ou CPF/CNPJ"},domProps:{"value":(_vm.computedIdentification)},on:{"keyup":_vm.validate,"focus":_vm.clearErrors,"input":function($event){if($event.target.composing){ return; }_vm.computedIdentification=$event.target.value}}})]),_c('small',{directives:[{name:"show",rawName:"v-show",value:(_vm.errors.length),expression:"errors.length"}],staticClass:"tray-feedbacks"},[_c('span',{staticClass:"tray-error-message",domProps:{"innerHTML":_vm._s(_vm.errors[_vm.errors.length - 1])}})]),_c('button',{staticClass:"tray-btn-primary",attrs:{"type":"submit"},on:{"click":_vm.dispatch}},[_vm._v("\n      Continuar\n    ")])]),_vm._t("app-facebook-login")],2)}
 var Mainvue_type_template_id_4a5e3fde_staticRenderFns = []
 
@@ -4569,28 +4595,28 @@ var Main_component = normalizeComponent(
 )
 
 /* harmony default export */ var Main = (Main_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52085b9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/Main.vue?vue&type=template&id=f9bb212e&
-var Mainvue_type_template_id_f9bb212e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[(_vm.screen === 'Main')?_c('section',{attrs:{"id":"tray-login-identify"}},[_c('header',[_c('strong',{staticClass:"tray-title tray-login__title"},[_vm._v("\n        "+_vm._s(_vm.texts.title)+"\n      ")]),_c('p',{staticClass:"tray-action"},[_vm._v(_vm._s(_vm.texts.action))]),_c('label',{staticClass:"tray-well"},[_vm._v("\n        "+_vm._s(_vm.identification)+"\n      ")])]),_c('form',{attrs:{"method":"POST"},on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_c('app-toggle-password',{attrs:{"id":"input-password"},model:{value:(_vm.password),callback:function ($$v) {_vm.password=$$v},expression:"password"}}),_c('small',{directives:[{name:"show",rawName:"v-show",value:(_vm.errors.length),expression:"errors.length"}],staticClass:"tray-feedbacks"},[_c('span',{staticClass:"tray-error-message",domProps:{"innerHTML":_vm._s(_vm.errors[_vm.errors.length - 1])}})]),_c('p',{staticClass:"tray-action"},[_c('a',{staticClass:"tray-link",attrs:{"href":"#"},on:{"click":function($event){$event.preventDefault();return _vm.setScreen('RecoverPassword')}}},[_vm._v("\n          Esqueci ou não tenho senha\n        ")])]),_c('button',{staticClass:"tray-btn-primary",attrs:{"type":"submit"}},[_vm._v("\n        Continuar\n      ")])],1),_c('div',{staticClass:"tray-general-separator"},[_c('span',{staticClass:"tray-general-separator-line"},[_vm._v("\n        "+_vm._s(_vm.texts.separator)+"\n      ")])]),_vm._t("app-facebook-login"),_vm._t("back-step")],2):_vm._e(),(_vm.screen === 'RecoverPassword')?_c('app-recover-password',{attrs:{"params":_vm.params,"callback":_vm.callback}}):_vm._e(),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading"},[_vm._m(0),_c('svg',{staticClass:"tray-loading-icon tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])])],1)}
-var Mainvue_type_template_id_f9bb212e_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tray-loading-mask"},[_c('div',{staticClass:"tray-loading-line"})])}]
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e54033b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/Main.vue?vue&type=template&id=a70ccc42&
+var Mainvue_type_template_id_a70ccc42_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[(_vm.screen === 'Main')?_c('section',{attrs:{"id":"tray-login-identify"}},[_c('header',[_c('strong',{staticClass:"tray-title tray-login__title"},[_vm._v("\n        "+_vm._s(_vm.texts.title)+"\n      ")]),_c('p',{staticClass:"tray-action"},[_vm._v(_vm._s(_vm.texts.action))]),_c('label',{staticClass:"tray-well"},[_vm._v("\n        "+_vm._s(_vm.identification)+"\n      ")])]),_c('form',{attrs:{"method":"POST"},on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_c('app-toggle-password',{attrs:{"id":"input-password"},model:{value:(_vm.password),callback:function ($$v) {_vm.password=$$v},expression:"password"}}),_c('small',{directives:[{name:"show",rawName:"v-show",value:(_vm.errors.length),expression:"errors.length"}],staticClass:"tray-feedbacks"},[_c('span',{staticClass:"tray-error-message",domProps:{"innerHTML":_vm._s(_vm.errors[_vm.errors.length - 1])}})]),_c('p',{staticClass:"tray-action"},[_c('a',{staticClass:"tray-link",attrs:{"href":"#"},on:{"click":function($event){$event.preventDefault();return _vm.setScreen('RecoverPassword')}}},[_vm._v("\n          Esqueci ou não tenho senha\n        ")])]),_c('button',{staticClass:"tray-btn-primary",attrs:{"type":"submit"}},[_vm._v("\n        Continuar\n      ")])],1),_c('div',{staticClass:"tray-general-separator"},[_c('span',{staticClass:"tray-general-separator-line"},[_vm._v("\n        "+_vm._s(_vm.texts.separator)+"\n      ")])]),_c('button',{staticClass:"tray-btn-primary tray-btn-otp",attrs:{"type":"button"},on:{"click":function($event){$event.preventDefault();return _vm.setScreen('Otp')}}},[_vm._v("\n      Receber código de segurança por e-mail\n    ")]),_vm._t("app-facebook-login"),_vm._t("back-step")],2):_vm._e(),(_vm.screen === 'RecoverPassword')?_c('app-recover-password',{attrs:{"params":_vm.params,"callback":_vm.callback}}):_vm._e(),(_vm.screen === 'Otp')?_c('app-otp-login',{attrs:{"callback":_vm.callback,"identification":_vm.identification,"identificationType":_vm.identificationType,"params":_vm.params}}):_vm._e(),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading"},[_vm._m(0),_c('svg',{staticClass:"tray-loading-icon tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])])],1)}
+var Mainvue_type_template_id_a70ccc42_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tray-loading-mask"},[_c('div',{staticClass:"tray-loading-line"})])}]
 
 
-// CONCATENATED MODULE: ./src/screens/Login/screens/Main.vue?vue&type=template&id=f9bb212e&
+// CONCATENATED MODULE: ./src/screens/Login/screens/Main.vue?vue&type=template&id=a70ccc42&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52085b9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/RecoverPassword/screens/Main.vue?vue&type=template&id=7d741339&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e54033b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/RecoverPassword/screens/Main.vue?vue&type=template&id=7d741339&
 var Mainvue_type_template_id_7d741339_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"tray-login__recover-password",attrs:{"id":"tray-login__recover-password"}},[(_vm.screen == 'New')?_c('app-new-password',{attrs:{"identification":_vm.identification,"identificationType":_vm.identificationType,"params":this.params}}):_vm._e(),(_vm.screen == 'ConfirmCode')?_c('app-confirm-code',{attrs:{"identification":_vm.identification,"identificationType":_vm.identificationType,"params":this.params,"password":this.password}}):_vm._e(),(_vm.screen === 'Login')?_c('app-recover-password-login',{attrs:{"callback":_vm.callback,"identification":_vm.identification,"identificationType":_vm.identificationType,"params":this.params,"password":this.password}}):_vm._e()],1)}
 var Mainvue_type_template_id_7d741339_staticRenderFns = []
 
 
 // CONCATENATED MODULE: ./src/screens/Login/screens/RecoverPassword/screens/Main.vue?vue&type=template&id=7d741339&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52085b9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/RecoverPassword/screens/New.vue?vue&type=template&id=4c2939a0&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e54033b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/RecoverPassword/screens/New.vue?vue&type=template&id=4c2939a0&
 var Newvue_type_template_id_4c2939a0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{staticClass:"tray-login__recover-password__new-password",attrs:{"method":"POST"},on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_c('header',[_c('strong',{staticClass:"tray-title tray-login__title"},[_vm._v("\n      "+_vm._s(_vm.texts.title)+"\n    ")]),_c('p',{staticClass:"tray-action"},[_vm._v(_vm._s(_vm.texts.action))]),_c('label',{staticClass:"tray-well"},[_vm._v("\n      "+_vm._s(_vm.identification)+"\n    ")])]),_c('app-toggle-password',{attrs:{"id":"recover-password"},model:{value:(_vm.passwordHandler),callback:function ($$v) {_vm.passwordHandler=$$v},expression:"passwordHandler"}}),_c('small',{directives:[{name:"show",rawName:"v-show",value:(_vm.errors.length),expression:"errors.length"}],staticClass:"tray-feedbacks"},[_c('span',{staticClass:"tray-error-message",domProps:{"innerHTML":_vm._s(_vm.errors[_vm.errors.length - 1])}})]),_c('button',{staticClass:"tray-btn-primary",attrs:{"type":"submit"},on:{"click":_vm.dispatch}},[_vm._v("\n    Continuar\n  ")]),_c('button',{staticClass:"tray-btn-primary",attrs:{"type":"reset"},on:{"click":_vm.reset}},[_vm._v("\n    Escolher outra opção\n  ")]),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading"},[_vm._m(0),_c('svg',{staticClass:"tray-loading-icon tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])])],1)}
 var Newvue_type_template_id_4c2939a0_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tray-loading-mask"},[_c('div',{staticClass:"tray-loading-line"})])}]
 
 
 // CONCATENATED MODULE: ./src/screens/Login/screens/RecoverPassword/screens/New.vue?vue&type=template&id=4c2939a0&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52085b9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TogglePassword.vue?vue&type=template&id=aad48274&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e54033b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TogglePassword.vue?vue&type=template&id=aad48274&
 var TogglePasswordvue_type_template_id_aad48274_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('fieldset',{staticClass:"tray-input-group"},[_c('label',{attrs:{"for":_vm.id}},[_c('figure',{staticClass:"tray-input-icon"},[_c('svg',{staticClass:"tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])]),_c('button',{staticClass:"tray-login-hide-password",attrs:{"type":"button"},on:{"click":_vm.toggleVisibility}},[_vm._v("\n      "+_vm._s(_vm.showPassword ? 'OCULTAR' : 'MOSTRAR')+"\n    ")])]),_c('input',{staticClass:"tray-input",attrs:{"type":_vm.showPassword ? 'text' : 'password',"id":_vm.id,"placeholder":"Senha"},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.$emit('input', $event.target.value)}}})])}
 var TogglePasswordvue_type_template_id_aad48274_staticRenderFns = []
 
@@ -4873,7 +4899,7 @@ var New_component = normalizeComponent(
 )
 
 /* harmony default export */ var New = (New_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52085b9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/RecoverPassword/screens/ConfirmCode.vue?vue&type=template&id=62195562&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e54033b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/RecoverPassword/screens/ConfirmCode.vue?vue&type=template&id=62195562&
 var ConfirmCodevue_type_template_id_62195562_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{staticClass:"tray-login__recover-password__confirm-code",attrs:{"method":"POST"},on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_c('header',{staticClass:"tray-login__recover-password__confirm-code__header"},[_c('figure',{staticClass:"tray-login__recover-password__confirm-code__icon"},[_c('svg',{staticClass:"tray-icon-mail",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M989.252 147.388h-954.573c-19.183 0-34.748 15.565-34.748 34.748v675.021c0 19.183 15.565 34.748 34.748 34.748h954.573c19.183 0 34.748-15.565 34.748-34.748v-675.021c-0.068-19.183-15.565-34.748-34.748-34.748zM954.505 822.409h-885.077v-605.525h885.077v605.525z"}}),_c('path',{staticClass:"path2",attrs:{"d":"M160.427 380.45l333.346 205.414c5.598 3.413 11.878 5.188 18.227 5.188s12.629-1.707 18.227-5.188l333.346-205.414c16.316-10.035 21.436-31.471 11.332-47.787-10.035-16.316-31.471-21.436-47.787-11.332l-315.119 194.15-315.119-194.15c-16.316-10.035-37.683-4.983-47.787 11.332s-5.052 37.683 11.332 47.787z"}})])]),_c('strong',{staticClass:"tray-title tray-login__recover-password__confirm-code__title"},[_vm._v("\n      "+_vm._s(_vm.texts.title)+"\n    ")]),_c('label',{staticClass:"tray-well"},[_vm._v("\n      "+_vm._s(_vm.identification)+"\n    ")])]),_c('fieldset',{staticClass:"tray-input-group"},[_c('label',{attrs:{"for":"password-code"}},[_c('figure',{staticClass:"tray-input-icon"},[_c('svg',{staticClass:"tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])])]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.securityCode),expression:"securityCode"}],staticClass:"tray-input",attrs:{"type":"text","id":"password-code","placeholder":"Código de segurança"},domProps:{"value":(_vm.securityCode)},on:{"input":function($event){if($event.target.composing){ return; }_vm.securityCode=$event.target.value}}})]),_c('small',{directives:[{name:"show",rawName:"v-show",value:(_vm.errors.length),expression:"errors.length"}],staticClass:"tray-feedbacks"},[_c('span',{staticClass:"tray-error-message",domProps:{"innerHTML":_vm._s(_vm.errors[_vm.errors.length - 1])}})]),_c('button',{staticClass:"tray-btn-primary",attrs:{"type":"submit"},on:{"click":_vm.dispatch}},[_vm._v("\n    Enviar codigo de segurança\n  ")]),_c('button',{staticClass:"tray-btn-primary",attrs:{"type":"reset"},on:{"click":_vm.reset}},[_vm._v("\n    Escolher outra opção\n  ")]),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading"},[_vm._m(0),_c('svg',{staticClass:"tray-loading-icon tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])])])}
 var ConfirmCodevue_type_template_id_62195562_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tray-loading-mask"},[_c('div',{staticClass:"tray-loading-line"})])}]
 
@@ -5070,12 +5096,12 @@ var ConfirmCode_component = normalizeComponent(
 )
 
 /* harmony default export */ var ConfirmCode = (ConfirmCode_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52085b9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/RecoverPassword/screens/Login.vue?vue&type=template&id=966c3b54&
-var Loginvue_type_template_id_966c3b54_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{staticClass:"tray-login__recover-password__login",attrs:{"method":"POST"},on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_vm._m(0),_c('button',{staticClass:"tray-btn-primary",attrs:{"type":"submit"}},[_vm._v("\n    Continuar\n  ")]),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading"},[_vm._m(1),_c('svg',{staticClass:"tray-loading-icon tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])])])}
-var Loginvue_type_template_id_966c3b54_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('header',[_c('h1',{staticClass:"tray-title tray-login__recover-password__login__title"},[_vm._v("\n      Senha cadastrada com sucesso!\n    ")])])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tray-loading-mask"},[_c('div',{staticClass:"tray-loading-line"})])}]
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e54033b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/RecoverPassword/screens/Login.vue?vue&type=template&id=261cf4d2&
+var Loginvue_type_template_id_261cf4d2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{staticClass:"tray-login__recover-password__login",attrs:{"method":"POST"},on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_vm._m(0),_c('button',{staticClass:"tray-btn-primary",attrs:{"type":"submit"}},[_vm._v("\n    Continuar\n  ")]),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading"},[_vm._m(1),_c('svg',{staticClass:"tray-loading-icon tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])])])}
+var Loginvue_type_template_id_261cf4d2_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('header',[_c('h1',{staticClass:"tray-title tray-login__recover-password__login__title"},[_vm._v("\n      Senha cadastrada com sucesso!\n    ")])])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tray-loading-mask"},[_c('div',{staticClass:"tray-loading-line"})])}]
 
 
-// CONCATENATED MODULE: ./src/screens/Login/screens/RecoverPassword/screens/Login.vue?vue&type=template&id=966c3b54&
+// CONCATENATED MODULE: ./src/screens/Login/screens/RecoverPassword/screens/Login.vue?vue&type=template&id=261cf4d2&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/RecoverPassword/screens/Login.vue?vue&type=script&lang=js&
 
@@ -5157,15 +5183,14 @@ var Loginvue_type_template_id_966c3b54_staticRenderFns = [function () {var _vm=t
       this.setLoading(true);
       this.passwordLogin(payload).then(response => {
         this.$emitEvent.login({
-          details: {
-            response,
-            method: 'password',
-            type: 'success'
-          }
+          response,
+          method: 'password',
+          type: 'success'
         });
 
         if (this.callback) {
-          this.redirect(this.callback);
+          var token = response.data.token;
+          this.redirect(this.callback, token);
           return;
         }
 
@@ -5194,8 +5219,8 @@ var Loginvue_type_template_id_966c3b54_staticRenderFns = [function () {var _vm=t
 
 var Login_component = normalizeComponent(
   screens_Loginvue_type_script_lang_js_,
-  Loginvue_type_template_id_966c3b54_render,
-  Loginvue_type_template_id_966c3b54_staticRenderFns,
+  Loginvue_type_template_id_261cf4d2_render,
+  Loginvue_type_template_id_261cf4d2_staticRenderFns,
   false,
   null,
   null,
@@ -5281,6 +5306,217 @@ var screens_Main_component = normalizeComponent(
 )
 
 /* harmony default export */ var screens_Main = (screens_Main_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e54033b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/Otp/screens/Login.vue?vue&type=template&id=3c94dadc&
+var Loginvue_type_template_id_3c94dadc_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{staticClass:"tray-login__otp",attrs:{"method":"POST"},on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_c('header',{staticClass:"tray-login__recover-password__confirm-code__header"},[_c('strong',{staticClass:"tray-title"},[_vm._v("\n      "+_vm._s(_vm.texts.title)+"\n    ")]),_c('p',{staticClass:"tray-action"},[_vm._v("\n      "+_vm._s(_vm.texts.action)+"\n    ")]),_c('label',{staticClass:"tray-well"},[_vm._v("\n      "+_vm._s(_vm.identification)+"\n    ")])]),_c('fieldset',{staticClass:"tray-input-group"},[_c('label',{attrs:{"for":"password-code"}},[_c('figure',{staticClass:"tray-input-icon"},[_c('svg',{staticClass:"tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])])]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.securityCode),expression:"securityCode"}],staticClass:"tray-input",attrs:{"type":"text","id":"password-code","placeholder":"Código de segurança"},domProps:{"value":(_vm.securityCode)},on:{"input":function($event){if($event.target.composing){ return; }_vm.securityCode=$event.target.value}}})]),_c('small',{directives:[{name:"show",rawName:"v-show",value:(_vm.errors.length),expression:"errors.length"}],staticClass:"tray-feedbacks"},[_c('span',{staticClass:"tray-error-message",domProps:{"innerHTML":_vm._s(_vm.errors[_vm.errors.length - 1])}})]),_c('button',{staticClass:"tray-btn-primary",attrs:{"type":"submit"},on:{"click":_vm.dispatch}},[_vm._v("\n    Enviar codigo de segurança\n  ")]),_c('button',{staticClass:"tray-btn-primary tray-btn-default",attrs:{"type":"reset"},on:{"click":function($event){return _vm.backTo('Main')}}},[_vm._v("\n    Escolher outra opção\n  ")]),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading"},[_vm._m(0),_c('svg',{staticClass:"tray-loading-icon tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])])])}
+var Loginvue_type_template_id_3c94dadc_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tray-loading-mask"},[_c('div',{staticClass:"tray-loading-line"})])}]
+
+
+// CONCATENATED MODULE: ./src/screens/Login/screens/Otp/screens/Login.vue?vue&type=template&id=3c94dadc&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/Otp/screens/Login.vue?vue&type=script&lang=js&
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ var Otp_screens_Loginvue_type_script_lang_js_ = ({
+  name: 'AppOtpConfirmCode',
+  mixins: [screenHandler, utils],
+  props: {
+    callback: {
+      type: String,
+      default: ''
+    },
+    endpoint: {
+      type: String,
+      default: 'otp'
+    },
+    identification: {
+      type: String,
+      default: ''
+    },
+    identificationType: {
+      type: String,
+      default: ''
+    },
+    params: {
+      type: Object,
+
+      default() {
+        return {
+          session_id: '',
+          store_id: ''
+        };
+      }
+
+    }
+  },
+
+  data() {
+    return {
+      securityCode: '',
+      texts: {
+        title: 'Código de segurança',
+        action: 'Informe o código de segurança que enviamos para seu e-mail',
+        errors: {
+          invalid: 'Autenticação incorreta'
+        }
+      }
+    };
+  },
+
+  mounted() {
+    this.setLoading(true);
+    this.generateSecurityCode(_objectSpread({}, this.params, {
+      endpoint: 'generate-security-code',
+      identification: this.identification,
+      [this.identificationType]: this.identification
+    })).then(() => {
+      this.setLoading(false);
+    });
+  },
+
+  methods: _objectSpread({}, mapActions('Login', {
+    backTo: 'setScreen'
+  }), {
+    generateSecurityCode: server.generateSecurityCode,
+    otpLogin: server.otpLogin,
+
+    /**
+     * Dispara o evento para identificar que
+     * o usuario verificou se existe uma conta registrada
+     * @param {object} event
+     */
+    dispatch() {
+      var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+        type: '',
+        target: ''
+      };
+      this.$emitEvent.action({
+        action: 'security-code',
+        type: event.type,
+        element: event.target
+      });
+    },
+
+    /**
+     * Realiza o login com o código de segurança
+     * @param {object} event
+     * @param {object} payload
+     */
+    submit(event) {
+      var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _objectSpread({}, this.params, {
+        code: this.securityCode,
+        endpoint: this.endpoint,
+        identification: this.identification,
+        [this.identificationType]: this.identification
+      });
+      this.setLoading(true);
+      this.otpLogin(payload).then(response => {
+        this.$emitEvent.login({
+          response,
+          method: 'otp',
+          type: 'success'
+        });
+
+        if (this.callback) {
+          this.redirect(this.callback);
+          return;
+        }
+
+        this.setLoading(false);
+      }).catch(error => {
+        this.$emitEvent.login({
+          response: error,
+          method: 'otp',
+          type: 'error'
+        });
+        var message = error.data.message;
+        this.setError(message || this.texts.errors.invalid);
+        this.setLoading(false);
+      });
+    }
+
+  })
+});
+// CONCATENATED MODULE: ./src/screens/Login/screens/Otp/screens/Login.vue?vue&type=script&lang=js&
+ /* harmony default export */ var screens_Otp_screens_Loginvue_type_script_lang_js_ = (Otp_screens_Loginvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/screens/Login/screens/Otp/screens/Login.vue
+
+
+
+
+
+/* normalize component */
+
+var screens_Login_component = normalizeComponent(
+  screens_Otp_screens_Loginvue_type_script_lang_js_,
+  Loginvue_type_template_id_3c94dadc_render,
+  Loginvue_type_template_id_3c94dadc_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  ,true
+)
+
+/* harmony default export */ var screens_Login = (screens_Login_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/Main.vue?vue&type=script&lang=js&
 
 //
@@ -5346,17 +5582,31 @@ var screens_Main_component = normalizeComponent(
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 
 
 /* harmony default export */ var Login_screens_Mainvue_type_script_lang_js_ = ({
-  name: 'AppMain',
+  name: 'AppLogin',
   mixins: [screenHandler],
   components: {
     AppTogglePassword: TogglePassword,
-    AppRecoverPassword: screens_Main
+    AppRecoverPassword: screens_Main,
+    AppOtpLogin: screens_Login
   },
   props: {
     callback: {
@@ -5401,10 +5651,8 @@ var screens_Main_component = normalizeComponent(
 
   data() {
     return {
-      loading: false,
       password: '',
-      showPassword: false,
-      errors: []
+      showPassword: false
     };
   },
 
@@ -5493,8 +5741,8 @@ var screens_Main_component = normalizeComponent(
 
 var Login_screens_Main_component = normalizeComponent(
   screens_Login_screens_Mainvue_type_script_lang_js_,
-  Mainvue_type_template_id_f9bb212e_render,
-  Mainvue_type_template_id_f9bb212e_staticRenderFns,
+  Mainvue_type_template_id_a70ccc42_render,
+  Mainvue_type_template_id_a70ccc42_staticRenderFns,
   false,
   null,
   null,
@@ -6605,7 +6853,7 @@ exports = module.exports = __webpack_require__("2350")(false);
 
 
 // module
-exports.push([module.i, ".tray-login,tray-login{color:#909090;font-family:Lato,Helvetica,sans-serif;font-size:14px}.tray-login *,tray-login *{-webkit-box-sizing:border-box;box-sizing:border-box}.tray-login svg,tray-login svg{fill:currentColor}.tray-login a,.tray-login a:focus,.tray-login a:hover,.tray-login button,.tray-login button:focus,.tray-login button:hover,.tray-login div,.tray-login div:focus,.tray-login div:hover,.tray-login input,.tray-login input:focus,.tray-login input:hover,.tray-login label,.tray-login label:focus,.tray-login label:hover,.tray-login select,.tray-login select:focus,.tray-login select:hover,.tray-login svg,.tray-login svg:focus,.tray-login svg:hover,tray-login a,tray-login a:focus,tray-login a:hover,tray-login button,tray-login button:focus,tray-login button:hover,tray-login div,tray-login div:focus,tray-login div:hover,tray-login input,tray-login input:focus,tray-login input:hover,tray-login label,tray-login label:focus,tray-login label:hover,tray-login select,tray-login select:focus,tray-login select:hover,tray-login svg,tray-login svg:focus,tray-login svg:hover{-webkit-transition:all .3s linear;transition:all .3s linear}.tray-login:before,tray-login:before{background:rgba(0,0,0,.5);content:\"\";display:block;position:fixed;top:0;left:0;height:100%;width:100%;z-index:9998}.tray-login .tray-container,tray-login .tray-container{background:#fff;border:1px solid rgba(0,0,0,.5);width:292px;position:fixed;left:calc(50% - 146px);top:calc(50% - 220px);padding:10px;z-index:9999}.tray-login .tray-close,tray-login .tray-close{position:absolute;right:10px}.tray-login .tray-title,tray-login .tray-title{font-weight:900;font-size:18px;margin:0 0 10px;display:block}.tray-login .tray-action,tray-login .tray-action{margin:0 0 10px}.tray-login .tray-link,tray-login .tray-link{color:#909090}@-webkit-keyframes loading-rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}@keyframes loading-rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}.tray-login .tray-loading,tray-login .tray-loading{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background:hsla(0,0%,100%,.7);height:100%;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;left:0;overflow:hidden;position:absolute;text-align:center;text-transform:lowercase;top:0;opacity:1;width:100%;z-index:1}.tray-login .tray-loading-mask,tray-login .tray-loading-mask{-webkit-transform-origin:30px 30px;transform-origin:30px 30px;-webkit-animation:loading-rotate 1.2s linear infinite;animation:loading-rotate 1.2s linear infinite;height:60px;left:50%;margin-left:-30px;margin-top:-30px;-webkit-mask-image:-webkit-linear-gradient(top,#000,transparent);overflow:hidden;position:absolute;top:50%;width:30px}.tray-login .tray-loading-line,tray-login .tray-loading-line{border-radius:50%;-webkit-box-shadow:inset 0 0 0 1px rgba(0,0,0,.5);box-shadow:inset 0 0 0 1px rgba(0,0,0,.5);height:60px;width:60px}.tray-login .tray-loading-icon,tray-login .tray-loading-icon{-webkit-transform:rotate(0);transform:rotate(0);fill:#7f7f7f;height:30px;width:30px;position:absolute;left:calc(50% - 15px);top:calc(50% - 15px)}.tray-login .tray-input-group,tray-login .tray-input-group{border:0;padding:0;position:relative}.tray-login .tray-input,tray-login .tray-input{background:#fff;border:1px solid #e0dcdc;border-radius:3px;color:#909090;display:block;font-size:14px;font-weight:300;height:47px;line-height:14px;padding:13px 0 14px 36px!important;width:100%;margin-bottom:10px;outline-width:0}.tray-login .tray-input:focus,tray-login .tray-input:focus{outline:0;border-color:silver;border-width:2px;color:#909090}.tray-login .tray-input-icon,tray-login .tray-input-icon{padding:0;margin:0;top:15px;left:15px;width:15px;position:absolute}.tray-login .tray-feedbacks,tray-login .tray-feedbacks{display:block;font-size:14px;margin-bottom:10px}.tray-login .tray-error-message,tray-login .tray-error-message{color:#ff5858}.tray-login .tray-well,tray-login .tray-well{width:100%;display:block;background-color:#ebebeb;border-radius:3px;border:1px solid #efeded;color:#8f8f8f;margin-bottom:10px;padding:10px 10px;text-align:center}.tray-login .tray-general-separator,tray-login .tray-general-separator{color:#c7c7c7;margin-bottom:10px;text-align:center;overflow:hidden;white-space:nowrap;display:block}.tray-login .tray-general-separator-line,tray-login .tray-general-separator-line{position:relative;display:inline-block}.tray-login .tray-general-separator-line:after,.tray-login .tray-general-separator-line:before,tray-login .tray-general-separator-line:after,tray-login .tray-general-separator-line:before{content:\"\";position:absolute;top:50%;width:9999px;height:1px;background:#c7c7c7}.tray-login .tray-general-separator-line:before,tray-login .tray-general-separator-line:before{margin-right:5px;right:100%}.tray-login .tray-general-separator-line:after,tray-login .tray-general-separator-line:after{left:100%;margin-left:5px}.tray-login .tray-login-hide-password,tray-login .tray-login-hide-password{border:0;cursor:pointer;color:#c7c7c7;font-size:10px;height:25px;position:absolute;right:10px;top:12px;text-transform:uppercase;outline-width:0}.tray-login .tray-btn-default,.tray-login .tray-btn-facebook,.tray-login .tray-btn-otp,.tray-login .tray-btn-primary,tray-login .tray-btn-default,tray-login .tray-btn-facebook,tray-login .tray-btn-otp,tray-login .tray-btn-primary{background:#6abf57;display:block;color:#fff;cursor:pointer;width:100%;height:48px;border-radius:3px;border:none;border-bottom:3px solid #539e41;font-size:14px;font-weight:700;margin-bottom:10px;padding:0}.tray-login .tray-btn-default:hover,.tray-login .tray-btn-facebook:hover,.tray-login .tray-btn-otp:hover,.tray-login .tray-btn-primary:hover,tray-login .tray-btn-default:hover,tray-login .tray-btn-facebook:hover,tray-login .tray-btn-otp:hover,tray-login .tray-btn-primary:hover{background:#51a43f;border-color:#407a32}.tray-login .tray-btn-facebook,tray-login .tray-btn-facebook{background-color:#3b5998;border-bottom-color:#243f77}.tray-login .tray-btn-facebook:hover,tray-login .tray-btn-facebook:hover{background-color:#2d4373;border-color:#182a50}.tray-login .tray-btn-default,tray-login .tray-btn-default{color:#bcbcbc;background-color:#fff;border:1px solid #d3d1d1;border-bottom-width:3px}.tray-login .tray-btn-default:hover,tray-login .tray-btn-default:hover{background-color:#f2f2f2;border-color:#bab7b7}.tray-login .tray-close,tray-login .tray-close{background:#fff;border:2px solid #bababa;border-radius:50%;color:#bababa;cursor:pointer;float:right;font-weight:700;font-size:12px;line-height:1;padding:3px 4px;margin:0;height:21px;width:21px}.tray-login__recover-password__login__title,tray-login__recover-password__login__title{text-align:center}.tray-login__recover-password__confirm-code__icon,tray-login__recover-password__confirm-code__icon{width:60px;margin:0 auto 10px}.tray-login__recover-password__confirm-code__title,tray-login__recover-password__confirm-code__title{text-align:center}", ""]);
+exports.push([module.i, ".tray-login,tray-login{color:#909090;font-family:Lato,Helvetica,sans-serif;font-size:14px}.tray-login *,tray-login *{-webkit-box-sizing:border-box;box-sizing:border-box}.tray-login svg,tray-login svg{fill:currentColor}.tray-login a,.tray-login a:focus,.tray-login a:hover,.tray-login button,.tray-login button:focus,.tray-login button:hover,.tray-login div,.tray-login div:focus,.tray-login div:hover,.tray-login input,.tray-login input:focus,.tray-login input:hover,.tray-login label,.tray-login label:focus,.tray-login label:hover,.tray-login select,.tray-login select:focus,.tray-login select:hover,.tray-login svg,.tray-login svg:focus,.tray-login svg:hover,tray-login a,tray-login a:focus,tray-login a:hover,tray-login button,tray-login button:focus,tray-login button:hover,tray-login div,tray-login div:focus,tray-login div:hover,tray-login input,tray-login input:focus,tray-login input:hover,tray-login label,tray-login label:focus,tray-login label:hover,tray-login select,tray-login select:focus,tray-login select:hover,tray-login svg,tray-login svg:focus,tray-login svg:hover{-webkit-transition:all .3s linear;transition:all .3s linear}.tray-login:before,tray-login:before{background:rgba(0,0,0,.5);content:\"\";display:block;position:fixed;top:0;left:0;height:100%;width:100%;z-index:9998}.tray-login .tray-container,tray-login .tray-container{background:#fff;border:1px solid rgba(0,0,0,.5);width:292px;position:fixed;left:calc(50% - 146px);top:calc(50% - 220px);padding:10px;z-index:9999}.tray-login .tray-close,tray-login .tray-close{position:absolute;right:10px}.tray-login .tray-title,tray-login .tray-title{font-weight:900;font-size:18px;margin:0 0 10px;display:block}.tray-login .tray-action,tray-login .tray-action{margin:0 0 10px}.tray-login .tray-link,tray-login .tray-link{color:#909090}@-webkit-keyframes loading-rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}@keyframes loading-rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}.tray-login .tray-loading,tray-login .tray-loading{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background:hsla(0,0%,100%,.7);height:100%;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;left:0;overflow:hidden;position:absolute;text-align:center;text-transform:lowercase;top:0;opacity:1;width:100%;z-index:1}.tray-login .tray-loading-mask,tray-login .tray-loading-mask{-webkit-transform-origin:30px 30px;transform-origin:30px 30px;-webkit-animation:loading-rotate 1.2s linear infinite;animation:loading-rotate 1.2s linear infinite;height:60px;left:50%;margin-left:-30px;margin-top:-30px;-webkit-mask-image:-webkit-linear-gradient(top,#000,transparent);overflow:hidden;position:absolute;top:50%;width:30px}.tray-login .tray-loading-line,tray-login .tray-loading-line{border-radius:50%;-webkit-box-shadow:inset 0 0 0 1px rgba(0,0,0,.5);box-shadow:inset 0 0 0 1px rgba(0,0,0,.5);height:60px;width:60px}.tray-login .tray-loading-icon,tray-login .tray-loading-icon{-webkit-transform:rotate(0);transform:rotate(0);fill:#7f7f7f;height:30px;width:30px;position:absolute;left:calc(50% - 15px);top:calc(50% - 15px)}.tray-login .tray-input-group,tray-login .tray-input-group{border:0;padding:0;position:relative}.tray-login .tray-input,tray-login .tray-input{background:#fff;border:1px solid #e0dcdc;border-radius:3px;color:#909090;display:block;font-size:14px;font-weight:300;height:47px;line-height:14px;padding:13px 0 14px 36px!important;width:100%;margin-bottom:10px;outline-width:0}.tray-login .tray-input:focus,tray-login .tray-input:focus{outline:0;border-color:silver;border-width:2px;color:#909090}.tray-login .tray-input-icon,tray-login .tray-input-icon{padding:0;margin:0;top:15px;left:15px;width:15px;position:absolute}.tray-login .tray-feedbacks,tray-login .tray-feedbacks{display:block;font-size:14px;margin-bottom:10px}.tray-login .tray-error-message,tray-login .tray-error-message{color:#ff5858}.tray-login .tray-well,tray-login .tray-well{width:100%;display:block;background-color:#ebebeb;border-radius:3px;border:1px solid #efeded;color:#8f8f8f;margin-bottom:10px;padding:10px 10px;text-align:center}.tray-login .tray-general-separator,tray-login .tray-general-separator{color:#c7c7c7;margin-bottom:10px;text-align:center;overflow:hidden;white-space:nowrap;display:block}.tray-login .tray-general-separator-line,tray-login .tray-general-separator-line{position:relative;display:inline-block}.tray-login .tray-general-separator-line:after,.tray-login .tray-general-separator-line:before,tray-login .tray-general-separator-line:after,tray-login .tray-general-separator-line:before{content:\"\";position:absolute;top:50%;width:9999px;height:1px;background:#c7c7c7}.tray-login .tray-general-separator-line:before,tray-login .tray-general-separator-line:before{margin-right:5px;right:100%}.tray-login .tray-general-separator-line:after,tray-login .tray-general-separator-line:after{left:100%;margin-left:5px}.tray-login .tray-login-hide-password,tray-login .tray-login-hide-password{border:0;cursor:pointer;color:#c7c7c7;font-size:10px;height:25px;position:absolute;right:10px;top:12px;text-transform:uppercase;outline-width:0}.tray-login .tray-btn-default,.tray-login .tray-btn-facebook,.tray-login .tray-btn-otp,.tray-login .tray-btn-primary,tray-login .tray-btn-default,tray-login .tray-btn-facebook,tray-login .tray-btn-otp,tray-login .tray-btn-primary{background:#6abf57;display:block;color:#fff;cursor:pointer;width:100%;height:48px;border-radius:3px;border:none;border-bottom:3px solid #539e41;font-size:14px;font-weight:700;margin-bottom:10px;padding:0}.tray-login .tray-btn-default:hover,.tray-login .tray-btn-facebook:hover,.tray-login .tray-btn-otp:hover,.tray-login .tray-btn-primary:hover,tray-login .tray-btn-default:hover,tray-login .tray-btn-facebook:hover,tray-login .tray-btn-otp:hover,tray-login .tray-btn-primary:hover{background:#51a43f;border-color:#407a32}.tray-login .tray-btn-facebook,tray-login .tray-btn-facebook{background-color:#3b5998;border-bottom-color:#243f77}.tray-login .tray-btn-facebook:hover,tray-login .tray-btn-facebook:hover{background-color:#2d4373;border-color:#182a50}.tray-login .tray-btn-default,tray-login .tray-btn-default{color:#bcbcbc;background-color:#fff;border:1px solid #d3d1d1;border-bottom-width:3px}.tray-login .tray-btn-default:hover,tray-login .tray-btn-default:hover{background-color:#f2f2f2;border-color:#bab7b7}.tray-login .tray-btn-otp,tray-login .tray-btn-otp{background-color:#52447c;border-bottom-color:#3d3160;font-size:13px}.tray-login .tray-btn-otp:hover,tray-login .tray-btn-otp:hover{background-color:#473b6c;border-bottom-color:#28203e}.tray-login .tray-close,tray-login .tray-close{background:#fff;border:2px solid #bababa;border-radius:50%;color:#bababa;cursor:pointer;float:right;font-weight:700;font-size:12px;line-height:1;padding:3px 4px;margin:0;height:21px;width:21px}.tray-login__recover-password__login__title,tray-login__recover-password__login__title{text-align:center}.tray-login__recover-password__confirm-code__icon,tray-login__recover-password__confirm-code__icon{width:60px;margin:0 auto 10px}.tray-login__recover-password__confirm-code__title,tray-login__recover-password__confirm-code__title{text-align:center}", ""]);
 
 // exports
 
