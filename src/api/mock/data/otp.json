@@ -1,0 +1,14 @@
+{
+    "data":{
+        "data": {
+            "hasAccount": true,
+            "customer": {
+                "id": "1"
+            },
+            "message": "Encontramos seu cadastro, prossiga com sua compra",
+            "token": "x9"
+        },
+        "statusCode":200
+    },
+    "status": 200
+}

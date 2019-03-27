@@ -58,6 +58,17 @@ tray-login,
         }
     }
 
+    .tray-btn-otp {
+        background-color: #52447c;
+        border-bottom-color: #3d3160;
+        font-size: 13px;
+
+        &:hover {
+            background-color: darken(#52447c, 5%);
+            border-bottom-color: darken(#3d3160, 10%);
+        }
+    }
+
     .tray-close {
         background: #fff;
         border: 2px solid #bababa;

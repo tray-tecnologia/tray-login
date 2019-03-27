@@ -13,7 +13,11 @@ import passwordLoginError from './data/error/password.json';
 
 import passwordUpdateSucces from './data/password-update.json';
 import passwordUpdateError from './data/error/password-update.json';
-/**
+
+import otpLoginSucces from './data/otp.json';
+import otpLoginError from './data/error/otp.json';
+
+/*
  * Cria uma promisse para o mock desejado
  * @param {json} mockData
  * @param {number} delay em milisegundos
@@ -88,6 +92,25 @@ export default {
     if (users.indexOf(identification) !== -1) {
       isValid = true;
       mockData = hasAccountResponse;
+    }
+
+    return fetch(mockData, delay, isValid);
+  },
+
+  /**
+   * Mock para o login com OTP
+   * @param {object} payload
+   */
+  otpLogin(payload = {
+    code: '',
+  }) {
+    const { code } = payload;
+    let isValid = false;
+    let mockData = otpLoginError;
+
+    if (code === 'ABC123') {
+      isValid = true;
+      mockData = otpLoginSucces;
     }
 
     return fetch(mockData, delay, isValid);

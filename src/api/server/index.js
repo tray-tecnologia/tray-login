@@ -67,7 +67,24 @@ export default {
   },
 
   /**
-   * Efetua o Login
+   * Efetua o login utilizando o codigo OTP
+   * @param {string} endpoint
+   * @param {object} params
+   * @returns {Promise}
+   */
+  otpLogin(payload = {
+    identification: '',
+    endpoint: 'otp',
+    session_id: '',
+    store_id: '',
+    identification_type: '',
+  }) {
+    const { endpoint, ...params } = payload;
+    return http.get(endpoint, { params }).then(response => response);
+  },
+
+  /**
+   * Efetua o login utilizando a senha
    * @param {string} endpoint
    * @param {object} params
    * @returns {Promise}
