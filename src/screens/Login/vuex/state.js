@@ -1,4 +1,4 @@
 export default {
-  screen: 'Main',
   errors: [],
+  screen: 'Main',
 };

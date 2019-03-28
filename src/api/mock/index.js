@@ -1,4 +1,5 @@
 import checkStatusSuccess from './data/check-status.json';
+import langs from './data/langs.json';
 import checkStatusBlocked from './data/check-status-blocked.json';
 
 import facebookResponse from './data/facebook.json';
@@ -70,6 +71,16 @@ export default {
 
   facebookLogin() {
     return fetch(facebookResponse, delay).then(response => response);
+  },
+
+  /**
+   * Mock com as langs definidas na plataforma
+   * @param {string} endpoint
+   * @param {object} payload
+   * @returns {Promise}
+   */
+  getLangs() {
+    return fetch(langs, delay).then(response => response.data);
   },
 
   generateSecurityCode() {

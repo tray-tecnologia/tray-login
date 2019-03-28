@@ -2,12 +2,19 @@
  * Esse mixin é responsável por definir métodos comuns para
  * o controle de cada tela
  */
+import { mapState } from 'vuex';
+
 export default {
   data() {
     return {
       errors: [],
       loading: false,
     };
+  },
+  computed: {
+    ...mapState({
+      $lang: state => state.lang,
+    }),
   },
   methods: {
     /**

@@ -7,4 +7,13 @@ export default {
   setIdentification({ commit }, identification) {
     commit('setIdentification', identification);
   },
+
+  /**
+   * Dispara a ação com para definir as langs
+   * @param {function} commit
+   * @param {object} lang
+   */
+  setLang({ commit }, lang) {
+    commit('setLang', lang);
+  },
 };
