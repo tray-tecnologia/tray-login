@@ -1,0 +1,37 @@
+{
+    "data": {
+        "data": {
+            "identify-title":"Identifique-se",
+            "identify-input":"E-mail ou CPF/CNPJ (números)" ,
+            "identify-data-invalid":"Dados inv&aacute;lidos, digite novamente!",
+            "identify-error-not-found":"Usu&aacute;rio n&atilde;o encontrado, fa&ccedil;a seu cadastro.",
+            "invalid-code":"Autenticação incorreta.",
+            "main-title":"Autenticação",
+            "main-action":"Escolha uma das opções para se identificar:",
+            "main-separator":"ou utilize uma das opções abaixo",
+            "password-title":"E-mail e senha",
+            "password-button":"E-mail e senha",
+            "password-button-cpf":"CPF e senha",
+            "password-button-cnpj":"CNPJ e senha",
+            "password-action":"Informe sua senha.",
+            "password-hide":"Ocultar",
+            "password-show":"Mostrar",
+            "password-input-label":"Senha",
+            "password-forget":"Esqueci ou não tenho senha",
+            "new-password-label":"Nova senha",
+            "new-password-title":"Cadastre uma nova senha",
+            "new-password-action":"Você receberá um código de segurança em seu e-mail para validar sua nova senha.",
+            "new-password-submit":"Salvar nova senha e continuar",
+            "new-password-code-submit":"Enviar código de segurança",
+            "invalid-password":"A nova senha deve possuir no mínimo 6 caracteres.",
+            "otp-title":"Código de segurança",
+            "otp-action":"Informe o código de segurança que enviamos para seu e-mail.",
+            "otp-receive":"Receber código de segurança por e-mail",
+            "otp-input-label":"Código de segurança",
+            "other-option":"Escolher outra opção",
+            "go-back":"Voltar",
+            "proceed":"Continuar",
+            "blocked-user":"Por motivos de segurança bloqueamos o acesso por e-mail e senha durante 60 minutos."
+        }
+    }
+}

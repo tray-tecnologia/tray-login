@@ -34,6 +34,20 @@ export default {
   },
 
   /**
+   * Recupera as langs definidas na plataforma
+   * @param {string} endpoint
+   * @param {object} payload
+   * @returns {Promise}
+   */
+  getLangs(payload = {
+    endpoint: 'langs/login_compoenent',
+    store_id: '',
+  }) {
+    const { endpoint, ...params } = payload;
+    return http.get(endpoint, { params }).then(response => response.data);
+  },
+
+  /**
    * Gera um novo codigo de segurança
    * @param {string} endpoint
    * @param {object} payload
