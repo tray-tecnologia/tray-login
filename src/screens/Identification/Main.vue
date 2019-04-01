@@ -54,12 +54,6 @@ import screenHandler from '@/mixins/screenHandler';
 export default {
   name: 'AppIdentify',
   mixins: [utils, screenHandler],
-  data() {
-    return {
-      errors: [],
-      loading: false,
-    };
-  },
   props: {
     endpoint: {
       type: String,
@@ -105,15 +99,14 @@ export default {
     ]),
 
     /**
+     * @to-do
      * Verifica a validade da identifação
      * @param {object} event
      * @return {boolean}
      */
-    validate(event) {
-      let isValid;
-      const { keyCode } = event;
-
-      return isValid || keyCode;
+    validate() {
+      // eslint-disable-next-line
+      return true
     },
 
     /**

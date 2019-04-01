@@ -10,7 +10,7 @@
       <button class="tray-login-hide-password"
         type="button"
         @click="toggleVisibility">
-        {{ showPassword ? 'OCULTAR' : 'MOSTRAR' }}
+        {{ showPassword ? $lang['password-hide'] : $lang['password-show'] }}
       </button>
     </label>
     <input v-bind:value="value"
@@ -23,8 +23,11 @@
 </template>
 
 <script>
+import screenHandler from '@/mixins/screenHandler';
+
 export default {
   name: 'AppTogglePassword',
+  mixins: [screenHandler],
   props: {
     value: String,
     id: {

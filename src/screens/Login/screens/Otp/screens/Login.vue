@@ -93,13 +93,6 @@ export default {
   data() {
     return {
       securityCode: '',
-      texts: {
-        title: 'Código de segurança',
-        action: 'Informe o código de segurança que enviamos para seu e-mail',
-        errors: {
-          invalid: 'Autenticação incorreta',
-        },
-      },
     };
   },
   mounted() {

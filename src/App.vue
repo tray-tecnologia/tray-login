@@ -11,7 +11,6 @@
 
         <app-facebook-login v-if="facebookEnabled"
           :callback="callback"
-          :defaultActions="defaultActions"
           :params="params"
           slot="app-facebook-login">
         </app-facebook-login>
@@ -19,13 +18,11 @@
 
       <app-login v-if="screen === 'Main'"
         :callback="callback"
-        :defaultActions="defaultActions"
         :params="params"
-        :texts="texts.main">
+        :text="text">
 
         <app-facebook-login v-if="facebookEnabled"
           :callback="callback"
-          :defaultActions="defaultActions"
           :params="params"
           slot="app-facebook-login">
         </app-facebook-login>
@@ -34,26 +31,25 @@
           class="tray-btn-default"
           @click="reset"
           slot="back-step">
-          {{ this.$lang['go-back'] }}
+          {{ $lang['go-back'] }}
         </button>
       </app-login>
 
       <section v-if="screen === 'Blocked'">
         <header>
           <strong class="tray-title tray-login__title">
-            {{ this.$lang['main-title']}}
+            {{ $lang['main-title']}}
           </strong>
           <p class="tray-action tray-error-message">
-            {{ this.$lang['blocked-user'] }}
+            {{ $lang['blocked-user'] }}
           </p>
         </header>
 
         <p class="tray-action">
-          {{ this.$lang ['identify-error-not-found' ]}}
+          {{ $lang ['identify-error-not-found' ]}}
         </p>
         <app-facebook-login v-if="facebookEnabled"
           :callback="callback"
-          :defaultActions="defaultActions"
           :params="params"
           slot="app-facebook-login">
         </app-facebook-login>
@@ -62,7 +58,7 @@
           class="tray-btn-default"
           @click="reset"
           slot="back-step">
-          {{ this.$lang['go-back'] }}
+          {{ $lang['go-back'] }}
         </button>
       </section>
 
@@ -138,10 +134,10 @@ export default {
       type: String,
       default: '',
     },
-    texts: {
-      type: [Object, String],
+    text: {
+      type: [String],
       default() {
-        return {};
+        return '';
       },
     },
   },
@@ -163,15 +159,6 @@ export default {
   },
 
   computed: {
-    /**
-     * Verifica se as ações padrão da plataforma devem ser disparadas
-     *
-     * @return {boolean}
-     */
-    defaultActions() {
-      return this.configurations.indexOf('default_actions') !== -1;
-    },
-
     /**
      * Verifica se o login com o facebook será utilizado
      *
@@ -242,7 +229,7 @@ export default {
       });
 
       const trayLogin = document.querySelector('tray-login');
-      if (trayLogin && this.defaultActions) {
+      if (trayLogin) {
         trayLogin.style.display = 'none';
       }
     },
