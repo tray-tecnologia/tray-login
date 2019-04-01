@@ -4,9 +4,9 @@
       id="tray-login-identify">
       <header>
         <strong class="tray-title tray-login__title">
-          {{ texts.title }}
+          {{ $lang['main-title'] }}
         </strong>
-        <p class="tray-action">{{ texts.action }}</p>
+        <p class="tray-action" v-html="text || $lang['main-action']"></p>
         <label class="tray-well">
           {{ identification }}
         </label>
@@ -24,26 +24,26 @@
           <a @click.prevent="setScreen('RecoverPassword')"
             class="tray-link"
             href="#">
-            Esqueci ou não tenho senha
+            {{ $lang['password-forget']}}
           </a>
         </p>
         <button
           class="tray-btn-primary"
           type="submit">
-          Continuar
+          {{ $lang['proceed'] }}
         </button>
       </form>
 
       <div class="tray-general-separator">
         <span class="tray-general-separator-line">
-          {{ texts.separator }}
+          {{ $lang['main-separator'] }}
         </span>
       </div>
       <button
         type="button"
         class="tray-btn-primary tray-btn-otp"
         @click.prevent="setScreen('Otp')">
-        Receber código de segurança por e-mail
+        {{ $lang['otp-receive'] }}
       </button>
       <slot name="app-facebook-login"></slot>
       <slot name="back-step"></slot>
@@ -94,10 +94,6 @@ export default {
       type: String,
       default: '/',
     },
-    defaultActions: {
-      type: Boolean,
-      default: true,
-    },
     endpoint: {
       type: String,
       default: 'password',
@@ -111,17 +107,10 @@ export default {
         };
       },
     },
-    texts: {
-      type: Object,
+    text: {
+      type: String,
       default() {
-        return {
-          title: 'Autenticação',
-          action: 'Escolha uma das opções para se identificar:',
-          separator: 'ou utilize uma das opções abaixo',
-          errors: {
-            incorrect: 'Autentica\u00e7\u00e3o incorreta.',
-          },
-        };
+        return '';
       },
     },
   },
@@ -200,7 +189,7 @@ export default {
             },
           });
 
-          if (this.defaultActions) {
+          if (this.callback) {
             this.redirect(this.callback, response.data.data.token);
 
             return response;
@@ -216,9 +205,8 @@ export default {
             type: 'error',
           });
 
-          const errorMessage = error.data.message || this.texts.errors.incorrect;
-
-          this.setError(errorMessage);
+          const { message } = error.data;
+          this.setError(message || this.$lang['invalid-code']);
           this.setLoading(false);
         });
     },

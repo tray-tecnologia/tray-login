@@ -17,10 +17,6 @@ export default {
       type: String,
       default: '',
     },
-    defaultActions: {
-      type: Boolean,
-      default: true,
-    },
     endpoint: {
       type: String,
       default: 'facebook/url',
@@ -64,7 +60,7 @@ export default {
           method: 'facebook',
         });
 
-        if (this.defaultActions) {
+        if (this.callback) {
           window.location = response.data.data.url;
         }
 
