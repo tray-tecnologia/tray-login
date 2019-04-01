@@ -2,10 +2,10 @@
   <form class="tray-login__otp" method='POST' @submit.prevent="submit">
     <header class="tray-login__recover-password__confirm-code__header">
       <strong class="tray-title">
-        {{ texts.title }}
+        {{ $lang['otp-title']}}
       </strong>
       <p class="tray-action">
-        {{ texts.action }}
+        {{ $lang['otp-action'] }}
       </p>
       <label class="tray-well">
         {{ identification }}
@@ -34,13 +34,13 @@
       class="tray-btn-primary"
       type="submit"
       @click="dispatch">
-      Enviar codigo de segurança
+      {{ $lang['new-password-code-submit' ]}}
     </button>
     <button
       class="tray-btn-primary tray-btn-default"
       type="reset"
       @click="backTo('Main')">
-      Escolher outra opção
+      {{ $lang['other-option'] }}
     </button>
     <section class="tray-loading" v-show="loading">
       <div class="tray-loading-mask">
@@ -162,8 +162,8 @@ export default {
           type: 'error',
         });
 
-        const { message } = error.data;
-        this.setError(message || this.texts.errors.invalid);
+        const { message = this.$lang['invalid-code'] } = error.data;
+        this.setError(message);
         this.setLoading(false);
       });
     },

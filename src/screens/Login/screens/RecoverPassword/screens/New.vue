@@ -2,9 +2,11 @@
   <form class="tray-login__recover-password__new-password" method='POST' @submit.prevent="submit">
     <header>
       <strong class="tray-title tray-login__title">
-        {{ texts.title }}
+        {{ $lang['new-password-success']}}
       </strong>
-      <p class="tray-action">{{ texts.action }}</p>
+      <p class="tray-action">
+        {{ $lang['new-password-action'] }}
+      </p>
       <label class="tray-well">
         {{ identification }}
       </label>
@@ -14,18 +16,17 @@
       id="recover-password">
     </app-toggle-password>
     <small class="tray-feedbacks" v-show="errors.length">
-      <span class="tray-error-message" v-html="errors[errors.length - 1]">
-      </span>
+      <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
     </small>
     <button class="tray-btn-primary"
       type="submit"
       @click="dispatch">
-      Continuar
+      {{ $lang['proceed'] }}
     </button>
-    <button class="tray-btn-primary"
+    <button class="tray-btn-default"
       type="reset"
       @click="reset">
-      Escolher outra opção
+      {{ $lang['other-option'] }}
     </button>
     <section class="tray-loading" v-show="loading">
       <div class="tray-loading-mask">
@@ -73,19 +74,6 @@ export default {
         };
       },
     },
-  },
-  data() {
-    return {
-      errors: [],
-      loading: false,
-      texts: {
-        title: 'Recuperação de senha',
-        action: 'Você receberá um código de segurança em seu e-mail para validar sua nova senha.',
-        errors: {
-          'invalid-password': 'A nova senha deve possuir no mínimo 6 caracteres.',
-        },
-      },
-    };
   },
   computed: {
     ...mapState('Login/RecoverPassword', [
@@ -159,19 +147,15 @@ export default {
       endpoint: this.endpoint,
     }) {
       if (!this.checkValidity(this.password)) {
-        this.setError(this.texts.errors['invalid-password']);
+        this.setError(this.$lang['invalid-password']);
         return;
       }
 
       this.setLoading(true);
-      this.generateSecurityCode(payload).then((response) => {
+      this.generateSecurityCode(payload).then(() => {
         this.setLoading(false);
-
         this.nextStep('ConfirmCode');
-        return response;
       });
-
-      this.clearErrors();
     },
   },
 };

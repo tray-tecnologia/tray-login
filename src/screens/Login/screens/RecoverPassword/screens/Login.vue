@@ -2,12 +2,12 @@
   <form method="POST" class="tray-login__recover-password__login" @submit.prevent="submit">
     <header>
       <h1 class="tray-title tray-login__recover-password__login__title">
-        Senha cadastrada com sucesso!
+        {{ $lang['new-password-success'] }}
       </h1>
     </header>
     <button class="tray-btn-primary"
       type="submit">
-      Continuar
+      {{ $lang['proceed'] }}
     </button>
     <section class="tray-loading" v-show="loading">
       <div class="tray-loading-mask">
