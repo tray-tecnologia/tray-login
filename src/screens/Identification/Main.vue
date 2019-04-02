@@ -14,6 +14,7 @@
           </figure>
         </label>
         <input
+          v-autofocus
           type="text"
           id="input-email"
           class="tray-input"
