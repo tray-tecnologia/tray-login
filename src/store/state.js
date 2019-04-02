@@ -1,5 +1,6 @@
 export default {
   screen: 'Identification',
+  identification: '',
   lang: {
     // identify screen
     'identify-title': 'Identifique-se',
@@ -36,6 +37,7 @@ export default {
     'new-password-action': 'Você receberá um código de segurança em seu e-mail para validar sua nova senha.',
     'new-password-submit': 'Salvar nova senha e continuar',
     'new-password-code-submit': 'Enviar codigo de segurança',
+    'new-password-success': 'Senha cadastrada com sucesso',
     // general texts
     'other-option': 'Escolher outra opção',
     'go-back': 'Voltar',
@@ -44,5 +46,4 @@ export default {
     'blocked-user': 'Por motivos de segurança bloqueamos o acesso por e-mail e senha durante 60 minutos.',
     'invalid-password': 'A nova senha deve possuir no mínimo 6 caracteres',
   },
-  identification: '',
 };

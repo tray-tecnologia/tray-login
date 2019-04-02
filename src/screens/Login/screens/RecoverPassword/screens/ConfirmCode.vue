@@ -8,7 +8,7 @@
         </svg>
       </figure>
       <strong class="tray-title tray-login__recover-password__confirm-code__title">
-        {{ texts.title }}
+        {{ $lang['otp-action'] }}
       </strong>
       <label class="tray-well">
         {{ identification }}
@@ -37,13 +37,13 @@
       class="tray-btn-primary"
       type="submit"
       @click="dispatch">
-      Enviar codigo de segurança
+      {{ $lang['new-password-code-submit'] }}
     </button>
     <button
-      class="tray-btn-primary"
+      class="tray-btn-default"
       type="reset"
       @click="reset">
-      Escolher outra opção
+      {{ $lang['other-option'] }}
     </button>
     <section class="tray-loading" v-show="loading">
       <div class="tray-loading-mask">
@@ -94,15 +94,7 @@ export default {
   },
   data() {
     return {
-      errors: [],
       securityCode: '',
-      loading: false,
-      texts: {
-        title: 'Informe o código de segurança que enviamos para seu e-mail',
-        errors: {
-          invalid: 'Autenticação incorreta',
-        },
-      },
     };
   },
   methods: {
@@ -157,8 +149,8 @@ export default {
         this.setLoading(false);
         this.nextStep('Login');
       }).catch((error) => {
-        const errorMessage = error.data.data.message || this.texts.errors.invalid;
-        this.setError(errorMessage);
+        const { message = this.$lang['invalid-code'] } = error.data.data;
+        this.setError(message);
         this.setLoading(false);
       });
     },
