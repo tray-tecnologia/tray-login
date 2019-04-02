@@ -13,7 +13,8 @@
         {{ showPassword ? $lang['password-hide'] : $lang['password-show'] }}
       </button>
     </label>
-    <input v-bind:value="value"
+    <input v-autofocus
+      v-bind:value="value"
       v-on:input="$emit('input', $event.target.value)"
       :type="showPassword ? 'text' : 'password'"
       :id="id"

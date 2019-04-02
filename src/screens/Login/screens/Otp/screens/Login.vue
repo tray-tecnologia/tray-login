@@ -20,7 +20,9 @@
           </svg>
         </figure>
       </label>
-      <input v-model="securityCode"
+      <input
+        v-autofocus
+        v-model="securityCode"
         type="text"
         id="password-code"
         class="tray-input"

@@ -11,6 +11,17 @@ export default {
       loading: false,
     };
   },
+  directives: {
+    /**
+     * Através da diretiva v-focus o input será
+     * focado automaticamente ao ser renderizado
+     */
+    autofocus: {
+      inserted(input) {
+        input.focus();
+      },
+    },
+  },
   computed: {
     ...mapState({
       $lang: state => state.lang,
