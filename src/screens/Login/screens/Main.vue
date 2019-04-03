@@ -15,7 +15,9 @@
       <form method='POST'
         @submit.prevent="submit">
         <app-toggle-password id="input-password"
-          v-model="password">
+          :state="this.errors.length >= 1 ? 'invalid' : 'initial'"
+          v-model="password"
+          @keyup.native="clearErrors">
         </app-toggle-password>
         <small class="tray-feedbacks" v-show="errors.length">
           <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
@@ -80,10 +82,11 @@ import AppRecoverPassword from './RecoverPassword/screens/Main.vue';
 import AppOtpLogin from './Otp/screens/Login.vue';
 import AppTogglePassword from '@/components/TogglePassword.vue';
 import screenHandler from '@/mixins/screenHandler';
+import utils from '@/mixins/utils';
 
 export default {
   name: 'AppLogin',
-  mixins: [screenHandler],
+  mixins: [screenHandler, utils],
   components: {
     AppTogglePassword,
     AppRecoverPassword,

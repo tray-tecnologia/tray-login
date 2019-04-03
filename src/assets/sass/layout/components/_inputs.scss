@@ -30,6 +30,20 @@ tray-login,
             border-width: 2px;
             color: #909090;
         }
+
+        &-invalid:not(.tray-input-initial) {
+            border-color: $input-error;
+            color: $input-error;
+
+            &:focus {
+                border-color: $input-error;
+                color: $input-error;
+            }
+
+            &::placeholder {
+                color: $input-error;
+            }
+        }
     }
 
     .tray-input-icon {
