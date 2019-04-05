@@ -200,7 +200,6 @@ export default {
     /**
      * Define a tela a ser exibida de acordo com a identificação
      * definidas
-     *
      * @param {string} identification
      */
     initialize(identification) {

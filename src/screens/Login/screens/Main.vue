@@ -15,9 +15,9 @@
       <form method='POST'
         @submit.prevent="submit">
         <app-toggle-password id="input-password"
-          :state="this.errors.length >= 1 ? 'invalid' : 'initial'"
           v-model="password"
-          @keyup.native="clearErrors">
+          :state="this.errors.length >= 1 ? 'invalid' : 'initial'"
+          @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()">
         </app-toggle-password>
         <small class="tray-feedbacks" v-show="errors.length">
           <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>

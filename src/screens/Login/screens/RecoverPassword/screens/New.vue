@@ -12,11 +12,16 @@
       </label>
     </header>
     <app-toggle-password
+      :state="errors.length >= 1 ? 'invalid' : 'valid'"
       v-model="passwordHandler"
+      @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
       id="recover-password">
     </app-toggle-password>
-    <small class="tray-feedbacks" v-show="errors.length">
-      <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
+    <small class="tray-feedbacks"
+      v-show="errors.length">
+      <span class="tray-error-message"
+        v-html="errors[errors.length - 1]">
+      </span>
     </small>
     <button class="tray-btn-primary"
       type="submit"
