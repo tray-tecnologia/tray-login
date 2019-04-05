@@ -21,7 +21,7 @@
       :id="id"
       class="tray-input"
       :class="inputClass"
-      placeholder="Senha"/>
+      :placeholder="$lang['password-input-label']"/>
   </fieldset>
 </template>
 

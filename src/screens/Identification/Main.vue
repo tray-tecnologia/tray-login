@@ -8,7 +8,7 @@
     <form method='POST' @submit.prevent="submit">
       <fieldset class="tray-input-group">
         <label for="input-email">
-          <figure class="tray-input-icon" :class="classObject">
+          <figure class="tray-input-icon" :class="identificationClasses">
             <svg class="tray-icon-mail" viewBox="0 0 1024 1024" v-if="earlyType === 'email'">
               <!-- eslint-disable-next-line -->
               <path class="path1" d="M989.252 147.388h-954.573c-19.183 0-34.748 15.565-34.748 34.748v675.021c0 19.183 15.565 34.748 34.748 34.748h954.573c19.183 0 34.748-15.565 34.748-34.748v-675.021c-0.068-19.183-15.565-34.748-34.748-34.748zM954.505 822.409h-885.077v-605.525h885.077v605.525z"></path>
@@ -21,15 +21,14 @@
             </svg>
           </figure>
         </label>
-        <input
+        <input v-model="computedIdentification"
           v-autofocus
           type="text"
           id="input-email"
-          class="tray-input"
-          :class="classObject"
-          @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
-          v-model="computedIdentification"
           @blur="validity()"
+          @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+          class="tray-input"
+          :class="identificationClasses"
           :placeholder="$lang['identify-input']"/>
       </fieldset>
       <small class="tray-feedbacks" v-show="errors.length">
@@ -129,7 +128,7 @@ export default {
      * Objeto de classes utilizadas na personalização do input
      * @return {object}
      */
-    classObject() {
+    identificationClasses() {
       return {
         'tray-input-invalid': this.errors.length >= 1,
         'tray-input-initial': !this.computedIdentification,
