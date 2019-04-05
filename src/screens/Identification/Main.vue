@@ -8,7 +8,7 @@
     <form method='POST' @submit.prevent="submit">
       <fieldset class="tray-input-group">
         <label for="input-email">
-          <figure class="tray-input-icon">
+          <figure class="tray-input-icon" :class="classObject">
             <svg class="tray-icon-mail" viewBox="0 0 1024 1024" v-if="earlyType === 'email'">
               <!-- eslint-disable-next-line -->
               <path class="path1" d="M989.252 147.388h-954.573c-19.183 0-34.748 15.565-34.748 34.748v675.021c0 19.183 15.565 34.748 34.748 34.748h954.573c19.183 0 34.748-15.565 34.748-34.748v-675.021c-0.068-19.183-15.565-34.748-34.748-34.748zM954.505 822.409h-885.077v-605.525h885.077v605.525z"></path>
@@ -26,13 +26,16 @@
           type="text"
           id="input-email"
           class="tray-input"
-          @keyup="validate"
-          @focus="clearErrors"
+          :class="classObject"
+          @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
           v-model="computedIdentification"
+          @blur="validity()"
           :placeholder="$lang['identify-input']"/>
       </fieldset>
       <small class="tray-feedbacks" v-show="errors.length">
-        <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
+        <span class="tray-error-message"
+          v-html="errors[errors.length - 1] || !isValidIdentification">
+        </span>
       </small>
       <button
         class="tray-btn-primary"
@@ -108,6 +111,31 @@ export default {
       const onlyNumbers = /\d+$/g.test(this.computedIdentification);
       return onlyNumbers ? 'cpf' : 'email';
     },
+
+    /**
+     * Verifica a validade da identifação
+     * @param {object} event
+     * @return {boolean}
+     */
+    isValidIdentification() {
+      const isValidDocument = this.identificationType !== 'email';
+      // eslint-disable-next-line
+      const isValidEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      return isValidDocument || isValidEmail.test(this.computedIdentification);
+    },
+
+    /**
+     * Objeto de classes utilizadas na personalização do input
+     * @return {object}
+     */
+    classObject() {
+      return {
+        'tray-input-invalid': this.errors.length >= 1,
+        'tray-input-initial': !this.computedIdentification,
+        'tray-input-valid': this.isValidIdentification,
+      };
+    },
   },
 
   methods: {
@@ -116,17 +144,6 @@ export default {
     ...mapActions([
       'setIdentification',
     ]),
-
-    /**
-     * @to-do
-     * Verifica a validade da identifação
-     * @param {object} event
-     * @return {boolean}
-     */
-    validate() {
-      // eslint-disable-next-line
-      return true
-    },
 
     /**
      * Dispara o evento para identificar que
@@ -142,6 +159,19 @@ export default {
     },
 
     /**
+     * Define um erro de validação caso exista
+     * @return {string}
+    */
+    validity() {
+      const isEmpty = !this.computedIdentification;
+      if (this.isValidIdentification || isEmpty) {
+        return;
+      }
+
+      this.setError(this.$lang['identify-data-invalid']);
+    },
+
+    /**
      * Envia os dados
      */
     submit(event, payload = {
@@ -150,6 +180,11 @@ export default {
       identification: this.identification,
       [this.identificationType]: this.identification,
     }) {
+      if (!this.isValidIdentification) {
+        this.setError(this.$lang['identify-data-invalid']);
+        return;
+      }
+
       this.setLoading(true);
       this.checkHasAccount(payload)
         .then(() => {
