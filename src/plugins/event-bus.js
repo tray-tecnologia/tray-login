@@ -3,22 +3,6 @@
  */
 const emitEvent = {
   /**
-   * Dispara um evento de ação
-   * @param {object} payload
-   */
-  action({ type, action, element } = {}) {
-    const event = new CustomEvent('tray-login#action', {
-      detail: {
-        type,
-        action,
-        element,
-      },
-    });
-
-    window.dispatchEvent(event);
-  },
-
-  /**
    * Dispara um evento customizado
    * @param {object} payload
    */
@@ -45,6 +29,21 @@ const emitEvent = {
         response,
         type,
         method,
+      },
+    });
+
+    window.dispatchEvent(event);
+  },
+
+  /**
+   * Dispara um evento de login
+   * @param {object} label
+   */
+  click(label) {
+    const event = new CustomEvent('tray-login-click', {
+      detail: {
+        response: label,
+        type: 'click',
       },
     });
 

@@ -39,8 +39,7 @@
       </small>
       <button
         class="tray-btn-primary"
-        type="submit"
-        @click="dispatch">
+        type="submit">
         {{ $lang['proceed'] }}
       </button>
     </form>
@@ -144,19 +143,6 @@ export default {
     ...mapActions([
       'setIdentification',
     ]),
-
-    /**
-     * Dispara o evento para identificar que
-     * o usuario verificou se existe uma conta registrada
-     * @param {object} event
-     */
-    dispatch(event) {
-      this.$emitEvent.action({
-        action: 'check-has-acount',
-        type: event.type,
-        element: event.target,
-      });
-    },
 
     /**
      * Define um erro de validação caso exista
