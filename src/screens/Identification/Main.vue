@@ -4,6 +4,7 @@
       <strong class="tray-title tray-login__title">
         {{ $lang['identify-title'] }}
       </strong>
+      <slot name="custom-texts"></slot>
     </header>
     <form method='POST' @submit.prevent="submit">
       <fieldset class="tray-input-group">

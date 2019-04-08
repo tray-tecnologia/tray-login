@@ -3,10 +3,11 @@
     <section v-if="screen === 'Main'"
       id="tray-login-identify">
       <header>
-        <strong class="tray-title tray-login__title">
+        <strong class="tray-title">
           {{ $lang['main-title'] }}
         </strong>
-        <p class="tray-action" v-html="text || $lang['main-action']"></p>
+        <slot v-if="this.$slots['custom-texts']" name="custom-texts"></slot>
+        <p v-else class="tray-action" v-html="$lang['main-action']"></p>
         <label class="tray-well">
           {{ identification }}
         </label>
@@ -108,12 +109,6 @@ export default {
           session_id: '',
           store_id: '',
         };
-      },
-    },
-    text: {
-      type: String,
-      default() {
-        return '';
       },
     },
   },

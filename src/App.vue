@@ -8,7 +8,10 @@
       <app-identification v-if="screen === 'Identification'"
         :callback="callback"
         :params="params">
-
+        <app-custom-texts v-if="hasCustomTexts"
+          :action="this.customTexts['main-action']"
+          slot="custom-texts">
+        </app-custom-texts>
         <app-facebook-login v-if="facebookEnabled"
           :callback="callback"
           :params="params"
@@ -18,15 +21,17 @@
 
       <app-login v-if="screen === 'Main'"
         :callback="callback"
-        :params="params"
-        :text="text">
-
+        :params="params">
+        <app-custom-texts v-if="hasCustomTexts"
+          :error="this.customTexts['general-error-alert']"
+          :action="this.customTexts['main-action']"
+          slot="custom-texts">
+        </app-custom-texts>
         <app-facebook-login v-if="facebookEnabled"
           :callback="callback"
           :params="params"
           slot="app-facebook-login">
         </app-facebook-login>
-
         <button v-if="identificationEnabled"
           class="tray-btn-default"
           @click="reset"
@@ -44,8 +49,12 @@
             {{ $lang['blocked-user'] }}
           </p>
         </header>
-
-        <p class="tray-action">
+        <app-custom-texts v-if="hasCustomTexts"
+          :error="this.customTexts['general-error-alert']"
+          :action="this.customTexts['main-action']"
+          slot="custom-texts">
+        </app-custom-texts>
+        <p class="tray-action" v-else>
           {{ $lang ['identify-error-not-found' ]}}
         </p>
         <app-facebook-login v-if="facebookEnabled"
@@ -53,7 +62,6 @@
           :params="params"
           slot="app-facebook-login">
         </app-facebook-login>
-
         <button v-if="identificationEnabled"
           class="tray-btn-default"
           @click="reset"
@@ -83,6 +91,7 @@ import http from 'api-client';
 import AppFacebookLogin from './components/FacebookLogin.vue';
 import AppIdentification from './screens/Identification/Main.vue';
 import AppLogin from './screens/Login/screens/Main.vue';
+import AppCustomTexts from './components/CustomTexts.vue';
 import screenHandler from '@/mixins/screenHandler';
 
 export default {
@@ -91,6 +100,7 @@ export default {
   components: {
     AppFacebookLogin,
     AppIdentification,
+    AppCustomTexts,
     AppLogin,
   },
   mixins: [screenHandler],
@@ -116,10 +126,6 @@ export default {
       type: String,
       default: '',
     },
-    locale: {
-      type: String,
-      default: 'pt_BR',
-    },
     methods: {
       type: [String, Array],
       default() {
@@ -134,10 +140,10 @@ export default {
       type: String,
       default: '',
     },
-    text: {
-      type: [String],
+    texts: {
+      type: [String, Object],
       default() {
-        return '';
+        return '{"general-error-alert": "", "main-action": ""}';
       },
     },
   },
@@ -175,6 +181,27 @@ export default {
      */
     identificationEnabled() {
       return this.methods.indexOf('identify') !== -1;
+    },
+
+    /**
+     * Verifica se existe algum texto personalizado definido
+     * pelo usuário
+     * @return {boolean}
+     */
+    hasCustomTexts() {
+      return Object.values(this.customTexts).some(value => value);
+    },
+
+    /**
+     * Realiza o tratamento dos textos personalizados
+     * definidos pelo usuário
+     */
+    customTexts() {
+      try {
+        return JSON.parse(this.texts);
+      } catch {
+        return this.texts;
+      }
     },
 
     /**
