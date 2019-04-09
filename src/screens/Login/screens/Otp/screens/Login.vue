@@ -35,8 +35,7 @@
     </small>
     <button
       class="tray-btn-primary"
-      type="submit"
-      @click="dispatch">
+      type="submit">
       {{ $lang['new-password-code-submit' ]}}
     </button>
     <button
@@ -127,22 +126,6 @@ export default {
     }),
     generateSecurityCode: http.generateSecurityCode,
     otpLogin: http.otpLogin,
-
-    /**
-     * Dispara o evento para identificar que
-     * o usuario verificou se existe uma conta registrada
-     * @param {object} event
-     */
-    dispatch(event = {
-      type: '',
-      target: '',
-    }) {
-      this.$emitEvent.action({
-        action: 'security-code',
-        type: event.type,
-        element: event.target,
-      });
-    },
 
     /**
      * Realiza o login com o código de segurança

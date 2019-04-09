@@ -38,8 +38,7 @@
     </small>
     <button
       class="tray-btn-primary"
-      type="submit"
-      @click="dispatch">
+      type="submit">
       {{ $lang['new-password-code-submit'] }}
     </button>
     <button
@@ -123,18 +122,6 @@ export default {
       setPassword: 'setPassword',
     }),
 
-    /**
-     * Dispara o evento para identificar que
-     * o usuario verificou se existe uma conta registrada
-     * @param {object} event
-     */
-    dispatch(event) {
-      this.$emitEvent.action({
-        action: 'security-code',
-        type: event.type,
-        element: event.target,
-      });
-    },
 
     /**
      * Reseta o módulo de recuperação de senha

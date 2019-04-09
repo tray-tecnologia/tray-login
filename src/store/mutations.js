@@ -14,6 +14,6 @@ export default {
    * @param {object} lang
    */
   setLang(state, lang) {
-    state.lang = { ...state.lang, lang };
+    state.lang = lang;
   },
 };

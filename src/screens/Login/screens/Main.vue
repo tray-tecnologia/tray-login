@@ -24,13 +24,16 @@
           <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
         </small>
         <p class="tray-action">
-          <a @click.prevent="setScreen('RecoverPassword')"
+          <a @click.prevent="
+              $emitEvent.click('tray-password-recover'),
+              setScreen('RecoverPassword')"
             class="tray-link"
             href="#">
-            {{ $lang['password-forget']}}
+            {{ $lang['password-forget'] }}
           </a>
         </p>
         <button
+          @click="$emitEvent.click('tray-password-submit')"
           class="tray-btn-primary"
           type="submit">
           {{ $lang['proceed'] }}
@@ -45,7 +48,9 @@
       <button
         type="button"
         class="tray-btn-primary tray-btn-otp"
-        @click.prevent="setScreen('Otp')">
+        @click.prevent="
+          $emitEvent.click('tray-random-code')
+          setScreen('Otp')">
         {{ $lang['otp-receive'] }}
       </button>
       <slot name="app-facebook-login"></slot>

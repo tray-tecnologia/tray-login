@@ -2,7 +2,7 @@
   <form class="tray-login__recover-password__new-password" method='POST' @submit.prevent="submit">
     <header>
       <strong class="tray-title tray-login__title">
-        {{ $lang['new-password-success']}}
+        {{ $lang['new-password-title']}}
       </strong>
       <p class="tray-action">
         {{ $lang['new-password-action'] }}
@@ -24,8 +24,7 @@
       </span>
     </small>
     <button class="tray-btn-primary"
-      type="submit"
-      @click="dispatch">
+      type="submit">
       {{ $lang['proceed'] }}
     </button>
     <button class="tray-btn-default"
@@ -108,19 +107,6 @@ export default {
     ...mapActions('Login', {
       backTo: 'setScreen',
     }),
-
-    /**
-     * Dispara o evento para identificar que
-     * o usuario verificou se existe uma conta registrada
-     * @param {object} event
-     */
-    dispatch(event) {
-      this.$emitEvent.action({
-        action: 'recover-password',
-        type: event.type,
-        element: event.target,
-      });
-    },
 
     /**
      * Verifica se a senha é valida

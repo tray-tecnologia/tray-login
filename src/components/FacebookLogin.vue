@@ -2,7 +2,7 @@
   <button
     ref="facebook-button"
     class="tray-btn-facebook"
-    @click="doFacebookLogin">
+    @click="$emitEvent.click('tray-login-facebook'), doFacebookLogin($event)">
       Facebook
   </button>
 </template>
@@ -46,13 +46,6 @@ export default {
       crossdm: encodeURIComponent(document.location.origin),
     }) {
       this.$parent.setLoading(true);
-
-      this.$emitEvent.action({
-        action: 'facebook-login',
-        element: event.target,
-        type: event.type,
-      });
-
       this.facebookLogin(payload).then((response) => {
         this.$emitEvent.login({
           response,
