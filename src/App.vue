@@ -54,9 +54,7 @@
           :action="this.customTexts['main-action']"
           slot="custom-texts">
         </app-custom-texts>
-        <p class="tray-action" v-else>
-          {{ $lang ['identify-error-not-found' ]}}
-        </p>
+        <p class="tray-action" v-else v-html="$lang ['identify-error-not-found']"></p>
         <app-facebook-login v-if="facebookEnabled"
           :callback="callback"
           :params="params"
@@ -84,7 +82,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import store from './store';
 
 import http from 'api-client';
@@ -124,7 +122,7 @@ export default {
     },
     identification: {
       type: String,
-      default: '',
+      default: 'teste@tray.com.br',
     },
     methods: {
       type: [String, Array],
@@ -162,9 +160,17 @@ export default {
     identification(identification) {
       this.initialize(identification);
     },
+    blockedUser(blockedUser) {
+      if (blockedUser) {
+        this.setScreen('Blocked');
+      }
+    },
   },
 
   computed: {
+    ...mapState([
+      'blockedUser',
+    ]),
     /**
      * Verifica se o login com o facebook será utilizado
      *
@@ -245,13 +251,9 @@ export default {
      * @param {event}
      */
     close(event) {
-      this.$emitEvent.custom({
-        name: 'close',
-        details: {
-          action: 'close',
-          element: event.target,
-          type: event.type,
-        },
+      this.$emitEvent.custom('close', {
+        element: event.target,
+        type: event.type,
       });
 
       const trayLogin = document.querySelector('tray-login');
@@ -266,13 +268,9 @@ export default {
      * @param {event}
      */
     reset(event) {
-      this.$emitEvent.custom({
-        name: 'reset',
-        details: {
-          action: 'reset',
-          element: event.target,
-          type: event.type,
-        },
+      this.$emitEvent.custom('reset', {
+        element: event.target,
+        type: event.type,
       });
 
       this.setScreen('Identification');

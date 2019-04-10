@@ -9,6 +9,6 @@ export const http = axios.create({
  * Define o plugin Axios como propriedade do Vue
  * @param {object} store | estado da aplicação para manipulação
  */
-export default function install({ store }) {
+export default function install(store) {
   interceptors(http, store);
 }

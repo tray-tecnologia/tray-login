@@ -16,4 +16,13 @@ export default {
   setLang(state, lang) {
     state.lang = lang;
   },
+
+  /**
+   * Define o bloqueio de usuario
+   * @param {object} state
+   * @param {boolean} blocked_user
+   */
+  setBlockedUser(state, blockedUser) {
+    state.blockedUser = blockedUser;
+  },
 };

@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="tray-login-screens">
     <section v-if="screen === 'Main'"
       id="tray-login-identify">
       <header>
@@ -47,7 +47,7 @@
       </div>
       <button
         type="button"
-        class="tray-btn-primary tray-btn-otp"
+        class="tray-btn-otp"
         @click.prevent="
           $emitEvent.click('tray-random-code')
           setScreen('Otp')">
@@ -124,6 +124,7 @@ export default {
     };
   },
   mounted() {
+    this.$emitEvent.custom('main');
     const payload = {
       ...this.params,
       endpoint: 'check-status',

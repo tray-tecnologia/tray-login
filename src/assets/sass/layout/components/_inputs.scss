@@ -1,12 +1,15 @@
 $general-input: $white;
 $input-error: $red;
 
-tray-login,
-.tray-login {
+tray-login {
     .tray-input-group {
         border: 0;
         padding: 0;
         position: relative;
+
+        .tray-input-icon {
+            color: #909090;
+        }
     }
 
     .tray-input {
@@ -63,6 +66,10 @@ tray-login,
 
     .tray-error-message {
         color: $input-error;
+
+        strong {
+            color: $input-error;
+        }
     }
 
     .tray-well {
