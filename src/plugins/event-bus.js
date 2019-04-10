@@ -11,7 +11,6 @@ const emitEvent = {
     const event = new CustomEvent(`tray-login#${name}`, {
       details,
     });
-
     window.dispatchEvent(event);
   },
 

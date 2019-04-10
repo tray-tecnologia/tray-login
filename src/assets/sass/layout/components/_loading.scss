@@ -9,8 +9,7 @@ $loading-width: $loading-height / 2;
 $gradient-color-1: #000;
 $gradient-color-2: rgba(0, 0, 0, 0);
 
-tray-login,
-.tray-login {
+tray-login {
     .tray-loading {
         @include display-flex();
         align-items: center;

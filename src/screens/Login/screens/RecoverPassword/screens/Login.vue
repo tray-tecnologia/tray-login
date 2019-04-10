@@ -1,7 +1,7 @@
 <template>
   <form method="POST" class="tray-login__recover-password__login" @submit.prevent="submit">
     <header>
-      <h1 class="tray-title tray-login__recover-password__login__title">
+      <h1 class="tray-title tray-title--center tray-login__recover-password__login__title">
         {{ $lang['new-password-success'] }}
       </h1>
     </header>

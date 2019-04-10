@@ -2,8 +2,7 @@ $color: $default-color;
 $background: $white;
 $overlay-color: rgba(0,0,0,.5);
 
-tray-login,
-.tray-login {
+tray-login {
     * {
         box-sizing: border-box;
     }
@@ -27,6 +26,11 @@ tray-login,
         &:focus {
             transition: all .3s linear;
         }
+    }
+
+    label {
+        padding: 0;
+        margin: 0;
     }
 
     color: $color;
@@ -66,6 +70,10 @@ tray-login,
         font-size: 18px;
         margin: 0 0 $default-margin;
         display: block;
+
+        &--center {
+            text-align: center;
+        }
     }
 
     .tray-action {
@@ -73,7 +81,7 @@ tray-login,
     }
 
     .tray-link {
-        color: $default-color;
+        text-decoration: underline;
     }
 
     .tray-custom-text {

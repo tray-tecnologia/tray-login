@@ -12,7 +12,6 @@ export default {
       }
 
       let redirectParam = '';
-
       if (token) {
         redirectParam = `?token=${token}`;
         if (callback.indexOf('?') > -1) {
