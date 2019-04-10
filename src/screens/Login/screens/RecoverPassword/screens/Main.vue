@@ -49,6 +49,9 @@ export default {
       default: '/',
     },
   },
+  mounted() {
+    this.$emitEvent.custom('recovery-password');
+  },
   computed: {
     ...mapState([
       'identification',

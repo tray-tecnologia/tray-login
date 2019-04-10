@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import { httpPlugin, eventBus } from '@/plugins';
+import vueCustomElement from 'vue-custom-element';
+
 
 /**
  * Componente centralizador
@@ -9,16 +11,7 @@ import store from './store';
 
 Vue.config.productionTip = false;
 Vue.use(eventBus);
+Vue.use(vueCustomElement);
 httpPlugin({ store });
 
-if (process.env.NODE_ENV === 'development') {
-  new Vue({
-    render: h => h(App),
-  }).$mount('#app');
-}
-
-/**
- * Exporta a aplicação como um web-componet
- * veja o comando de build no package.json
- */
-export default App;
+Vue.customElement('tray-login', App);

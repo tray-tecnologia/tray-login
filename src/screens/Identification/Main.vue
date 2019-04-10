@@ -80,6 +80,9 @@ export default {
       },
     },
   },
+  mounted() {
+    this.$emitEvent.custom('identify');
+  },
   computed: {
     ...mapState([
       'identification',

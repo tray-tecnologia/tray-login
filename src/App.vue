@@ -245,13 +245,9 @@ export default {
      * @param {event}
      */
     close(event) {
-      this.$emitEvent.custom({
-        name: 'close',
-        details: {
-          action: 'close',
-          element: event.target,
-          type: event.type,
-        },
+      this.$emitEvent.custom('close', {
+        element: event.target,
+        type: event.type,
       });
 
       const trayLogin = document.querySelector('tray-login');
@@ -266,13 +262,9 @@ export default {
      * @param {event}
      */
     reset(event) {
-      this.$emitEvent.custom({
-        name: 'reset',
-        details: {
-          action: 'reset',
-          element: event.target,
-          type: event.type,
-        },
+      this.$emitEvent.custom('reset', {
+        element: event.target,
+        type: event.type,
       });
 
       this.setScreen('Identification');

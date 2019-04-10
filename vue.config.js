@@ -1,7 +1,18 @@
 const path = require('path');
 
 module.exports = {
-  chainWebpack: (config) => {
+  css: {
+    extract: false,
+  },
+  configureWebpack: {
+    output: {
+      filename: () => 'tray-login.js',
+    },
+    optimization: {
+      splitChunks: false,
+    },
+  },
+  chainWebpack(config) {
     const apiClient = process.env.VUE_APP_API_CLIENT;
     config.resolve.alias.set(
       'api-client',
