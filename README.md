@@ -18,11 +18,14 @@ identification  | Identificação utilizada para login (opcional)
 ## Eventos
 Lista de eventos disparados pelo componente.
 
-Evento              | Descrição
---------            | -----------
-tray-login          | Dispara quando finalizou o processo de login
-tray-login#action   | Dispara sempre que uma ação é efetuada no componente
-tray-login#close    | Dispara quando fecha o componente
+Evento                      | Descrição
+--------                    | -----------
+tray-login                  | Dispara quando finalizou o processo de login
+tray-login#close            | Dispara quando fecha o componente
+tray-login#identify         | Dispara quando abre a tela de identificação
+tray-login#main             | Dispara quando abre a tela de login
+tray-login#otp              | Dispara quando abre a tela de login com OTP
+tray-login#recover-password | Dispara quando abre a tela de recuperação de senha
 
 
 ## Uso

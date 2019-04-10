@@ -4,9 +4,10 @@
 const emitEvent = {
   /**
    * Dispara um evento customizado
-   * @param {object} payload
+   * @param {string} name
+   * @param {object} details
    */
-  custom({ name, details = {} } = {}) {
+  custom(name = 'custom', details = {}) {
     const event = new CustomEvent(`tray-login#${name}`, {
       details,
     });
