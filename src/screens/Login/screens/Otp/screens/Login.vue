@@ -98,6 +98,7 @@ export default {
     };
   },
   mounted() {
+    this.$emitEvent.custom('otp');
     this.setLoading(true);
     this.generateSecurityCode({
       ...this.params,

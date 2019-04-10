@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="tray-login-screens">
     <section v-if="screen === 'Main'"
       id="tray-login-identify">
       <header>
@@ -124,6 +124,7 @@ export default {
     };
   },
   mounted() {
+    this.$emitEvent.custom('main');
     const payload = {
       ...this.params,
       endpoint: 'check-status',
