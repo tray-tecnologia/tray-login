@@ -9980,6 +9980,11 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-custom-element@^3.2.6:
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/vue-custom-element/-/vue-custom-element-3.2.6.tgz#9e3f52eb5c5014c298cad731321ed64487fada0b"
+  integrity sha512-tNWsax/Rq4Sr1QHj0pi4CWaBnAYfva75rlQg2fBKGja35+6AmdcZre/ztoiBWCSlSJ7APsMakG5R0A+GWBAc4Q==
+
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"

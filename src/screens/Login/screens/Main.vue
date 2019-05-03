@@ -45,16 +45,9 @@
           {{ $lang['main-separator'] }}
         </span>
       </div>
-      <button
-        type="button"
-        class="tray-btn-primary tray-btn-otp"
-        @click.prevent="
-          $emitEvent.click('tray-random-code')
-          setScreen('Otp')">
-        {{ $lang['otp-receive'] }}
-      </button>
+      <slot name="app-otp-login"></slot>
       <slot name="app-facebook-login"></slot>
-      <slot name="back-step"></slot>
+      <slot name="app-back-step"></slot>
     </section>
 
     <app-recover-password v-if="screen === 'RecoverPassword'"
@@ -124,7 +117,9 @@ export default {
     };
   },
   mounted() {
+    this.setLoading(true);
     this.$emitEvent.custom('main');
+
     const payload = {
       ...this.params,
       endpoint: 'check-status',
@@ -132,7 +127,6 @@ export default {
       [this.identificationType]: this.identification,
     };
 
-    this.setLoading(true);
     this.checkUserStatus(payload).then((response) => {
       if (response.data.data.blocked) {
         this.$parent.setScreen('Blocked');
@@ -182,37 +176,34 @@ export default {
       [this.identificationType]: this.identification,
     }) {
       this.setLoading(true);
-      this.passwordLogin(payload)
-        .then((response) => {
-          this.clearErrors();
-          this.$emitEvent.login({
-            details: {
-              response,
-              method: 'password',
-              type: 'success',
-            },
-          });
-
-          if (this.callback) {
-            this.redirect(this.callback, response.data.data.token);
-
-            return response;
-          }
-
-          this.setLoading(false);
-          return response;
-        })
-        .catch((error) => {
-          this.$emitEvent.login({
-            response: error,
+      this.passwordLogin(payload).then((response) => {
+        this.clearErrors();
+        this.$emitEvent.login({
+          details: {
+            response,
             method: 'password',
-            type: 'error',
-          });
-
-          const { message } = error.data;
-          this.setError(message || this.$lang['invalid-code']);
-          this.setLoading(false);
+            type: 'success',
+          },
         });
+
+        if (this.callback) {
+          this.redirect(this.callback, response.data.data.token);
+          return response;
+        }
+
+        this.setLoading(false);
+        return response;
+      }).catch((error) => {
+        this.$emitEvent.login({
+          response: error,
+          method: 'password',
+          type: 'error',
+        });
+
+        const { message } = error.data;
+        this.setError(message || this.$lang['invalid-code']);
+        this.setLoading(false);
+      });
     },
   },
 };

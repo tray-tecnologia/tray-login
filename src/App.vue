@@ -5,42 +5,52 @@
         @click="close">
         X
       </button>
-      <app-identification v-if="screen === 'Identification'"
-        :callback="callback"
+      <app-identification id="identify" v-if="screen === 'Identification'"
+        class="tray-login-screens"
+        :callback="this.dataCallback"
         :params="params">
         <app-custom-texts v-if="hasCustomTexts"
           :action="this.customTexts['main-action']"
           slot="custom-texts">
         </app-custom-texts>
         <app-facebook-login v-if="facebookEnabled"
-          :callback="callback"
+          :callback="this.dataCallback"
           :params="params"
           slot="app-facebook-login">
         </app-facebook-login>
       </app-identification>
 
-      <app-login v-if="screen === 'Main'"
-        :callback="callback"
+      <app-login id="main" v-if="screen === 'Main'"
+        class="tray-login-screens"
+        :callback="this.dataCallback"
         :params="params">
         <app-custom-texts v-if="hasCustomTexts"
           :error="this.customTexts['general-error-alert']"
           :action="this.customTexts['main-action']"
           slot="custom-texts">
         </app-custom-texts>
+        <app-otp-button v-if="otpEnabled"
+          :callback="this.dataCallback"
+          :params="params"
+          slot="app-otp-login"
+        >
+        </app-otp-button>
         <app-facebook-login v-if="facebookEnabled"
-          :callback="callback"
+          :callback="this.dataCallback"
           :params="params"
           slot="app-facebook-login">
         </app-facebook-login>
-        <button v-if="identificationEnabled"
+        <button type="button"
+          v-if="identificationEnabled"
           class="tray-btn-default"
           @click="reset"
-          slot="back-step">
+          slot="app-back-step">
           {{ $lang['go-back'] }}
         </button>
       </app-login>
 
-      <section v-if="screen === 'Blocked'">
+      <section id="blocked" v-if="screen === 'Blocked'"
+        class="tray-login-screens">
         <header>
           <strong class="tray-title tray-login__title">
             {{ $lang['main-title']}}
@@ -54,9 +64,7 @@
           :action="this.customTexts['main-action']"
           slot="custom-texts">
         </app-custom-texts>
-        <p class="tray-action" v-else>
-          {{ $lang ['identify-error-not-found' ]}}
-        </p>
+        <p class="tray-action" v-else v-html="$lang['main-action']"></p>
         <app-facebook-login v-if="facebookEnabled"
           :callback="callback"
           :params="params"
@@ -65,12 +73,13 @@
         <button v-if="identificationEnabled"
           class="tray-btn-default"
           @click="reset"
-          slot="back-step">
+          slot="app-back-step">
           {{ $lang['go-back'] }}
         </button>
       </section>
 
-      <section class="tray-loading" v-show="loading">
+      <section id="tray-login-loading" v-show="loading"
+        class="tray-loading">
         <div class="tray-loading-mask">
           <div class="tray-loading-line"></div>
         </div>
@@ -84,13 +93,14 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import store from './store';
 
 import http from 'api-client';
 import AppFacebookLogin from './components/FacebookLogin.vue';
 import AppIdentification from './screens/Identification/Main.vue';
 import AppLogin from './screens/Login/screens/Main.vue';
+import AppOtpButton from './screens/Login/screens/Otp/Button.vue';
 import AppCustomTexts from './components/CustomTexts.vue';
 import screenHandler from '@/mixins/screenHandler';
 
@@ -98,9 +108,10 @@ export default {
   store,
   name: 'TrayLogin',
   components: {
+    AppCustomTexts,
     AppFacebookLogin,
     AppIdentification,
-    AppCustomTexts,
+    AppOtpButton,
     AppLogin,
   },
   mixins: [screenHandler],
@@ -112,46 +123,46 @@ export default {
     };
   },
   props: {
-    callback: {
+    dataBaseUrl: {
+      type: String,
+      default: 'checkout',
+    },
+    dataCallback: {
       type: String,
       default: '/',
     },
-    configurations: {
-      type: [String, Array],
-      default() {
-        return ['default_actions'];
-      },
-    },
-    identification: {
+    dataIdentification: {
       type: String,
       default: '',
     },
-    methods: {
+    dataMethods: {
       type: [String, Array],
       default() {
         return ['facebook', 'identify'];
       },
     },
-    session: {
+    dataSession: {
       type: String,
       default: '',
     },
-    store: {
-      type: String,
+    dataStore: {
+      type: [String, Number],
       default: '',
     },
-    texts: {
+    dataTexts: {
       type: [String, Object],
       default() {
         return '{"general-error-alert": "", "main-action": ""}';
       },
     },
   },
-
+  beforeMount() {
+    this.setBaseUrl(this['base-url']);
+  },
   mounted() {
-    this.initialize(this.identification);
+    this.initialize(this.dataIdentification);
     this.getLangs({
-      store_id: this.store,
+      store_id: this.dataStore,
       endpoint: 'langs/login_component',
     }).then((response) => {
       this.setLang(response.data);
@@ -159,28 +170,46 @@ export default {
   },
 
   watch: {
-    identification(identification) {
+    dataIdentification(identification) {
       this.initialize(identification);
+    },
+    blockedUser(blockedUser) {
+      if (blockedUser) {
+        this.setScreen('Blocked');
+      }
+    },
+    dataBaseUrl(baseUrl) {
+      this.setBaseUrl(baseUrl);
     },
   },
 
   computed: {
+    ...mapState([
+      'blockedUser',
+    ]),
+
+    /**
+     * Verifica se o login com o otp será utilizado
+     * @return {boolean}
+     */
+    otpEnabled() {
+      return this.dataMethods.indexOf('otp') !== -1;
+    },
+
     /**
      * Verifica se o login com o facebook será utilizado
-     *
      * @return {boolean}
      */
     facebookEnabled() {
-      return this.methods.indexOf('facebook') !== -1;
+      return this.dataMethods.indexOf('facebook') !== -1;
     },
 
     /**
      * Verifica se o modulo de identificação será utilizado
-     *
      * @return {boolean}
      */
     identificationEnabled() {
-      return this.methods.indexOf('identify') !== -1;
+      return this.dataMethods.indexOf('identify') !== -1;
     },
 
     /**
@@ -198,9 +227,9 @@ export default {
      */
     customTexts() {
       try {
-        return JSON.parse(this.texts);
+        return JSON.parse(this.dataTexts);
       } catch {
-        return this.texts;
+        return this.dataTexts;
       }
     },
 
@@ -211,8 +240,8 @@ export default {
      */
     params() {
       return {
-        session_id: this.session,
-        store_id: this.store,
+        session_id: this.dataSession,
+        store_id: this.dataStore,
       };
     },
   },
@@ -222,6 +251,7 @@ export default {
     ...mapActions([
       'setIdentification',
       'setLang',
+      'setBaseUrl',
     ]),
 
     /**

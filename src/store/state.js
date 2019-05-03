@@ -1,5 +1,6 @@
 export default {
   screen: 'Identification',
+  blockedUser: false,
   identification: '',
   lang: {
     // identify screen

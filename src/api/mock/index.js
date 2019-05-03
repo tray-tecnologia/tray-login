@@ -18,6 +18,17 @@ import passwordUpdateError from './data/error/password-update.json';
 import otpLoginSucces from './data/otp.json';
 import otpLoginError from './data/error/otp.json';
 
+const users = [
+  'teste@tray.com.br',
+  'usuariobloqueado@tray.com.br',
+];
+
+const blockedusers = [
+  'usuariobloqueado@tray.com.br',
+];
+
+const delay = 300;
+
 /*
  * Cria uma promisse para o mock desejado
  * @param {json} mockData
@@ -35,17 +46,6 @@ const fetch = (mockData, delay = delay, isValid = true) => {
     }, delay);
   });
 };
-
-const users = [
-  'teste@tray.com.br',
-  'usuariobloqueado@tray.com.br',
-];
-
-const blockedusers = [
-  'usuariobloqueado@tray.com.br',
-];
-
-const delay = 300;
 
 /**
  * Exporta os mocks com o delay definido

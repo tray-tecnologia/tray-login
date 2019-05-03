@@ -21,11 +21,13 @@
         </figure>
       </label>
       <input
-        type="text"
+        type="tel"
         v-autofocus
         id="password-code"
         class="tray-input"
         v-model="securityCode"
+        maxlength="6"
+        autocomplete="off"
         :class="securityCodeClassses"
         :placeholder="$lang['otp-title']"/>
     </fieldset>
@@ -39,7 +41,7 @@
       {{ $lang['new-password-code-submit' ]}}
     </button>
     <button
-      class="tray-btn-primary tray-btn-default"
+      class="tray-btn-default"
       type="reset"
       @click="backTo('Main')">
       {{ $lang['other-option'] }}
@@ -97,18 +99,6 @@ export default {
       securityCode: '',
     };
   },
-  mounted() {
-    this.$emitEvent.custom('otp');
-    this.setLoading(true);
-    this.generateSecurityCode({
-      ...this.params,
-      endpoint: 'generate-security-code',
-      identification: this.identification,
-      [this.identificationType]: this.identification,
-    }).then(() => {
-      this.setLoading(false);
-    });
-  },
   computed: {
     /**
      * Objeto de classes utilizadas na personalização do input
@@ -121,11 +111,13 @@ export default {
       };
     },
   },
+  mounted() {
+    this.$emitEvent.custom('otp');
+  },
   methods: {
     ...mapActions('Login', {
       backTo: 'setScreen',
     }),
-    generateSecurityCode: http.generateSecurityCode,
     otpLogin: http.otpLogin,
 
     /**

@@ -8,9 +8,8 @@ export default (http, store) => {
      */
     (error) => {
       const { response } = error;
-
       if ([403].indexOf(response.status) !== -1) {
-        store.dispatch('setScreen', 'Blocked');
+        store.dispatch('setBlockedUser', true);
       }
 
       return Promise.reject(response);

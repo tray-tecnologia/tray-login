@@ -6,13 +6,13 @@ Web Component para realizar login nas lojas da Tray.
 `npm install tray-login`
 
 ## Atributos
-Atributo        | Descrição
---------        | -----------
-store           | ID da loja
-methods         | Tipos de login que você deseja utilizar, opções: ['facebook', 'password', 'otp']
-callback        | URL de callback caso o login esteja correto
-texts           | Textos personalizados (opcional)
-identification  | Identificação utilizada para login (opcional)
+Atributo             | Descrição
+--------             | -----------
+data-store           | ID da loja
+data-methods         | Tipos de login que você deseja utilizar, opções: ['facebook', 'password', 'otp']
+data-callback        | URL de callback caso o login esteja correto
+data-texts           | Textos personalizados (opcional)
+data-identification  | Identificação utilizada para login (opcional)
 
 
 ## Eventos
@@ -40,10 +40,10 @@ tray-login#recover-password | Dispara quando abre a tela de recuperação de sen
 
 ```HTML
 <tray-login
-    methods="['facebook']"
-    callback="/callback.html"
-    store="351572"
-    texts="{}">
+    data-methods="['facebook']"
+    data-callback="/callback.html"
+    data-store="351572"
+    data-texts="{}">
 </tray-login>
 ```
 
