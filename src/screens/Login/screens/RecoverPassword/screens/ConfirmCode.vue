@@ -1,5 +1,6 @@
 <template>
-  <form class="tray-login__recover-password__confirm-code" method='POST' @submit.prevent="submit">
+  <form id="send-security-code"
+    class="tray-login__recover-password__confirm-code" method='POST' @submit.prevent="submit">
     <header class="tray-login__recover-password__confirm-code__header">
       <figure class="tray-login__recover-password__confirm-code__icon">
         <svg class="tray-icon-mail" viewBox="0 0 1024 1024">
@@ -36,13 +37,12 @@
       <span class="tray-error-message" v-html="errors[errors.length - 1]">
       </span>
     </small>
-    <button
+    <button id="security-code-submit"
       class="tray-btn-primary"
       type="submit">
       {{ $lang['new-password-code-submit'] }}
     </button>
-    <button
-      class="tray-btn-default"
+    <button class="tray-btn-default tray-btn-other-option"
       type="reset"
       @click="reset">
       {{ $lang['other-option'] }}

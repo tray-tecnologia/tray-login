@@ -23,16 +23,14 @@
         <small class="tray-feedbacks" v-show="errors.length">
           <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
         </small>
-        <p class="tray-action">
-          <a @click.prevent="
-              $emitEvent.click('tray-password-recover'),
-              setScreen('RecoverPassword')"
-            class="tray-link"
-            href="#">
-            {{ $lang['password-forget'] }}
-          </a>
-        </p>
-        <button
+        <a class="tray-link tray-password-forget"
+          @click.prevent="
+            $emitEvent.click('tray-password-recover'),
+            setScreen('RecoverPassword')"
+          href="#">
+          {{ $lang['password-forget'] }}
+        </a>
+        <button id="password-submit"
           @click="$emitEvent.click('tray-password-submit')"
           class="tray-btn-primary"
           type="submit">

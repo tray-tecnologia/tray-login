@@ -1,5 +1,5 @@
 <template>
-  <section id="tray-login__recover-password" class="tray-login__recover-password">
+  <section id="new-password" class="tray-login__recover-password">
     <app-new-password v-if="screen == 'New'"
       :identification="identification"
       :identificationType="identificationType"
