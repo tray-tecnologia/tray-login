@@ -38,7 +38,7 @@
     <button id="otp-submit"
       class="tray-btn-primary"
       type="submit">
-      {{ $lang['new-password-code-submit' ]}}
+      {{ $lang['proceed' ]}}
     </button>
     <button
       class="tray-btn-default"
@@ -141,7 +141,8 @@ export default {
         });
 
         if (this.callback) {
-          this.redirect(this.callback);
+          const { token = '' } = response.data.data;
+          this.redirect(this.callback, token);
           return;
         }
 

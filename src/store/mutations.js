@@ -34,4 +34,14 @@ export default {
   setBaseUrl(state, baseUrl) {
     state.baseUrl = baseUrl;
   },
+
+  /**
+   * Define a resolução do dispositivo que
+   * a aplicação está sendo executa
+   * @param {object} state
+   * @param {number} resolution
+   */
+  setResolution(state, resolution) {
+    state.resolution = resolution;
+  },
 };

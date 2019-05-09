@@ -37,4 +37,14 @@ export default {
     setHttpBaseUrl(baseUrl);
     commit('setBaseUrl', baseUrl);
   },
+
+  /**
+   * Dispara a ação para definir a resolução em que
+   * a aplicação está sendo executada
+   * @param {function} commit
+   * @param {number} resolution
+   */
+  setResolution({ commit }, resolution) {
+    commit('setResolution', resolution);
+  },
 };

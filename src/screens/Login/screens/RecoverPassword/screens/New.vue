@@ -27,7 +27,7 @@
     <button id="new-password-submit"
       class="tray-btn-primary"
       type="submit">
-      {{ $lang['proceed'] }}
+      {{ $lang['new-password-submit'] }}
     </button>
     <button class="tray-btn-default tray-btn-other-option"
       type="reset"

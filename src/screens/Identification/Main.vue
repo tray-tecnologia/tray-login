@@ -29,6 +29,7 @@
           @blur="validity()"
           @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
           class="tray-input"
+          autocapitalize="off"
           :class="identificationClasses"
           :placeholder="$lang['identify-input']"/>
       </fieldset>
