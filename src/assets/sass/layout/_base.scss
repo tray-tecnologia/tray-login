@@ -84,6 +84,11 @@ tray-login {
         text-decoration: underline;
     }
 
+    .tray-password-forget {
+        display: block;
+        margin: 0 0 $default-margin;
+    }
+
     .tray-custom-text {
         display: block;
         margin-bottom: 5px;

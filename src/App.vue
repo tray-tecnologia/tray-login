@@ -42,7 +42,7 @@
         </app-facebook-login>
         <button type="button"
           v-if="identificationEnabled"
-          class="tray-btn-default"
+          class="tray-btn-default tray-btn-other-option"
           @click="reset"
           slot="app-back-step">
           {{ $lang['go-back'] }}
@@ -79,6 +79,9 @@
       </section>
 
       <section id="tray-login-loading" v-show="loading"
+        :class="{
+          'tray-loading-hidden': !loading
+        }"
         class="tray-loading">
         <div class="tray-loading-mask">
           <div class="tray-loading-line"></div>
@@ -157,7 +160,7 @@ export default {
     },
   },
   beforeMount() {
-    this.setBaseUrl(this['base-url']);
+    this.setBaseUrl(this.dataBaseUrl);
   },
   mounted() {
     this.initialize(this.dataIdentification);

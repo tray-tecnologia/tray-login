@@ -1,6 +1,8 @@
 <template>
-  <form method='POST' @submit.prevent="submit">
-    <button type="submit"
+  <form method='POST' @submit.prevent="submit" id="form-otp">
+    <button
+      id="tray-login-otp"
+      type="submit"
       slot="app-otp-login"
       class="tray-btn-otp"
       @click="$emitEvent.custom('generate-security-code')">

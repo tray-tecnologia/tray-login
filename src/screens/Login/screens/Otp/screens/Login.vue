@@ -1,5 +1,5 @@
 <template>
-  <form class="tray-login__otp" method='POST' @submit.prevent="submit">
+  <form id="form-otp" class="tray-login__otp" method='POST' @submit.prevent="submit">
     <header class="tray-login__recover-password__confirm-code__header">
       <strong class="tray-title">
         {{ $lang['otp-title']}}
@@ -12,7 +12,7 @@
       </label>
     </header>
     <fieldset class="tray-input-group">
-      <label for="password-code">
+      <label for="input-code">
         <figure class="tray-input-icon" :class="securityCodeClassses">
           <svg class="tray-icon-locked" viewBox="0 0 1024 1024">
             <!-- eslint-disable-next-line -->
@@ -23,7 +23,7 @@
       <input
         type="tel"
         v-autofocus
-        id="password-code"
+        id="input-code"
         class="tray-input"
         v-model="securityCode"
         maxlength="6"
@@ -35,7 +35,7 @@
       <span class="tray-error-message" v-html="errors[errors.length - 1]">
       </span>
     </small>
-    <button
+    <button id="otp-submit"
       class="tray-btn-primary"
       type="submit">
       {{ $lang['new-password-code-submit' ]}}

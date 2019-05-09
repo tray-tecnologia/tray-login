@@ -1,5 +1,6 @@
 <template>
-  <form class="tray-login__recover-password__new-password" method='POST' @submit.prevent="submit">
+  <form id="change-password"
+    class="tray-login__new-password" method='POST' @submit.prevent="submit">
     <header>
       <strong class="tray-title tray-login__title">
         {{ $lang['new-password-title']}}
@@ -15,7 +16,7 @@
       :state="errors.length >= 1 ? 'invalid' : 'valid'"
       v-model="passwordHandler"
       @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
-      id="recover-password">
+      id="new-password-input">
     </app-toggle-password>
     <small class="tray-feedbacks"
       v-show="errors.length">
@@ -23,11 +24,12 @@
         v-html="errors[errors.length - 1]">
       </span>
     </small>
-    <button class="tray-btn-primary"
+    <button id="new-password-submit"
+      class="tray-btn-primary"
       type="submit">
       {{ $lang['proceed'] }}
     </button>
-    <button class="tray-btn-default"
+    <button class="tray-btn-default tray-btn-other-option"
       type="reset"
       @click="reset">
       {{ $lang['other-option'] }}

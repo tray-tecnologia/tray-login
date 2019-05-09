@@ -6,7 +6,7 @@
       </strong>
       <slot name="custom-texts"></slot>
     </header>
-    <form method='POST' @submit.prevent="submit">
+    <form id="form-identify" method='POST' @submit.prevent="submit">
       <fieldset class="tray-input-group">
         <label for="input-email">
           <figure class="tray-input-icon" :class="identificationClasses">
@@ -38,6 +38,7 @@
         </span>
       </small>
       <button
+        id="tray-login-identify"
         class="tray-btn-primary"
         type="submit">
         {{ $lang['proceed'] }}
