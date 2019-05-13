@@ -10,6 +10,10 @@ tray-login {
         .tray-input-icon {
             color: #909090;
         }
+
+        button {
+            padding: 0;
+        }
     }
 
     .tray-input {
@@ -85,7 +89,7 @@ tray-login {
     }
 
     .tray-general-separator {
-        color: #c7c7c7;
+        color: #909090;
         display: block;
         margin-bottom: 10px;
         text-align: center;
@@ -105,7 +109,7 @@ tray-login {
             top: 50%;
             width: 9999px;
             height: 1px;
-            background: #c7c7c7
+            background: #909090;
         }
 
         &:before {

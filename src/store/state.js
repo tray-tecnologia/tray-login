@@ -1,5 +1,4 @@
 export default {
-  screen: 'Identification',
   blockedUser: false,
   identification: '',
   lang: {
@@ -47,4 +46,6 @@ export default {
     'blocked-user': 'Por motivos de segurança bloqueamos o acesso por e-mail e senha durante 60 minutos.',
     'invalid-password': 'A nova senha deve possuir no mínimo 6 caracteres',
   },
+  screen: 'Identification',
+  resolution: 768,
 };

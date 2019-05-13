@@ -4,7 +4,6 @@ import { isValidCpf, isValidCnpj } from '@brazilian-utils/validators';
  * Retorna o tipo da identificação preenchida pelo usuário
  * @param {object} state
  */
-// eslint-disable-next-line
 export const identificationType = (state) => {
   let type = 'email';
 
@@ -18,3 +17,5 @@ export const identificationType = (state) => {
 
   return type;
 };
+
+export const isMobile = state => state.resolution <= 768;

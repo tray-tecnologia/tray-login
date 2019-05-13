@@ -82,7 +82,7 @@ export default {
           });
 
           if (this.callback) {
-            const { token } = response.data;
+            const { token = '' } = response.data.data;
             this.redirect(this.callback, token);
             return;
           }
