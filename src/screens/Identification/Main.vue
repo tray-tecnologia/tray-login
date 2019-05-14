@@ -178,14 +178,19 @@ export default {
 
       this.setLoading(true);
       this.checkHasAccount(payload)
-        .then(() => {
+        .then((response) => {
+          const { hasAccount } = response.data || false;
+          if (!hasAccount) {
+            throw response;
+          }
+
           this.clearErrors();
           this.$parent.setScreen('Main');
           this.setLoading(false);
         })
         .catch((error) => {
-          const { message } = error.data;
-          this.setError(message || this.$lang['invalid-code']);
+          const { message = this.$lang['identify-error-not-found'] } = error || false;
+          this.setError(message);
           this.setLoading(false);
         });
     },

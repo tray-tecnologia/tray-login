@@ -7,7 +7,7 @@ import facebookResponse from './data/facebook.json';
 import securityCodeResponse from './data/generate-security-code.json';
 
 import hasAccountResponse from './data/has-account.json';
-import hasAccountResponseError from './data/error/has-account.json';
+import hasAccountResponseNotFound from './data/has-account-not-found.json';
 
 import passwordLoginSucces from './data/password.json';
 import passwordLoginError from './data/error/password.json';
@@ -97,15 +97,13 @@ export default {
   }) {
     const { identification } = payload;
 
-    let isValid = false;
-    let mockData = hasAccountResponseError;
+    let mockData = hasAccountResponseNotFound;
 
     if (users.indexOf(identification) !== -1) {
-      isValid = true;
       mockData = hasAccountResponse;
     }
 
-    return fetch(mockData, delay, isValid);
+    return fetch(mockData, delay).then(response => response.data);
   },
 
   /**

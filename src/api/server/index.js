@@ -77,7 +77,7 @@ export default {
     store_id: '',
   }) {
     const { endpoint, ...params } = payload;
-    return http.get(endpoint, { params }).then(response => response);
+    return http.get(endpoint, { params }).then(response => response.data);
   },
 
   /**
