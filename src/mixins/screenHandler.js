@@ -40,6 +40,7 @@ export default {
      * @param {string} error
      */
     setError(error = '') {
+      if (!error) return;
       this.errors.push(error);
     },
 
