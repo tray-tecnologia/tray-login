@@ -1,11 +1,11 @@
 <template>
   <section id="tray-login-identify" class="tray-login__identify">
-    <header>
+    <div>
       <strong class="tray-title tray-login__title">
         {{ $lang['identify-title'] }}
       </strong>
       <slot name="custom-texts"></slot>
-    </header>
+    </div>
     <form id="form-identify" method='POST' @submit.prevent="submit">
       <fieldset class="tray-input-group">
         <label for="input-email">

@@ -1,7 +1,7 @@
 <template>
   <form id="change-password"
     class="tray-login__new-password" method='POST' @submit.prevent="submit">
-    <header>
+    <div>
       <strong class="tray-title tray-login__title">
         {{ $lang['new-password-title']}}
       </strong>
@@ -11,7 +11,7 @@
       <label class="tray-well">
         {{ identification }}
       </label>
-    </header>
+    </div>
     <app-toggle-password
       :state="errors.length >= 1 ? 'invalid' : 'valid'"
       v-model="passwordHandler"

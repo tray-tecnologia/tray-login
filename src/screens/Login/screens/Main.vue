@@ -2,7 +2,7 @@
   <section class="tray-login-screens">
     <section v-if="screen === 'Main'"
       id="tray-login-identify">
-      <header>
+      <div>
         <strong class="tray-title">
           {{ $lang['main-title'] }}
         </strong>
@@ -11,7 +11,7 @@
         <label class="tray-well">
           {{ identification }}
         </label>
-      </header>
+      </div>
 
       <form method='POST'
         @submit.prevent="submit">
