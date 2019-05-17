@@ -51,14 +51,14 @@
 
       <section id="blocked" v-if="screen === 'Blocked'"
         class="tray-login-screens">
-        <header>
+        <div>
           <strong class="tray-title tray-login__title">
             {{ $lang['main-title']}}
           </strong>
           <p class="tray-action tray-error-message">
             {{ $lang['blocked-user'] }}
           </p>
-        </header>
+        </div>
         <app-custom-texts v-if="hasCustomTexts"
           :error="this.customTexts['general-error-alert']"
           :action="this.customTexts['main-action']"
