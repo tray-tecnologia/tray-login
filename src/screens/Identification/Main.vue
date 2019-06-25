@@ -1,5 +1,5 @@
 <template>
-  <section id="tray-login-identify" class="tray-login__identify">
+  <section class="tray-login__identify">
     <div>
       <strong class="tray-title tray-login__title">
         {{ $lang['identify-title'] }}

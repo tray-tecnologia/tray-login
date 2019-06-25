@@ -1,7 +1,6 @@
 <template>
   <section class="tray-login-screens">
-    <section v-if="screen === 'Main'"
-      id="tray-login-identify">
+    <section v-if="screen === 'Main'">
       <div>
         <strong class="tray-title">
           {{ $lang['main-title'] }}
