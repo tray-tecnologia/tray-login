@@ -59,6 +59,10 @@ tray-login {
         top: calc(50% - 220px);
         padding: $default-gutter;
         z-index: 9999;
+
+        &.tray-container__identify {
+            top: calc(50% - 120px);
+        }
     }
 
     .tray-close {
