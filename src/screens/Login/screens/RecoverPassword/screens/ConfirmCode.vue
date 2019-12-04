@@ -107,8 +107,20 @@ export default {
     securityCodeClassses() {
       return {
         'tray-input-invalid': this.errors.length >= 1,
-        'tray-input-initial': !this.securityCode,
       };
+    },
+
+    /**
+     * Verifica se o codigo de segurança preenchido é valido
+     * @return {boolean}
+     */
+    isValidSecurityCode() {
+      if (this.securityCode.length < 6) {
+        return false;
+      }
+
+      const onlyNumbersPattern = /^\d+$/;
+      return onlyNumbersPattern.test(this.securityCode);
     },
   },
   methods: {
@@ -147,6 +159,13 @@ export default {
       [this.identificationType]: this.identification,
     }) {
       this.setLoading(true);
+
+      if (!this.isValidSecurityCode) {
+        this.setError(this.$lang['invalid-code']);
+        this.setLoading(false);
+        return;
+      }
+
       this.updatePassword(payload).then(() => {
         this.setLoading(false);
         this.nextStep('Login');
