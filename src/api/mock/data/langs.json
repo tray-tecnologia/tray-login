@@ -22,7 +22,7 @@
             "new-password-title":"Cadastre uma nova senha",
             "new-password-action":"Você receberá um código de segurança em seu e-mail para validar sua nova senha.",
             "new-password-submit":"Salvar nova senha e continuar",
-            "new-password-code-submit":"Enviar código de segurança",
+            "new-password-code-submit":"Validar código de segurança",
             "new-password-success": "Senha cadastrada com sucesso",
             "invalid-password":"A nova senha deve possuir no mínimo 6 caracteres.",
             "otp-title":"Código de segurança",

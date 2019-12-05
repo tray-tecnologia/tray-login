@@ -36,7 +36,7 @@ export default {
     'new-password-title': 'Cadastre uma nova senha',
     'new-password-action': 'Você receberá um código de segurança em seu e-mail para validar sua nova senha.',
     'new-password-submit': 'Salvar nova senha e continuar',
-    'new-password-code-submit': 'Enviar codigo de segurança',
+    'new-password-code-submit': 'Validar código de segurança',
     'new-password-success': 'Senha cadastrada com sucesso',
     // general texts
     'other-option': 'Escolher outra opção',
