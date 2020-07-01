@@ -5,12 +5,6 @@
       :identificationType="identificationType"
       :params="this.params">
     </app-new-password>
-    <app-confirm-code v-if="screen == 'ConfirmCode'"
-      :identification="identification"
-      :identificationType="identificationType"
-      :params="this.params"
-      :password="this.password">
-    </app-confirm-code>
     <app-recover-password-login v-if="screen === 'Login'"
       :callback="callback"
       :identification="identification"
@@ -31,7 +25,6 @@ export default {
   name: 'AppRecoverPassword',
   components: {
     AppNewPassword,
-    AppConfirmCode,
     AppRecoverPasswordLogin,
   },
   props: {

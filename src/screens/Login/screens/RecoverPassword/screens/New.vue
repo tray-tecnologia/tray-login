@@ -5,19 +5,38 @@
       <strong class="tray-title tray-login__title">
         {{ $lang['new-password-title']}}
       </strong>
+      <header class="tray-login__recover-password__header">
+        <figure class="tray-login__recover-password__figure">
+          <svg class="tray-user-lock" viewBox="0 0 640 512">
+            <!-- eslint-disable-next-line -->
+            <path class="path1" d="M224 256A128 128 0 1 0 96 128a128 128 0 0 0 128 128zm96 64a63.08 63.08 0 0 1 8.1-30.5c-4.8-.5-9.5-1.5-14.5-1.5h-16.7a174.08 174.08 0 0 1-145.8 0h-16.7A134.43 134.43 0 0 0 0 422.4V464a48 48 0 0 0 48 48h280.9a63.54 63.54 0 0 1-8.9-32zm288-32h-32v-80a80 80 0 0 0-160 0v80h-32a32 32 0 0 0-32 32v160a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V320a32 32 0 0 0-32-32zM496 432a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm32-144h-64v-80a32 32 0 0 1 64 0z"></path>
+          </svg>
+        </figure>
+      </header>
       <p class="tray-action">
-        {{ $lang['new-password-action'] }}
+        {{ $lang['new-password-code'] }}
+        <b>{{ identification }}</b>
+        {{ $lang['new-password-create'] }}
       </p>
-      <label class="tray-well">
-        {{ identification }}
-      </label>
     </div>
+    <app-confirm-code
+      :identification="identification"
+      :identificationType="identificationType"
+      :params="this.params"
+      :password="this.password">
+    </app-confirm-code>
     <app-toggle-password
       :state="errors.length >= 1 ? 'invalid' : 'valid'"
       v-model="passwordHandler"
       @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
       id="new-password-input">
     </app-toggle-password>
+    <app-confirm-password
+      :state="errors.length >= 1 ? 'invalid' : 'valid'"
+      v-model="confirmationHandler"
+      @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+      id="confirm-password-input">
+    </app-confirm-password>
     <small class="tray-feedbacks"
       v-show="errors.length">
       <span class="tray-error-message"
@@ -51,12 +70,16 @@ import client from 'api-client';
 import screenHandler from '@/mixins/screenHandler';
 import { mapState, mapActions } from 'vuex';
 import AppTogglePassword from '@/components/TogglePassword.vue';
+import AppConfirmPassword from '@/components/ConfirmPassword.vue';
+import AppConfirmCode from '@/screens/Login/screens/RecoverPassword/screens/ConfirmCode.vue';
 
 export default {
   name: 'AppNewPassword',
   mixins: [screenHandler],
   components: {
     AppTogglePassword,
+    AppConfirmPassword,
+    AppConfirmCode,
   },
   props: {
     endpoint: {
@@ -84,6 +107,7 @@ export default {
   computed: {
     ...mapState('Login/RecoverPassword', [
       'password',
+      'confirmation',
     ]),
 
     /**
@@ -98,17 +122,36 @@ export default {
         return this.setPassword(password);
       },
     },
+
+    confirmationHandler: {
+      get() {
+        return this.confirmation;
+      },
+      set(confirmation) {
+        return this.setConfirmation(confirmation);
+      },
+    },
   },
   methods: {
     generateSecurityCode: client.generateSecurityCode,
     ...mapActions('Login/RecoverPassword', {
       setPassword: 'setPassword',
+      setConfirmation: 'setConfirmation',
       nextStep: 'setScreen',
     }),
 
     ...mapActions('Login', {
       backTo: 'setScreen',
     }),
+
+    /**
+     * Verifica se a senha está vazia
+     * @param {string}
+     * @return {boolean}
+     */
+    checkEmptyPassword(password = this.password) {
+      return password === null;
+    },
 
     /**
      * Verifica se a senha é valida
@@ -120,11 +163,21 @@ export default {
     },
 
     /**
+     * Verifica as senhas são iguais
+     * @param {string}
+     * @return {boolean}
+     */
+    checkEquality(password = this.password, confirmation = this.confirmation) {
+      return password === confirmation;
+    },
+
+    /**
      * Reseta o módulo de recuperação de senha
      * @param {string}
      */
     reset() {
       this.setPassword('');
+      this.setConfirmation('');
       this.backTo('Main');
     },
 
@@ -139,7 +192,15 @@ export default {
       [this.identificationType]: this.identification,
       endpoint: this.endpoint,
     }) {
+      if (!this.checkEmptyPassword(this.password)) {
+        this.setError(this.$lang['empty-password']);
+        return;
+      }
       if (!this.checkValidity(this.password)) {
+        this.setError(this.$lang['invalid-password']);
+        return;
+      }
+      if (!this.checkEquality(this.password, this.confirmation)) {
         this.setError(this.$lang['invalid-password']);
         return;
       }
@@ -147,7 +208,6 @@ export default {
       this.setLoading(true);
       this.generateSecurityCode(payload).then(() => {
         this.setLoading(false);
-        this.nextStep('ConfirmCode');
       });
     },
   },
