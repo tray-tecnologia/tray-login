@@ -1,6 +1,6 @@
 <template>
   <section id="send-security-code">
-    <input
+    <input v-autofocus
       @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
       v-on:load="this.load()"
       v-model="securityCode"
