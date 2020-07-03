@@ -2,7 +2,6 @@
   <section id="send-security-code">
     <input v-autofocus
       @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
-      v-on:sendConfirmationCode="sendCode() "
       v-model="securityCode"
       type="text"
       id="password-code"

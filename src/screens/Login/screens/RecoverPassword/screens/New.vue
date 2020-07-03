@@ -20,11 +20,11 @@
       </p>
     </div>
     <app-confirm-code
+      @load="load"
       :identification="identification"
       :identificationType="identificationType"
       :params="this.params"
-      :password="this.password"
-      @load="$emit('sendConfirmationCode')">
+      :password="this.password">
     </app-confirm-code>
     <app-toggle-password
       :state="errors.length >= 1 ? 'invalid' : 'valid'"
@@ -207,10 +207,14 @@ export default {
       }
 
       this.setLoading(true);
-      this.generateSecurityCode(payload).then(() => {
+    },
+
+    load() {
+      this.generateSecurityCode().then(() => {
+        console.log('hello there');
         this.setLoading(false);
       });
-    },
+    }
   },
 };
 </script>
