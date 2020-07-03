@@ -23,9 +23,7 @@
           <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
         </small>
         <a class="tray-link tray-password-forget"
-          @click.prevent="
-            $emitEvent.click('tray-password-recover'),
-            setScreen('RecoverPassword')"
+          @click.prevent="sendCode"
           href="#">
           {{ $lang['password-forget'] }}
         </a>
@@ -148,6 +146,7 @@ export default {
   methods: {
     checkUserStatus: http.checkUserStatus,
     passwordLogin: http.passwordLogin,
+    generateSecurityCode: http.generateSecurityCode,
 
     ...mapActions('Login', [
       'setScreen',
@@ -202,6 +201,14 @@ export default {
         this.setLoading(false);
       });
     },
+
+    sendCode() {
+      this.generateSecurityCode(this.payload).then(() => {
+        this.setLoading(false);
+        this.setScreen('RecoverPassword');
+      });
+    },
+
   },
 };
 </script>

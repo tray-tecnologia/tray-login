@@ -20,7 +20,6 @@
       </p>
     </div>
     <app-confirm-code
-      @load="load"
       :identification="identification"
       :identificationType="identificationType"
       :params="this.params"
@@ -208,13 +207,6 @@ export default {
 
       this.setLoading(true);
     },
-
-    load() {
-      this.generateSecurityCode().then(() => {
-        console.log('hello there');
-        this.setLoading(false);
-      });
-    }
   },
 };
 </script>
