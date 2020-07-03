@@ -23,7 +23,8 @@
       :identification="identification"
       :identificationType="identificationType"
       :params="this.params"
-      :password="this.password">
+      :password="this.password"
+      @load="$emit('sendConfirmationCode')">
     </app-confirm-code>
     <app-toggle-password
       :state="errors.length >= 1 ? 'invalid' : 'valid'"
@@ -213,3 +214,7 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  @import '@/assets/sass/app.scss';
+</style>

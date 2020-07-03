@@ -2,6 +2,7 @@
   <section id="send-security-code">
     <input v-autofocus
       @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+      v-on:sendConfirmationCode="sendCode() "
       v-model="securityCode"
       type="text"
       id="password-code"
@@ -108,7 +109,6 @@ export default {
     reset() {
       this.setPassword('');
       this.setConfirmation('');
-      this.nextStep('New');
       this.backTo('Main');
     },
 
@@ -117,7 +117,7 @@ export default {
      * @param {object} event
      * @param {object} payload
      */
-    load(event, payload = {
+    sendCode(event, payload = {
       ...this.params,
       code: this.securityCode,
       endpoint: this.endpoint,

@@ -18,7 +18,6 @@
 <script>
 import { mapState, mapGetters } from 'vuex';
 import AppNewPassword from './New.vue';
-import AppConfirmCode from './ConfirmCode.vue';
 import AppRecoverPasswordLogin from './Login.vue';
 
 export default {
