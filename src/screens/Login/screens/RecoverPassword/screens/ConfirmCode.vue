@@ -125,6 +125,7 @@ export default {
       password: this.password,
       [this.identificationType]: this.identification,
     }) {
+      console.log(event)
       this.setLoading(true);
 
       if (!this.isValidSecurityCode) {
