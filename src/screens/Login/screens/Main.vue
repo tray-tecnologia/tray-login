@@ -202,10 +202,20 @@ export default {
       });
     },
 
+    /**
+     * Envia o código de confirmação para o email do cliente
+     * @return {undefined}
+     */
     sendCode() {
       this.generateSecurityCode(this.payload).then(() => {
         this.setLoading(false);
         this.setScreen('RecoverPassword');
+      }).catch((error) => {
+        this.$emitEvent.login({
+          response: error,
+          method: 'password',
+          type: 'error',
+        });
       });
     },
 

@@ -192,15 +192,11 @@ export default {
       [this.identificationType]: this.identification,
       endpoint: this.endpoint,
     }) {
-      if (!this.checkEmptyPassword(this.password)) {
-        this.setError(this.$lang['empty-password']);
-        return;
-      }
-      if (!this.checkValidity(this.password)) {
-        this.setError(this.$lang['invalid-password']);
-        return;
-      }
       if (!this.checkEquality(this.password, this.confirmation)) {
+        this.setError(this.$lang['non-equal-password']);
+        return;
+      }
+      if (!this.checkEmptyPassword(this.password) || !this.checkValidity(this.password, this.confirmation)) {
         this.setError(this.$lang['invalid-password']);
         return;
       }
