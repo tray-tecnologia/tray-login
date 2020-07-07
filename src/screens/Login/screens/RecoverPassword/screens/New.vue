@@ -133,7 +133,6 @@ export default {
     },
   },
   methods: {
-    generateSecurityCode: client.generateSecurityCode,
     ...mapActions('Login/RecoverPassword', {
       setPassword: 'setPassword',
       setConfirmation: 'setConfirmation',
@@ -182,16 +181,9 @@ export default {
     },
 
     /**
-     * Gera um novo codigo de segurança
-     * @param {object} event
-     * @param {object} payload
+     * Valida os campos
      */
-    submit(event, payload = {
-      ...this.params,
-      identification: this.identification,
-      [this.identificationType]: this.identification,
-      endpoint: this.endpoint,
-    }) {
+    submit() {
       if (!this.checkEquality(this.password, this.confirmation)) {
         this.setError(this.$lang['non-equal-password']);
         return;
