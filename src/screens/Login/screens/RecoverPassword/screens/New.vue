@@ -45,6 +45,7 @@
     </small>
     <button id="new-password-submit"
       class="tray-btn-primary"
+      @click.prevent="submit"
       type="submit">
       {{ $lang['new-password-submit'] }}
     </button>
@@ -192,7 +193,6 @@ export default {
         this.setError(this.$lang['invalid-password']);
         return;
       }
-
       this.setLoading(true);
     },
   },
