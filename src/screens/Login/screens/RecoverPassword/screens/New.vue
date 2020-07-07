@@ -45,7 +45,6 @@
     </small>
     <button id="new-password-submit"
       class="tray-btn-primary"
-      @click.prevent="submit"
       type="submit">
       {{ $lang['new-password-submit'] }}
     </button>
@@ -134,6 +133,7 @@ export default {
     },
   },
   methods: {
+    updatePassword: client.updatePassword,
     ...mapActions('Login/RecoverPassword', {
       setPassword: 'setPassword',
       setConfirmation: 'setConfirmation',
@@ -184,7 +184,14 @@ export default {
     /**
      * Valida os campos
      */
-    submit() {
+    submit(event, payload = {
+      ...this.params,
+      code: this.securityCode,
+      endpoint: this.endpoint,
+      identification: this.identification,
+      password: this.password,
+      [this.identificationType]: this.identification,
+    }) {
       if (!this.checkEquality(this.password, this.confirmation)) {
         this.setError(this.$lang['non-equal-password']);
         return;
@@ -193,7 +200,15 @@ export default {
         this.setError(this.$lang['invalid-password']);
         return;
       }
-      this.setLoading(true);
+
+      this.updatePassword(payload).then(() => {
+        this.setLoading(false);
+        this.nextStep('Login');
+      }).catch((error) => {
+        const { message = this.$lang['invalid-code'] } = error.data.data;
+        this.setError(message);
+        this.setLoading(false);
+      });
     },
   },
 };
