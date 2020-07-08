@@ -43,7 +43,7 @@ export default {
     id: {
       type: String,
       default() {
-        return '';
+        return 'confirmation';
       },
     },
   },

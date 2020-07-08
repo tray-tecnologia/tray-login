@@ -33,7 +33,7 @@
     </app-toggle-password>
     <app-confirm-password
       :state="errors.length >= 1 ? 'invalid' : 'valid'"
-      v-model="confirmationHandler"
+      v-model="passwordConfirmation"
       @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
       id="confirm-password-input">
     </app-confirm-password>
@@ -104,10 +104,16 @@ export default {
       },
     },
   },
+
+  data() {
+    return {
+      passwordConfirmation: '',
+    };
+  },
+
   computed: {
     ...mapState('Login/RecoverPassword', [
       'password',
-      'confirmation',
     ]),
 
     /**
@@ -122,36 +128,17 @@ export default {
         return this.setPassword(password);
       },
     },
-
-    confirmationHandler: {
-      get() {
-        return this.confirmation;
-      },
-      set(confirmation) {
-        return this.setConfirmation(confirmation);
-      },
-    },
   },
   methods: {
     updatePassword: client.updatePassword,
     ...mapActions('Login/RecoverPassword', {
       setPassword: 'setPassword',
-      setConfirmation: 'setConfirmation',
       nextStep: 'setScreen',
     }),
 
     ...mapActions('Login', {
       backTo: 'setScreen',
     }),
-
-    /**
-     * Verifica se a senha está vazia
-     * @param {string}
-     * @return {boolean}
-     */
-    checkEmptyPassword(password = this.password) {
-      return password === null;
-    },
 
     /**
      * Verifica se a senha é valida
@@ -167,7 +154,7 @@ export default {
      * @param {string}
      * @return {boolean}
      */
-    checkEquality(password = this.password, confirmation = this.confirmation) {
+    checkEquality(password = this.password, confirmation = this.passwordConfirmation) {
       return password === confirmation;
     },
 
@@ -196,7 +183,7 @@ export default {
         this.setError(this.$lang['non-equal-password']);
         return;
       }
-      if (!this.checkEmptyPassword(this.password) || !this.checkValidity(this.password, this.confirmation)) {
+      if (!this.checkValidity(this.password)) {
         this.setError(this.$lang['invalid-password']);
         return;
       }
