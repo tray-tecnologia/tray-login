@@ -1,27 +1,24 @@
 <template>
-  <section id="send-security-code">
+  <fieldset class="tray-input-group">
+    <label :for="id">
+      <figure class="tray-input-icon" :class="inputClass">
+        <svg class="tray-icon-locked" viewBox="0 0 512 512">
+          <!-- eslint-disable-next-line -->
+          <path class="path1" d="M176 216h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16H176c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16zm-16 80c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16H176c-8.84 0-16 7.16-16 16v16zm96 121.13c-16.42 0-32.84-5.06-46.86-15.19L0 250.86V464c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V250.86L302.86 401.94c-14.02 10.12-30.44 15.19-46.86 15.19zm237.61-254.18c-8.85-6.94-17.24-13.47-29.61-22.81V96c0-26.51-21.49-48-48-48h-77.55c-3.04-2.2-5.87-4.26-9.04-6.56C312.6 29.17 279.2-.35 256 0c-23.2-.35-56.59 29.17-73.41 41.44-3.17 2.3-6 4.36-9.04 6.56H96c-26.51 0-48 21.49-48 48v44.14c-12.37 9.33-20.76 15.87-29.61 22.81A47.995 47.995 0 0 0 0 200.72v10.65l96 69.35V96h320v184.72l96-69.35v-10.65c0-14.74-6.78-28.67-18.39-37.77z"></path>
+        </svg>
+      </figure>
+    </label>
     <input v-autofocus
       @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
       v-model="securityCode"
-      type="text"
-      id="password-code"
+      :id="id"
+      :class="inputClass"
       class="tray-input"
-      :class="securityCodeClassses"
       :placeholder="$lang['otp-title']"/>
     <small class="tray-feedbacks" v-show="errors.length">
-      <span class="tray-error-message" v-html="errors[errors.length - 1]">
-      </span>
+      <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
     </small>
-    <section class="tray-loading" v-show="loading">
-      <div class="tray-loading-mask">
-        <div class="tray-loading-line"></div>
-      </div>
-      <svg class="tray-loading-icon tray-icon-locked" viewBox="0 0 1024 1024">
-        <!-- eslint-disable-next-line -->
-        <path class="path1" d="M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"></path>
-      </svg>
-    </section>
-  </section>
+  </fieldset>
 </template>
 
 <script>
@@ -54,7 +51,7 @@ export default {
         };
       },
     },
-    password: {
+    id: {
       type: String,
       default: '',
     },
@@ -86,6 +83,24 @@ export default {
 
       const onlyNumbersPattern = /^\d+$/;
       return onlyNumbersPattern.test(this.securityCode);
+    },
+
+    inputClass() {
+      const { state } = this;
+
+      if (state === '') {
+        return 'tray-input-initial';
+      }
+
+      if (state === true || state === 'valid') {
+        return 'tray-input-valid';
+      }
+
+      if (state === false || state === 'invalid') {
+        return 'tray-input-invalid';
+      }
+
+      return 'tray-input-initial';
     },
   },
   methods: {
