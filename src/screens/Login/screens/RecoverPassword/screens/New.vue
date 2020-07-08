@@ -164,7 +164,6 @@ export default {
      */
     reset() {
       this.setPassword('');
-      this.setConfirmation('');
       this.backTo('Main');
     },
 

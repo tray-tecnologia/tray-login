@@ -111,7 +111,6 @@ export default {
 
     ...mapActions('Login/RecoverPassword', {
       nextStep: 'setScreen',
-      setConfirmation: 'setConfirmation',
     }),
 
 
@@ -120,7 +119,6 @@ export default {
      * @param {string}
      */
     reset() {
-      this.setConfirmation('');
       this.backTo('Main');
     },
 
