@@ -121,37 +121,6 @@ export default {
     reset() {
       this.backTo('Main');
     },
-
-    /**
-     * Envia o código de segurança
-     * @param {object} event
-     * @param {object} payload
-     */
-    sendCode(event, payload = {
-      ...this.params,
-      code: this.securityCode,
-      endpoint: this.endpoint,
-      identification: this.identification,
-      password: this.password,
-      [this.identificationType]: this.identification,
-    }) {
-      this.setLoading(true);
-
-      if (!this.isValidSecurityCode) {
-        this.setError(this.$lang['invalid-code']);
-        this.setLoading(false);
-        return;
-      }
-
-      this.updatePassword(payload).then(() => {
-        this.setLoading(false);
-        this.nextStep('Login');
-      }).catch((error) => {
-        const { message = this.$lang['invalid-code'] } = error.data.data;
-        this.setError(message);
-        this.setLoading(false);
-      });
-    },
   },
 };
 </script>

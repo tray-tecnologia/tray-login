@@ -1,6 +1,6 @@
 {
   "name": "tray-login",
-  "version": "2.4.8",
+  "version": "2.5.8",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "NODE_ENV=production vue-cli-service build --target lib --name trayLogin src/main.js",
