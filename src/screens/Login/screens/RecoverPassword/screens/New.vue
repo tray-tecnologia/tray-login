@@ -180,6 +180,7 @@ export default {
         return false;
       }
       const onlyNumbersPattern = /^\d+$/;
+      return console.log(onlyNumbersPattern.test(this.securityCode));
       return onlyNumbersPattern.test(this.securityCode);
     },
 
