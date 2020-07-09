@@ -150,6 +150,8 @@ export default {
         return false;
       }
       const onlyNumbersPattern = /^\d+$/;
+      console.log(this.securityCode);
+      return console.log(onlyNumbersPattern.test(this.securityCode));
       return onlyNumbersPattern.test(this.securityCode);
     },
   },
