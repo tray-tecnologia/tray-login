@@ -213,7 +213,7 @@ export default {
         return;
       }
 
-      if (!this.isValidSecurityCode) {
+      if (!this.isValidSecurityCode()) {
         this.setError(this.$lang['invalid-code']);
         this.setLoading(false);
         return;
