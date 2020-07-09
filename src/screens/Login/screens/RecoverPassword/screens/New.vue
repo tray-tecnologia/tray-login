@@ -23,6 +23,7 @@
       :identification="identification"
       :identificationType="identificationType"
       :params="this.params"
+      :class="securityCodeClassses"
       :password="this.password">
     </app-confirm-code>
     <app-toggle-password
@@ -108,6 +109,7 @@ export default {
   data() {
     return {
       passwordConfirmation: '',
+      securityCode: '',
     };
   },
 
@@ -127,6 +129,28 @@ export default {
       set(password) {
         return this.setPassword(password);
       },
+    },
+
+    /**
+     * Objeto de classes utilizadas na personalização do input
+     * @return {object}
+     */
+    securityCodeClassses() {
+      return {
+        'tray-input-invalid': this.errors.length >= 1,
+      };
+    },
+
+    /**
+     * Verifica se o codigo de segurança preenchido é valido
+     * @return {boolean}
+     */
+    isValidSecurityCode() {
+      if (this.securityCode.length < 6) {
+        return false;
+      }
+      const onlyNumbersPattern = /^\d+$/;
+      return onlyNumbersPattern.test(this.securityCode);
     },
   },
   methods: {
@@ -184,6 +208,12 @@ export default {
       }
       if (!this.checkValidity(this.password)) {
         this.setError(this.$lang['invalid-password']);
+        return;
+      }
+
+      if (!this.isValidSecurityCode) {
+        this.setError(this.$lang['invalid-code']);
+        this.setLoading(false);
         return;
       }
 
