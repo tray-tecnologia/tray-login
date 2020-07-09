@@ -180,7 +180,6 @@ export default {
         return false;
       }
       const onlyNumbersPattern = /^\d+$/;
-      return console.log(onlyNumbersPattern.test(this.securityCode));
       return onlyNumbersPattern.test(this.securityCode);
     },
 
@@ -212,6 +211,10 @@ export default {
         this.setError(this.$lang['invalid-password']);
         return;
       }
+
+      console.log(this.securityCode);
+      const onlyNumbersPattern = /^\d+$/;
+      console.log(onlyNumbersPattern.test(this.securityCode));
 
       if (!this.isValidSecurityCode()) {
         this.setError(this.$lang['invalid-code']);
