@@ -23,6 +23,7 @@
       :identification="identification"
       :identificationType="identificationType"
       :params="this.params"
+      v-model="securityCode"
       :class="securityCodeClassses"
       :password="this.password">
     </app-confirm-code>
@@ -140,20 +141,6 @@ export default {
         'tray-input-invalid': this.errors.length >= 1,
       };
     },
-
-    /**
-     * Verifica se o codigo de segurança preenchido é valido
-     * @return {boolean}
-     */
-    isValidSecurityCode() {
-      if (this.securityCode.length < 6) {
-        return false;
-      }
-      const onlyNumbersPattern = /^\d+$/;
-      console.log(this.securityCode);
-      return console.log(onlyNumbersPattern.test(this.securityCode));
-      return onlyNumbersPattern.test(this.securityCode);
-    },
   },
   methods: {
     updatePassword: client.updatePassword,
@@ -182,6 +169,18 @@ export default {
      */
     checkEquality(password = this.password, confirmation = this.passwordConfirmation) {
       return password === confirmation;
+    },
+
+    /**
+     * Verifica se o codigo de segurança preenchido é valido
+     * @return {boolean}
+     */
+    isValidSecurityCode() {
+      if (this.securityCode.length < 6) {
+        return false;
+      }
+      const onlyNumbersPattern = /^\d+$/;
+      return onlyNumbersPattern.test(this.securityCode);
     },
 
     /**
