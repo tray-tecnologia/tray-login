@@ -172,18 +172,6 @@ export default {
     },
 
     /**
-     * Verifica se o codigo de segurança preenchido é valido
-     * @return {boolean}
-     */
-    isValidSecurityCode() {
-      if (this.securityCode.length < 6) {
-        return false;
-      }
-      const onlyNumbersPattern = /^\d+$/;
-      return onlyNumbersPattern.test(this.securityCode);
-    },
-
-    /**
      * Reseta o módulo de recuperação de senha
      * @param {string}
      */
@@ -212,11 +200,11 @@ export default {
         return;
       }
 
-      console.log(this.securityCode);
+      const validateSecurityCodeLen = this.securityCode >= 6;
       const onlyNumbersPattern = /^\d+$/;
-      console.log(onlyNumbersPattern.test(this.securityCode));
+      const isOnlyNumbers = onlyNumbersPattern.test(this.securityCode);
 
-      if (!this.isValidSecurityCode()) {
+      if (!validateSecurityCodeLen || !isOnlyNumbers) {
         this.setError(this.$lang['invalid-code']);
         this.setLoading(false);
         return;
