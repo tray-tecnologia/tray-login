@@ -229,7 +229,7 @@ export default {
       }
 
       this.updatePassword(payload).then(() => {
-        alert('updatePassword');
+        this.params.code = this.securityCode;
         this.setLoading(true);
         this.nextStep('Login');
       }).catch((error) => {
