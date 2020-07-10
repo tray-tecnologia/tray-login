@@ -204,7 +204,7 @@ export default {
     },
 
     /**
-     * Valida os campos
+     * Valida os campos e altera a senha
      */
     submit(event, payload = {
       ...this.params,
@@ -229,7 +229,8 @@ export default {
       }
 
       this.updatePassword(payload).then(() => {
-        this.setLoading(false);
+        alert('updatePassword');
+        this.setLoading(true);
         this.nextStep('Login');
       }).catch((error) => {
         const { message = this.$lang['invalid-code'] } = error.data.data;
