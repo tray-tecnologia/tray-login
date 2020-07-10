@@ -187,8 +187,9 @@ export default {
     },
 
     /**
-     * Verifica as senhas são iguais
-     * @param {string}
+     * Verifica se as senhas são iguais
+     * @param {string} password a senha digitada
+     * @param {string} confirmation a confirmação da senha
      * @return {boolean}
      */
     checkEquality(password = this.password, confirmation = this.passwordConfirmation) {
@@ -205,7 +206,7 @@ export default {
     },
 
     /**
-     * Valida os campos e altera a senha
+     * Valida os campos
      */
     submit(event, payload = {
       ...this.params,
@@ -232,6 +233,9 @@ export default {
       this.update();
     },
 
+    /**
+     * Atualiza a senha
+     */
     update(event, payload = {
       ...this.params,
       code: this.securityCode,
@@ -254,6 +258,3 @@ export default {
 };
 </script>
 
-<style lang="scss">
-  @import '@/assets/sass/app.scss';
-</style>
