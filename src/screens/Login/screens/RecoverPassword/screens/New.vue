@@ -228,6 +228,17 @@ export default {
         return;
       }
 
+      this.update();
+    },
+
+    update(event, payload = {
+      ...this.params,
+      code: this.securityCode,
+      endpoint: 'password-update',
+      identification: this.identification,
+      password: this.password,
+      [this.identificationType]: this.identification,
+    }) {
       this.updatePassword(payload).then(() => {
         this.params.code = this.securityCode;
         this.setLoading(true);
