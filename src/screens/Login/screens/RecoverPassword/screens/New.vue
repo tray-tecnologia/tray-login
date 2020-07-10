@@ -29,6 +29,7 @@
         </figure>
       </label>
       <input v-autofocus
+        autocomplete="off"
         @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
         v-model="securityCode"
         :id="id"
