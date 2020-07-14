@@ -25,7 +25,7 @@
             "new-password-create":" e crie uma nova senha.",
             "new-password-submit":"Salvar nova senha",
             "new-password-code-submit":"Validar código de segurança",
-            "new-password-success": "Senha cadastrada com sucesso",
+            "new-password-success": "Nova senha cadastrada com sucesso!",
             "empty-password":"Nova senha é necessária",
             "invalid-password":"A nova senha deve possuir no mínimo 6 caracteres.",
             "non-equal-password":"As senhas não correspondem.",
