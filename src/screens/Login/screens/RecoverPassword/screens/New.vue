@@ -36,17 +36,16 @@
         :class="inputClass"
         class="tray-input"
         :placeholder="$lang['otp-title']"/>
-      <small class="tray-feedbacks" v-show="errors.length">
-        <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
-      </small>
     </fieldset>
     <app-toggle-password
+      autocomplete="off"
       :state="errors.length >= 1 ? 'invalid' : 'valid'"
       v-model="passwordHandler"
       @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
       id="new-password-input">
     </app-toggle-password>
     <app-confirm-password
+      autocomplete="off"
       :state="errors.length >= 1 ? 'invalid' : 'valid'"
       v-model="passwordConfirmation"
       @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
