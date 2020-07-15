@@ -142,6 +142,7 @@ export default {
     endpoint: 'retrieve-masked-email',
     session_id: '',
     store_id: '',
+    identification_type: '',
   }) {
     const { endpoint, ...params } = payload;
     return http.post(endpoint, params).then(response => response);

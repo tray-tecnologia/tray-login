@@ -125,9 +125,15 @@ export default {
   },
 
   mounted() {
+    const payload = {
+      ...this.params,
+      endpoint: this.endpoint,
+      identification: this.identification,
+      [this.identificationType]: this.identificationType,
+    };
     const isValidDocument = this.identificationType !== 'email';
     if (isValidDocument) {
-      this.getMaskedEmail({ cpf: '95457023460'}).then((response) => {
+      this.getMaskedEmail(payload, { identification: this.identification }).then((response) => {
         this.maskedEmail = response.data.email;
       }).catch(error => {
         throw error;
