@@ -125,9 +125,9 @@ export default {
   },
 
   mounted() {
-    const isValidEmail = false;
-    if (!isValidEmail) {
-      this.getMaskedEmail({ cpf: "95457023460"}).then((response) => {
+    const isValidDocument = this.identificationType !== 'email';
+    if (isValidDocument) {
+      this.getMaskedEmail({ cpf: '95457023460'}).then((response) => {
         this.maskedEmail = response.data.email;
       }).catch(error => {
         throw error;

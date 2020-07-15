@@ -174,13 +174,13 @@ export default {
    * @return {Promise}
    */
   getMaskedEmail(payload = {
-    cpf: '95457023460',
+    identification: '95457023460',
   }) {
     let isValid = true;
     let mockData = emailMaskedSuccess;
-    const { cpf } = payload;
+    const { identification } = payload;
 
-    if (cpf !== '95457023460') {
+    if (identification !== '95457023460') {
       isValid = false;
       mockData = emailMaskedError;
     }
