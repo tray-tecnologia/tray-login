@@ -23,7 +23,7 @@
       :id="id"
       class="tray-input"
       :class="inputClass"
-      :placeholder="$lang['password-input-label']"/>
+      :placeholder="$lang['confirmation-input-label']"/>
   </fieldset>
 </template>
 
@@ -32,7 +32,7 @@ import screenHandler from '@/mixins/screenHandler';
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'AppTogglePassword',
+  name: 'AppConfirmPassword',
   mixins: [screenHandler],
   props: {
     value: String,
@@ -43,7 +43,7 @@ export default {
     id: {
       type: String,
       default() {
-        return '';
+        return 'confirmation';
       },
     },
   },

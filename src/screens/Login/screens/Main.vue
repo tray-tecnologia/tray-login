@@ -23,9 +23,7 @@
           <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
         </small>
         <a class="tray-link tray-password-forget"
-          @click.prevent="
-            $emitEvent.click('tray-password-recover'),
-            setScreen('RecoverPassword')"
+          @click="sendCode"
           href="#">
           {{ $lang['password-forget'] }}
         </a>
@@ -79,6 +77,7 @@ import AppOtpLogin from './Otp/screens/Login.vue';
 import AppTogglePassword from '@/components/TogglePassword.vue';
 import screenHandler from '@/mixins/screenHandler';
 import utils from '@/mixins/utils';
+import { error } from 'util'
 
 export default {
   name: 'AppLogin',
@@ -148,6 +147,7 @@ export default {
   methods: {
     checkUserStatus: http.checkUserStatus,
     passwordLogin: http.passwordLogin,
+    generateSecurityCode: http.generateSecurityCode,
 
     ...mapActions('Login', [
       'setScreen',
@@ -202,6 +202,27 @@ export default {
         this.setLoading(false);
       });
     },
+
+    /**
+     * Envia o código de confirmação para o email do cliente
+     * @return {undefined}
+     */
+    sendCode(event, payload = {
+      ...this.params,
+      endpoint: 'generate-security-code',
+      identification: this.identification,
+      [this.identificationType]: this.identification,
+    }) {
+      this.setLoading(true);
+      this.generateSecurityCode(payload).then(() => {
+        this.setLoading(false);
+        this.setScreen('RecoverPassword');
+      }).catch((error) => {
+        this.setError(error);
+        this.setLoading(false);
+      });
+    },
+
   },
 };
 </script>

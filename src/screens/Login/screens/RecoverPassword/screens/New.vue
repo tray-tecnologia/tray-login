@@ -5,19 +5,52 @@
       <strong class="tray-title tray-login__title">
         {{ $lang['new-password-title']}}
       </strong>
+      <header class="tray-login__recover-password__header">
+        <figure class="tray-login__recover-password__figure">
+          <svg class="tray-user-lock" viewBox="0 0 640 512">
+            <!-- eslint-disable-next-line -->
+            <path class="path1" d="M224 256A128 128 0 1 0 96 128a128 128 0 0 0 128 128zm96 64a63.08 63.08 0 0 1 8.1-30.5c-4.8-.5-9.5-1.5-14.5-1.5h-16.7a174.08 174.08 0 0 1-145.8 0h-16.7A134.43 134.43 0 0 0 0 422.4V464a48 48 0 0 0 48 48h280.9a63.54 63.54 0 0 1-8.9-32zm288-32h-32v-80a80 80 0 0 0-160 0v80h-32a32 32 0 0 0-32 32v160a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V320a32 32 0 0 0-32-32zM496 432a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm32-144h-64v-80a32 32 0 0 1 64 0z"></path>
+          </svg>
+        </figure>
+      </header>
       <p class="tray-action">
-        {{ $lang['new-password-action'] }}
+        {{ $lang['new-password-code'] }}
+        <b>{{ identification }}</b>
+        {{ $lang['new-password-create'] }}
       </p>
-      <label class="tray-well">
-        {{ identification }}
-      </label>
     </div>
+    <fieldset class="tray-input-group">
+      <label :for="id">
+        <figure class="tray-input-icon" :class="inputClass">
+          <svg class="tray-icon-locked" viewBox="0 0 512 512">
+            <!-- eslint-disable-next-line -->
+            <path class="path1" d="M176 216h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16H176c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16zm-16 80c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16H176c-8.84 0-16 7.16-16 16v16zm96 121.13c-16.42 0-32.84-5.06-46.86-15.19L0 250.86V464c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V250.86L302.86 401.94c-14.02 10.12-30.44 15.19-46.86 15.19zm237.61-254.18c-8.85-6.94-17.24-13.47-29.61-22.81V96c0-26.51-21.49-48-48-48h-77.55c-3.04-2.2-5.87-4.26-9.04-6.56C312.6 29.17 279.2-.35 256 0c-23.2-.35-56.59 29.17-73.41 41.44-3.17 2.3-6 4.36-9.04 6.56H96c-26.51 0-48 21.49-48 48v44.14c-12.37 9.33-20.76 15.87-29.61 22.81A47.995 47.995 0 0 0 0 200.72v10.65l96 69.35V96h320v184.72l96-69.35v-10.65c0-14.74-6.78-28.67-18.39-37.77z"></path>
+          </svg>
+        </figure>
+      </label>
+      <input v-autofocus
+        autocomplete="off"
+        @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+        v-model="securityCode"
+        :id="id"
+        :class="inputClass"
+        class="tray-input"
+        :placeholder="$lang['otp-title']"/>
+    </fieldset>
     <app-toggle-password
+      autocomplete="off"
       :state="errors.length >= 1 ? 'invalid' : 'valid'"
       v-model="passwordHandler"
       @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
       id="new-password-input">
     </app-toggle-password>
+    <app-confirm-password
+      autocomplete="off"
+      :state="errors.length >= 1 ? 'invalid' : 'valid'"
+      v-model="passwordConfirmation"
+      @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+      id="confirm-password-input">
+    </app-confirm-password>
     <small class="tray-feedbacks"
       v-show="errors.length">
       <span class="tray-error-message"
@@ -51,12 +84,14 @@ import client from 'api-client';
 import screenHandler from '@/mixins/screenHandler';
 import { mapState, mapActions } from 'vuex';
 import AppTogglePassword from '@/components/TogglePassword.vue';
+import AppConfirmPassword from '@/components/ConfirmPassword.vue';
 
 export default {
   name: 'AppNewPassword',
   mixins: [screenHandler],
   components: {
     AppTogglePassword,
+    AppConfirmPassword,
   },
   props: {
     endpoint: {
@@ -81,6 +116,14 @@ export default {
       },
     },
   },
+
+  data() {
+    return {
+      passwordConfirmation: '',
+      securityCode: '',
+    };
+  },
+
   computed: {
     ...mapState('Login/RecoverPassword', [
       'password',
@@ -98,9 +141,32 @@ export default {
         return this.setPassword(password);
       },
     },
+
+    /**
+     * Objeto de classes utilizadas na personalização do input
+     * @return {object}
+     */
+    securityCodeClassses() {
+      return {
+        'tray-input-invalid': this.errors.length >= 1,
+      };
+    },
+
+    /**
+     * Verifica se o codigo de segurança preenchido é valido
+     * @return {boolean}
+     */
+    isValidSecurityCode() {
+      if (this.securityCode.length < 6) {
+        return false;
+      }
+
+      const onlyNumbersPattern = /^\d+$/;
+      return onlyNumbersPattern.test(this.securityCode);
+    },
   },
   methods: {
-    generateSecurityCode: client.generateSecurityCode,
+    updatePassword: client.updatePassword,
     ...mapActions('Login/RecoverPassword', {
       setPassword: 'setPassword',
       nextStep: 'setScreen',
@@ -120,6 +186,16 @@ export default {
     },
 
     /**
+     * Verifica se as senhas são iguais
+     * @param {string} password a senha digitada
+     * @param {string} confirmation a confirmação da senha
+     * @return {boolean}
+     */
+    checkEquality(password = this.password, confirmation = this.passwordConfirmation) {
+      return password === confirmation;
+    },
+
+    /**
      * Reseta o módulo de recuperação de senha
      * @param {string}
      */
@@ -129,27 +205,55 @@ export default {
     },
 
     /**
-     * Gera um novo codigo de segurança
-     * @param {object} event
-     * @param {object} payload
+     * Valida os campos
      */
     submit(event, payload = {
       ...this.params,
-      identification: this.identification,
-      [this.identificationType]: this.identification,
+      code: this.securityCode,
       endpoint: this.endpoint,
+      identification: this.identification,
+      password: this.password,
+      [this.identificationType]: this.identification,
     }) {
+      if (!this.checkEquality(this.password, this.confirmation)) {
+        this.setError(this.$lang['non-equal-password']);
+        return;
+      }
       if (!this.checkValidity(this.password)) {
         this.setError(this.$lang['invalid-password']);
         return;
       }
 
-      this.setLoading(true);
-      this.generateSecurityCode(payload).then(() => {
+      if (!this.isValidSecurityCode) {
+        this.setError(this.$lang['invalid-code']);
+        return;
+      }
+
+      this.update();
+    },
+
+    /**
+     * Atualiza a senha
+     */
+    update(event, payload = {
+      ...this.params,
+      code: this.securityCode,
+      endpoint: 'password-update',
+      identification: this.identification,
+      password: this.password,
+      [this.identificationType]: this.identification,
+    }) {
+      this.updatePassword(payload).then(() => {
+        this.params.code = this.securityCode;
+        this.setLoading(true);
+        this.nextStep('Login');
+      }).catch((error) => {
+        const { message = this.$lang['invalid-code'] } = error.data.data;
+        this.setError(message);
         this.setLoading(false);
-        this.nextStep('ConfirmCode');
       });
     },
   },
 };
 </script>
+
