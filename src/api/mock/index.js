@@ -18,6 +18,9 @@ import passwordUpdateError from './data/error/password-update.json';
 import otpLoginSucces from './data/otp.json';
 import otpLoginError from './data/error/otp.json';
 
+import emailMaskedSuccess from './data/email-masked.json';
+import emailMaskedError from './data/error/email-masked.json';
+
 const users = [
   'teste@tray.com.br',
   'usuariobloqueado@tray.com.br',
@@ -164,4 +167,24 @@ export default {
 
     return fetch(mockData, delay, isValid);
   },
+
+  /**
+   * Recupera o email mascarado do cliente
+   * @param {object} payload
+   * @return {Promise}
+   */
+  getMaskedEmail(payload = {
+    cpf: '95457023460',
+  }) {
+    let isValid = true;
+    let mockData = emailMaskedSuccess;
+    const { cpf } = payload;
+
+    if (cpf !== '95457023460') {
+      isValid = false;
+      mockData = emailMaskedError;
+    }
+
+    return fetch(mockData, delay, isValid)
+  }
 };

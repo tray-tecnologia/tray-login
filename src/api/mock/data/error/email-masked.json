@@ -1,0 +1,6 @@
+{
+    "data":{
+        "message": "Mensagem de errro da api"
+    },
+    "statusCode":200
+}
