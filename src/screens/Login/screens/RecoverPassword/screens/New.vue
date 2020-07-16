@@ -205,15 +205,13 @@ export default {
 
     /**
      * Recupera o email mascarado do cliente a partir do CPF
-     * @param {object}
+     * @param {object} payload os parâmetros enviados para o endpoint
      * @return {undefined}
      */
     getUserMaskedMail(payload = {
       ...this.params,
-      code: this.securityCode,
       endpoint: this.endpoint,
       identification: this.identification,
-      password: this.password,
       [this.identificationType]: this.identification,
     }) {
       this.getMaskedEmail(payload, { identification: this.identification }).then((response) => {

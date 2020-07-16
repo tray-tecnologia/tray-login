@@ -134,7 +134,7 @@ export default {
   /**
    * Recupera o email mascarado do cliente a partir do CPF
    * @param {string} endpoint
-   * @param {object} params
+   * @param {object} payload
    * @returns {Promise}
    */
   getMaskedEMail(payload = {
