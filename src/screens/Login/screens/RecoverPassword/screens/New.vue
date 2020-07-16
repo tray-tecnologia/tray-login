@@ -125,12 +125,6 @@ export default {
   },
 
   mounted() {
-    const payload = {
-      ...this.params,
-      endpoint: this.endpoint,
-      identification: this.identification,
-      [this.identificationType]: this.identificationType,
-    };
     const isValidDocument = this.identificationType !== 'email';
     if (isValidDocument) {
       this.getUserMaskedMail();
