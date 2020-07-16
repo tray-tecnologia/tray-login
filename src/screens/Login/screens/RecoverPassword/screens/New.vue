@@ -125,19 +125,9 @@ export default {
   },
 
   mounted() {
-    const payload = {
-      ...this.params,
-      endpoint: this.endpoint,
-      identification: this.identification,
-      [this.identificationType]: this.identificationType,
-    };
     const isValidDocument = this.identificationType !== 'email';
     if (isValidDocument) {
-      this.getMaskedEmail(payload, { identification: this.identification }).then((response) => {
-        this.maskedEmail = response.data.email;
-      }).catch(error => {
-        throw error;
-      });
+      this.getUserMaskedMail();
     }
   },
 
@@ -212,6 +202,19 @@ export default {
     checkEquality(password = this.password, confirmation = this.passwordConfirmation) {
       return password === confirmation;
     },
+
+    getUserMaskedMail(payload = {
+      ...this.params,
+      endpoint: this.endpoint,
+      identification: this.identification,
+      [this.identificationType]: this.identificationType,
+    }) {
+      this.getMaskedEmail(payload, { identification: this.identification }).then((response) => {
+        this.maskedEmail = response.data.email;
+      }).catch(error => {
+        throw error;
+      });
+    }
 
     /**
      * Reseta o módulo de recuperação de senha
