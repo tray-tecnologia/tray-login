@@ -133,11 +133,7 @@ export default {
     };
     const isValidDocument = this.identificationType !== 'email';
     if (isValidDocument) {
-      this.getMaskedEmail(payload, { identification: this.identification }).then((response) => {
-        this.maskedEmail = response.data.email;
-      }).catch(error => {
-        throw error;
-      });
+      this.getUserMaskedMail();
     }
   },
 
@@ -214,6 +210,26 @@ export default {
     },
 
     /**
+     * Recupera o email mascarado do cliente a partir do CPF
+     * @param {object}
+     * @return {undefined}
+     */
+    getUserMaskedMail(payload = {
+      ...this.params,
+      code: this.securityCode,
+      endpoint: this.endpoint,
+      identification: this.identification,
+      password: this.password,
+      [this.identificationType]: this.identification,
+    }) {
+      this.getMaskedEmail(payload, { identification: this.identification }).then((response) => {
+        this.maskedEmail = response.data.email;
+      }).catch((error) => {
+        throw error;
+      });
+    },
+
+    /**
      * Reseta o módulo de recuperação de senha
      * @param {string}
      */
@@ -225,14 +241,7 @@ export default {
     /**
      * Valida os campos
      */
-    submit(event, payload = {
-      ...this.params,
-      code: this.securityCode,
-      endpoint: this.endpoint,
-      identification: this.identification,
-      password: this.password,
-      [this.identificationType]: this.identification,
-    }) {
+    submit() {
       if (!this.checkEquality(this.password, this.confirmation)) {
         this.setError(this.$lang['non-equal-password']);
         return;

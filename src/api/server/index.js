@@ -145,6 +145,6 @@ export default {
     identification_type: '',
   }) {
     const { endpoint, ...params } = payload;
-    return http.post(endpoint, params).then(response => response);
+    return http.get(endpoint, params).then(response => response);
   },
 };

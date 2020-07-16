@@ -185,6 +185,6 @@ export default {
       mockData = emailMaskedError;
     }
 
-    return fetch(mockData, delay, isValid)
-  }
+    return fetch(mockData, delay, isValid);
+  },
 };
