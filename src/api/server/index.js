@@ -137,7 +137,7 @@ export default {
    * @param {object} payload
    * @returns {Promise}
    */
-  getMaskedEMail(payload = {
+  getMaskedEmail(payload = {
     identification: '',
     endpoint: 'retrieve-masked-email',
     session_id: '',
@@ -145,6 +145,6 @@ export default {
     identification_type: '',
   }) {
     const { endpoint, ...params } = payload;
-    return http.get(endpoint, params).then(response => response);
+    return http.get(endpoint, { params }).then(response => response);
   },
 };
