@@ -210,12 +210,12 @@ export default {
      */
     getUserMaskedMail(payload = {
       ...this.params,
-      endpoint: this.endpoint,
+      endpoint: 'retrieve-masked-email',
       identification: this.identification,
       [this.identificationType]: this.identification,
     }) {
-      this.getMaskedEmail(payload, { identification: this.identification }).then((response) => {
-        this.maskedEmail = response.data.email;
+      this.getMaskedEmail(payload).then((response) => {
+        this.maskedEmail = response.data.data.responseData.maskedEmail;
       }).catch((error) => {
         throw error;
       });
