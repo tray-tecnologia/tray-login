@@ -130,4 +130,21 @@ export default {
     const { endpoint, ...params } = payload;
     return http.post(endpoint, params).then(response => response);
   },
+
+  /**
+   * Recupera o email mascarado do cliente a partir do CPF
+   * @param {string} endpoint
+   * @param {object} payload
+   * @returns {Promise}
+   */
+  getMaskedEmail(payload = {
+    identification: '',
+    endpoint: 'retrieve-masked-email',
+    session_id: '',
+    store_id: '',
+    identification_type: '',
+  }) {
+    const { endpoint, ...params } = payload;
+    return http.get(endpoint, { params }).then(response => response);
+  },
 };
