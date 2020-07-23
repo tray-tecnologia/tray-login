@@ -224,10 +224,11 @@ export default {
 
     /**
      * Valida o input do componente
+     * @return {undefined}
      */
     validateInput() {
       const onlyNumbers = /\^[0-9]*$/.test(this.securityCode);
-      return onlyNumbers ? '' : this.$forceUpdate();
+      return onlyNumbers ? null : this.$forceUpdate();
     },
 
     /**
