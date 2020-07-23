@@ -1,5 +1,5 @@
 <template>
-  <form id="change-password"
+  <form id="change-password" autocomplete="off"
     class="tray-login__new-password" method='POST' @submit.prevent="submit">
     <div>
       <strong class="tray-title tray-login__title">
