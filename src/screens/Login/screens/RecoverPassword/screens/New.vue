@@ -39,14 +39,14 @@
         :placeholder="$lang['otp-title']"/>
     </fieldset>
     <app-toggle-password
-      autocomplete="off"
+      autocomplete="new-password"
       :state="errors.length >= 1 ? 'invalid' : 'valid'"
       v-model="passwordHandler"
       @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
       id="new-pswrd-input">
     </app-toggle-password>
     <app-confirm-password
-      autocomplete="off"
+      autocomplete="new-password"
       :state="errors.length >= 1 ? 'invalid' : 'valid'"
       v-model="passwordConfirmation"
       @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
