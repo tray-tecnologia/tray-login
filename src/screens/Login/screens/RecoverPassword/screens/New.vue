@@ -1,5 +1,5 @@
 <template>
-  <form id="change-password"
+  <form id="change-password" autocomplete="off"
     class="tray-login__new-password" method='POST' @submit.prevent="submit">
     <div>
       <strong class="tray-title tray-login__title">
@@ -20,7 +20,7 @@
       </p>
     </div>
     <fieldset class="tray-input-group">
-      <label for="new-password-input">
+      <label for="security-code-input">
         <figure class="tray-input-icon">
           <svg class="tray-icon-locked" viewBox="0 0 512 512">
             <!-- eslint-disable-next-line -->
@@ -32,23 +32,25 @@
         autocomplete="off"
         @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
         v-model="securityCode"
-        id="new-password-input"
+        id="security-code-input"
+        maxlength="6"
+        @input="filterInput()"
         class="tray-input"
         :placeholder="$lang['otp-title']"/>
     </fieldset>
     <app-toggle-password
-      autocomplete="off"
+      autocomplete="new-password"
       :state="errors.length >= 1 ? 'invalid' : 'valid'"
       v-model="passwordHandler"
       @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
-      id="new-password-input">
+      id="new-pswrd-input">
     </app-toggle-password>
     <app-confirm-password
-      autocomplete="off"
+      autocomplete="new-password"
       :state="errors.length >= 1 ? 'invalid' : 'valid'"
       v-model="passwordConfirmation"
       @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
-      id="confirm-password-input">
+      id="confirm-pswrd-input">
     </app-confirm-password>
     <small class="tray-feedbacks"
       v-show="errors.length">
@@ -219,6 +221,14 @@ export default {
       }).catch((error) => {
         throw error;
       });
+    },
+
+    /**
+     * Valida se o input possui apenas números
+     * @return {undefined}
+     */
+    filterInput() {
+      this.securityCode = this.securityCode.replace(/[^0-9]+/g, '');
     },
 
     /**
