@@ -34,6 +34,7 @@
         v-model="securityCode"
         id="security-code-input"
         maxlength="6"
+        @input="validateInput()"
         :placeholder="$lang['otp-title']"/>
     </fieldset>
     <app-toggle-password
@@ -219,6 +220,14 @@ export default {
       }).catch((error) => {
         throw error;
       });
+    },
+
+    /**
+     * Valida o input do componente
+     */
+    validateInput() {
+      const onlyNumbers = /\^[0-9]*$/.test(this.securityCode);
+      return onlyNumbers ? '' : this.$forceUpdate();
     },
 
     /**
