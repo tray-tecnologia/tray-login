@@ -1,6 +1,6 @@
 <template>
   <form id="form-otp" class="tray-login__otp" method='POST' @submit.prevent="submit">
-    <header class="tray-login__recover-password__confirm-code__header">
+    <div class="tray-login__recover-password__confirm-code__header">
       <strong class="tray-title">
         {{ $lang['otp-title']}}
       </strong>
@@ -10,7 +10,7 @@
       <label class="tray-well">
         {{ identification }}
       </label>
-    </header>
+    </div>
     <fieldset class="tray-input-group">
       <label for="input-code">
         <figure class="tray-input-icon" :class="securityCodeClassses">
