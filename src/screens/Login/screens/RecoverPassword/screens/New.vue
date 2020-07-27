@@ -1,5 +1,5 @@
 <template>
-  <form id="change-password"
+  <form id="change-password" autocomplete="off"
     class="tray-login__new-password" method='POST' @submit.prevent="submit">
     <div>
       <strong class="tray-title tray-login__title">
@@ -21,37 +21,38 @@
     </div>
     <fieldset class="tray-input-group">
       <label for="security-code-input">
-        <figure class="tray-input-icon">
+        <figure class="tray-input-icon" :class="securityCodeErrors ? 'tray-input-invalid' : 'tray-input-initial'">
           <svg class="tray-icon-locked" viewBox="0 0 512 512">
             <!-- eslint-disable-next-line -->
             <path class="path1" d="M176 216h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16H176c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16zm-16 80c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16H176c-8.84 0-16 7.16-16 16v16zm96 121.13c-16.42 0-32.84-5.06-46.86-15.19L0 250.86V464c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V250.86L302.86 401.94c-14.02 10.12-30.44 15.19-46.86 15.19zm237.61-254.18c-8.85-6.94-17.24-13.47-29.61-22.81V96c0-26.51-21.49-48-48-48h-77.55c-3.04-2.2-5.87-4.26-9.04-6.56C312.6 29.17 279.2-.35 256 0c-23.2-.35-56.59 29.17-73.41 41.44-3.17 2.3-6 4.36-9.04 6.56H96c-26.51 0-48 21.49-48 48v44.14c-12.37 9.33-20.76 15.87-29.61 22.81A47.995 47.995 0 0 0 0 200.72v10.65l96 69.35V96h320v184.72l96-69.35v-10.65c0-14.74-6.78-28.67-18.39-37.77z"></path>
           </svg>
         </figure>
       </label>
-      <input v-autofocus
-        autocomplete="new-password"
-        @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+      <input v-autofocus @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
         v-model="securityCode"
+        class="tray-input"
+        :class="securityCodeErrors ? 'tray-input-invalid' : 'tray-input-initial'"
         id="security-code-input"
         maxlength="6"
         @input="filterInput()"
-        class="tray-input"
         :placeholder="$lang['otp-title']"/>
     </fieldset>
     <app-toggle-password
-      autocomplete="new-password"
-      :state="errors.length >= 1 ? 'invalid' : 'valid'"
+      :autoComplete="false"
+      :autoFocus="false"
+      :state="passwordErrors ? 'invalid' : 'valid'"
       v-model="passwordHandler"
       @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
       id="new-pswrd-input">
     </app-toggle-password>
-    <app-confirm-password
-      autocomplete="new-password"
-      :state="errors.length >= 1 ? 'invalid' : 'valid'"
+    <app-toggle-password
+      :autoComplete="false"
+      :autoFocus="false"
+      :state="passwordErrors ? 'invalid' : 'valid'"
       v-model="passwordConfirmation"
       @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
       id="confirm-pswrd-input">
-    </app-confirm-password>
+    </app-toggle-password>
     <small class="tray-feedbacks"
       v-show="errors.length">
       <span class="tray-error-message"
@@ -85,14 +86,12 @@ import client from 'api-client';
 import screenHandler from '@/mixins/screenHandler';
 import { mapState, mapActions } from 'vuex';
 import AppTogglePassword from '@/components/TogglePassword.vue';
-import AppConfirmPassword from '@/components/ConfirmPassword.vue';
 
 export default {
   name: 'AppNewPassword',
   mixins: [screenHandler],
   components: {
     AppTogglePassword,
-    AppConfirmPassword,
   },
   props: {
     endpoint: {
@@ -152,16 +151,6 @@ export default {
     },
 
     /**
-     * Objeto de classes utilizadas na personalização do input
-     * @return {object}
-     */
-    securityCodeClassses() {
-      return {
-        'tray-input-invalid': this.errors.length >= 1,
-      };
-    },
-
-    /**
      * Verifica se o codigo de segurança preenchido é valido
      * @return {boolean}
      */
@@ -173,6 +162,30 @@ export default {
       const onlyNumbersPattern = /^\d+$/;
       return onlyNumbersPattern.test(this.securityCode);
     },
+
+    /**
+     * Verifica se existem erros relacionados ao codigo de segurança
+     * @return {boolean}
+     */
+    securityCodeErrors() {
+      if (this.errors.length <= 0) {
+        return false
+      }
+
+      return this.errors[0].indexOf('Código') !== -1;
+    },
+
+    /**
+     * Verifica se existem erros relacionados a nova senha
+     * @return {boolean}
+    */
+    passwordErrors() {
+      if (this.errors.length <= 0) {
+        return false
+      }
+
+      return this.errors[0].indexOf('senha') !== -1;
+    }
   },
   methods: {
     updatePassword: client.updatePassword,

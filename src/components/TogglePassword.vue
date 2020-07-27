@@ -15,8 +15,19 @@
         {{ showPassword ? $lang['password-hide'] : $lang['password-show'] }}
       </button>
     </label>
-    <input v-autofocus
-      autocomplete="off"
+    <input v-if="autoFocus"
+      v-autofocus
+      :autocomplete="autoComplete ? 'on' : 'new-password'"
+      v-bind:value="value"
+      v-on:input="$emit('input', $event.target.value)"
+      :type="showPassword ? 'text' : 'password'"
+      :id="id"
+      class="tray-input"
+      :class="inputClass"
+      :placeholder="$lang['password-input-label']"/>
+
+    <input v-else
+      :autocomplete="autoComplete ? 'on' : 'new-password'"
       v-bind:value="value"
       v-on:input="$emit('input', $event.target.value)"
       :type="showPassword ? 'text' : 'password'"
@@ -44,6 +55,18 @@ export default {
       type: String,
       default() {
         return '';
+      },
+    },
+    autoComplete: {
+      type: Boolean,
+      default() {
+        return false;
+      },
+    },
+    autoFocus: {
+      type: Boolean,
+      default() {
+        return false;
       },
     },
   },
