@@ -1,4 +1,4 @@
-en<template>
+<template>
   <form id="change-password"
     class="tray-login__new-password" method='POST' @submit.prevent="submit">
     <div>
