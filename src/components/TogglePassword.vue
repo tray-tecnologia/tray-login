@@ -67,6 +67,9 @@ export default {
         return 'off';
       },
     },
+    /**
+     * Renderiza o campo ja com foco
+     */
     autoFocus: {
       type: Boolean,
       default() {
