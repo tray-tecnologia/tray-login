@@ -1,5 +1,5 @@
 <template>
-  <form id="change-password" autocomplete="off"
+  <form id="change-password"
     class="tray-login__new-password" method='POST' @submit.prevent="submit">
     <div>
       <strong class="tray-title tray-login__title">
@@ -29,7 +29,7 @@
         </figure>
       </label>
       <input v-autofocus
-        autocomplete="off"
+        autocomplete="new-password"
         @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
         v-model="securityCode"
         id="security-code-input"

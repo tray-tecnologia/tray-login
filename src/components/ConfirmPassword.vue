@@ -16,7 +16,7 @@
       </button>
     </label>
     <input v-autofocus
-      autocomplete="off"
+      autocomplete="new-password"
       v-bind:value="value"
       v-on:input="$emit('input', $event.target.value)"
       :type="showPassword ? 'text' : 'password'"
