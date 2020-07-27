@@ -17,7 +17,7 @@
     </label>
     <input v-if="autoFocus"
       v-autofocus
-      :autocomplete="autoComplete ? 'on' : 'new-password'"
+      :autocomplete="autoComplete"
       v-bind:value="value"
       v-on:input="$emit('input', $event.target.value)"
       :type="showPassword ? 'text' : 'password'"
@@ -27,7 +27,7 @@
       :placeholder="$lang['password-input-label']"/>
 
     <input v-else
-      :autocomplete="autoComplete ? 'on' : 'new-password'"
+      :autocomplete="autoComplete"
       v-bind:value="value"
       v-on:input="$emit('input', $event.target.value)"
       :type="showPassword ? 'text' : 'password'"
@@ -57,10 +57,14 @@ export default {
         return '';
       },
     },
+    /**
+     * Saiba mais sobre os tipos e casos de uso aqui
+     * https://www.chromium.org/developers/design-documents/create-amazing-password-forms#TOC-Use-autocomplete-attributes
+     */
     autoComplete: {
-      type: Boolean,
+      type: String,
       default() {
-        return false;
+        return 'off';
       },
     },
     autoFocus: {
