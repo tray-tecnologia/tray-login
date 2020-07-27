@@ -195,7 +195,7 @@ export default {
           type: 'error',
         });
 
-        const { message } = error;
+        const { message } = error.data;
         this.setError(message || this.$lang['invalid-code']);
         this.setLoading(false);
       });
