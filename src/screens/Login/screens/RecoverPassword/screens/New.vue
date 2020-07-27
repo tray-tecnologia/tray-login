@@ -19,7 +19,6 @@
         {{ $lang['new-password-create'] }}
       </p>
     </div>
-    <input type="text" id="username" autocomplete="username" :value="identification" style="display: none" />
     <fieldset class="tray-input-group">
       <label for="security-code-input">
         <figure class="tray-input-icon"
@@ -137,10 +136,6 @@ export default {
   computed: {
     ...mapState('Login/RecoverPassword', [
       'password',
-    ]),
-
-    ...mapState([
-      'identification',
     ]),
 
     /**
