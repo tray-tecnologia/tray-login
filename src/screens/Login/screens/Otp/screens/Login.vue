@@ -27,7 +27,7 @@
         class="tray-input"
         v-model="securityCode"
         maxlength="6"
-        autocomplete="off"
+        autocomplete="new-password"
         :class="securityCodeClassses"
         :placeholder="$lang['otp-title']"/>
     </fieldset>

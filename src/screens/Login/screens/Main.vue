@@ -22,7 +22,7 @@
         <small class="tray-feedbacks" v-show="errors.length">
           <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
         </small>
-        <button class="tray-link tray-password-forget" @click="sendCode">
+        <button class="tray-link tray-password-forget" type="button" @click="sendCode">
           {{ $lang['password-forget'] }}
         </button>
         <button id="password-submit"
