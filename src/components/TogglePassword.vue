@@ -15,8 +15,19 @@
         {{ showPassword ? $lang['password-hide'] : $lang['password-show'] }}
       </button>
     </label>
-    <input v-autofocus
-      autocomplete="off"
+    <input v-if="autoFocus"
+      v-autofocus
+      :autocomplete="autoComplete"
+      v-bind:value="value"
+      v-on:input="$emit('input', $event.target.value)"
+      :type="showPassword ? 'text' : 'password'"
+      :id="id"
+      class="tray-input"
+      :class="inputClass"
+      :placeholder="$lang['password-input-label']"/>
+
+    <input v-else
+      :autocomplete="autoComplete"
       v-bind:value="value"
       v-on:input="$emit('input', $event.target.value)"
       :type="showPassword ? 'text' : 'password'"
@@ -44,6 +55,25 @@ export default {
       type: String,
       default() {
         return '';
+      },
+    },
+    /**
+     * Saiba mais sobre os tipos e casos de uso aqui
+     * https://www.chromium.org/developers/design-documents/create-amazing-password-forms#TOC-Use-autocomplete-attributes
+     */
+    autoComplete: {
+      type: String,
+      default() {
+        return 'off';
+      },
+    },
+    /**
+     * Renderiza o campo ja com foco
+     */
+    autoFocus: {
+      type: Boolean,
+      default() {
+        return false;
       },
     },
   },
