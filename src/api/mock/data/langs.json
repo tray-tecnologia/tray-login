@@ -5,7 +5,7 @@
             "identify-input":"E-mail ou CPF/CNPJ (números)" ,
             "identify-data-invalid":"Dados inv&aacute;lidos, digite novamente!",
             "identify-error-not-found":"Usu&aacute;rio n&atilde;o encontrado, fa&ccedil;a seu cadastro.",
-            "invalid-code":"Código inserido não é válido.",
+            "invalid-code":"Autenticação incorreta",
             "main-title":"Autenticação",
             "main-action":"Escolha uma das opções para se identificar:",
             "main-separator":"ou utilize uma das opções abaixo",

@@ -173,7 +173,7 @@ export default {
         return false;
       }
 
-      return this.errors[0].indexOf('segurança') !== -1;
+      return this.errors[0].indexOf('segurança') !== -1 || this.errors[0].indexOf('Autenticação');
     },
 
     /**
