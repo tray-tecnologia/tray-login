@@ -11,7 +11,7 @@ export default {
     'identify-data-invalid': 'Dados inv&aacute;lidos, digite novamente!',
     'identify-error': 'N&atilde;o foi poss&iacute;vel verificar seu cadastro, tente novamente.',
     'identify-not-found': 'Usu&aacute;rio n&atilde;o encontrado, fa&ccedil;a seu cadastro.',
-    'invalid-code': 'Autenticação incorreta.',
+    'invalid-code': 'Código inserido não é válido.',
     // main screen
     'main-title': 'Autenticação',
     'main-action': 'Escolha uma das opções para se identificar:',

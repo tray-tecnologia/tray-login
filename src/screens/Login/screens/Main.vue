@@ -15,6 +15,7 @@
       <form method='POST'
         @submit.prevent="submit">
         <app-toggle-password id="input-password"
+          :autoFocus="true"
           v-model="password"
           :state="this.errors.length >= 1 ? 'invalid' : 'initial'"
           @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()">
@@ -22,11 +23,9 @@
         <small class="tray-feedbacks" v-show="errors.length">
           <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
         </small>
-        <a class="tray-link tray-password-forget"
-          @click="sendCode"
-          href="#">
+        <button class="tray-link tray-password-forget" type="button" @click="sendCode">
           {{ $lang['password-forget'] }}
-        </a>
+        </button>
         <button id="password-submit"
           @click="$emitEvent.click('tray-password-submit')"
           class="tray-btn-primary"
@@ -77,7 +76,6 @@ import AppOtpLogin from './Otp/screens/Login.vue';
 import AppTogglePassword from '@/components/TogglePassword.vue';
 import screenHandler from '@/mixins/screenHandler';
 import utils from '@/mixins/utils';
-import { error } from 'util'
 
 export default {
   name: 'AppLogin',

@@ -86,6 +86,12 @@ tray-login {
     }
 
     .tray-link {
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 0;
+        outline: none;
         text-decoration: underline;
     }
 
