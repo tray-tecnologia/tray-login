@@ -2,6 +2,6 @@
     "data":{
         "hasAccount": false
     },
-    "message": "Código de segurança inválido",
+    "message": "Autenticação incorreta",
     "statusCode": 200
 }
