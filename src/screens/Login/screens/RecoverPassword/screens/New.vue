@@ -19,6 +19,7 @@
         {{ $lang['new-password-create'] }}
       </p>
     </div>
+    <input type="text" id="username" autocomplete="username" :value="identification" style="display: none" />
     <fieldset class="tray-input-group">
       <label for="security-code-input">
         <figure class="tray-input-icon"
@@ -30,7 +31,7 @@
         </figure>
       </label>
       <input v-autofocus
-        autocomplete="off"
+        autocomplete="one-time-code"
         @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
         v-model="securityCode"
         class="tray-input"
@@ -52,7 +53,7 @@
       :state="passwordErrors ? 'invalid' : 'valid'"
       v-model="passwordConfirmation"
       @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
-      id="new-password-confirm">
+      id="confirm-new-password">
     </app-toggle-password>
     <small class="tray-feedbacks"
       v-show="errors.length">
@@ -136,6 +137,10 @@ export default {
   computed: {
     ...mapState('Login/RecoverPassword', [
       'password',
+    ]),
+
+    ...mapState([
+      'identification',
     ]),
 
     /**
