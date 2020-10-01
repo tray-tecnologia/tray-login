@@ -24,9 +24,7 @@
       :id="id"
       class="tray-input"
       :class="inputClass"
-      :placeholder="id === 'confirm-new-password' ?
-      $lang['confirmation-input-label']
-      : $lang['password-input-label']"/>
+      :placeholder="$lang['password-input-label']"/>
 
     <input v-else
       :autocomplete="autoComplete"
@@ -36,9 +34,7 @@
       :id="id"
       class="tray-input"
       :class="inputClass"
-      :placeholder="id === 'confirm-new-password' ?
-      $lang['confirmation-input-label']
-      : $lang['password-input-label']"/>
+      :placeholder="$lang['password-input-label']"/>
   </fieldset>
 </template>
 
