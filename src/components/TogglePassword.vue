@@ -122,7 +122,15 @@ export default {
      * @return {string}
      */
     passwordLabel() {
-      return this.id === 'confirm-new-password' ? ['confirmation-input-label'] : ['password-input-label'];
+      if (this.id === 'new-password') {
+        return ['new-password-label'];
+      }
+
+      if (this.id === 'confirm-new-password') {
+        return ['confirmation-input-label'];
+      }
+
+      return ['password-input-label'];
     },
   },
 };
