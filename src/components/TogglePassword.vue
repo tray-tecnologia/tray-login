@@ -24,7 +24,7 @@
       :id="id"
       class="tray-input"
       :class="inputClass"
-      :placeholder="$lang['password-input-label']"/>
+      :placeholder="$lang[this.passwordLabel]"/>
 
     <input v-else
       :autocomplete="autoComplete"
@@ -34,7 +34,7 @@
       :id="id"
       class="tray-input"
       :class="inputClass"
-      :placeholder="$lang['password-input-label']"/>
+      :placeholder="$lang[this.passwordLabel]"/>
   </fieldset>
 </template>
 
@@ -115,6 +115,14 @@ export default {
       }
 
       return 'tray-input-initial';
+    },
+
+    /**
+     * Define qual a label deve ser exibida dependendo do tipo de campo de senha
+     * @return {string}
+     */
+    passwordLabel() {
+      return this.id === 'confirm-new-password' ? ['confirmation-input-label'] : ['password-input-label'];
     },
   },
 };
