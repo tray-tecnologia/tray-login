@@ -78,7 +78,9 @@
         {{ $lang['go-back'] }}
       </button>
     </section>
-
+    <section id="tray-login-terms" v-if="hasTerm">
+      <app-terms :termText="this.dataTerms"></app-terms>
+    </section>
     <section id="tray-login-loading" v-show="loading"
       :class="{
         'tray-loading-hidden': !loading
@@ -105,6 +107,7 @@ import AppIdentification from './screens/Identification/Main.vue';
 import AppLogin from './screens/Login/screens/Main.vue';
 import AppOtpButton from './screens/Login/screens/Otp/Button.vue';
 import AppCustomTexts from './components/CustomTexts.vue';
+import AppTerms from './components/Terms.vue';
 import screenHandler from '@/mixins/screenHandler';
 
 export default {
@@ -116,6 +119,7 @@ export default {
     AppIdentification,
     AppOtpButton,
     AppLogin,
+    AppTerms,
   },
   mixins: [screenHandler],
   data() {
@@ -157,6 +161,10 @@ export default {
       default() {
         return '{"general-error-alert": "", "main-action": ""}';
       },
+    },
+    dataTerms: {
+      type: String,
+      default: '',
     },
   },
   beforeMount() {
@@ -227,6 +235,14 @@ export default {
      */
     hasCustomTexts() {
       return Object.values(this.customTexts).some(value => value);
+    },
+
+    /**
+     * Verifica se tem textos de termos
+     * @return {boolean}
+     */
+    hasTerm() {
+      return this.dataTerms.trim().length > 0;
     },
 
     /**
