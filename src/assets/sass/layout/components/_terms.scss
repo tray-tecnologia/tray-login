@@ -1,0 +1,17 @@
+.tray-login {
+    &__terms-container {
+        a {
+            text-decoration: none;
+            color: #4f08ee;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #2208ee;
+        }
+
+        p {
+            color: $gray;
+        }
+    }
+}
