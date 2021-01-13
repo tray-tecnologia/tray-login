@@ -8,7 +8,7 @@
         {{ $lang['otp-action'] }}
       </p>
       <label class="tray-well">
-        {{ identification }}
+        {{ maskedEmail || identification }}
       </label>
     </div>
     <fieldset class="tray-input-group">
@@ -60,7 +60,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import http from 'api-client';
+import { http, client } from 'api-client';
 import screenHandler from '@/mixins/screenHandler';
 import utils from '@/mixins/utils';
 
@@ -97,6 +97,7 @@ export default {
   data() {
     return {
       securityCode: '',
+      maskedEmail: '',
     };
   },
   computed: {
@@ -112,6 +113,10 @@ export default {
     },
   },
   mounted() {
+    const isValidDocument = this.identificationType !== 'email';
+    if (isValidDocument) {
+      this.getUserMaskedMail();
+    }
     this.$emitEvent.custom('otp');
   },
   methods: {
@@ -119,6 +124,7 @@ export default {
       backTo: 'setScreen',
     }),
     otpLogin: http.otpLogin,
+    getMaskedEmail: http.getMaskedEmail,
 
     /**
      * Realiza o login com o código de segurança
@@ -157,6 +163,24 @@ export default {
         const { message = this.$lang['invalid-code'] } = error.data;
         this.setError(message);
         this.setLoading(false);
+      });
+    },
+
+    /**
+     * Recupera o email mascarado do cliente a partir do CPF
+     * @param {object} payload os parâmetros enviados para o endpoint
+     * @return {undefined}
+     */
+    getUserMaskedMail(payload = {
+      ...this.params,
+      endpoint: 'retrieve-masked-email',
+      identification: this.identification,
+      [this.identificationType]: this.identification,
+    }) {
+      this.getMaskedEmail(payload).then((response) => {
+        this.maskedEmail = response.data.data.responseData.maskedEmail;
+      }).catch((error) => {
+        throw error;
       });
     },
   },
