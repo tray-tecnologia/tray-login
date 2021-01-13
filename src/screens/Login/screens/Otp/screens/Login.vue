@@ -60,7 +60,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { http, client } from 'api-client';
+import http from 'api-client';
 import screenHandler from '@/mixins/screenHandler';
 import utils from '@/mixins/utils';
 
