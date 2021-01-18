@@ -4,12 +4,18 @@
       <strong class="tray-title">
         {{ $lang['otp-title']}}
       </strong>
+      <div class="tray-login__recover-password__header">
+        <figure class="tray-login__recover-password__figure">
+          <svg class="tray-user-lock" viewBox="0 0 640 512">
+            <!-- eslint-disable-next-line -->
+            <path class="path1" d="M224 256A128 128 0 1 0 96 128a128 128 0 0 0 128 128zm96 64a63.08 63.08 0 0 1 8.1-30.5c-4.8-.5-9.5-1.5-14.5-1.5h-16.7a174.08 174.08 0 0 1-145.8 0h-16.7A134.43 134.43 0 0 0 0 422.4V464a48 48 0 0 0 48 48h280.9a63.54 63.54 0 0 1-8.9-32zm288-32h-32v-80a80 80 0 0 0-160 0v80h-32a32 32 0 0 0-32 32v160a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V320a32 32 0 0 0-32-32zM496 432a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm32-144h-64v-80a32 32 0 0 1 64 0z"></path>
+          </svg>
+        </figure>
+      </div>
       <p class="tray-action">
-        {{ $lang['otp-action'] }}
+        {{ $lang['new-password-code'] }}
+        <b> {{ maskedEmail || identification }} </b>
       </p>
-      <label class="tray-well">
-        {{ identification }}
-      </label>
     </div>
     <fieldset class="tray-input-group">
       <label for="input-code">
@@ -97,6 +103,7 @@ export default {
   data() {
     return {
       securityCode: '',
+      maskedEmail: '',
     };
   },
   computed: {
@@ -112,6 +119,10 @@ export default {
     },
   },
   mounted() {
+    const isValidDocument = this.identificationType !== 'email';
+    if (isValidDocument) {
+      this.getUserMaskedMail();
+    }
     this.$emitEvent.custom('otp');
   },
   methods: {
@@ -119,6 +130,7 @@ export default {
       backTo: 'setScreen',
     }),
     otpLogin: http.otpLogin,
+    getMaskedEmail: http.getMaskedEmail,
 
     /**
      * Realiza o login com o código de segurança
@@ -157,6 +169,24 @@ export default {
         const { message = this.$lang['invalid-code'] } = error.data;
         this.setError(message);
         this.setLoading(false);
+      });
+    },
+
+    /**
+     * Recupera o email mascarado do cliente a partir do CPF
+     * @param {object} payload os parâmetros enviados para o endpoint
+     * @return {undefined}
+     */
+    getUserMaskedMail(payload = {
+      ...this.params,
+      endpoint: 'retrieve-masked-email',
+      identification: this.identification,
+      [this.identificationType]: this.identification,
+    }) {
+      this.getMaskedEmail(payload).then((response) => {
+        this.maskedEmail = response.data.data.responseData.maskedEmail;
+      }).catch((error) => {
+        throw error;
       });
     },
   },
