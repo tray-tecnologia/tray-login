@@ -60,6 +60,46 @@
         v-html="errors[errors.length - 1]">
       </span>
     </small>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="app__customer-password-change__validation-rules">
+          <span class="app__customer-password-change__validation-rules__contains">
+            {{ $lang['must-contain'] }}
+          </span>
+          <span class="app__customer-password-change__validation-rules__list">
+            <dl>
+              <dt class="app__customer-password-change__validation-rules__list__item"
+              :class="{'app__loading': loading}">
+                <app-svg
+                  :name="getIconName($v.passwordHandler, $v.passwordHandler.isValidLength)"
+                  class="app__icon--rules"
+                  :class="{'app__loading': loading}">
+                </app-svg>
+                {{ $lang['min-characters'] }}
+              </dt>
+              <dt class="app__customer-password-change__validation-rules__list__item"
+              :class="{'app__loading': loading}">
+                <app-svg
+                  :name="getIconName($v.passwordHandler, $v.passwordHandler.containsNumber)"
+                  class="app__icon--rules"
+                  :class="{'app__loading': loading}">
+                </app-svg>
+                {{ $lang['min-number'] }}
+              </dt>
+              <dt class="app__customer-password-change__validation-rules__list__item"
+              :class="{'app__loading': loading}">
+                <app-svg
+                  :name="getIconName($v.passwordHandler, $v.passwordHandler.containsLetter)"
+                  class="app__icon--rules"
+                  :class="{'app__loading': loading}">
+                </app-svg>
+                {{ $lang['min-letter'] }}
+              </dt>
+            </dl>
+          </span>
+        </div>
+      </div>
+    </div>
     <button id="new-password-submit"
       class="tray-btn-primary"
       type="submit">
@@ -86,13 +126,22 @@
 import client from 'api-client';
 import screenHandler from '@/mixins/screenHandler';
 import { mapState, mapActions } from 'vuex';
+import { validationMixin } from 'vuelidate';
+import { required, sameAs } from 'vuelidate/lib/validators';
 import AppTogglePassword from '@/components/TogglePassword.vue';
+import AppSvg from '@/components/Svg.vue';
+import {
+  isValidLength,
+  containsLetter,
+  containsNumber,
+} from '../validators/password';
 
 export default {
   name: 'AppNewPassword',
-  mixins: [screenHandler],
+  mixins: [screenHandler, validationMixin],
   components: {
     AppTogglePassword,
+    AppSvg,
   },
   props: {
     endpoint: {
@@ -297,6 +346,77 @@ export default {
         this.setLoading(false);
       });
     },
+
+    /**
+     * Retorna o state de acordo com as opções do validador
+     * https://monterail.github.io/vuelidate/
+     *
+     * @param {object} $dirty Se o input já sofreu interação do usuário
+     * @param {object} $error Se o input é inválido e já sofreu interação do usuário, ou
+     * seja, quando [$invalid] e [$dirty] são true.
+     * @param {object} $invalid Se o input não "passa" em alguma validação
+     * @param {object} $model Valor do input
+     * @param {string} validationMessage Mensagem de validação customizada
+     * @returns {boolean|string}
+     */
+    getValidatorState(
+      {
+        $dirty, $error, $invalid, $model,
+      } = {},
+      validationMessage,
+    ) {
+      const wasTouched = $dirty;
+      const hasNoErrors = !$error;
+
+      if (validationMessage && validationMessage.length) {
+        return 'invalid';
+      }
+
+      if (wasTouched) {
+        return hasNoErrors;
+      }
+
+      const isAnyValidationInvalid = $invalid;
+      const isEmpty = !$model;
+
+      const isNeutral = hasNoErrors && (isAnyValidationInvalid || isEmpty);
+      return isNeutral ? 'initial' : !isAnyValidationInvalid;
+    },
+
+    /**
+     * Retorna o ícone correto de acordo com as regras de validação
+     * @param {boolean} validationRule a regra de validação sendo testada
+     * @return {string}
+     */
+    getIconName(
+      { $dirty } = {},
+      validationRule,
+    ) {
+      const wasTouched = $dirty;
+
+      if (wasTouched) {
+        return validationRule ? 'check' : 'times';
+      }
+
+      return 'circle';
+    },
+  },
+
+  validations() {
+    const validations = {
+      passwordHandler: {
+        required,
+        isValidLength,
+        containsLetter,
+        containsNumber,
+      },
+
+      confirmation: {
+        sameAsPassword: sameAs('password'),
+      },
+    };
+
+    return validations;
   },
 };
 </script>

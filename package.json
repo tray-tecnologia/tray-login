@@ -9,12 +9,21 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-brands-svg-icons": "^5.14.0",
+    "@fortawesome/free-regular-svg-icons": "^5.14.0",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@fortawesome/vue-fontawesome": "^2.0.0",
     "@brazilian-utils/validators": "^0.1.9",
     "@vue/web-component-wrapper": "^1.2.0",
     "axios": "^0.18.0",
     "vue": "^2.5.22",
     "vue-custom-element": "^3.2.6",
-    "vuex": "^3.1.0"
+    "vuex": "^3.1.0",
+    "vuelidate": "^0.7.5",
+    "webpack": "^3.12.0",
+    "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
@@ -32,7 +41,8 @@
     "fibers": "^3.1.1",
     "sass": "^1.16.0",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.5.21"
+    "vue-template-compiler": "^2.5.21",
+    "webpack-dev-server": "^2.11.5"
   },
   "description": "Web Component para realizar login nas lojas da Tray.",
   "main": "main.js",
