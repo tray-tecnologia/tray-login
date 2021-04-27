@@ -135,7 +135,7 @@ import {
   containsNumber,
   circleIcon,
   checkIcon,
-  timesIcon
+  timesIcon,
 } from '../validators/password';
 
 export default {
