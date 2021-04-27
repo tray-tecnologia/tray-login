@@ -70,29 +70,29 @@
             <dl>
               <dt class="app__customer-password-change__validation-rules__list__item"
               :class="{'app__loading': loading}">
-                <app-svg
-                  :name="getIconName($v.passwordHandler, $v.passwordHandler.isValidLength)"
+                <figure
+                  v-html="($v.passwordHandler, $v.passwordHandler.isValidLength)"
                   class="app__icon--rules"
                   :class="{'app__loading': loading}">
-                </app-svg>
+                </figure>
                 {{ $lang['min-characters'] }}
               </dt>
               <dt class="app__customer-password-change__validation-rules__list__item"
               :class="{'app__loading': loading}">
-                <app-svg
-                  :name="getIconName($v.passwordHandler, $v.passwordHandler.containsNumber)"
+                <figure
+                  v-html="getIconName($v.passwordHandler, $v.passwordHandler.containsNumber)"
                   class="app__icon--rules"
                   :class="{'app__loading': loading}">
-                </app-svg>
+                </figure>
                 {{ $lang['min-number'] }}
               </dt>
               <dt class="app__customer-password-change__validation-rules__list__item"
               :class="{'app__loading': loading}">
-                <app-svg
-                  :name="getIconName($v.passwordHandler, $v.passwordHandler.containsLetter)"
+                <figure
+                  v-html="getIconName($v.passwordHandler, $v.passwordHandler.containsLetter)"
                   class="app__icon--rules"
                   :class="{'app__loading': loading}">
-                </app-svg>
+                </figure>
                 {{ $lang['min-letter'] }}
               </dt>
             </dl>
@@ -129,11 +129,13 @@ import { mapState, mapActions } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required, sameAs } from 'vuelidate/lib/validators';
 import AppTogglePassword from '@/components/TogglePassword.vue';
-import AppSvg from '@/components/Svg.vue';
 import {
   isValidLength,
   containsLetter,
   containsNumber,
+  circleIcon,
+  checkIcon,
+  timesIcon
 } from '../validators/password';
 
 export default {
@@ -141,7 +143,6 @@ export default {
   mixins: [screenHandler, validationMixin],
   components: {
     AppTogglePassword,
-    AppSvg,
   },
   props: {
     endpoint: {
@@ -395,10 +396,10 @@ export default {
       const wasTouched = $dirty;
 
       if (wasTouched) {
-        return validationRule ? 'check' : 'times';
+        return validationRule ? checkIcon : timesIcon;
       }
 
-      return 'circle';
+      return circleIcon;
     },
   },
 

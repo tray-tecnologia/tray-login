@@ -9,19 +9,20 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@brazilian-utils/validators": "^0.1.9",
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-brands-svg-icons": "^5.14.0",
     "@fortawesome/free-regular-svg-icons": "^5.14.0",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/vue-fontawesome": "^2.0.0",
-    "@brazilian-utils/validators": "^0.1.9",
     "@vue/web-component-wrapper": "^1.2.0",
     "axios": "^0.18.0",
+    "html-loader": "^2.1.2",
     "vue": "^2.5.22",
     "vue-custom-element": "^3.2.6",
-    "vuex": "^3.1.0",
     "vuelidate": "^0.7.5",
+    "vuex": "^3.1.0",
     "webpack": "^3.12.0",
     "webpack-merge": "^4.2.2"
   },
