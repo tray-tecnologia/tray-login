@@ -133,9 +133,11 @@ import {
   isValidLength,
   containsLetter,
   containsNumber,
-  checkIcon,
-  timesIcon,
 } from '../validators/password';
+import {
+  checkIcon,
+  timesIcon
+} from '../validators/icons';
 
 export default {
   name: 'AppNewPassword',
