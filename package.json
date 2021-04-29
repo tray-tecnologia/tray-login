@@ -1,6 +1,6 @@
 {
   "name": "tray-login",
-  "version": "2.0.15",
+  "version": "2.0.16",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "NODE_ENV=production vue-cli-service build --target lib --name trayLogin src/main.js",
@@ -16,11 +16,12 @@
     "@fortawesome/free-regular-svg-icons": "^5.14.0",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^2.0.0",
+    "@vue/cli": "^4.5.12",
     "@vue/web-component-wrapper": "^1.2.0",
     "axios": "^0.18.0",
     "html-loader": "^2.1.2",
     "svg-inline-loader": "^0.8.2",
-    "vue": "^2.5.22",
+    "vue": "^2.6.12",
     "vue-custom-element": "^3.2.6",
     "vuelidate": "^0.7.5",
     "vuex": "^3.1.0",
