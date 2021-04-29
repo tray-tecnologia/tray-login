@@ -258,6 +258,10 @@ export default {
       return password.length >= 8;
     },
 
+    /**
+     * Verifica os requisitos foram cumpridos
+     * @return {boolean}
+     */
     checkRequirements() {
       return containsNumber && containsLetter;
     },
