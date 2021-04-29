@@ -60,8 +60,7 @@
         v-html="errors[errors.length - 1]">
       </span>
     </small>
-    <div class="row">
-      <div class="col-md-12">
+      <div class="col">
         <div class="app__customer-password-change__validation-rules">
           <span class="app__customer-password-change__validation-rules__contains">
             {{ $lang['must-contain'] }}
@@ -98,7 +97,6 @@
             </dl>
           </span>
         </div>
-      </div>
     </div>
     <button id="new-password-submit"
       class="tray-btn-primary"

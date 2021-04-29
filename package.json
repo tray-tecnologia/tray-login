@@ -19,8 +19,6 @@
     "@vue/cli": "^4.5.12",
     "@vue/web-component-wrapper": "^1.2.0",
     "axios": "^0.18.0",
-    "html-loader": "^2.1.2",
-    "svg-inline-loader": "^0.8.2",
     "vue": "^2.6.12",
     "vue-custom-element": "^3.2.6",
     "vuelidate": "^0.7.5",
