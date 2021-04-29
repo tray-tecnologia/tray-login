@@ -71,7 +71,7 @@
               <dt class="app__customer-password-change__validation-rules__list__item"
               :class="{'app__loading': loading}">
                 <figure
-                  v-html="($v.passwordHandler, $v.passwordHandler.isValidLength)"
+                  v-html="getIconName($v.passwordHandler.isValidLength)"
                   class="app__icon--rules"
                   :class="{'app__loading': loading}">
                 </figure>
@@ -80,7 +80,7 @@
               <dt class="app__customer-password-change__validation-rules__list__item"
               :class="{'app__loading': loading}">
                 <figure
-                  v-html="getIconName($v.passwordHandler, $v.passwordHandler.containsNumber)"
+                  v-html="getIconName($v.passwordHandler.containsNumber)"
                   class="app__icon--rules"
                   :class="{'app__loading': loading}">
                 </figure>
@@ -89,9 +89,9 @@
               <dt class="app__customer-password-change__validation-rules__list__item"
               :class="{'app__loading': loading}">
                 <figure
-                  v-html="getIconName($v.passwordHandler, $v.passwordHandler.containsLetter)"
                   class="app__icon--rules"
-                  :class="{'app__loading': loading}">
+                  :class="{'app__loading': loading}"
+                  v-html="getIconName($v.passwordHandler.containsLetter)">
                 </figure>
                 {{ $lang['min-letter'] }}
               </dt>
@@ -133,7 +133,6 @@ import {
   isValidLength,
   containsLetter,
   containsNumber,
-  circleIcon,
   checkIcon,
   timesIcon,
 } from '../validators/password';
@@ -256,7 +255,11 @@ export default {
      * @return {boolean}
      */
     checkValidity(password = this.password) {
-      return password.length >= 6;
+      return password.length >= 8;
+    },
+
+    checkRequirements() {
+      return containsNumber && containsLetter;
     },
 
     /**
@@ -318,6 +321,11 @@ export default {
         return;
       }
 
+      if (!this.checkRequirements()) {
+        this.setError(this.$lang.errors.requirements);
+        return;
+      }
+
       if (!this.isValidSecurityCode) {
         this.setError(this.$lang['invalid-code']);
         return;
@@ -348,41 +356,6 @@ export default {
       });
     },
 
-    /**
-     * Retorna o state de acordo com as opções do validador
-     * https://monterail.github.io/vuelidate/
-     *
-     * @param {object} $dirty Se o input já sofreu interação do usuário
-     * @param {object} $error Se o input é inválido e já sofreu interação do usuário, ou
-     * seja, quando [$invalid] e [$dirty] são true.
-     * @param {object} $invalid Se o input não "passa" em alguma validação
-     * @param {object} $model Valor do input
-     * @param {string} validationMessage Mensagem de validação customizada
-     * @returns {boolean|string}
-     */
-    getValidatorState(
-      {
-        $dirty, $error, $invalid, $model,
-      } = {},
-      validationMessage,
-    ) {
-      const wasTouched = $dirty;
-      const hasNoErrors = !$error;
-
-      if (validationMessage && validationMessage.length) {
-        return 'invalid';
-      }
-
-      if (wasTouched) {
-        return hasNoErrors;
-      }
-
-      const isAnyValidationInvalid = $invalid;
-      const isEmpty = !$model;
-
-      const isNeutral = hasNoErrors && (isAnyValidationInvalid || isEmpty);
-      return isNeutral ? 'initial' : !isAnyValidationInvalid;
-    },
 
     /**
      * Retorna o ícone correto de acordo com as regras de validação
@@ -390,16 +363,9 @@ export default {
      * @return {string}
      */
     getIconName(
-      { $dirty } = {},
       validationRule,
     ) {
-      const wasTouched = $dirty;
-
-      if (wasTouched) {
-        return validationRule ? checkIcon : timesIcon;
-      }
-
-      return circleIcon;
+      return validationRule ? checkIcon : timesIcon;
     },
   },
 
