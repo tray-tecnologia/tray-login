@@ -134,7 +134,7 @@ import {
 } from '../validators/password';
 import {
   checkIcon,
-  timesIcon
+  timesIcon,
 } from '../validators/icons';
 
 export default {
