@@ -60,43 +60,43 @@
         v-html="errors[errors.length - 1]">
       </span>
     </small>
-      <div class="col">
-        <div class="app__customer-password-change__validation-rules">
-          <span class="app__customer-password-change__validation-rules__contains">
-            {{ $lang['must-contain'] }}
-          </span>
-          <span class="app__customer-password-change__validation-rules__list">
-            <dl>
-              <dt class="app__customer-password-change__validation-rules__list__item"
-              :class="{'app__loading': loading}">
-                <figure
-                  v-html="getIconName($v.passwordHandler.isValidLength)"
-                  class="app__icon--rules"
-                  :class="{'app__loading': loading}">
-                </figure>
-                {{ $lang['min-characters'] }}
-              </dt>
-              <dt class="app__customer-password-change__validation-rules__list__item"
-              :class="{'app__loading': loading}">
-                <figure
-                  v-html="getIconName($v.passwordHandler.containsNumber)"
-                  class="app__icon--rules"
-                  :class="{'app__loading': loading}">
-                </figure>
-                {{ $lang['min-number'] }}
-              </dt>
-              <dt class="app__customer-password-change__validation-rules__list__item"
-              :class="{'app__loading': loading}">
-                <figure
-                  class="app__icon--rules"
-                  :class="{'app__loading': loading}"
-                  v-html="getIconName($v.passwordHandler.containsLetter)">
-                </figure>
-                {{ $lang['min-letter'] }}
-              </dt>
-            </dl>
-          </span>
-        </div>
+    <div class="col">
+      <div class="app__customer-password-change__validation-rules">
+        <span class="app__customer-password-change__validation-rules__contains">
+          {{ $lang['must-contain'] }}
+        </span>
+        <span class="app__customer-password-change__validation-rules__list">
+          <dl>
+            <dt class="app__customer-password-change__validation-rules__list__item"
+            :class="{'app__loading': loading}">
+              <figure
+                v-html="getIconName($v.passwordHandler.isValidLength)"
+                class="app__icon--rules"
+                :class="{'app__loading': loading}">
+              </figure>
+              {{ $lang['min-characters'] }}
+            </dt>
+            <dt class="app__customer-password-change__validation-rules__list__item"
+            :class="{'app__loading': loading}">
+              <figure
+                v-html="getIconName($v.passwordHandler.containsNumber)"
+                class="app__icon--rules"
+                :class="{'app__loading': loading}">
+              </figure>
+              {{ $lang['min-number'] }}
+            </dt>
+            <dt class="app__customer-password-change__validation-rules__list__item"
+            :class="{'app__loading': loading}">
+              <figure
+                class="app__icon--rules"
+                :class="{'app__loading': loading}"
+                v-html="getIconName($v.passwordHandler.containsLetter)">
+              </figure>
+              {{ $lang['min-letter'] }}
+            </dt>
+          </dl>
+        </span>
+      </div>
     </div>
     <button id="new-password-submit"
       class="tray-btn-primary"
