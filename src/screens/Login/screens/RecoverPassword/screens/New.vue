@@ -60,6 +60,44 @@
         v-html="errors[errors.length - 1]">
       </span>
     </small>
+    <div class="col">
+      <div class="app__customer-password-change__validation-rules">
+        <span class="app__customer-password-change__validation-rules__contains">
+          {{ $lang['must-contain'] }}
+        </span>
+        <span class="app__customer-password-change__validation-rules__list">
+          <dl>
+            <dt class="app__customer-password-change__validation-rules__list__item"
+            :class="{'app__loading': loading}">
+              <figure
+                v-html="getIconName($v.passwordHandler.isValidLength)"
+                class="app__icon--rules"
+                :class="{'app__loading': loading}">
+              </figure>
+              {{ $lang['min-characters'] }}
+            </dt>
+            <dt class="app__customer-password-change__validation-rules__list__item"
+            :class="{'app__loading': loading}">
+              <figure
+                v-html="getIconName($v.passwordHandler.containsNumber)"
+                class="app__icon--rules"
+                :class="{'app__loading': loading}">
+              </figure>
+              {{ $lang['min-number'] }}
+            </dt>
+            <dt class="app__customer-password-change__validation-rules__list__item"
+            :class="{'app__loading': loading}">
+              <figure
+                class="app__icon--rules"
+                :class="{'app__loading': loading}"
+                v-html="getIconName($v.passwordHandler.containsLetter)">
+              </figure>
+              {{ $lang['min-letter'] }}
+            </dt>
+          </dl>
+        </span>
+      </div>
+    </div>
     <button id="new-password-submit"
       class="tray-btn-primary"
       type="submit">
@@ -86,11 +124,22 @@
 import client from 'api-client';
 import screenHandler from '@/mixins/screenHandler';
 import { mapState, mapActions } from 'vuex';
+import { validationMixin } from 'vuelidate';
+import { required, sameAs } from 'vuelidate/lib/validators';
 import AppTogglePassword from '@/components/TogglePassword.vue';
+import {
+  isValidLength,
+  containsLetter,
+  containsNumber,
+} from '../validators/password';
+import {
+  checkIcon,
+  timesIcon,
+} from '../validators/icons';
 
 export default {
   name: 'AppNewPassword',
-  mixins: [screenHandler],
+  mixins: [screenHandler, validationMixin],
   components: {
     AppTogglePassword,
   },
@@ -206,7 +255,15 @@ export default {
      * @return {boolean}
      */
     checkValidity(password = this.password) {
-      return password.length >= 6;
+      return password.length >= 8;
+    },
+
+    /**
+     * Verifica os requisitos foram cumpridos
+     * @return {boolean}
+     */
+    checkRequirements() {
+      return containsNumber && containsLetter;
     },
 
     /**
@@ -268,6 +325,11 @@ export default {
         return;
       }
 
+      if (!this.checkRequirements()) {
+        this.setError(this.$lang.errors.requirements);
+        return;
+      }
+
       if (!this.isValidSecurityCode) {
         this.setError(this.$lang['invalid-code']);
         return;
@@ -297,6 +359,35 @@ export default {
         this.setLoading(false);
       });
     },
+
+
+    /**
+     * Retorna o ícone correto de acordo com as regras de validação
+     * @param {boolean} validationRule a regra de validação sendo testada
+     * @return {string}
+     */
+    getIconName(
+      validationRule,
+    ) {
+      return validationRule ? checkIcon : timesIcon;
+    },
+  },
+
+  validations() {
+    const validations = {
+      passwordHandler: {
+        required,
+        isValidLength,
+        containsLetter,
+        containsNumber,
+      },
+
+      confirmation: {
+        sameAsPassword: sameAs('password'),
+      },
+    };
+
+    return validations;
   },
 };
 </script>

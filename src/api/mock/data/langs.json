@@ -27,7 +27,7 @@
             "new-password-code-submit":"Validar código de segurança",
             "new-password-success": "Nova senha cadastrada com sucesso!",
             "empty-password":"Nova senha é necessária",
-            "invalid-password":"A nova senha deve possuir no mínimo 6 caracteres.",
+            "invalid-password":"A nova senha deve possuir no mínimo 8 caracteres.",
             "non-equal-password":"As senhas não correspondem.",
             "otp-title":"Código de segurança",
             "otp-action":"Informe o código de segurança que enviamos para seu e-mail.",
@@ -36,7 +36,26 @@
             "other-option":"Escolher outra opção",
             "go-back":"Voltar",
             "proceed":"Continuar",
-            "blocked-user":"Por motivos de segurança bloqueamos o acesso por e-mail e senha durante 60 minutos."
+            "blocked-user":"Por motivos de segurança bloqueamos o acesso por e-mail e senha durante 60 minutos.",
+            "title": "Alterar senha",
+            "new-password": "Nova senha",
+            "confirm-password": "Confirmar nova senha",
+            "must-contain": "Sua senha deve conter: ",
+            "min-characters": "Mínimo de 8 caracteres",
+            "min-number": "Pelo menos 1 número",
+            "min-letter": "Pelo menos 1 letra",
+            "save-password": "Salvar nova senha",
+            "errors": {
+                "requirements": "Senha não atende aos requisitos",
+                "equal": "Senhas não são iguais",
+                "create-password": "Para salvar, crie uma nova senha",
+                "confirm-password": "Para salvar, confirme a senha",
+                "length": "A senha deve ter no mínimo 8 caracteres."
+            },
+            "messages": {
+                "success": "Senha alterada com sucesso",
+                "failure": "Houve um erro ao alterar sua senha"
+            }
         }
     }
 }
