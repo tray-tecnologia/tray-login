@@ -178,12 +178,7 @@ export default {
 
       this.setLoading(true);
       this.checkHasAccount(payload)
-        .then((response) => {
-          const { hasAccount } = response.data || false;
-          if (!hasAccount) {
-            throw response;
-          }
-
+        .then(() => {
           this.clearErrors();
           this.$parent.setScreen('Main');
           this.setLoading(false);
