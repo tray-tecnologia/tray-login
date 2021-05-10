@@ -165,34 +165,16 @@ export default {
     /**
      * Envia os dados
      */
-    submit(event, payload = {
-      ...this.params,
-      endpoint: this.endpoint,
-      identification: this.identification,
-      [this.identificationType]: this.identification,
-    }) {
+    submit() {
       if (!this.isValidIdentification) {
         this.setError(this.$lang['identify-data-invalid']);
         return;
       }
 
       this.setLoading(true);
-      this.checkHasAccount(payload)
-        .then((response) => {
-          const { hasAccount } = response.data || false;
-          if (!hasAccount) {
-            throw response;
-          }
-
-          this.clearErrors();
-          this.$parent.setScreen('Main');
-          this.setLoading(false);
-        })
-        .catch((error) => {
-          const { message = this.$lang['identify-error-not-found'] } = error || false;
-          this.setError(message);
-          this.setLoading(false);
-        });
+      this.clearErrors();
+      this.$parent.setScreen('Main');
+      this.setLoading(false);
     },
   },
 };
