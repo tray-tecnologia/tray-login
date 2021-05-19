@@ -61,7 +61,7 @@ export default {
     store_id: '',
   }) {
     const { endpoint, ...params } = payload;
-    return http.post(endpoint, params).then(response => response);
+    return http.post(endpoint, params).then(response => console.log(response));
   },
 
   /**
