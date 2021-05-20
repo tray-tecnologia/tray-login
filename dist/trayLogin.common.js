@@ -10046,7 +10046,7 @@ function _objectWithoutProperties(source, excluded) {
         params = _objectWithoutProperties(payload, ["endpoint"]);
 
     return http.post(endpoint, params).then(function (response) {
-      return response.data.errors;
+      return response.data;
     });
   },
 
