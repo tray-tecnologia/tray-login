@@ -216,8 +216,11 @@ export default {
         this.setLoading(false);
         this.setScreen('RecoverPassword');
       }).catch((error) => {
-        console.log('oioioioi');
-        this.setError(error);
+        console.log('error', error);
+        const { errors = [this.$lang['invalid-code']] } = { ...error };
+        console.log('errors', errors);
+        const lastError = errors[errors.length - 1];
+        this.setError(lastError);
         this.setLoading(false);
       });
     },
