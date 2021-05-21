@@ -216,7 +216,7 @@ export default {
         this.setLoading(false);
         this.setScreen('RecoverPassword');
       }).catch((error) => {
-        console.log(error);
+        console.log('oioioioi');
         this.setError(error);
         this.setLoading(false);
       });

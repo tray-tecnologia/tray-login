@@ -1,0 +1,6 @@
+{
+    "errors": {
+        "0": "Autenticação incorreta"
+    },
+    "statusCode": 400
+}
