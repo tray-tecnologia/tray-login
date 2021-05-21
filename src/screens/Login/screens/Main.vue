@@ -215,6 +215,10 @@ export default {
       this.generateSecurityCode(payload).then(() => {
         this.setLoading(false);
         this.setScreen('RecoverPassword');
+      }).catch((error) => {
+        console.log(error);
+        this.setError(error);
+        this.setLoading(false);
       });
     },
 
