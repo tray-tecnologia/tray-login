@@ -103,4 +103,4 @@ Agora que o ambiente está configurado, execute na raiz:
 yarn serve
 ```
 
-Caso você esteja utilizando o docker o comando acima já é executado automaticamente ao levantar o ontainer
+Caso você esteja utilizando o docker o comando acima já é executado automaticamente ao levantar o container
