@@ -173,8 +173,11 @@ export default {
 
       this.setLoading(true);
       this.clearErrors();
-      this.$parent.setScreen('Main');
       this.setLoading(false);
+ 
+      // TODO: criar fluxo de autenticação do CPF
+      // this.$parent.setScreen('Main');
+      this.$parent.setScreen('Authentication');
     },
   },
 };
