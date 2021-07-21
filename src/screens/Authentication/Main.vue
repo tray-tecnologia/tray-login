@@ -17,6 +17,7 @@
                 class="tray-btn-default"
                 v-for="n in names"
                 :key="n"
+                @click="submit(n)"
             >
                 {{ n }}
             </button>
@@ -38,12 +39,21 @@ import utils from '@/mixins/utils';
 export default {
     name: 'AppAuthentication',
     mixins: [screenHandler, utils],
+    props: ['reset'],
     data() {
         return {
             storeName: "Marketplace XYZ",
             names: ['******* Rulfini', '******* Beltrão', '******* Madeira']
         };
     },
-    props: ['reset']
+    methods: {
+        submit(name) {
+            if(name === '******* Rulfini') {
+                this.$parent.setScreen('Registration');
+            } else {
+                alert('Opção invalida!');
+            }
+        }
+    }
 }
 </script>
