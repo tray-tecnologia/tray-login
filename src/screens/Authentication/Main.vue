@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import screenHandler from "@/mixins/screenHandler";
-import utils from "@/mixins/utils";
+import screenHandler from '@/mixins/screenHandler';
+import utils from '@/mixins/utils';
 
 export default {
   name: 'AppAuthentication',
@@ -47,7 +47,7 @@ export default {
         this.$parent.setScreen('Registration');
       } else {
         // TODO: especificar ação de opção invalida
-        //eslint-disable-next-line
+        // eslint-disable-next-line
         alert('Opção invalida!');
       }
     },
