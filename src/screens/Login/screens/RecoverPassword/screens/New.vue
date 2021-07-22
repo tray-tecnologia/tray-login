@@ -21,7 +21,7 @@
     </div>
     <fieldset class="tray-input-group">
       <label for="security-code-input">
-        <email-open-icon />
+        <email-open-icon :securityCodeErrors="securityCodeErrors"/>
       </label>
       <input v-autofocus
         autocomplete="one-time-code"
@@ -115,6 +115,7 @@
 </template>
 
 <script>
+import EmailOpenIcon from '@/assets/icons/EmailOpen.vue';
 import client from 'api-client';
 import screenHandler from '@/mixins/screenHandler';
 import { mapState, mapActions } from 'vuex';
@@ -130,7 +131,6 @@ import {
   checkIcon,
   timesIcon,
 } from '../validators/icons';
-import EmailOpenIcon from '@/assets/icons/EmailOpen.vue';
 
 export default {
   name: 'AppNewPassword',

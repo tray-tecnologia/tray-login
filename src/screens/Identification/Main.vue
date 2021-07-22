@@ -54,7 +54,7 @@ import { mapActions, mapState, mapGetters } from 'vuex';
 import utils from '@/mixins/utils';
 import screenHandler from '@/mixins/screenHandler';
 import EmailIcon from '@/assets/icons/Email.vue';
-import DocumentIcon from '@/assets/icons/Document.vue'
+import DocumentIcon from '@/assets/icons/Document.vue';
 
 export default {
   name: 'AppIdentify',
@@ -171,7 +171,6 @@ export default {
       // console.log(this.identification);
       this.clearErrors();
       this.setLoading(false);
- 
       // TODO: criar fluxo de autenticação do CPF
       // this.$parent.setScreen('Main');
       this.$parent.setScreen('Authentication');

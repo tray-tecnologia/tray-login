@@ -1,7 +1,7 @@
 <template>
   <fieldset class="tray-input-group">
     <label :for="id">
-      <password-icon />  
+      <password-icon :inputClass="inputClass"/>
       <button v-show="value"
         class="tray-login-hide-password"
         :class="inputClass"
