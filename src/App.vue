@@ -16,7 +16,7 @@
         :action="this.customTexts['main-action']"
         slot="custom-texts">
       </app-custom-texts>
-      <app-facebook-login v-if="facebookEnabled" 
+      <app-facebook-login v-if="facebookEnabled"
         :callback="this.dataCallback"
         :params="params"
         slot="app-facebook-login">
@@ -115,18 +115,17 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import store from './store';
-
 import http from 'api-client';
+import screenHandler from '@/mixins/screenHandler';
 import AppFacebookLogin from './components/FacebookLogin.vue';
 import AppIdentification from './screens/Identification/Main.vue';
 import AppLogin from './screens/Login/screens/Main.vue';
 import AppOtpButton from './screens/Login/screens/Otp/Button.vue';
 import AppCustomTexts from './components/CustomTexts.vue';
 import AppTerms from './components/Terms.vue';
-import screenHandler from '@/mixins/screenHandler';
 import AppAuthentication from './screens/Authentication/Main.vue';
 import AppCompleteRegistration from './screens/CompleteRegistration/Main.vue';
+import store from './store';
 
 export default {
   store,
