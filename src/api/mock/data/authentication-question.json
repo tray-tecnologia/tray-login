@@ -1,0 +1,19 @@
+{
+  "data":
+    {
+      "data":
+        {
+          "message":
+            {
+              "question": "What's your last name?",
+              "answers":
+                [
+                  "***** ******* *********** Zamana",
+                  "***** ******* *********** Neto",
+                  "***** ******* *********** Caldeira"
+                ]
+            }
+        }
+    },
+  "statusCode": 200
+}

@@ -8,6 +8,7 @@ import securityCodeResponse from './data/generate-security-code.json';
 
 import hasAccountResponse from './data/has-account.json';
 import hasAccountResponseNotFound from './data/has-account-not-found.json';
+import hasEmailDomainMktplace from './data/has-email-domain-mktplace.json';
 
 import passwordLoginSucces from './data/password.json';
 import passwordLoginError from './data/error/password.json';
@@ -20,6 +21,19 @@ import otpLoginError from './data/error/otp.json';
 
 import emailMaskedSuccess from './data/email-masked.json';
 import emailMaskedError from './data/error/email-masked.json';
+
+import authenticationQuestion from './data/authentication-question.json';
+
+import chosenQuestion from './data/chosen-question.json';
+import chosenQuestionError from './data/error/chosen-question.json';
+
+const cpfs = [,
+  '44523430829'
+];
+
+const rightAnswers = [
+  '***** ******* *********** Zamana',
+];
 
 const users = [
   'teste@tray.com.br',
@@ -106,6 +120,10 @@ export default {
       mockData = hasAccountResponse;
     }
 
+    if (cpfs.indexOf(identification) !== -1) {
+      mockData = hasEmailDomainMktplace;
+    }
+
     return fetch(mockData, delay).then(response => response.data);
   },
 
@@ -187,4 +205,37 @@ export default {
 
     return fetch(mockData, delay, isValid);
   },
+
+  /**
+   * Retorna uma pargunta de segurança baseada nos dados do usuário
+   */
+  authenticationQuestion(payload = {
+    identification: '',
+  }) {
+    const { identification } = payload;
+
+    const mockData = authenticationQuestion;
+
+    return fetch(mockData.data, delay);
+  },
+
+  /**
+   * Recebe a resposta da pergunta de segurança e valida de está correta 
+   */
+  chosenQuestion(payload = {
+    identification: '',
+    chosen: '',
+  }) {
+    const { chosen } = payload;
+    
+    let mockData = '';
+
+    if (rightAnswers.indexOf(chosen) !== -1) {
+      mockData = chosenQuestion;
+    } else {
+      mockData = chosenQuestionError;
+    }
+
+    return fetch(mockData.data, delay);
+  }
 };

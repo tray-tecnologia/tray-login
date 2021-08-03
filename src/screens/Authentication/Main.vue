@@ -12,11 +12,11 @@
         >.
       </p>
       <p class="tray-action">{{ $lang["authentication-action-2"] }}</p>
-      <label class="tray-well">{{ $lang["authentication-question"] }}</label>
+      <label class="tray-well">{{ question }}</label>
     </div>
 
     <div>
-      <button class="tray-btn-default" v-for="n in names" :key="n" @click="submit(n)">
+      <button class="tray-btn-default" v-for="n in answers" :key="n" @click="submit(n)">
         {{ n }}
       </button>
     </div>
@@ -30,6 +30,7 @@
 <script>
 import screenHandler from '@/mixins/screenHandler';
 import utils from '@/mixins/utils';
+import http from 'api-client';
 
 export default {
   name: 'AppAuthentication',
@@ -38,19 +39,42 @@ export default {
   data() {
     return {
       storeName: 'Marketplace XYZ',
-      names: ['******* Rulfini', '******* Beltrão', '******* Madeira'],
+      question: '',
+      answers: [],
     };
   },
   methods: {
-    submit(name) {
-      if (name === '******* Rulfini') {
-        this.$parent.setScreen('Registration');
-      } else {
-        // TODO: especificar ação de opção invalida
-        // eslint-disable-next-line
-        alert('Opção invalida!');
-      }
+    authenticationQuestion: http.authenticationQuestion,
+    chosenQuestion: http.chosenQuestion,
+    doAuthenticationQuestion() {
+      this.authenticationQuestion({
+        identification: this.identification,
+        store_id: this.dataStore,
+        endpoint: 'question',
+      }).then((response) => {
+        this.question = response.data.message.question;
+        this.answers = response.data.message.answers;
+      });
     },
+    submit(chosen) {
+      this.setLoading(true);
+      this.chosenQuestion({
+        identification: this.identification,
+        chosen: chosen,
+        store_id: this.dataStore,
+        endpoint: 'question/answer',
+      }).then((response) => {
+        this.setLoading(false);
+        if (response.data.message) {
+          this.$parent.setScreen('Registration');
+        } else {
+          this.doAuthenticationQuestion();
+        }
+      });
+    },
+  },
+  mounted() {
+    this.doAuthenticationQuestion();
   },
 };
 </script>

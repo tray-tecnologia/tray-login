@@ -168,12 +168,18 @@ export default {
       }
 
       this.setLoading(true);
-      // console.log(this.identification);
-      this.clearErrors();
-      this.setLoading(false);
-      // TODO: criar fluxo de autenticação do CPF
-      // this.$parent.setScreen('Main');
-      this.$parent.setScreen('Authentication');
+      this.checkHasAccount({
+        identification: this.identification,
+        store_id: this.dataStore,
+      }).then((res) => {
+        this.clearErrors();
+        this.setLoading(false);
+        if (res.data.customer && !res.data.customer.hasEmailDomainMktplace) {
+          this.$parent.setScreen('Authentication');
+        } else {
+          this.$parent.setScreen('Main');
+        }
+      });
     },
   },
 };

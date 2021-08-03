@@ -26,13 +26,13 @@
     <app-authentication id="authentication" v-if="screen === 'Authentication'"
       :reset="reset"
       :callback="this.dataCallback"
-      :params="params">
-    </app-authentication>
+      :params="params"
+    />
 
-    <app-complete-registration id="registration" v-if="screen === 'Registration'"
+    <app-complete-register id="registration" v-if="screen === 'Registration'"
       :callback="this.dataCallback"
-      :params="params">
-    </app-complete-registration>
+      :params="params"
+    />
 
     <app-login id="main" v-if="screen === 'Main'"
       class="tray-login-screens"
@@ -47,8 +47,7 @@
         :callback="this.dataCallback"
         :params="params"
         slot="app-otp-login"
-      >
-      </app-otp-button>
+      />
       <app-facebook-login v-if="facebookEnabled"
         :callback="this.dataCallback"
         :params="params"
@@ -124,7 +123,7 @@ import AppOtpButton from './screens/Login/screens/Otp/Button.vue';
 import AppCustomTexts from './components/CustomTexts.vue';
 import AppTerms from './components/Terms.vue';
 import AppAuthentication from './screens/Authentication/Main.vue';
-import AppCompleteRegistration from './screens/CompleteRegistration/Main.vue';
+import AppCompleteRegister from './screens/Login/screens/RecoverPassword/screens/CompleteRegister.vue';
 import store from './store';
 
 export default {
@@ -138,7 +137,7 @@ export default {
     AppLogin,
     AppTerms,
     AppAuthentication,
-    AppCompleteRegistration,
+    AppCompleteRegister,
   },
   mixins: [screenHandler],
   data() {
