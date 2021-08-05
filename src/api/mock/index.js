@@ -27,8 +27,11 @@ import authenticationQuestion from './data/authentication-question.json';
 import chosenQuestion from './data/chosen-question.json';
 import chosenQuestionError from './data/error/chosen-question.json';
 
-const cpfs = [,
-  '44523430829'
+import saveOrUpdateSuccess from './data/save-or-update.json';
+import saveOrUpdateError from './data/error/save-or-update.json';
+
+const cpfs = [
+  '44523430829',
 ];
 
 const rightAnswers = [
@@ -167,7 +170,7 @@ export default {
   },
 
   /**
-   * Mock para o login de senha
+   * Mock para alterar senha
    * @param {object} payload
    * @return {Promise}
    */
@@ -178,12 +181,31 @@ export default {
     let isValid = false;
     let mockData = passwordUpdateError;
 
-    if (code === 'ABC123') {
+    if (code === '123456') {
       isValid = true;
       mockData = passwordUpdateSucces;
     }
 
     return fetch(mockData, delay, isValid);
+  },
+
+  /**
+   * Mock para atualziar email e senha
+   * @param {} payload
+   * @returns
+   */
+  saveOrUpdate(payload = {
+    identification: '',
+    email: '',
+    password: '',
+  }) {
+    let mockData = saveOrUpdateError;
+
+    if (users.indexOf(payload['email']) !== -1) {
+      mockData = saveOrUpdateSuccess;
+    }
+
+    return fetch(mockData, delay);
   },
 
   /**
@@ -212,7 +234,6 @@ export default {
   authenticationQuestion(payload = {
     identification: '',
   }) {
-    const { identification } = payload;
 
     const mockData = authenticationQuestion;
 
@@ -220,14 +241,14 @@ export default {
   },
 
   /**
-   * Recebe a resposta da pergunta de segurança e valida de está correta 
+   * Recebe a resposta da pergunta de segurança e valida de está correta
    */
   chosenQuestion(payload = {
     identification: '',
     chosen: '',
   }) {
     const { chosen } = payload;
-    
+
     let mockData = '';
 
     if (rightAnswers.indexOf(chosen) !== -1) {
@@ -237,5 +258,5 @@ export default {
     }
 
     return fetch(mockData.data, delay);
-  }
+  },
 };

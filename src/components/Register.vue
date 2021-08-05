@@ -9,7 +9,7 @@
       </div>
       <p class="tray-action">{{ this.paragraph }}</p>
     </div>
-    <fieldset class="tray-input-group" v-if="this.hasEmail">
+    <fieldset class="tray-input-group" v-if="!this.hasEmail">
       <label for="security-code-input">
         <email-open-icon :securityCodeErrors="securityCodeErrors"/>
       </label>
@@ -28,7 +28,12 @@
       <label for="security-code-input">
         <email-icon />
       </label>
-      <input v-autofocus class="tray-input" :placeholder="$lang['registration-input']" />
+      <input
+        v-model="newEmail"
+        v-autofocus
+        class="tray-input"
+        :placeholder="$lang['registration-input']"
+      />
     </fieldset>
     <app-toggle-password
       :autoComplete="'new-password'"
@@ -136,6 +141,9 @@ import {
 } from '../screens/Login/screens/RecoverPassword/validators/icons';
 
 export default {
+  mounted() {
+    this.$emitEvent.custom('recovery-password');
+  },
   name: 'AppRegister',
   mixins: [screenHandler, validationMixin],
   components: {
@@ -197,6 +205,7 @@ export default {
     return {
       passwordConfirmation: '',
       securityCode: '',
+      newEmail: '',
     };
   },
 
@@ -257,6 +266,7 @@ export default {
   },
   methods: {
     updatePassword: client.updatePassword,
+    saveOrUpdate: client.saveOrUpdate,
     ...mapActions('Login/RecoverPassword', {
       setPassword: 'setPassword',
       nextStep: 'setScreen',
@@ -311,10 +321,8 @@ export default {
     },
 
     /**
-     * Valida os campos
+     * Valida os campos 
      */
-
-    // TODO: alterar endpoint da função de submit aos diferenes usos do componente
     submit() {
       if (!this.checkEquality(this.password, this.confirmation)) {
         this.setError(this.$lang['non-equal-password']);
@@ -331,36 +339,16 @@ export default {
         return;
       }
 
-      if (!this.isValidSecurityCode) {
-        this.setError(this.$lang['invalid-code']);
-        return;
+      if (!this.hasEmail) {
+        if (!this.isValidSecurityCode) {
+          this.setError(this.$lang['invalid-code']);
+          return;
+        }
+        this.updateOnlyPassword();
+      } else {
+        this.updatePasswordAndEmail();
       }
-
-      this.update();
     },
-
-    /**
-     * Atualiza a senha
-     */
-    update(event, payload = {
-      ...this.params,
-      code: this.securityCode,
-      endpoint: 'password-update',
-      identification: this.identification,
-      password: this.password,
-      [this.identificationType]: this.identification,
-    }) {
-      this.updatePassword(payload).then(() => {
-        this.params.code = this.securityCode;
-        this.setLoading(true);
-        this.nextStep('Login');
-      }).catch((error) => {
-        const { message = this.$lang['invalid-code'] } = error.data.data;
-        this.setError(message);
-        this.setLoading(false);
-      });
-    },
-
 
     /**
      * Retorna o ícone correto de acordo com as regras de validação
@@ -371,6 +359,54 @@ export default {
       validationRule,
     ) {
       return validationRule ? checkIcon : timesIcon;
+    },
+
+    /**
+     * Atualiza apenas a senha
+     */
+    updateOnlyPassword(event, payload = {
+      ...this.params,
+      code: this.securityCode,
+      endpoint: 'password-update',
+      identification: this.identification,
+      password: this.password,
+      [this.identificationType]: this.identification,
+    }) {
+      this.setLoading(true);
+      this.updatePassword(payload).then(() => {
+        this.params.code = this.securityCode;
+        this.nextStep('Login');
+        console.log(this.nextStep);
+        this.setLoading(false);
+      }).catch((error) => {
+        const { message = this.$lang['invalid-code'] } = error.data.data;
+        this.setError(message);
+        this.setLoading(false);
+      });
+    },
+
+    /**
+     * Atualiza senha e e-mail
+     */
+    updatePasswordAndEmail(payload = {
+      ...this.params,
+      identification: this.identification,
+      email: this.newEmail,
+      password: this.password,
+    }) {
+      this.setLoading(true);
+      this.saveOrUpdate(payload).then((response) => {
+        this.setLoading(false);
+        if(response.data.data.customer) {
+          // TODO: descobrir pq esse negocio não funciona
+          this.nextStep('Login');
+          console.log(this.nextStep);
+        }
+      }).catch((error) => {
+        const { message = this.$lang['invalid-email'] } = error.data.data;
+        this.setError(message);
+        this.setLoading(false);
+      });
     },
   },
 

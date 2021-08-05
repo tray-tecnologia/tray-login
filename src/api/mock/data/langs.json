@@ -6,6 +6,7 @@
             "identify-data-invalid":"Dados inv&aacute;lidos, digite novamente!",
             "identify-error-not-found":"Usu&aacute;rio n&atilde;o encontrado, fa&ccedil;a seu cadastro.",
             "invalid-code":"Autenticação incorreta",
+            "invalid-email": "E-mail invalido",
             "authentication-title": "Autenticação",
             "authentication-action-1": "Você já comprou na nossa loja através do",
             "authentication-action-2": "Para sua segurança, selecione a opção correta para completar seu cadastro:",

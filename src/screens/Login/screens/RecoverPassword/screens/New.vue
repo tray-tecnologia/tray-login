@@ -9,12 +9,12 @@
     :icon="'userPassword'"
     :button1="this.$store.state.lang['new-password-submit']"
     :button2 ="this.$store.state.lang['other-option']"
-    :hasEmail="true"
+    :hasEmail="false"
   />
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 import client from 'api-client';
 import AppRegister from '../../../../../components/Register.vue';
 
@@ -34,14 +34,6 @@ export default {
     AppRegister,
   },
   props: {
-    identification: {
-      type: String,
-      default: '',
-    },
-    identificationType: {
-      type: String,
-      default: '',
-    },
     params: {
       type: Object,
       default() {
@@ -53,13 +45,19 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(['identificationType']),
     ...mapState([
       'identification',
     ]),
-    ...mapGetters(['identificationType']),
   },
   methods: {
     getMaskedEmail: client.getMaskedEmail,
+    updatePassword: client.updatePassword,
+    ...mapActions('Login/RecoverPassword', {
+      setPassword: 'setPassword',
+      nextStep: 'setScreen',
+    }),
+
     /**
      * Recupera o email mascarado do cliente a partir do CPF
      * @param {object} payload os parâmetros enviados para o endpoint

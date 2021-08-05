@@ -7,7 +7,7 @@
     :paragraph="this.$store.state.lang['registration-action']"
     :icon="'documentUser'"
     :button1="this.$store.state.lang['registration-button']"
-    :hasEmail="false"
+    :hasEmail="true"
   />
 </template>
 
@@ -16,21 +16,10 @@ import { mapGetters, mapState } from 'vuex';
 import AppRegister from '../../../../../components/Register.vue';
 
 export default {
-  mounted() {
-    console.log(identification);
-  },
   components: {
     AppRegister,
   },
   props: {
-    identification: {
-      type: String,
-      default: '',
-    },
-    identificationType: {
-      type: String,
-      default: '',
-    },
     params: {
       type: Object,
       default() {
@@ -46,14 +35,9 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(['identificationType']),
     ...mapState([
       'identification',
-    ]),
-
-    ...mapGetters(['identificationType']),
-    ...mapState('Login/RecoverPassword', [
-      'screen',
-      'password',
     ]),
   },
 };

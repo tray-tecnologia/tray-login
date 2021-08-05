@@ -12,6 +12,7 @@ export default {
     'identify-error': 'N&atilde;o foi poss&iacute;vel verificar seu cadastro, tente novamente.',
     'identify-not-found': 'Usu&aacute;rio n&atilde;o encontrado, fa&ccedil;a seu cadastro.',
     'invalid-code': 'Autenticação incorreta',
+    'invalid-email': 'E-mail invalido',
     // authentication screen
     'authentication-title': 'Autenticação',
     'authentication-action-1': 'Você já comprou na nossa loja através do ',
