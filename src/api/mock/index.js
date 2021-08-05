@@ -30,6 +30,10 @@ import chosenQuestionError from './data/error/chosen-question.json';
 import saveOrUpdateSuccess from './data/save-or-update.json';
 import saveOrUpdateError from './data/error/save-or-update.json';
 
+
+const correctPassword = 'senhacorreta1'
+const correctCode = '123456'
+
 const cpfs = [
   '44523430829',
 ];
@@ -158,13 +162,9 @@ export default {
     password: '',
   }) {
     const { password } = payload;
-    let isValid = false;
-    let mockData = passwordLoginError;
 
-    if (password === 'senhacorreta') {
-      isValid = true;
-      mockData = passwordLoginSucces;
-    }
+    const isValid = true;
+    const mockData = passwordLoginSucces;
 
     return fetch(mockData, delay, isValid);
   },
@@ -175,13 +175,18 @@ export default {
    * @return {Promise}
    */
   updatePassword(payload = {
+    identification: '',
+    endpoint: 'password-update',
+    session_id: '',
+    store_id: '',
+    identification_type: '',
     code: '',
+    password: '',
   }) {
-    const { code } = payload;
     let isValid = false;
     let mockData = passwordUpdateError;
 
-    if (code === '123456') {
+    if (payload.code === correctCode) {
       isValid = true;
       mockData = passwordUpdateSucces;
     }
@@ -199,11 +204,10 @@ export default {
     email: '',
     password: '',
   }) {
-    let mockData = saveOrUpdateError;
+    let mockData = saveOrUpdateSuccess;
 
-    if (users.indexOf(payload['email']) !== -1) {
-      mockData = saveOrUpdateSuccess;
-    }
+    // caso de erro
+    // mockData = saveOrUpdateError;
 
     return fetch(mockData, delay);
   },
@@ -234,7 +238,6 @@ export default {
   authenticationQuestion(payload = {
     identification: '',
   }) {
-
     const mockData = authenticationQuestion;
 
     return fetch(mockData.data, delay);

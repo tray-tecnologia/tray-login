@@ -10,6 +10,7 @@
     :button1="this.$store.state.lang['new-password-submit']"
     :button2 ="this.$store.state.lang['other-option']"
     :hasEmail="false"
+    :callback="this.callback"
   />
 </template>
 
@@ -42,6 +43,10 @@ export default {
           store_id: '',
         };
       },
+    },
+    callback: {
+      type: String,
+      default: '/',
     },
   },
   computed: {

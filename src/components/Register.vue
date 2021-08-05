@@ -1,122 +1,137 @@
 <template>
-  <form id="change-password"
-    class="tray-login__new-password" method='POST' @submit.prevent="submit">
-    <div>
-      <strong class="tray-title tray-login__title">{{ this.title }}</strong>
-      <div class="tray-login__recover-password__header">
-        <user-passwod-icon v-if="this.icon === 'userPassword'"/>
-        <document-user-icon v-else/>
+  <section>
+    <form
+      v-if="!success"
+      id="change-password"
+      class="tray-login__new-password"
+      method='POST'
+      @submit.prevent="submit"
+    >
+      <div>
+        <strong class="tray-title tray-login__title">{{ this.title }}</strong>
+        <div class="tray-login__recover-password__header">
+          <user-passwod-icon v-if="this.icon === 'userPassword'"/>
+          <document-user-icon v-else/>
+        </div>
+        <p class="tray-action">{{ this.paragraph }}</p>
       </div>
-      <p class="tray-action">{{ this.paragraph }}</p>
-    </div>
-    <fieldset class="tray-input-group" v-if="!this.hasEmail">
-      <label for="security-code-input">
-        <email-open-icon :securityCodeErrors="securityCodeErrors"/>
-      </label>
-      <input v-autofocus
-        autocomplete="one-time-code"
-        @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
-        v-model="securityCode"
-        class="tray-input"
-        :class="securityCodeErrors ? 'tray-input-invalid' : 'tray-input-initial'"
-        id="security-code-input"
-        maxlength="6"
-        @input="filterInput()"
-        :placeholder="$lang['otp-title']"/>
-    </fieldset>
-    <fieldset class="tray-input-group" v-else>
-      <label for="security-code-input">
-        <email-icon />
-      </label>
-      <input
-        v-model="newEmail"
-        v-autofocus
-        class="tray-input"
-        :placeholder="$lang['registration-input']"
-      />
-    </fieldset>
-    <app-toggle-password
-      :autoComplete="'new-password'"
-      :state="passwordErrors ? 'invalid' : 'valid'"
-      v-model="passwordHandler"
-      @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
-      id="new-password">
-    </app-toggle-password>
-    <app-toggle-password
-      :autoComplete="'new-password'"
-      :state="passwordErrors ? 'invalid' : 'valid'"
-      v-model="passwordConfirmation"
-      @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
-      id="confirm-new-password">
-    </app-toggle-password>
-    <small class="tray-feedbacks"
-      v-show="errors.length">
-      <span class="tray-error-message"
-        v-html="errors[errors.length - 1]">
-      </span>
-    </small>
-    <div class="col">
-      <div class="app__customer-password-change__validation-rules">
-        <span class="app__customer-password-change__validation-rules__contains">
-          {{ $lang['must-contain'] }}
+      <fieldset class="tray-input-group" v-if="!this.hasEmail">
+        <label for="security-code-input">
+          <email-open-icon :securityCodeErrors="securityCodeErrors"/>
+        </label>
+        <input v-autofocus
+          autocomplete="one-time-code"
+          @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+          v-model="securityCode"
+          class="tray-input"
+          :class="securityCodeErrors ? 'tray-input-invalid' : 'tray-input-initial'"
+          id="security-code-input"
+          maxlength="6"
+          @input="filterInput()"
+          :placeholder="$lang['otp-title']"/>
+      </fieldset>
+      <fieldset class="tray-input-group" v-else>
+        <label for="security-code-input">
+          <email-icon />
+        </label>
+        <input
+          v-model="newEmail"
+          v-autofocus
+          class="tray-input"
+          :placeholder="$lang['registration-input']"
+        />
+      </fieldset>
+      <app-toggle-password
+        :autoComplete="'new-password'"
+        :state="passwordErrors ? 'invalid' : 'valid'"
+        v-model="passwordHandler"
+        @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+        id="new-password">
+      </app-toggle-password>
+      <app-toggle-password
+        :autoComplete="'new-password'"
+        :state="passwordErrors ? 'invalid' : 'valid'"
+        v-model="passwordConfirmation"
+        @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+        id="confirm-new-password">
+      </app-toggle-password>
+      <small class="tray-feedbacks"
+        v-show="errors.length">
+        <span class="tray-error-message"
+          v-html="errors[errors.length - 1] || !isValidEmail">
         </span>
-        <span class="app__customer-password-change__validation-rules__list">
-          <dl>
-            <dt class="app__customer-password-change__validation-rules__list__item"
-            :class="{'app__loading': loading}">
-              <figure
-                v-html="getIconName($v.passwordHandler.isValidLength)"
-                class="app__icon--rules"
-                :class="{'app__loading': loading}">
-              </figure>
-              {{ $lang['min-characters'] }}
-            </dt>
-            <dt class="app__customer-password-change__validation-rules__list__item"
-            :class="{'app__loading': loading}">
-              <figure
-                v-html="getIconName($v.passwordHandler.containsNumber)"
-                class="app__icon--rules"
-                :class="{'app__loading': loading}">
-              </figure>
-              {{ $lang['min-number'] }}
-            </dt>
-            <dt class="app__customer-password-change__validation-rules__list__item"
-            :class="{'app__loading': loading}">
-              <figure
-                class="app__icon--rules"
-                :class="{'app__loading': loading}"
-                v-html="getIconName($v.passwordHandler.containsLetter)">
-              </figure>
-              {{ $lang['min-letter'] }}
-            </dt>
-          </dl>
-        </span>
+      </small>
+      <div class="col">
+        <div class="app__customer-password-change__validation-rules">
+          <span class="app__customer-password-change__validation-rules__contains">
+            {{ $lang['must-contain'] }}
+          </span>
+          <span class="app__customer-password-change__validation-rules__list">
+            <dl>
+              <dt class="app__customer-password-change__validation-rules__list__item"
+              :class="{'app__loading': loading}">
+                <figure
+                  v-html="getIconName($v.passwordHandler.isValidLength)"
+                  class="app__icon--rules"
+                  :class="{'app__loading': loading}">
+                </figure>
+                {{ $lang['min-characters'] }}
+              </dt>
+              <dt class="app__customer-password-change__validation-rules__list__item"
+              :class="{'app__loading': loading}">
+                <figure
+                  v-html="getIconName($v.passwordHandler.containsNumber)"
+                  class="app__icon--rules"
+                  :class="{'app__loading': loading}">
+                </figure>
+                {{ $lang['min-number'] }}
+              </dt>
+              <dt class="app__customer-password-change__validation-rules__list__item"
+              :class="{'app__loading': loading}">
+                <figure
+                  class="app__icon--rules"
+                  :class="{'app__loading': loading}"
+                  v-html="getIconName($v.passwordHandler.containsLetter)">
+                </figure>
+                {{ $lang['min-letter'] }}
+              </dt>
+            </dl>
+          </span>
+        </div>
       </div>
-    </div>
-    <button
-      v-if="this.button1"
-      id="new-password-submit"
-      class="tray-btn-primary"
-      type="submit">
-      {{ this.button1 }}
-    </button>
-    <button
-      v-if="this.button2"
-      class="tray-btn-default tray-btn-other-option"
-      type="reset"
-      @click="reset">
-      {{ this.button2 }}
-    </button>
-    <section class="tray-loading" v-show="loading">
-      <div class="tray-loading-mask">
-        <div class="tray-loading-line"></div>
-      </div>
-      <svg class="tray-loading-icon tray-icon-locked" viewBox="0 0 1024 1024">
-        <!-- eslint-disable-next-line -->
-        <path class="path1" d="M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"></path>
-      </svg>
-    </section>
-  </form>
+      <button
+        v-if="this.button1"
+        id="new-password-submit"
+        class="tray-btn-primary"
+        type="submit">
+        {{ this.button1 }}
+      </button>
+      <button
+        v-if="this.button2"
+        class="tray-btn-default tray-btn-other-option"
+        type="reset"
+        @click="reset">
+        {{ this.button2 }}
+      </button>
+      <section class="tray-loading" v-show="loading">
+        <div class="tray-loading-mask">
+          <div class="tray-loading-line"></div>
+        </div>
+        <svg class="tray-loading-icon tray-icon-locked" viewBox="0 0 1024 1024">
+          <!-- eslint-disable-next-line -->
+          <path class="path1" d="M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"></path>
+        </svg>
+      </section>
+    </form>
+    <app-recover-password-login
+      v-else
+      :callback="this.callback"
+      :identification="identification"
+      :identificationType="identificationType"
+      :params="this.params"
+      :password="this.password">
+    </app-recover-password-login>
+  </section>
 </template>
 
 <script>
@@ -139,6 +154,7 @@ import {
   checkIcon,
   timesIcon,
 } from '../screens/Login/screens/RecoverPassword/validators/icons';
+import AppRecoverPasswordLogin from '../screens/Login/screens/RecoverPassword/screens/Login.vue';
 
 export default {
   mounted() {
@@ -152,6 +168,7 @@ export default {
     UserPasswodIcon,
     DocumentUserIcon,
     EmailIcon,
+    AppRecoverPasswordLogin,
   },
   props: {
     endpoint: {
@@ -199,6 +216,10 @@ export default {
       type: String,
       default: '',
     },
+    callback: {
+      type: String,
+      default: '/',
+    },
   },
 
   data() {
@@ -206,6 +227,7 @@ export default {
       passwordConfirmation: '',
       securityCode: '',
       newEmail: '',
+      success: false,
     };
   },
 
@@ -276,6 +298,18 @@ export default {
       backTo: 'setScreen',
     }),
 
+     /**
+     * Verifica se o email é valido
+     * @param {object} event
+     * @return {boolean}
+     */
+    isValidEmail() {
+      // eslint-disable-next-line
+      const emailValid = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      return emailValid.test(this.newEmail);
+    },
+
     /**
      * Verifica se a senha é valida
      * @param {string}
@@ -321,7 +355,7 @@ export default {
     },
 
     /**
-     * Valida os campos 
+     * Valida os campos
      */
     submit() {
       if (!this.checkEquality(this.password, this.confirmation)) {
@@ -346,7 +380,11 @@ export default {
         }
         this.updateOnlyPassword();
       } else {
-        this.updatePasswordAndEmail();
+        if (this.isValidEmail()) {
+          this.updatePasswordAndEmail();
+        } else {
+          this.setError(this.$lang['invalid-email']);
+        }
       }
     },
 
@@ -374,9 +412,7 @@ export default {
     }) {
       this.setLoading(true);
       this.updatePassword(payload).then(() => {
-        this.params.code = this.securityCode;
-        this.nextStep('Login');
-        console.log(this.nextStep);
+        this.success = true;
         this.setLoading(false);
       }).catch((error) => {
         const { message = this.$lang['invalid-code'] } = error.data.data;
@@ -396,12 +432,10 @@ export default {
     }) {
       this.setLoading(true);
       this.saveOrUpdate(payload).then((response) => {
-        this.setLoading(false);
-        if(response.data.data.customer) {
-          // TODO: descobrir pq esse negocio não funciona
-          this.nextStep('Login');
-          console.log(this.nextStep);
+        if (response.data.data.customer) {
+          this.success = true;
         }
+        this.setLoading(false);
       }).catch((error) => {
         const { message = this.$lang['invalid-email'] } = error.data.data;
         this.setError(message);
