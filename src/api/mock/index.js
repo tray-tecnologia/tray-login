@@ -30,9 +30,7 @@ import chosenQuestionError from './data/error/chosen-question.json';
 import saveOrUpdateSuccess from './data/save-or-update.json';
 import saveOrUpdateError from './data/error/save-or-update.json';
 
-
-const correctPassword = 'senhacorreta1'
-const correctCode = '123456'
+const correctCode = '123456';
 
 const cpfs = [
   '44523430829',
@@ -163,8 +161,13 @@ export default {
   }) {
     const { password } = payload;
 
-    const isValid = true;
-    const mockData = passwordLoginSucces;
+    let isValid = false;
+    let mockData = passwordLoginError;
+
+    if (password !== '') {
+      isValid = true;
+      mockData = passwordLoginSucces;
+    }
 
     return fetch(mockData, delay, isValid);
   },
@@ -206,10 +209,11 @@ export default {
   }) {
     let mockData = saveOrUpdateSuccess;
 
-    // caso de erro
-    // mockData = saveOrUpdateError;
+    if (users.indexOf(payload.email) === -1) {
+      mockData = saveOrUpdateError;
+    }
 
-    return fetch(mockData, delay);
+    return fetch(mockData.data, delay);
   },
 
   /**
@@ -235,9 +239,7 @@ export default {
   /**
    * Retorna uma pargunta de segurança baseada nos dados do usuário
    */
-  authenticationQuestion(payload = {
-    identification: '',
-  }) {
+  authenticationQuestion() {
     const mockData = authenticationQuestion;
 
     return fetch(mockData.data, delay);

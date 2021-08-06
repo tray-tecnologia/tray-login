@@ -72,7 +72,6 @@ export default {
       [this.identificationType]: this.identification,
       password: this.password,
     }) {
-      console.log(payload);
       this.setLoading(true);
       this.passwordLogin(payload)
         .then((response) => {
@@ -81,7 +80,7 @@ export default {
             method: 'password',
             type: 'success',
           });
-          
+
           if (this.callback) {
             const { token = '' } = response.data.data;
             this.redirect(this.callback, token);
@@ -96,7 +95,7 @@ export default {
             type: 'error',
           });
 
-          console.log(error)
+          console.log(error);
 
           this.setLoading(false);
         });

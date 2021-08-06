@@ -147,4 +147,49 @@ export default {
     const { endpoint, ...params } = payload;
     return http.get(endpoint, { params }).then(response => response);
   },
+
+  /**
+   * Recebe a resposta da pergunta de segurança
+   * @param {*} payload 
+   * @returns 
+   */
+  authenticationQuestion(payload = {
+    identification: '',
+    endpoint: 'api/question',
+    session_id: '',
+    store_id: '',
+  }) {
+    const { endpoint, ...params } = payload;
+    return http.get(endpoint, { params }).then(response => response);
+  },
+
+  /**
+   * Valida a resposta escolhida na pergunta de segurança
+   * @param {*} payload 
+   * @returns 
+   */
+  chosenQuestion(payload = {
+    identification: '',
+    endpoint: 'api/question/answer',
+    session_id: '',
+    store_id: '',
+  }) {
+    const { endpoint, ...params } = payload;
+    return http.get(endpoint, { params }).then(response => response);
+  },
+
+  /**
+   * Atualiza e-mail e senha
+   * @param {*} payload 
+   * @returns 
+   */
+  saveOrUpdate(payload = {
+    identification: '',
+    endpoint: 'customer/saveOrUpdate',
+    session_id: '',
+    store_id: '',
+  }) {
+    const { endpoint, ...params } = payload;
+    return http.get(endpoint, { params }).then(response => response);
+  }
 };

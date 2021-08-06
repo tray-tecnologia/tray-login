@@ -298,7 +298,7 @@ export default {
       backTo: 'setScreen',
     }),
 
-     /**
+    /**
      * Verifica se o email é valido
      * @param {object} event
      * @return {boolean}
@@ -379,12 +379,10 @@ export default {
           return;
         }
         this.updateOnlyPassword();
+      } else if (this.isValidEmail()) {
+        this.updatePasswordAndEmail();
       } else {
-        if (this.isValidEmail()) {
-          this.updatePasswordAndEmail();
-        } else {
-          this.setError(this.$lang['invalid-email']);
-        }
+        this.setError(this.$lang['invalid-email']);
       }
     },
 
@@ -432,7 +430,7 @@ export default {
     }) {
       this.setLoading(true);
       this.saveOrUpdate(payload).then((response) => {
-        if (response.data.data.customer) {
+        if (response.data.customer) {
           this.success = true;
         }
         this.setLoading(false);

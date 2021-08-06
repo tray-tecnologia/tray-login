@@ -49,8 +49,6 @@ export default {
     doAuthenticationQuestion() {
       this.authenticationQuestion({
         identification: this.identification,
-        store_id: this.dataStore,
-        endpoint: 'question',
       }).then((response) => {
         this.question = response.data.message.question;
         this.answers = response.data.message.answers;
@@ -60,7 +58,7 @@ export default {
       this.setLoading(true);
       this.chosenQuestion({
         identification: this.identification,
-        chosen: chosen,
+        chosen,
         store_id: this.dataStore,
         endpoint: 'question/answer',
       }).then((response) => {

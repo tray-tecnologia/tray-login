@@ -13,4 +13,6 @@ Vue.use(eventBus);
 Vue.use(vueCustomElement);
 httpPlugin(store);
 
+console.log(process.env.VUE_APP_API_CLIENT);
+
 Vue.customElement('tray-login', App);
