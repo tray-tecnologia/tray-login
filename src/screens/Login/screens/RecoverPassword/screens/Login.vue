@@ -94,9 +94,6 @@ export default {
             method: 'password',
             type: 'error',
           });
-
-          console.log(error);
-
           this.setLoading(false);
         });
     },
