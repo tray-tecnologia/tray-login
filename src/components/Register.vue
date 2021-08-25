@@ -432,6 +432,8 @@ export default {
       this.saveOrUpdate(payload).then((response) => {
         if (response.data.customer) {
           this.success = true;
+        } else {
+          this.setError(response.data.message);
         }
         this.setLoading(false);
       }).catch((error) => {

@@ -59,14 +59,14 @@ export default {
       });
     },
     submit(chosen) {
-      this.setLoading(true);
+      this.$parent.setLoading(true);
       this.chosenQuestion({
         identification: this.identification,
         chosen,
         store_id: this.dataStore,
         endpoint: 'question/answer',
       }).then((response) => {
-        this.setLoading(false);
+        this.$parent.setLoading(false);
         if (response.data.message) {
           this.$parent.setScreen('Registration');
         } else {
