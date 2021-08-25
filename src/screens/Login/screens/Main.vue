@@ -69,13 +69,13 @@
 </template>
 
 <script>
+import screenHandler from '@/mixins/screenHandler';
+import utils from '@/mixins/utils';
 import http from 'api-client';
+import AppTogglePassword from '@/components/TogglePassword.vue';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import AppRecoverPassword from './RecoverPassword/screens/Main.vue';
 import AppOtpLogin from './Otp/screens/Login.vue';
-import AppTogglePassword from '@/components/TogglePassword.vue';
-import screenHandler from '@/mixins/screenHandler';
-import utils from '@/mixins/utils';
 
 export default {
   name: 'AppLogin',

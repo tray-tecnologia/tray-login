@@ -1,0 +1,11 @@
+{
+  "data":{
+      "data": {
+          "hasAccount": true,
+          "customer": {
+            "hasEmailDomainMktplace": false
+          }
+      }
+  },
+  "statusCode":200
+}

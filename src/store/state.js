@@ -12,6 +12,20 @@ export default {
     'identify-error': 'N&atilde;o foi poss&iacute;vel verificar seu cadastro, tente novamente.',
     'identify-not-found': 'Usu&aacute;rio n&atilde;o encontrado, fa&ccedil;a seu cadastro.',
     'invalid-code': 'Autenticação incorreta',
+    'invalid-email': 'E-mail inválido',
+    // authentication screen
+    'authentication-title': 'Autenticação',
+    'authentication-action-1': 'Você já comprou na nossa loja através do ',
+    'authentication-action-2': 'Para sua segurança, selecione a opção correta para completar seu cadastro:',
+    'authentication-question': 'Qual o seu sobrenome?',
+    'authentication-go-back': '< Alterar CPF/CNPJ',
+    // complete registration screen
+    'registration-title': 'Completar cadastro',
+    'registration-action': 'Insira seus dados para concluir o seu cadastro:',
+    'registration-input': 'E-mail',
+    'registration-button': 'Concluir cadastro',
+    'registration-complete-title': 'Cadastro finalizado com sucesso',
+    'registration-complete-button': 'Continuar',
     // main screen
     'main-title': 'Autenticação',
     'main-action': 'Escolha uma das opções para se identificar:',

@@ -1,0 +1,464 @@
+<template>
+  <section>
+    <form
+      v-if="!success"
+      id="change-password"
+      class="tray-login__new-password"
+      method='POST'
+      @submit.prevent="submit"
+    >
+      <div>
+        <strong class="tray-title tray-login__title">{{ this.title }}</strong>
+        <div class="tray-login__recover-password__header">
+          <user-passwod-icon v-if="this.icon === 'userPassword'"/>
+          <document-user-icon v-else/>
+        </div>
+        <p class="tray-action">{{ this.paragraph }}</p>
+      </div>
+      <fieldset class="tray-input-group" v-if="!this.hasEmail">
+        <label for="security-code-input">
+          <email-open-icon :securityCodeErrors="securityCodeErrors"/>
+        </label>
+        <input v-autofocus
+          autocomplete="one-time-code"
+          @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+          v-model="securityCode"
+          class="tray-input"
+          :class="securityCodeErrors ? 'tray-input-invalid' : 'tray-input-initial'"
+          id="security-code-input"
+          maxlength="6"
+          @input="filterInput()"
+          :placeholder="$lang['otp-title']"/>
+      </fieldset>
+      <fieldset class="tray-input-group" v-else>
+        <label for="security-code-input">
+          <email-icon />
+        </label>
+        <input
+          v-model="newEmail"
+          v-autofocus
+          class="tray-input"
+          :placeholder="$lang['registration-input']"
+        />
+      </fieldset>
+      <app-toggle-password
+        :autoComplete="'new-password'"
+        :state="passwordErrors ? 'invalid' : 'valid'"
+        v-model="passwordHandler"
+        @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+        id="new-password">
+      </app-toggle-password>
+      <app-toggle-password
+        :autoComplete="'new-password'"
+        :state="passwordErrors ? 'invalid' : 'valid'"
+        v-model="passwordConfirmation"
+        @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+        id="confirm-new-password">
+      </app-toggle-password>
+      <small class="tray-feedbacks"
+        v-show="errors.length">
+        <span class="tray-error-message"
+          v-html="errors[errors.length - 1] || !isValidEmail">
+        </span>
+      </small>
+      <div class="col">
+        <div class="app__customer-password-change__validation-rules">
+          <span class="app__customer-password-change__validation-rules__contains">
+            {{ $lang['must-contain'] }}
+          </span>
+          <span class="app__customer-password-change__validation-rules__list">
+            <dl>
+              <dt class="app__customer-password-change__validation-rules__list__item"
+              :class="{'app__loading': loading}">
+                <figure
+                  v-html="getIconName($v.passwordHandler.isValidLength)"
+                  class="app__icon--rules"
+                  :class="{'app__loading': loading}">
+                </figure>
+                {{ $lang['min-characters'] }}
+              </dt>
+              <dt class="app__customer-password-change__validation-rules__list__item"
+              :class="{'app__loading': loading}">
+                <figure
+                  v-html="getIconName($v.passwordHandler.containsNumber)"
+                  class="app__icon--rules"
+                  :class="{'app__loading': loading}">
+                </figure>
+                {{ $lang['min-number'] }}
+              </dt>
+              <dt class="app__customer-password-change__validation-rules__list__item"
+              :class="{'app__loading': loading}">
+                <figure
+                  class="app__icon--rules"
+                  :class="{'app__loading': loading}"
+                  v-html="getIconName($v.passwordHandler.containsLetter)">
+                </figure>
+                {{ $lang['min-letter'] }}
+              </dt>
+            </dl>
+          </span>
+        </div>
+      </div>
+      <button
+        v-if="this.button1"
+        id="new-password-submit"
+        class="tray-btn-primary"
+        type="submit">
+        {{ this.button1 }}
+      </button>
+      <button
+        v-if="this.button2"
+        class="tray-btn-default tray-btn-other-option"
+        type="reset"
+        @click="reset">
+        {{ this.button2 }}
+      </button>
+      <section class="tray-loading" v-show="loading">
+        <div class="tray-loading-mask">
+          <div class="tray-loading-line"></div>
+        </div>
+        <svg class="tray-loading-icon tray-icon-locked" viewBox="0 0 1024 1024">
+          <!-- eslint-disable-next-line -->
+          <path class="path1" d="M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"></path>
+        </svg>
+      </section>
+    </form>
+    <app-recover-password-login
+      v-else
+      :callback="this.callback"
+      :identification="identification"
+      :identificationType="identificationType"
+      :params="this.params"
+      :password="this.password">
+    </app-recover-password-login>
+  </section>
+</template>
+
+<script>
+import EmailOpenIcon from '@/assets/icons/EmailOpen.vue';
+import UserPasswodIcon from '@/assets/icons/UserPassword.vue';
+import DocumentUserIcon from '@/assets/icons/DocumentUser.vue';
+import EmailIcon from '@/assets/icons/Email.vue';
+import client from 'api-client';
+import screenHandler from '@/mixins/screenHandler';
+import { mapState, mapActions } from 'vuex';
+import { validationMixin } from 'vuelidate';
+import { required, sameAs } from 'vuelidate/lib/validators';
+import AppTogglePassword from '@/components/TogglePassword.vue';
+import {
+  isValidLength,
+  containsLetter,
+  containsNumber,
+} from '../screens/Login/screens/RecoverPassword/validators/password';
+import {
+  checkIcon,
+  timesIcon,
+} from '../screens/Login/screens/RecoverPassword/validators/icons';
+import AppRecoverPasswordLogin from '../screens/Login/screens/RecoverPassword/screens/Login.vue';
+
+export default {
+  mounted() {
+    this.$emitEvent.custom('recovery-password');
+  },
+  name: 'AppRegister',
+  mixins: [screenHandler, validationMixin],
+  components: {
+    AppTogglePassword,
+    EmailOpenIcon,
+    UserPasswodIcon,
+    DocumentUserIcon,
+    EmailIcon,
+    AppRecoverPasswordLogin,
+  },
+  props: {
+    endpoint: {
+      type: String,
+      default: 'generate-security-code',
+    },
+    identification: {
+      type: String,
+      default: '',
+    },
+    identificationType: {
+      type: String,
+      default: '',
+    },
+    params: {
+      type: Object,
+      default() {
+        return {
+          session_id: '',
+          store_id: '',
+        };
+      },
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    icon: {
+      type: String,
+      default: '',
+    },
+    paragraph: {
+      type: String,
+      default: '',
+    },
+    hasEmail: {
+      type: Boolean,
+      default: false,
+    },
+    button1: {
+      type: String,
+      default: '',
+    },
+    button2: {
+      type: String,
+      default: '',
+    },
+    callback: {
+      type: String,
+      default: '/',
+    },
+  },
+
+  data() {
+    return {
+      passwordConfirmation: '',
+      securityCode: '',
+      newEmail: '',
+      success: false,
+    };
+  },
+
+  computed: {
+    ...mapState('Login/RecoverPassword', [
+      'password',
+    ]),
+
+    /**
+     * Estado mapeado da vuex,
+     * https://vuex.vuejs.org/guide/forms.html#two-way-computed-property
+     */
+    passwordHandler: {
+      get() {
+        return this.password;
+      },
+      set(password) {
+        return this.setPassword(password);
+      },
+    },
+
+    /**
+     * Verifica se o codigo de segurança preenchido é valido
+     * @return {boolean}
+     */
+    isValidSecurityCode() {
+      if (this.securityCode.length < 6) {
+        return false;
+      }
+
+      const onlyNumbersPattern = /^\d+$/;
+      return onlyNumbersPattern.test(this.securityCode);
+    },
+
+    /**
+     * Verifica se existem erros relacionados ao codigo de segurança
+     * @return {boolean}
+     */
+    securityCodeErrors() {
+      if (this.errors.length <= 0) {
+        return false;
+      }
+
+      return this.errors[0].indexOf('segurança') !== -1 || this.errors[0].indexOf('Autenticação');
+    },
+
+    /**
+     * Verifica se existem erros relacionados a nova senha
+     * @return {boolean}
+    */
+    passwordErrors() {
+      if (this.errors.length <= 0) {
+        return false;
+      }
+
+      return this.errors[0].indexOf('senha') !== -1;
+    },
+  },
+  methods: {
+    updatePassword: client.updatePassword,
+    saveOrUpdate: client.saveOrUpdate,
+    ...mapActions('Login/RecoverPassword', {
+      setPassword: 'setPassword',
+      nextStep: 'setScreen',
+    }),
+
+    ...mapActions('Login', {
+      backTo: 'setScreen',
+    }),
+
+    /**
+     * Verifica se o email é valido
+     * @param {object} event
+     * @return {boolean}
+     */
+    isValidEmail() {
+      // eslint-disable-next-line
+      const emailValid = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      return emailValid.test(this.newEmail);
+    },
+
+    /**
+     * Verifica se a senha é valida
+     * @param {string}
+     * @return {boolean}
+     */
+    checkValidity(password = this.password) {
+      return password.length >= 8;
+    },
+
+    /**
+     * Verifica os requisitos foram cumpridos
+     * @return {boolean}
+     */
+    checkRequirements() {
+      return containsNumber && containsLetter;
+    },
+
+    /**
+     * Verifica se as senhas são iguais
+     * @param {string} password a senha digitada
+     * @param {string} confirmation a confirmação da senha
+     * @return {boolean}
+     */
+    checkEquality(password = this.password, confirmation = this.passwordConfirmation) {
+      return password === confirmation;
+    },
+
+    /**
+     * Valida se o input possui apenas números
+     * @return {undefined}
+     */
+    filterInput() {
+      this.securityCode = this.securityCode.replace(/[^0-9]+/g, '');
+    },
+
+    /**
+     * Reseta o módulo de recuperação de senha
+     * @param {string}
+     */
+    reset() {
+      this.setPassword('');
+      this.backTo('Main');
+    },
+
+    /**
+     * Valida os campos
+     */
+    submit() {
+      if (!this.checkEquality(this.password, this.confirmation)) {
+        this.setError(this.$lang['non-equal-password']);
+        return;
+      }
+
+      if (!this.checkValidity(this.password)) {
+        this.setError(this.$lang['invalid-password']);
+        return;
+      }
+
+      if (!this.checkRequirements()) {
+        this.setError(this.$lang.errors.requirements);
+        return;
+      }
+
+      if (!this.hasEmail) {
+        if (!this.isValidSecurityCode) {
+          this.setError(this.$lang['invalid-code']);
+          return;
+        }
+        this.updateOnlyPassword();
+      } else if (this.isValidEmail()) {
+        this.updatePasswordAndEmail();
+      } else {
+        this.setError(this.$lang['invalid-email']);
+      }
+    },
+
+    /**
+     * Retorna o ícone correto de acordo com as regras de validação
+     * @param {boolean} validationRule a regra de validação sendo testada
+     * @return {string}
+     */
+    getIconName(
+      validationRule,
+    ) {
+      return validationRule ? checkIcon : timesIcon;
+    },
+
+    /**
+     * Atualiza apenas a senha
+     */
+    updateOnlyPassword(event, payload = {
+      ...this.params,
+      code: this.securityCode,
+      endpoint: 'password-update',
+      identification: this.identification,
+      password: this.password,
+      [this.identificationType]: this.identification,
+    }) {
+      this.setLoading(true);
+      this.updatePassword(payload).then(() => {
+        this.success = true;
+        this.setLoading(false);
+      }).catch((error) => {
+        const { message = this.$lang['invalid-code'] } = error.data.data;
+        this.setError(message);
+        this.setLoading(false);
+      });
+    },
+
+    /**
+     * Atualiza senha e e-mail
+     */
+    updatePasswordAndEmail(payload = {
+      ...this.params,
+      identification: this.identification,
+      email: this.newEmail,
+      password: this.password,
+    }) {
+      this.setLoading(true);
+      this.saveOrUpdate(payload).then((response) => {
+        if (response.data.customer) {
+          this.success = true;
+        } else {
+          this.setError(response.data.message);
+        }
+        this.setLoading(false);
+      }).catch((error) => {
+        const { message = this.$lang['invalid-email'] } = error.data.data;
+        this.setError(message);
+        this.setLoading(false);
+      });
+    },
+  },
+
+  validations() {
+    const validations = {
+      passwordHandler: {
+        required,
+        isValidLength,
+        containsLetter,
+        containsNumber,
+      },
+
+      confirmation: {
+        sameAsPassword: sameAs('password'),
+      },
+    };
+
+    return validations;
+  },
+};
+</script>

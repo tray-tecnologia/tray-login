@@ -8,6 +8,7 @@ import securityCodeResponse from './data/generate-security-code.json';
 
 import hasAccountResponse from './data/has-account.json';
 import hasAccountResponseNotFound from './data/has-account-not-found.json';
+import hasEmailDomainMktplace from './data/has-email-domain-mktplace.json';
 
 import passwordLoginSucces from './data/password.json';
 import passwordLoginError from './data/error/password.json';
@@ -20,6 +21,24 @@ import otpLoginError from './data/error/otp.json';
 
 import emailMaskedSuccess from './data/email-masked.json';
 import emailMaskedError from './data/error/email-masked.json';
+
+import authenticationQuestion from './data/authentication-question.json';
+
+import chosenQuestion from './data/chosen-question.json';
+import chosenQuestionError from './data/error/chosen-question.json';
+
+import saveOrUpdateSuccess from './data/save-or-update.json';
+import saveOrUpdateError from './data/error/save-or-update.json';
+
+const correctCode = '123456';
+
+const cpfs = [
+  '44523430829',
+];
+
+const rightAnswers = [
+  '***** ******* *********** Zamana',
+];
 
 const users = [
   'teste@tray.com.br',
@@ -106,6 +125,10 @@ export default {
       mockData = hasAccountResponse;
     }
 
+    if (cpfs.indexOf(identification) !== -1) {
+      mockData = hasEmailDomainMktplace;
+    }
+
     return fetch(mockData, delay).then(response => response.data);
   },
 
@@ -137,10 +160,11 @@ export default {
     password: '',
   }) {
     const { password } = payload;
+
     let isValid = false;
     let mockData = passwordLoginError;
 
-    if (password === 'senhacorreta') {
+    if (password !== '') {
       isValid = true;
       mockData = passwordLoginSucces;
     }
@@ -149,23 +173,47 @@ export default {
   },
 
   /**
-   * Mock para o login de senha
+   * Mock para alterar senha
    * @param {object} payload
    * @return {Promise}
    */
   updatePassword(payload = {
+    identification: '',
+    endpoint: 'password-update',
+    session_id: '',
+    store_id: '',
+    identification_type: '',
     code: '',
+    password: '',
   }) {
-    const { code } = payload;
     let isValid = false;
     let mockData = passwordUpdateError;
 
-    if (code === 'ABC123') {
+    if (payload.code === correctCode) {
       isValid = true;
       mockData = passwordUpdateSucces;
     }
 
     return fetch(mockData, delay, isValid);
+  },
+
+  /**
+   * Mock para atualziar email e senha
+   * @param {} payload
+   * @returns
+   */
+  saveOrUpdate(payload = {
+    identification: '',
+    email: '',
+    password: '',
+  }) {
+    let mockData = saveOrUpdateSuccess;
+
+    if (users.indexOf(payload.email) === -1) {
+      mockData = saveOrUpdateError;
+    }
+
+    return fetch(mockData.data, delay);
   },
 
   /**
@@ -186,5 +234,34 @@ export default {
     }
 
     return fetch(mockData, delay, isValid);
+  },
+
+  /**
+   * Retorna uma pargunta de segurança baseada nos dados do usuário
+   */
+  authenticationQuestion() {
+    const mockData = authenticationQuestion;
+
+    return fetch(mockData.data, delay);
+  },
+
+  /**
+   * Recebe a resposta da pergunta de segurança e valida de está correta
+   */
+  chosenQuestion(payload = {
+    identification: '',
+    chosen: '',
+  }) {
+    const { chosen } = payload;
+
+    let mockData = '';
+
+    if (rightAnswers.indexOf(chosen) !== -1) {
+      mockData = chosenQuestion;
+    } else {
+      mockData = chosenQuestionError;
+    }
+
+    return fetch(mockData.data, delay);
   },
 };

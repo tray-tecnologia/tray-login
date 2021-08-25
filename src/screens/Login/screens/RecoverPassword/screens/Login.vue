@@ -94,7 +94,6 @@ export default {
             method: 'password',
             type: 'error',
           });
-
           this.setLoading(false);
         });
     },

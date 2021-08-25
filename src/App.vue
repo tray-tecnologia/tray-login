@@ -1,11 +1,13 @@
 <template>
   <div class="tray-container"
-    v-bind:class="{ 'tray-container__identify': screen === 'Identification' }"
+    :class="{ 'tray-container__identify': screen === 'Identification' }"
     ref="tray-login" v-show="showComponent">
+
     <button class="tray-close"
       @click="close">
       X
     </button>
+
     <app-identification id="identify" v-if="screen === 'Identification'"
       class="tray-login-screens"
       :callback="this.dataCallback"
@@ -21,6 +23,17 @@
       </app-facebook-login>
     </app-identification>
 
+    <app-authentication id="authentication" v-if="screen === 'Authentication'"
+      :reset="reset"
+      :callback="this.dataCallback"
+      :params="params"
+    />
+
+    <app-complete-register id="registration" v-if="screen === 'Registration'"
+      :callback="this.dataCallback"
+      :params="params"
+    />
+
     <app-login id="main" v-if="screen === 'Main'"
       class="tray-login-screens"
       :callback="this.dataCallback"
@@ -34,8 +47,7 @@
         :callback="this.dataCallback"
         :params="params"
         slot="app-otp-login"
-      >
-      </app-otp-button>
+      />
       <app-facebook-login v-if="facebookEnabled"
         :callback="this.dataCallback"
         :params="params"
@@ -78,9 +90,11 @@
         {{ $lang['go-back'] }}
       </button>
     </section>
+
     <section id="tray-login-terms" v-if="hasTerm">
       <app-terms :termText="this.dataTerms"></app-terms>
     </section>
+
     <section id="tray-login-loading" v-show="loading"
       :class="{
         'tray-loading-hidden': !loading
@@ -94,21 +108,23 @@
         <path class="path1" d="M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"></path>
       </svg>
     </section>
+
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import store from './store';
-
 import http from 'api-client';
+import screenHandler from '@/mixins/screenHandler';
 import AppFacebookLogin from './components/FacebookLogin.vue';
 import AppIdentification from './screens/Identification/Main.vue';
 import AppLogin from './screens/Login/screens/Main.vue';
 import AppOtpButton from './screens/Login/screens/Otp/Button.vue';
 import AppCustomTexts from './components/CustomTexts.vue';
 import AppTerms from './components/Terms.vue';
-import screenHandler from '@/mixins/screenHandler';
+import AppAuthentication from './screens/Authentication/Main.vue';
+import AppCompleteRegister from './screens/Login/screens/RecoverPassword/screens/CompleteRegister.vue';
+import store from './store';
 
 export default {
   store,
@@ -120,6 +136,8 @@ export default {
     AppOtpButton,
     AppLogin,
     AppTerms,
+    AppAuthentication,
+    AppCompleteRegister,
   },
   mixins: [screenHandler],
   data() {

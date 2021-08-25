@@ -3,28 +3,21 @@
     <app-new-password v-if="screen == 'New'"
       :identification="identification"
       :identificationType="identificationType"
-      :params="this.params">
-    </app-new-password>
-    <app-recover-password-login v-if="screen === 'Login'"
-      :callback="callback"
-      :identification="identification"
-      :identificationType="identificationType"
       :params="this.params"
+      :callback="callback"
       :password="this.password">
-    </app-recover-password-login>
+    </app-new-password>
   </section>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex';
 import AppNewPassword from './New.vue';
-import AppRecoverPasswordLogin from './Login.vue';
 
 export default {
   name: 'AppRecoverPassword',
   components: {
     AppNewPassword,
-    AppRecoverPasswordLogin,
   },
   props: {
     params: {

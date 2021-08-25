@@ -68,6 +68,17 @@ tray-login {
         }
     }
 
+    .tray-btn-link {
+        background-color: transparent;
+        color: #909090;
+        border: none;
+        width: 100%;
+        cursor: pointer;
+        text-decoration: underline;
+        text-align: right;
+        font-size: 14px;
+    }
+
     .tray-close {
         background: #fff;
         border: 2px solid #bababa;

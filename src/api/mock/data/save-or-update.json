@@ -1,0 +1,43 @@
+{
+  "data": {
+    "data": {
+      "customer": {
+        "id": "17",
+        "cpf": "",
+        "rg": "",
+        "cnpj": null,
+        "companyName": null,
+        "stateScription": null,
+        "name": "",
+        "welcome": "Name",
+        "phone": null,
+        "cellphone": "",
+        "birthDate": "",
+        "gender": null,
+        "email": "test@tray.com.br",
+        "cards": null,
+        "hasCards": null,
+        "address": false,
+        "billingAddress": null,
+        "addresses": [],
+        "deliveryAddresses": [],
+        "token": "5b3051627b65fdd2e9b2fca03df8220b6102bdcdd2cda",
+        "loginMethod": "email",
+        "byPassword": true,
+        "attributes": [],
+        "facebookEmailMissing": false,
+        "credit": null,
+        "errors": [],
+        "checkTraycheckout": false,
+        "profile": null,
+        "hasEmailDomainMktplace": false,
+        "age": null,
+        "acceptNews": false,
+        "isDivergence": false,
+        "accounts": null
+      }
+    },
+    "statusCode": 200
+  },
+  "status": 200
+}
