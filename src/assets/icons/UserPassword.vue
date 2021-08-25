@@ -9,7 +9,14 @@
 
 <script>
 export default {
-  props: ['size', 'identificationClasses'],
+  props: {
+    size: {
+      type: Number,
+    },
+    identificationClasses: {
+      type: String,
+    },
+  },
   computed: {
     /**
      * Verifica se o parametro size tem valor

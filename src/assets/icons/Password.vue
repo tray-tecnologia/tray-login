@@ -9,7 +9,14 @@
 
 <script>
 export default {
-  props: ['size', 'inputClass'],
+  props: {
+    size: {
+      type: Number,
+    },
+    inputClass: {
+      type: String,
+    },
+  },
   computed: {
     hasSize() {
       return this.size ? this.size : 1;

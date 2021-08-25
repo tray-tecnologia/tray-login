@@ -10,6 +10,10 @@
 
 <script>
 export default {
-  props: ['securityCodeErrors'],
+  props: {
+    securityCodeErrors: {
+      type: String,
+    },
+  },
 };
 </script>

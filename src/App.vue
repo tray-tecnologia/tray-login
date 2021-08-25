@@ -1,6 +1,6 @@
 <template>
   <div class="tray-container"
-    v-bind:class="{ 'tray-container__identify': screen === 'Identification' }"
+    :class="{ 'tray-container__identify': screen === 'Identification' }"
     ref="tray-login" v-show="showComponent">
 
     <button class="tray-close"

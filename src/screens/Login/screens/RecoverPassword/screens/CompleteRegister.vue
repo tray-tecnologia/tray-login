@@ -13,7 +13,7 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex';
-import AppRegister from '../../../../../components/Register.vue';
+import AppRegister from '@/components/Register.vue';
 
 export default {
   components: {

@@ -150,8 +150,8 @@ export default {
 
   /**
    * Recebe a resposta da pergunta de segurança
-   * @param {*} payload 
-   * @returns 
+   * @param {*} payload
+   * @returns
    */
   authenticationQuestion(payload = {
     identification: '',
@@ -165,8 +165,8 @@ export default {
 
   /**
    * Valida a resposta escolhida na pergunta de segurança
-   * @param {*} payload 
-   * @returns 
+   * @param {*} payload
+   * @returns
    */
   chosenQuestion(payload = {
     identification: '',
@@ -180,8 +180,8 @@ export default {
 
   /**
    * Atualiza e-mail e senha
-   * @param {*} payload 
-   * @returns 
+   * @param {*} payload
+   * @returns
    */
   saveOrUpdate(payload = {
     identification: '',
@@ -191,5 +191,5 @@ export default {
   }) {
     const { endpoint, ...params } = payload;
     return http.get(endpoint, { params }).then(response => response);
-  }
+  },
 };

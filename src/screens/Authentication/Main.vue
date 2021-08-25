@@ -8,16 +8,16 @@
 
     <div>
       <p class="tray-action">
-        {{ $lang["authentication-action-1"] }} <strong>{{ storeName }}</strong
-        >.
+        {{ $lang["authentication-action-1"] }} <strong>{{ storeName }}</strong>.
       </p>
       <p class="tray-action">{{ $lang["authentication-action-2"] }}</p>
       <label class="tray-well">{{ question }}</label>
     </div>
 
     <div>
-      <button class="tray-btn-default" v-for="n in answers" :key="n" @click="submit(n)">
-        {{ n }}
+      <button
+        class="tray-btn-default" v-for="answer in answers" :key="answer" @click="submit(answer)">
+        {{ answer }}
       </button>
     </div>
 
@@ -35,7 +35,11 @@ import http from 'api-client';
 export default {
   name: 'AppAuthentication',
   mixins: [screenHandler, utils],
-  props: ['reset'],
+  props: {
+    reset: {
+      type: Function,
+    },
+  },
   data() {
     return {
       storeName: 'Marketplace XYZ',
