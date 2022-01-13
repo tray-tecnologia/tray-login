@@ -76,6 +76,11 @@ import AppOtpLogin from './Otp/screens/Login.vue';
 import AppTogglePassword from '@/components/TogglePassword.vue';
 import screenHandler from '@/mixins/screenHandler';
 import utils from '@/mixins/utils';
+import {
+  isValidLength,
+  containsLetter,
+  containsNumber,
+} from './RecoverPassword/validators/password';
 
 export default {
   name: 'AppLogin',
@@ -140,6 +145,14 @@ export default {
     ]),
 
     ...mapGetters(['identificationType']),
+
+    isStringPassword() {
+      return (
+        isValidLength(this.password)
+        && containsLetter(this.password)
+        && containsNumber(this.password)
+      );
+    },
   },
 
   methods: {
@@ -181,7 +194,9 @@ export default {
           },
         });
 
-        if (this.callback) {
+        if (!this.isStringPassword) {
+          this.setScreen('RecoverPassword');
+        } else if (this.callback) {
           this.redirect(this.callback, response.data.data.token);
           return response;
         }

@@ -140,7 +140,7 @@ export default {
     let isValid = false;
     let mockData = passwordLoginError;
 
-    if (password === 'senhacorreta') {
+    if (password === 'senhacorreta' || password === 'senhacorreta123') {
       isValid = true;
       mockData = passwordLoginSucces;
     }
