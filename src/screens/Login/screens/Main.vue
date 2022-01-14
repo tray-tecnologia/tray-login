@@ -56,6 +56,13 @@
       :params="params">
     </app-otp-login>
 
+    <app-compulsory-password v-if="screen === 'CompulsoryPassword'"
+      :callback="callback"
+      :identification="identification"
+      :identificationType="identificationType"
+      :params="params"
+    />
+
     <section class="tray-loading" v-show="loading">
       <div class="tray-loading-mask">
         <div class="tray-loading-line"></div>
@@ -73,6 +80,7 @@ import http from 'api-client';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import AppRecoverPassword from './RecoverPassword/screens/Main.vue';
 import AppOtpLogin from './Otp/screens/Login.vue';
+import AppCompulsoryPassword from './CompulsoryPassword/Main.vue';
 import AppTogglePassword from '@/components/TogglePassword.vue';
 import screenHandler from '@/mixins/screenHandler';
 import utils from '@/mixins/utils';
@@ -88,6 +96,7 @@ export default {
   components: {
     AppTogglePassword,
     AppRecoverPassword,
+    AppCompulsoryPassword,
     AppOtpLogin,
   },
   props: {
@@ -146,7 +155,7 @@ export default {
 
     ...mapGetters(['identificationType']),
 
-    isStringPassword() {
+    isStrongPassword() {
       return (
         isValidLength(this.password)
         && containsLetter(this.password)
@@ -194,8 +203,8 @@ export default {
           },
         });
 
-        if (!this.isStringPassword) {
-          this.setScreen('RecoverPassword');
+        if (!this.isStrongPassword) {
+          this.setScreen('CompulsoryPassword');
         } else if (this.callback) {
           this.redirect(this.callback, response.data.data.token);
           return response;
