@@ -123,6 +123,7 @@
 <script>
 import client from 'api-client';
 import screenHandler from '@/mixins/screenHandler';
+import utils from '@/mixins/utils';
 import { mapState, mapActions } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required, sameAs } from 'vuelidate/lib/validators';
@@ -132,14 +133,10 @@ import {
   containsLetter,
   containsNumber,
 } from '../validators/password';
-import {
-  checkIcon,
-  timesIcon,
-} from '../validators/icons';
 
 export default {
   name: 'AppNewPassword',
-  mixins: [screenHandler, validationMixin],
+  mixins: [screenHandler, validationMixin, utils],
   components: {
     AppTogglePassword,
   },
@@ -346,18 +343,6 @@ export default {
         this.setError(message);
         this.setLoading(false);
       });
-    },
-
-
-    /**
-     * Retorna o ícone correto de acordo com as regras de validação
-     * @param {boolean} validationRule a regra de validação sendo testada
-     * @return {string}
-     */
-    getIconName(
-      validationRule,
-    ) {
-      return validationRule ? checkIcon : timesIcon;
     },
   },
 

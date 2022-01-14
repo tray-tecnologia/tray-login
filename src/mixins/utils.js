@@ -1,3 +1,8 @@
+import {
+  checkIcon,
+  timesIcon,
+} from '../screens/Login/screens/RecoverPassword/validators/icons';
+
 export default {
   methods: {
     /**
@@ -20,6 +25,17 @@ export default {
       }
 
       window.location = callback + redirectParam;
+    },
+
+    /**
+     * Retorna o ícone correto de acordo com as regras de validação
+     * @param {boolean} validationRule a regra de validação sendo testada
+     * @return {string}
+     */
+    getIconName(
+      validationRule,
+    ) {
+      return validationRule ? checkIcon : timesIcon;
     },
   },
 };
