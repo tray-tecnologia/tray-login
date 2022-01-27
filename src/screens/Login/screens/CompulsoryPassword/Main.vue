@@ -88,7 +88,7 @@ import screenHandler from '@/mixins/screenHandler';
 import utils from '@/mixins/utils';
 import AppTogglePassword from '@/components/TogglePassword.vue';
 import { validationMixin } from 'vuelidate';
-import { required, sameAs } from 'vuelidate/lib/validators';
+import { required } from 'vuelidate/lib/validators';
 import {
   isValidLength,
   containsLetter,
@@ -127,6 +127,10 @@ export default {
     },
   },
   computed: {
+    ...mapState([
+      'securityCode',
+    ]),
+
     ...mapState('Login/RecoverPassword', [
       'password',
     ]),
@@ -178,14 +182,11 @@ export default {
     },
 
     /**
-     *  @TODO
-     *  Conectar com função de API correta
-     *
      * Atualiza a senha
      */
     update(event, payload = {
       ...this.params,
-      code: 'ABC123', // não vai ter esse código na versão final
+      code: this.securityCode,
       endpoint: 'password-update',
       identification: this.identification,
       password: this.password,

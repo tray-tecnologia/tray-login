@@ -169,6 +169,10 @@ export default {
     passwordLogin: http.passwordLogin,
     generateSecurityCode: http.generateSecurityCode,
 
+    ...mapActions([
+      'setSecurityCode',
+    ]),
+
     ...mapActions('Login', [
       'setScreen',
     ]),
@@ -204,6 +208,7 @@ export default {
         });
 
         if (!this.isStrongPassword) {
+          this.setSecurityCode(response.data.data.code);
           this.setScreen('CompulsoryPassword');
         } else if (this.callback) {
           this.redirect(this.callback, response.data.data.token);
