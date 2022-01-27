@@ -9,6 +9,15 @@ export default {
   },
 
   /**
+   * Define o valor do código de segurança
+   * @param {object} state
+   * @param {string} identification
+   */
+  setSecurityCode(state, securityCode) {
+    state.securityCode = securityCode;
+  },
+
+  /**
    * Define as langs
    * @param {object} state
    * @param {object} lang

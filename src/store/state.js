@@ -1,6 +1,7 @@
 export default {
   blockedUser: false,
   identification: '',
+  securityCode: '',
   lang: {
     // identify screen
     'identify-title': 'Identifique-se',
