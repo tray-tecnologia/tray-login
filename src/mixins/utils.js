@@ -32,9 +32,7 @@ export default {
      * @param {boolean} validationRule a regra de validação sendo testada
      * @return {string}
      */
-    getIconName(
-      validationRule,
-    ) {
+    getIconName(validationRule) {
       return validationRule ? checkIcon : timesIcon;
     },
   },
