@@ -155,12 +155,27 @@ export default {
 
     ...mapGetters(['identificationType']),
 
+    /**
+     * Valida se a senha passa nos requisitos de segurança
+     *
+     * @return {boolean}
+     */
     isStrongPassword() {
       return (
         isValidLength(this.password)
         && containsLetter(this.password)
         && containsNumber(this.password)
       );
+    },
+
+    /**
+     * Verifica se é um identifier de teste da tray
+     *
+     * @return {number}
+     */
+    isTestIdentifier() {
+      const testIdentifiers = ['teste@tray.com.br', 'testepagamento@tray.net.br'];
+      return testIdentifiers.includes(this.identification);
     },
   },
 
@@ -207,7 +222,9 @@ export default {
           },
         });
 
-        if (!this.isStrongPassword) {
+        console.log(this.isTestIdentifier);
+
+        if (!this.isStrongPassword && !this.isTestIdentifier) {
           this.setSecurityCode(response.data.data.code);
           this.setScreen('CompulsoryPassword');
         } else if (this.callback) {
