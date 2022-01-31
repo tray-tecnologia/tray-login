@@ -22,14 +22,14 @@
         :autoComplete="'compulsory-password'"
         :state="passwordErrors ? 'invalid' : 'valid'"
         v-model="passwordHandler"
-        @keyup.native="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()"
+        @keyup.native="isKeyupEnter($event)"
         id="new-password"
       />
       <app-toggle-password
         :autoComplete="'compulsory-password'"
         :state="passwordErrors ? 'invalid' : 'valid'"
         v-model="passwordConfirmation"
-        @keyup.native="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()"
+        @keyup.native="isKeyupEnter($event)"
         id="confirm-new-password"
       />
     </fieldset>
@@ -202,7 +202,19 @@ export default {
         this.setLoading(false);
       });
     },
+
+    /**
+     * Verifica se a tecla clicada é o enter
+     * caso sim, envia o formulário
+     *
+     * @param {object} event evento de click
+     * @return {function}
+     */
+    isKeyupEnter(event) {
+      return event.keyCode !== this.enterKeyCode ? this.clearErrors() : event.preventDefault();
+    },
   },
+
   validations() {
     const validations = {
       passwordHandler: {
