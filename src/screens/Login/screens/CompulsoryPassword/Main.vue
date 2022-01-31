@@ -181,7 +181,13 @@ export default {
     },
 
     /**
-     * Atualiza a senha
+     * Faz a requisição que atualiza a senha
+     *
+     * @param {obeject} this.param
+     * @param {string} code código de segurança
+     * @param {string} identification e-mail ou cpf do usuário
+     * @param {string} password senha
+     * @param {string} this.identification identifica se é e-mail ou CPF
      */
     update(event, payload = {
       ...this.params,
