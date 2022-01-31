@@ -31,7 +31,7 @@
       </label>
       <input v-autofocus
         autocomplete="one-time-code"
-        @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+        @keyup="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()"
         v-model="securityCode"
         class="tray-input"
         :class="securityCodeErrors ? 'tray-input-invalid' : 'tray-input-initial'"
@@ -44,14 +44,14 @@
       :autoComplete="'new-password'"
       :state="passwordErrors ? 'invalid' : 'valid'"
       v-model="passwordHandler"
-      @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+      @keyup.native="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()"
       id="new-password">
     </app-toggle-password>
     <app-toggle-password
       :autoComplete="'new-password'"
       :state="passwordErrors ? 'invalid' : 'valid'"
       v-model="passwordConfirmation"
-      @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+      @keyup.native="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()"
       id="confirm-new-password">
     </app-toggle-password>
     <small class="tray-feedbacks"

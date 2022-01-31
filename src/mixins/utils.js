@@ -4,6 +4,12 @@ import {
 } from '../screens/Login/screens/RecoverPassword/validators/icons';
 
 export default {
+  data() {
+    return {
+      enterKeyCode: 13,
+    };
+  },
+
   methods: {
     /**
      * Redirecionar o usuario para a url definida no callback

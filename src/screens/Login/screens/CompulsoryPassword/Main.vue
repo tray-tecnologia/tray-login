@@ -22,14 +22,14 @@
         :autoComplete="'compulsory-password'"
         :state="passwordErrors ? 'invalid' : 'valid'"
         v-model="passwordHandler"
-        @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+        @keyup.native="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()"
         id="new-password"
       />
       <app-toggle-password
         :autoComplete="'compulsory-password'"
         :state="passwordErrors ? 'invalid' : 'valid'"
         v-model="passwordConfirmation"
-        @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+        @keyup.native="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()"
         id="confirm-new-password"
       />
     </fieldset>

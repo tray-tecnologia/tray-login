@@ -18,7 +18,7 @@
           :autoFocus="true"
           v-model="password"
           :state="this.errors.length >= 1 ? 'invalid' : 'initial'"
-          @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()">
+          @keyup.native="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()">
         </app-toggle-password>
         <small class="tray-feedbacks" v-show="errors.length">
           <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
