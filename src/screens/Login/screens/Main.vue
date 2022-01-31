@@ -5,7 +5,10 @@
         <strong class="tray-title">
           {{ $lang['main-title'] }}
         </strong>
-        <slot v-if="this.$slots['custom-texts']" name="custom-texts"></slot>
+        <slot
+          v-if="this.$slots['custom-texts']"
+          name="custom-texts">
+        </slot>
         <p v-else class="tray-action" v-html="$lang['main-action']"></p>
         <label class="tray-well">
           {{ identification }}
@@ -44,19 +47,22 @@
       <slot name="app-back-step"></slot>
     </section>
 
-    <app-recover-password v-if="screen === 'RecoverPassword'"
+    <app-recover-password
+      v-if="screen === 'RecoverPassword'"
       :params="params"
       :callback="callback">
     </app-recover-password>
 
-    <app-otp-login v-if="screen === 'Otp'"
+    <app-otp-login
+      v-if="screen === 'Otp'"
       :callback="callback"
       :identification="identification"
       :identificationType="identificationType"
       :params="params">
     </app-otp-login>
 
-    <app-compulsory-password v-if="screen === 'CompulsoryPassword'"
+    <app-compulsory-password
+      v-if="screen === 'CompulsoryPassword'"
       :callback="callback"
       :identification="identification"
       :identificationType="identificationType"
