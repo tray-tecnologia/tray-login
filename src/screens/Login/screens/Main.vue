@@ -218,10 +218,14 @@ export default {
           },
         });
 
-        if (!this.isStrongPassword && !this.isTestIdentifier) {
+        if (!this.isStrongPassword && !this.isTestIdentifier(this.identification)) {
           this.setSecurityCode(response.data.data.code);
           this.setScreen('CompulsoryPassword');
-        } else if (this.callback) {
+          this.setLoading(false);
+          return response;
+        }
+
+        if (this.callback) {
           this.redirect(this.callback, response.data.data.token);
           return response;
         }

@@ -45,11 +45,11 @@ export default {
     /**
      * Verifica se é um identifier de teste da tray
      *
-     * @return {number}
+     * @return {boolean}
      */
-    isTestIdentifier() {
+    isTestIdentifier(identification) {
       const testIdentifiers = ['teste@tray.com.br', 'testepagamento@tray.net.br'];
-      return testIdentifiers.includes(this.identification);
+      return testIdentifiers.includes(identification);
     },
   },
 };

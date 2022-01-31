@@ -167,7 +167,6 @@ export default {
         return;
       }
 
-      // todo: o erro ta aqui
       if (!isValidLength(this.password)) {
         this.setError(this.$lang['invalid-password']);
         return;
