@@ -173,16 +173,6 @@ export default {
         && containsNumber(this.password)
       );
     },
-
-    /**
-     * Verifica se é um identifier de teste da tray
-     *
-     * @return {number}
-     */
-    isTestIdentifier() {
-      const testIdentifiers = ['teste@tray.com.br', 'testepagamento@tray.net.br'];
-      return testIdentifiers.includes(this.identification);
-    },
   },
 
   methods: {
@@ -227,8 +217,6 @@ export default {
             type: 'success',
           },
         });
-
-        console.log(this.isTestIdentifier);
 
         if (!this.isStrongPassword && !this.isTestIdentifier) {
           this.setSecurityCode(response.data.data.code);

@@ -41,5 +41,15 @@ export default {
     getIconName(validationRule) {
       return validationRule ? checkIcon : timesIcon;
     },
+
+    /**
+     * Verifica se é um identifier de teste da tray
+     *
+     * @return {number}
+     */
+    isTestIdentifier() {
+      const testIdentifiers = ['teste@tray.com.br', 'testepagamento@tray.net.br'];
+      return testIdentifiers.includes(this.identification);
+    },
   },
 };
