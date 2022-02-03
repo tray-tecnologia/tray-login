@@ -27,7 +27,7 @@
           type="text"
           id="input-email"
           @blur="validity()"
-          @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+          @keyup="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()"
           class="tray-input"
           autocapitalize="off"
           :class="identificationClasses"

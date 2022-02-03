@@ -26,6 +26,18 @@ export default {
     ...mapState({
       $lang: state => state.lang,
     }),
+
+    /**
+     * Verifica se existem erros relacionados a nova senha
+     * @return {boolean}
+    */
+    passwordErrors() {
+      if (this.errors.length <= 0) {
+        return false;
+      }
+
+      return this.errors[0].indexOf('senha') !== -1;
+    },
   },
   methods: {
     /**

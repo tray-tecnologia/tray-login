@@ -31,7 +31,7 @@
       </label>
       <input v-autofocus
         autocomplete="one-time-code"
-        @keyup="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+        @keyup="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()"
         v-model="securityCode"
         class="tray-input"
         :class="securityCodeErrors ? 'tray-input-invalid' : 'tray-input-initial'"
@@ -44,14 +44,14 @@
       :autoComplete="'new-password'"
       :state="passwordErrors ? 'invalid' : 'valid'"
       v-model="passwordHandler"
-      @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+      @keyup.native="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()"
       id="new-password">
     </app-toggle-password>
     <app-toggle-password
       :autoComplete="'new-password'"
       :state="passwordErrors ? 'invalid' : 'valid'"
       v-model="passwordConfirmation"
-      @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()"
+      @keyup.native="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()"
       id="confirm-new-password">
     </app-toggle-password>
     <small class="tray-feedbacks"
@@ -123,6 +123,7 @@
 <script>
 import client from 'api-client';
 import screenHandler from '@/mixins/screenHandler';
+import utils from '@/mixins/utils';
 import { mapState, mapActions } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { required, sameAs } from 'vuelidate/lib/validators';
@@ -132,14 +133,10 @@ import {
   containsLetter,
   containsNumber,
 } from '../validators/password';
-import {
-  checkIcon,
-  timesIcon,
-} from '../validators/icons';
 
 export default {
   name: 'AppNewPassword',
-  mixins: [screenHandler, validationMixin],
+  mixins: [screenHandler, validationMixin, utils],
   components: {
     AppTogglePassword,
   },
@@ -223,18 +220,6 @@ export default {
       }
 
       return this.errors[0].indexOf('segurança') !== -1 || this.errors[0].indexOf('Autenticação');
-    },
-
-    /**
-     * Verifica se existem erros relacionados a nova senha
-     * @return {boolean}
-    */
-    passwordErrors() {
-      if (this.errors.length <= 0) {
-        return false;
-      }
-
-      return this.errors[0].indexOf('senha') !== -1;
     },
   },
   methods: {
@@ -358,18 +343,6 @@ export default {
         this.setError(message);
         this.setLoading(false);
       });
-    },
-
-
-    /**
-     * Retorna o ícone correto de acordo com as regras de validação
-     * @param {boolean} validationRule a regra de validação sendo testada
-     * @return {string}
-     */
-    getIconName(
-      validationRule,
-    ) {
-      return validationRule ? checkIcon : timesIcon;
     },
   },
 

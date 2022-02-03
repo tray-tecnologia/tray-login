@@ -11,6 +11,15 @@ export default {
   },
 
   /**
+   * Dispara a ação para definir o código de segurança
+   * @param {function} commit
+   * @param {string} identification
+   */
+  setSecurityCode({ commit }, securityCode) {
+    commit('setSecurityCode', securityCode);
+  },
+
+  /**
    * Dispara a ação com para definir as langs
    * @param {function} commit
    * @param {object} lang

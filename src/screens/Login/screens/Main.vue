@@ -5,7 +5,10 @@
         <strong class="tray-title">
           {{ $lang['main-title'] }}
         </strong>
-        <slot v-if="this.$slots['custom-texts']" name="custom-texts"></slot>
+        <slot
+          v-if="this.$slots['custom-texts']"
+          name="custom-texts">
+        </slot>
         <p v-else class="tray-action" v-html="$lang['main-action']"></p>
         <label class="tray-well">
           {{ identification }}
@@ -18,7 +21,7 @@
           :autoFocus="true"
           v-model="password"
           :state="this.errors.length >= 1 ? 'invalid' : 'initial'"
-          @keyup.native="$event.keyCode !== 13 ? clearErrors() : $event.preventDefault()">
+          @keyup.native="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()">
         </app-toggle-password>
         <small class="tray-feedbacks" v-show="errors.length">
           <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
@@ -44,17 +47,27 @@
       <slot name="app-back-step"></slot>
     </section>
 
-    <app-recover-password v-if="screen === 'RecoverPassword'"
+    <app-recover-password
+      v-if="screen === 'RecoverPassword'"
       :params="params"
       :callback="callback">
     </app-recover-password>
 
-    <app-otp-login v-if="screen === 'Otp'"
+    <app-otp-login
+      v-if="screen === 'Otp'"
       :callback="callback"
       :identification="identification"
       :identificationType="identificationType"
       :params="params">
     </app-otp-login>
+
+    <app-compulsory-password
+      v-if="screen === 'CompulsoryPassword'"
+      :callback="callback"
+      :identification="identification"
+      :identificationType="identificationType"
+      :params="params"
+    />
 
     <section class="tray-loading" v-show="loading">
       <div class="tray-loading-mask">
@@ -70,12 +83,18 @@
 
 <script>
 import http from 'api-client';
+import utils from '@/mixins/utils';
+import screenHandler from '@/mixins/screenHandler';
 import { mapActions, mapState, mapGetters } from 'vuex';
+import AppTogglePassword from '@/components/TogglePassword.vue';
 import AppRecoverPassword from './RecoverPassword/screens/Main.vue';
 import AppOtpLogin from './Otp/screens/Login.vue';
-import AppTogglePassword from '@/components/TogglePassword.vue';
-import screenHandler from '@/mixins/screenHandler';
-import utils from '@/mixins/utils';
+import AppCompulsoryPassword from './CompulsoryPassword/Main.vue';
+import {
+  isValidLength,
+  containsLetter,
+  containsNumber,
+} from './RecoverPassword/validators/password';
 
 export default {
   name: 'AppLogin',
@@ -83,6 +102,7 @@ export default {
   components: {
     AppTogglePassword,
     AppRecoverPassword,
+    AppCompulsoryPassword,
     AppOtpLogin,
   },
   props: {
@@ -140,12 +160,29 @@ export default {
     ]),
 
     ...mapGetters(['identificationType']),
+
+    /**
+     * Valida se a senha passa nos requisitos de segurança
+     *
+     * @return {boolean}
+     */
+    isStrongPassword() {
+      return (
+        isValidLength(this.password)
+        && containsLetter(this.password)
+        && containsNumber(this.password)
+      );
+    },
   },
 
   methods: {
     checkUserStatus: http.checkUserStatus,
     passwordLogin: http.passwordLogin,
     generateSecurityCode: http.generateSecurityCode,
+
+    ...mapActions([
+      'setSecurityCode',
+    ]),
 
     ...mapActions('Login', [
       'setScreen',
@@ -180,6 +217,13 @@ export default {
             type: 'success',
           },
         });
+
+        if (!this.isStrongPassword && !this.isTestIdentifier(this.identification)) {
+          this.setSecurityCode(response.data.data.code);
+          this.setScreen('CompulsoryPassword');
+          this.setLoading(false);
+          return response;
+        }
 
         if (this.callback) {
           this.redirect(this.callback, response.data.data.token);
