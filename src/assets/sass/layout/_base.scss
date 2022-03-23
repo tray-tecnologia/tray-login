@@ -55,14 +55,13 @@ tray-login {
         border: 1px solid $overlay-color;
         width: 292px;
         position: fixed;
-        left: calc(50% - 146px);
-        top: calc(50% - 300px);
         padding: $default-gutter;
         z-index: 9999;
-
-        &.tray-container__identify {
-            top: calc(50% - 120px);
-        }
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        max-height: 100%;
+        overflow: auto;
     }
 
     .tray-close {
