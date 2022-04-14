@@ -147,4 +147,11 @@ export default {
     const { endpoint, ...params } = payload;
     return http.get(endpoint, { params }).then(response => response);
   },
+
+  callbackLoginLayout(payload = {
+    endpoint: '/my-account/api/login',
+  }) {
+    const { endpoint, ...params } = payload;
+    return http.post(endpoint, params).then(response => response);
+  },
 };
