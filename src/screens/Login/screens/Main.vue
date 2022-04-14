@@ -110,6 +110,10 @@ export default {
       type: String,
       default: '/',
     },
+    callbackPost: {
+      type: String,
+      default: '/',
+    },
     endpoint: {
       type: String,
       default: 'password',
@@ -173,12 +177,21 @@ export default {
         && containsNumber(this.password)
       );
     },
+
+    /**
+     * Valida de callbackPost é diferente de "/"
+     * @return {bool}
+     */
+    hasCallbackPost() {
+      return this.callbackPost !== '/';
+    },
   },
 
   methods: {
     checkUserStatus: http.checkUserStatus,
     passwordLogin: http.passwordLogin,
     generateSecurityCode: http.generateSecurityCode,
+    callbackLoginLayout: http.callbackLoginLayout,
 
     ...mapActions([
       'setSecurityCode',
@@ -223,6 +236,19 @@ export default {
           this.setScreen('CompulsoryPassword');
           this.setLoading(false);
           return response;
+        }
+
+        if (this.hasCallbackPost) {
+          const payloadLoginLayout = {
+            endpoint: this.callbackPost,
+
+          };
+
+          this.callbackLoginLayout(payloadLoginLayout).then((res) => {
+            const { token = '', callback = '' } = res.data.data;
+            this.redirect(callback, token);
+            return res;
+          });
         }
 
         if (this.callback) {
