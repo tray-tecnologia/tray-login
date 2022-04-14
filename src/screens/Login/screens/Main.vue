@@ -239,12 +239,10 @@ export default {
         }
 
         if (this.hasCallbackPost) {
-          const payloadLoginLayout = {
-            endpoint: this.callbackPost,
+          const payloadPost = JSON.parse(this.callbackPost);
+          payloadPost.token = response.data.data.token;
 
-          };
-
-          this.callbackLoginLayout(payloadLoginLayout).then((res) => {
+          this.callbackLoginLayout(payloadPost).then((res) => {
             const { token = '', redirect = '' } = res.data.data;
             this.redirect(redirect, token);
             return res;

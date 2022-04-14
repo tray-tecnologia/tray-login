@@ -148,6 +148,11 @@ export default {
     return http.get(endpoint, { params }).then(response => response);
   },
 
+  /**
+   * Recupera o token para o login
+   * @param {object} payload
+   * @returns {Promisse}
+   */
   callbackLoginLayout(payload = {
     endpoint: '/my-account/api/login',
   }) {
