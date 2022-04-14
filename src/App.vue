@@ -23,6 +23,7 @@
     <app-login id="main" v-if="screen === 'Main'"
       class="tray-login-screens"
       :callback="this.dataCallback"
+      :callbackPost="this.dataCallbackPost"
       :params="params">
       <app-custom-texts v-if="hasCustomTexts"
         :error="this.customTexts['general-error-alert']"
@@ -133,6 +134,10 @@ export default {
       default: 'checkout',
     },
     dataCallback: {
+      type: String,
+      default: '/',
+    },
+    dataCallbackPost: {
       type: String,
       default: '/',
     },
