@@ -245,8 +245,8 @@ export default {
           };
 
           this.callbackLoginLayout(payloadLoginLayout).then((res) => {
-            const { token = '', callback = '' } = res.data.data;
-            this.redirect(callback, token);
+            const { token = '', redirect = '' } = res.data.data;
+            this.redirect(redirect, token);
             return res;
           });
         }

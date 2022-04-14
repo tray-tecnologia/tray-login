@@ -2,7 +2,7 @@
     "data": {
         "data": {
             "token": "5155ofsdfgsfsdf4a6sd5f4a6s5d4f6asd54f65465",
-            "callback": "https://minhaloja.commercesuite.com.br/my-account/"
+            "redirect": "https://minhaloja.commercesuite.com.br/my-account/"
         } 
     },
     "statusCode": 200
