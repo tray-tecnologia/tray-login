@@ -1,4 +1,4 @@
-import { http } from '@/plugins/http';
+import { http, httpBasic } from '@/plugins/http';
 
 export default {
   /**
@@ -157,6 +157,6 @@ export default {
     endpoint: '/my-account/api/login',
   }) {
     const { endpoint, ...params } = payload;
-    return http.post(endpoint, params).then(response => response);
+    return httpBasic.post(endpoint, params).then(response => response);
   },
 };
