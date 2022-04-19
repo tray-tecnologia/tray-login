@@ -16708,7 +16708,9 @@ var es6_promise = __webpack_require__("551c");
 // CONCATENATED MODULE: ./src/plugins/http/index.js
 
 
-var httpBasic = axios_default.a.create();
+var httpBasic = axios_default.a.create({
+  baseURL: '/'
+});
 var http = axios_default.a.create({
   baseURL: '/checkout'
 });
