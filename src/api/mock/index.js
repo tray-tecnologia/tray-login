@@ -197,7 +197,7 @@ export default {
    * @returns {Promisse}
    */
   callbackLoginLayout(payload = {
-    endpoint: '/my-account/api/login',
+    endpoint: 'my-account/api/login',
   }) {
     let mockData = callbackPostSuccess;
     const isValid = true;

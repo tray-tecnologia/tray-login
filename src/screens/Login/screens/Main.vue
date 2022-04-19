@@ -250,7 +250,7 @@ export default {
 
           this.callbackLoginLayout(payloadPost).then((res) => {
             const { token = '', redirect = '' } = res.data.data;
-            this.redirect(redirect, token);
+            this.redirect(redirect, 'token');
             return res;
           });
         }
