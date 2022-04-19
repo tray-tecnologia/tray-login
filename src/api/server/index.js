@@ -157,6 +157,6 @@ export default {
     endpoint: 'my-account/api/login',
   }) {
     const { endpoint, ...params } = payload;
-    return httpBasic.post(endpoint, params).then(response => response);
+    return http.post(endpoint, params).then(response => response);
   },
 };
