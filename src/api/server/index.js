@@ -154,7 +154,7 @@ export default {
    * @returns {Promisse}
    */
   callbackLoginLayout(payload = {
-    endpoint: '/my-account/api/login',
+    endpoint: 'my-account/api/login',
   }) {
     const { endpoint, ...params } = payload;
     return httpBasic.post(endpoint, params).then(response => response);
