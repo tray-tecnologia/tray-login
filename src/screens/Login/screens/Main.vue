@@ -4,6 +4,7 @@
       <div>
         <strong class="tray-title">
           {{ $lang['main-title'] }}
+          {{ this.callbackPost }} teste
         </strong>
         <slot
           v-if="this.$slots['custom-texts']"
@@ -231,8 +232,6 @@ export default {
           },
         });
 
-        console.log("console: login success!");
-
         if (!this.isStrongPassword && !this.isTestIdentifier(this.identification)) {
           this.setSecurityCode(response.data.data.code);
           this.setScreen('CompulsoryPassword');
@@ -241,16 +240,12 @@ export default {
         }
 
         if (this.hasCallbackPost) {
-          console.log("console: has Callback Post!");
-
           const payloadPost = JSON.parse(this.callbackPost);
           payloadPost.token = response.data.data.token;
 
-          console.log(`console: ${payloadPost}`);
-
           this.callbackLoginLayout(payloadPost).then((res) => {
             const { token = '', redirect = '' } = res.data.data;
-            this.redirect(redirect, 'token');
+            this.redirect(redirect, token);
             return res;
           });
         }
