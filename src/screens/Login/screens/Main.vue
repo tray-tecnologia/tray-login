@@ -3,7 +3,7 @@
     <section v-if="screen === 'Main'">
       <div>
         <strong class="tray-title">
-          {{ $lang['main-title'] }}
+          {{ $lang['main-title'] }} teste
         </strong>
         <slot
           v-if="this.$slots['custom-texts']"
