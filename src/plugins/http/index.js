@@ -2,7 +2,7 @@ import axios from 'axios';
 import interceptors from './interceptors';
 
 export const httpBasic = axios.create({
-  baseURL: '/',
+  baseURL: 'https://minhaloja.commercesuite.com.br/',
 });
 
 export const http = axios.create({

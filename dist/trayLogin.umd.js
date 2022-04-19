@@ -16709,7 +16709,7 @@ var es6_promise = __webpack_require__("551c");
 
 
 var httpBasic = axios_default.a.create({
-  baseURL: '/'
+  baseURL: 'https://minhaloja.commercesuite.com.br/'
 });
 var http = axios_default.a.create({
   baseURL: '/checkout'
