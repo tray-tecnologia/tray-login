@@ -17613,7 +17613,7 @@ function _objectWithoutProperties(source, excluded) {
     var endpoint = payload.endpoint,
         params = _objectWithoutProperties(payload, ["endpoint"]);
 
-    return http.post(endpoint, params).then(function (response) {
+    return httpBasic.post(endpoint, params).then(function (response) {
       return response;
     });
   }
