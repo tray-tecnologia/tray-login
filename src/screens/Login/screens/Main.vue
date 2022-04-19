@@ -4,7 +4,6 @@
       <div>
         <strong class="tray-title">
           {{ $lang['main-title'] }}
-          {{ this.callbackPost }} teste
         </strong>
         <slot
           v-if="this.$slots['custom-texts']"
