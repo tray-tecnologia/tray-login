@@ -1,6 +1,6 @@
 {
   "name": "tray-login",
-  "version": "data-callback-post",
+  "version": "7.7.7",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "NODE_ENV=production vue-cli-service build --target lib --inline-vue --name trayLogin src/main.js",
