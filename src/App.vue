@@ -182,7 +182,7 @@ export default {
     this.initialize(this.dataIdentification);
     this.getLangs({
       store_id: this.dataStore,
-      endpoint: 'langs/login_component',
+      endpoint: 'https://easycheckout.tray.com.br/checkout/langs/login_component',
     }).then((response) => {
       this.setLang(response.data);
     });
