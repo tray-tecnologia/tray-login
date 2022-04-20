@@ -22,7 +22,7 @@ import emailMaskedSuccess from './data/email-masked.json';
 import emailMaskedError from './data/error/email-masked.json';
 
 import callbackPostSuccess from './data/callback-post.json';
-import callbackPostError from './data/erroe/callback-post.json';
+import callbackPostError from './data/error/callback-post.json';
 
 const users = [
   'teste@tray.com.br',
