@@ -20,11 +20,6 @@ module.exports = {
     config.resolve.alias.set(
       'api-client',
       path.resolve(__dirname, `src/api/${apiClient}`),
-      /**
-       * @todo
-       * forçar a usar o server em ambientes de teste conectado com outra loja
-       */
-      // path.resolve(__dirname, `src/api/server`),
     );
   },
 };
