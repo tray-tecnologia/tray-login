@@ -3,7 +3,7 @@
     <section v-if="screen === 'Main'">
       <div>
         <strong class="tray-title">
-          {{ $lang['main-title'] }} versão de teste
+          {{ $lang['main-title'] }}
         </strong>
         <slot
           v-if="this.$slots['custom-texts']"
@@ -241,6 +241,7 @@ export default {
         if (this.hasCallbackPost) {
           const payloadPost = JSON.parse(this.callbackPost);
           payloadPost.token = response.data.data.token;
+          payloadPost.endpoint = 'my-account/api/login';
 
           this.callbackLoginLayout(payloadPost).then((res) => {
             const { token = '', redirect = '' } = res.data.data;
