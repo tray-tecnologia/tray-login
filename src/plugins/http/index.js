@@ -1,10 +1,16 @@
 import axios from 'axios';
 import interceptors from './interceptors';
 
+/**
+ * URL base das requisições
+ */
 export const httpBasic = axios.create({
   baseURL: '',
 });
 
+/**
+ * URL base das requisições com "/checkout"
+ */
 export const http = axios.create({
   baseURL: '/checkout',
 });

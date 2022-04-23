@@ -185,6 +185,13 @@ export default {
     hasCallbackPost() {
       return this.callbackPost !== '/';
     },
+
+    /**
+     * Rota usada no payload post
+     */
+    payloadPostEndpoint() {
+      return 'my-account/api/login';
+    },
   },
 
   methods: {
@@ -241,7 +248,7 @@ export default {
         if (this.hasCallbackPost) {
           const payloadPost = JSON.parse(this.callbackPost);
           payloadPost.token = response.data.data.token;
-          payloadPost.endpoint = 'my-account/api/login';
+          payloadPost.endpoint = this.payloadPostEndpoint;
 
           this.callbackLoginLayout(payloadPost).then((res) => {
             const { token = '', redirect = '' } = res.data.data;

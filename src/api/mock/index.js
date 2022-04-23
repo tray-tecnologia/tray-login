@@ -194,7 +194,7 @@ export default {
   /**
    * Recupera o token para o login
    * @param {object} payload
-   * @returns {Promisse}
+   * @returns {promisse}
    */
   callbackLoginLayout(payload = {
     endpoint: 'my-account/api/login',
