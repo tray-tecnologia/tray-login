@@ -5,18 +5,18 @@ import interceptors from './interceptors';
  * URL base das requisições
  */
 export const httpBasic = axios.create({
-  baseURL: '',
+  baseURL: 'https://easycentralqa.commercesuite.com.br/',
 });
 
 /**
  * URL base das requisições com "/checkout"
  */
 export const http = axios.create({
-  baseURL: '/checkout',
+  baseURL: 'https://easycentralqa.commercesuite.com.br/checkout',
 });
 
 export function setBaseUrl(baseUrl = 'checkout') {
-  http.defaults.baseURL = `/${baseUrl}`;
+  // http.defaults.baseURL = `/${baseUrl}`;
 }
 
 /**
