@@ -2,7 +2,7 @@
   <section class="tray-login__identify">
     <div>
       <strong class="tray-title tray-login__title">
-        {{ $lang['identify-title'] }}
+        {{ $lang['identify-title'] }} versão teste
       </strong>
       <slot name="custom-texts"></slot>
     </div>
