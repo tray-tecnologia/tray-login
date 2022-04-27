@@ -16,7 +16,7 @@ export const http = axios.create({
 });
 
 export function setBaseUrl(baseUrl = 'checkout') {
-  // http.defaults.baseURL = `/${baseUrl}`;
+  http.defaults.baseURL = `/${baseUrl}`;
 }
 
 /**
