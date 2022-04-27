@@ -188,6 +188,7 @@ export default {
 
     /**
      * Rota usada no payload post
+     * @return {string}
      */
     payloadPostEndpoint() {
       return 'my-account/api/login';
@@ -249,6 +250,8 @@ export default {
           const payloadPost = JSON.parse(this.callbackPost);
           payloadPost.token = response.data.data.token;
           payloadPost.endpoint = this.payloadPostEndpoint;
+
+          console.log(JSON.stringify(payloadPost));
 
           this.callbackLoginLayout(payloadPost).then((res) => {
             const { token = '', redirect = '' } = res.data.data;
