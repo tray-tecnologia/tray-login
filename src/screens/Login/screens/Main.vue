@@ -255,6 +255,8 @@ export default {
             this.redirect(redirect, token);
             return res;
           });
+
+          return response;
         }
 
         if (this.callback) {
