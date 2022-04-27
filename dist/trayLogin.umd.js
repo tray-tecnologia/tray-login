@@ -16713,14 +16713,14 @@ var es6_promise = __webpack_require__("551c");
  */
 
 var httpBasic = axios_default.a.create({
-  baseURL: 'https://minhaloja.commercesuite.com.br/'
+  baseURL: 'https://easycentralqa.commercesuite.com.br/'
 });
 /**
  * URL base das requisições com "/checkout"
  */
 
 var http = axios_default.a.create({
-  baseURL: 'https://minhaloja.commercesuite.com.br/checkout'
+  baseURL: 'https://easycentralqa.commercesuite.com.br/checkout'
 });
 function http_setBaseUrl() {// http.defaults.baseURL = `/${baseUrl}`;
 
