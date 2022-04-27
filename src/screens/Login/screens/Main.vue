@@ -250,7 +250,11 @@ export default {
           payloadPost.token = response.data.data.token;
           payloadPost.endpoint = this.payloadPostEndpoint;
 
+          console.log(this.callbackPost);
+          console.log(JSON.stringify(response.data));
+
           this.callbackLoginLayout(payloadPost).then((res) => {
+            console.log(JSON.stringify(res.data));
             const { token = '', redirect = '' } = res.data.data;
             this.redirect(redirect, token);
             return res;
