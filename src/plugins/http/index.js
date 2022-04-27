@@ -5,14 +5,14 @@ import interceptors from './interceptors';
  * URL base das requisições
  */
 export const httpBasic = axios.create({
-  baseURL: 'https://minhaloja.commercesuite.com.br/',
+  baseURL: '',
 });
 
 /**
  * URL base das requisições com "/checkout"
  */
 export const http = axios.create({
-  baseURL: 'https://minhaloja.commercesuite.com.br/checkout',
+  baseURL: '/checkout',
 });
 
 export function setBaseUrl(baseUrl = 'checkout') {
