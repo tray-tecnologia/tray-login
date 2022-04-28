@@ -16713,7 +16713,7 @@ var es6_promise = __webpack_require__("551c");
  */
 
 var httpBasic = axios_default.a.create({
-  baseURL: ''
+  baseURL: '/'
 });
 /**
  * URL base das requisições com "/checkout"

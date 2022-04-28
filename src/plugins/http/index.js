@@ -5,7 +5,7 @@ import interceptors from './interceptors';
  * URL base das requisições
  */
 export const httpBasic = axios.create({
-  baseURL: '',
+  baseURL: '/',
 });
 
 /**
