@@ -230,7 +230,7 @@ export default {
     }) {
       this.setLoading(true);
       this.passwordLogin(payload).then((response) => {
-        this.clearErrors();
+        const { token: tokenPassword, code } = response.data.data;
         this.$emitEvent.login({
           details: {
             response,
@@ -240,7 +240,7 @@ export default {
         });
 
         if (!this.isStrongPassword && !this.isTestIdentifier(this.identification)) {
-          this.setSecurityCode(response.data.data.code);
+          this.setSecurityCode(code);
           this.setScreen('CompulsoryPassword');
           this.setLoading(false);
           return response;
@@ -248,7 +248,7 @@ export default {
 
         if (this.hasCallbackPost) {
           const payloadPost = JSON.parse(this.callbackPost);
-          payloadPost.token = response.data.data.token;
+          payloadPost.token = tokenPassword;
           payloadPost.endpoint = this.payloadPostEndpoint;
 
           this.callbackLoginLayout(payloadPost).then((res) => {
@@ -261,7 +261,7 @@ export default {
         }
 
         if (this.callback) {
-          this.redirect(this.callback, response.data.data.token);
+          this.redirect(this.callback, tokenPassword);
           return response;
         }
 
