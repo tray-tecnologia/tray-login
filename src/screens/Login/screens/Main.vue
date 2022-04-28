@@ -179,7 +179,7 @@ export default {
     },
 
     /**
-     * Valida de callbackPost é diferente de "/"
+     * Valida se o callbackPost é diferente de "/"
      * @return {bool}
      */
     hasCallbackPost() {
