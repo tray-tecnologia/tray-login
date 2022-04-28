@@ -1,6 +1,9 @@
 const path = require('path');
 
 module.exports = {
+  devServer: {
+    proxy: 'https://easycentralqa.commercesuite.com.br/',
+  },
   css: {
     extract: false,
   },

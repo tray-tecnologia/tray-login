@@ -16699,6 +16699,17 @@ var es6_promise = __webpack_require__("551c");
 // CONCATENATED MODULE: ./src/plugins/http/index.js
 
 
+/**
+ * URL base das requisições
+ */
+
+var httpBasic = axios_default.a.create({
+  baseURL: '/'
+});
+/**
+ * URL base das requisições com "/checkout"
+ */
+
 var http = axios_default.a.create({
   baseURL: '/checkout'
 });
@@ -17274,14 +17285,14 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 /* harmony default export */ var vue_custom_element_esm = (vue_custom_element_esm_install);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=447c0386&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showComponent),expression:"showComponent"}],ref:"tray-login",staticClass:"tray-container"},[_c('button',{staticClass:"tray-close",on:{"click":_vm.close}},[_vm._v("\n    X\n  ")]),(_vm.screen === 'Identification')?_c('app-identification',{staticClass:"tray-login-screens",attrs:{"id":"identify","callback":this.dataCallback,"params":_vm.params}},[(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","action":this.customTexts['main-action']},slot:"custom-texts"}):_vm._e(),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"params":_vm.params},slot:"app-facebook-login"}):_vm._e()],1):_vm._e(),(_vm.screen === 'Main')?_c('app-login',{staticClass:"tray-login-screens",attrs:{"id":"main","callback":this.dataCallback,"params":_vm.params}},[(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","error":this.customTexts['general-error-alert'],"action":this.customTexts['main-action']},slot:"custom-texts"}):_vm._e(),(_vm.otpEnabled)?_c('app-otp-button',{attrs:{"slot":"app-otp-login","callback":this.dataCallback,"params":_vm.params},slot:"app-otp-login"}):_vm._e(),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"params":_vm.params},slot:"app-facebook-login"}):_vm._e(),(_vm.identificationEnabled)?_c('button',{staticClass:"tray-btn-default tray-btn-other-option",attrs:{"slot":"app-back-step","type":"button"},on:{"click":_vm.reset},slot:"app-back-step"},[_vm._v("\n      "+_vm._s(_vm.$lang['go-back'])+"\n    ")]):_vm._e()],1):_vm._e(),(_vm.screen === 'Blocked')?_c('section',{staticClass:"tray-login-screens",attrs:{"id":"blocked"}},[_c('div',[_c('strong',{staticClass:"tray-title tray-login__title"},[_vm._v("\n        "+_vm._s(_vm.$lang['main-title'])+"\n      ")]),_c('p',{staticClass:"tray-action tray-error-message"},[_vm._v("\n        "+_vm._s(_vm.$lang['blocked-user'])+"\n      ")])]),(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","error":this.customTexts['general-error-alert'],"action":this.customTexts['main-action']},slot:"custom-texts"}):_c('p',{staticClass:"tray-action",domProps:{"innerHTML":_vm._s(_vm.$lang['main-action'])}}),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":_vm.callback,"params":_vm.params},slot:"app-facebook-login"}):_vm._e(),(_vm.identificationEnabled)?_c('button',{staticClass:"tray-btn-default",attrs:{"slot":"app-back-step"},on:{"click":_vm.reset},slot:"app-back-step"},[_vm._v("\n      "+_vm._s(_vm.$lang['go-back'])+"\n    ")]):_vm._e()],1):_vm._e(),(_vm.hasTerm)?_c('section',{attrs:{"id":"tray-login-terms"}},[_c('app-terms',{attrs:{"termText":this.dataTerms}})],1):_vm._e(),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading",class:{
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=3a96f9ab&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showComponent),expression:"showComponent"}],ref:"tray-login",staticClass:"tray-container"},[_c('button',{staticClass:"tray-close",on:{"click":_vm.close}},[_vm._v("\n    X\n  ")]),(_vm.screen === 'Identification')?_c('app-identification',{staticClass:"tray-login-screens",attrs:{"id":"identify","callback":this.dataCallback,"params":_vm.params}},[(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","action":this.customTexts['main-action']},slot:"custom-texts"}):_vm._e(),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"params":_vm.params},slot:"app-facebook-login"}):_vm._e()],1):_vm._e(),(_vm.screen === 'Main')?_c('app-login',{staticClass:"tray-login-screens",attrs:{"id":"main","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params}},[(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","error":this.customTexts['general-error-alert'],"action":this.customTexts['main-action']},slot:"custom-texts"}):_vm._e(),(_vm.otpEnabled)?_c('app-otp-button',{attrs:{"slot":"app-otp-login","callback":this.dataCallback,"params":_vm.params},slot:"app-otp-login"}):_vm._e(),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"params":_vm.params},slot:"app-facebook-login"}):_vm._e(),(_vm.identificationEnabled)?_c('button',{staticClass:"tray-btn-default tray-btn-other-option",attrs:{"slot":"app-back-step","type":"button"},on:{"click":_vm.reset},slot:"app-back-step"},[_vm._v("\n      "+_vm._s(_vm.$lang['go-back'])+"\n    ")]):_vm._e()],1):_vm._e(),(_vm.screen === 'Blocked')?_c('section',{staticClass:"tray-login-screens",attrs:{"id":"blocked"}},[_c('div',[_c('strong',{staticClass:"tray-title tray-login__title"},[_vm._v("\n        "+_vm._s(_vm.$lang['main-title'])+"\n      ")]),_c('p',{staticClass:"tray-action tray-error-message"},[_vm._v("\n        "+_vm._s(_vm.$lang['blocked-user'])+"\n      ")])]),(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","error":this.customTexts['general-error-alert'],"action":this.customTexts['main-action']},slot:"custom-texts"}):_c('p',{staticClass:"tray-action",domProps:{"innerHTML":_vm._s(_vm.$lang['main-action'])}}),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":_vm.callback,"params":_vm.params},slot:"app-facebook-login"}):_vm._e(),(_vm.identificationEnabled)?_c('button',{staticClass:"tray-btn-default",attrs:{"slot":"app-back-step"},on:{"click":_vm.reset},slot:"app-back-step"},[_vm._v("\n      "+_vm._s(_vm.$lang['go-back'])+"\n    ")]):_vm._e()],1):_vm._e(),(_vm.hasTerm)?_c('section',{attrs:{"id":"tray-login-terms"}},[_c('app-terms',{attrs:{"termText":this.dataTerms}})],1):_vm._e(),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading",class:{
       'tray-loading-hidden': !_vm.loading
     },attrs:{"id":"tray-login-loading"}},[_vm._m(0),_c('svg',{staticClass:"tray-loading-icon tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])])],1)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tray-loading-mask"},[_c('div',{staticClass:"tray-loading-line"})])}]
 
 
-// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=447c0386&
+// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=3a96f9ab&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
 var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
@@ -17584,6 +17595,24 @@ function _objectWithoutProperties(source, excluded) {
     return http.get(endpoint, {
       params: params
     }).then(function (response) {
+      return response;
+    });
+  },
+
+  /**
+   * Recupera o token para o login
+   * @param {object} payload
+   * @returns {Promisse}
+   */
+  callbackLoginLayout: function callbackLoginLayout() {
+    var payload = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+      endpoint: 'my-account/api/login'
+    };
+
+    var endpoint = payload.endpoint,
+        params = _objectWithoutProperties(payload, ["endpoint"]);
+
+    return httpBasic.post(endpoint, params).then(function (response) {
       return response;
     });
   }
@@ -18625,12 +18654,12 @@ var Main_component = normalizeComponent(
 )
 
 /* harmony default export */ var Main = (Main_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/Main.vue?vue&type=template&id=7bc50b94&
-var Mainvue_type_template_id_7bc50b94_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"tray-login-screens"},[(_vm.screen === 'Main')?_c('section',[_c('div',[_c('strong',{staticClass:"tray-title"},[_vm._v("\n        "+_vm._s(_vm.$lang['main-title'])+"\n      ")]),(this.$slots['custom-texts'])?_vm._t("custom-texts"):_c('p',{staticClass:"tray-action",domProps:{"innerHTML":_vm._s(_vm.$lang['main-action'])}}),_c('label',{staticClass:"tray-well"},[_vm._v("\n        "+_vm._s(_vm.identification)+"\n      ")])],2),_c('form',{attrs:{"method":"POST"},on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_c('app-toggle-password',{attrs:{"id":"input-password","autoFocus":true,"state":this.errors.length >= 1 ? 'invalid' : 'initial'},nativeOn:{"keyup":function($event){$event.keyCode !== _vm.enterKeyCode ? _vm.clearErrors() : $event.preventDefault()}},model:{value:(_vm.password),callback:function ($$v) {_vm.password=$$v},expression:"password"}}),_c('small',{directives:[{name:"show",rawName:"v-show",value:(_vm.errors.length),expression:"errors.length"}],staticClass:"tray-feedbacks"},[_c('span',{staticClass:"tray-error-message",domProps:{"innerHTML":_vm._s(_vm.errors[_vm.errors.length - 1])}})]),_c('button',{staticClass:"tray-link tray-password-forget",attrs:{"type":"button"},on:{"click":_vm.sendCode}},[_vm._v("\n        "+_vm._s(_vm.$lang['password-forget'])+"\n      ")]),_c('button',{staticClass:"tray-btn-primary",attrs:{"id":"password-submit","type":"submit"},on:{"click":function($event){return _vm.$emitEvent.click('tray-password-submit')}}},[_vm._v("\n        "+_vm._s(_vm.$lang['proceed'])+"\n      ")])],1),_c('div',{staticClass:"tray-general-separator"},[_c('span',{staticClass:"tray-general-separator-line"},[_vm._v("\n        "+_vm._s(_vm.$lang['main-separator'])+"\n      ")])]),_vm._t("app-otp-login"),_vm._t("app-facebook-login"),_vm._t("app-back-step")],2):_vm._e(),(_vm.screen === 'RecoverPassword')?_c('app-recover-password',{attrs:{"params":_vm.params,"callback":_vm.callback}}):_vm._e(),(_vm.screen === 'Otp')?_c('app-otp-login',{attrs:{"callback":_vm.callback,"identification":_vm.identification,"identificationType":_vm.identificationType,"params":_vm.params}}):_vm._e(),(_vm.screen === 'CompulsoryPassword')?_c('app-compulsory-password',{attrs:{"callback":_vm.callback,"identification":_vm.identification,"identificationType":_vm.identificationType,"params":_vm.params}}):_vm._e(),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading"},[_vm._m(0),_c('svg',{staticClass:"tray-loading-icon tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])])],1)}
-var Mainvue_type_template_id_7bc50b94_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tray-loading-mask"},[_c('div',{staticClass:"tray-loading-line"})])}]
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/Main.vue?vue&type=template&id=40516943&
+var Mainvue_type_template_id_40516943_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"tray-login-screens"},[(_vm.screen === 'Main')?_c('section',[_c('div',[_c('strong',{staticClass:"tray-title"},[_vm._v("\n        "+_vm._s(_vm.$lang['main-title'])+"\n      ")]),(this.$slots['custom-texts'])?_vm._t("custom-texts"):_c('p',{staticClass:"tray-action",domProps:{"innerHTML":_vm._s(_vm.$lang['main-action'])}}),_c('label',{staticClass:"tray-well"},[_vm._v("\n        "+_vm._s(_vm.identification)+"\n      ")])],2),_c('form',{attrs:{"method":"POST"},on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_c('app-toggle-password',{attrs:{"id":"input-password","autoFocus":true,"state":this.errors.length >= 1 ? 'invalid' : 'initial'},nativeOn:{"keyup":function($event){$event.keyCode !== _vm.enterKeyCode ? _vm.clearErrors() : $event.preventDefault()}},model:{value:(_vm.password),callback:function ($$v) {_vm.password=$$v},expression:"password"}}),_c('small',{directives:[{name:"show",rawName:"v-show",value:(_vm.errors.length),expression:"errors.length"}],staticClass:"tray-feedbacks"},[_c('span',{staticClass:"tray-error-message",domProps:{"innerHTML":_vm._s(_vm.errors[_vm.errors.length - 1])}})]),_c('button',{staticClass:"tray-link tray-password-forget",attrs:{"type":"button"},on:{"click":_vm.sendCode}},[_vm._v("\n        "+_vm._s(_vm.$lang['password-forget'])+"\n      ")]),_c('button',{staticClass:"tray-btn-primary",attrs:{"id":"password-submit","type":"submit"},on:{"click":function($event){return _vm.$emitEvent.click('tray-password-submit')}}},[_vm._v("\n        "+_vm._s(_vm.$lang['proceed'])+"\n      ")])],1),_c('div',{staticClass:"tray-general-separator"},[_c('span',{staticClass:"tray-general-separator-line"},[_vm._v("\n        "+_vm._s(_vm.$lang['main-separator'])+"\n      ")])]),_vm._t("app-otp-login"),_vm._t("app-facebook-login"),_vm._t("app-back-step")],2):_vm._e(),(_vm.screen === 'RecoverPassword')?_c('app-recover-password',{attrs:{"params":_vm.params,"callback":_vm.callback}}):_vm._e(),(_vm.screen === 'Otp')?_c('app-otp-login',{attrs:{"callback":_vm.callback,"identification":_vm.identification,"identificationType":_vm.identificationType,"params":_vm.params}}):_vm._e(),(_vm.screen === 'CompulsoryPassword')?_c('app-compulsory-password',{attrs:{"callback":_vm.callback,"identification":_vm.identification,"identificationType":_vm.identificationType,"params":_vm.params}}):_vm._e(),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading"},[_vm._m(0),_c('svg',{staticClass:"tray-loading-icon tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])])],1)}
+var Mainvue_type_template_id_40516943_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tray-loading-mask"},[_c('div',{staticClass:"tray-loading-line"})])}]
 
 
-// CONCATENATED MODULE: ./src/screens/Login/screens/Main.vue?vue&type=template&id=7bc50b94&
+// CONCATENATED MODULE: ./src/screens/Login/screens/Main.vue?vue&type=template&id=40516943&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TogglePassword.vue?vue&type=template&id=2d379ec2&
 var TogglePasswordvue_type_template_id_2d379ec2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('fieldset',{staticClass:"tray-input-group"},[_c('label',{attrs:{"for":_vm.id}},[_c('figure',{staticClass:"tray-input-icon",class:_vm.inputClass},[_c('svg',{staticClass:"tray-icon-locked",attrs:{"viewBox":"0 0 512 512"}},[_c('path',{staticClass:"path1",attrs:{"d":"M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"}})])]),_c('button',{directives:[{name:"show",rawName:"v-show",value:(_vm.value),expression:"value"}],staticClass:"tray-login-hide-password",class:_vm.inputClass,attrs:{"type":"button"},on:{"click":_vm.toggleVisibility}},[_vm._v("\n      "+_vm._s(_vm.showPassword ? _vm.$lang['password-hide'] : _vm.$lang['password-show'])+"\n    ")])]),(_vm.autoFocus)?_c('input',{directives:[{name:"autofocus",rawName:"v-autofocus"}],staticClass:"tray-input",class:_vm.inputClass,attrs:{"autocomplete":_vm.autoComplete,"type":_vm.showPassword ? 'text' : 'password',"id":_vm.id,"placeholder":_vm.$lang[this.passwordLabel]},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.$emit('input', $event.target.value)}}}):_c('input',{staticClass:"tray-input",class:_vm.inputClass,attrs:{"autocomplete":_vm.autoComplete,"type":_vm.showPassword ? 'text' : 'password',"id":_vm.id,"placeholder":_vm.$lang[this.passwordLabel]},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.$emit('input', $event.target.value)}}})])}
@@ -20095,6 +20124,10 @@ function Login_screens_Mainvue_type_script_lang_js_objectSpread(target) { for (v
       type: String,
       default: '/'
     },
+    callbackPost: {
+      type: String,
+      default: '/'
+    },
     endpoint: {
       type: String,
       default: 'password'
@@ -20142,12 +20175,29 @@ function Login_screens_Mainvue_type_script_lang_js_objectSpread(target) { for (v
      */
     isStrongPassword: function isStrongPassword() {
       return isValidLength(this.password) && containsLetter(this.password) && containsNumber(this.password);
+    },
+
+    /**
+     * Valida se o callbackPost é diferente de "/"
+     * @return {bool}
+     */
+    hasCallbackPost: function hasCallbackPost() {
+      return this.callbackPost !== '/';
+    },
+
+    /**
+     * Rota usada no payload post
+     * @return {string}
+     */
+    payloadPostEndpoint: function payloadPostEndpoint() {
+      return 'my-account/api/login';
     }
   }),
   methods: Login_screens_Mainvue_type_script_lang_js_objectSpread(Login_screens_Mainvue_type_script_lang_js_objectSpread(Login_screens_Mainvue_type_script_lang_js_objectSpread({
     checkUserStatus: server.checkUserStatus,
     passwordLogin: server.passwordLogin,
-    generateSecurityCode: server.generateSecurityCode
+    generateSecurityCode: server.generateSecurityCode,
+    callbackLoginLayout: server.callbackLoginLayout
   }, Object(vuex_esm["b" /* mapActions */])(['setSecurityCode'])), Object(vuex_esm["b" /* mapActions */])('Login', ['setScreen'])), {}, {
     /**
      * Altera o atributo type do input password
@@ -20171,7 +20221,9 @@ function Login_screens_Mainvue_type_script_lang_js_objectSpread(target) { for (v
       }, this.identificationType, this.identification));
       this.setLoading(true);
       this.passwordLogin(payload).then(function (response) {
-        _this2.clearErrors();
+        var _response$data$data = response.data.data,
+            tokenPassword = _response$data$data.token,
+            code = _response$data$data.code;
 
         _this2.$emitEvent.login({
           details: {
@@ -20182,7 +20234,7 @@ function Login_screens_Mainvue_type_script_lang_js_objectSpread(target) { for (v
         });
 
         if (!_this2.isStrongPassword && !_this2.isTestIdentifier(_this2.identification)) {
-          _this2.setSecurityCode(response.data.data.code);
+          _this2.setSecurityCode(code);
 
           _this2.setScreen('CompulsoryPassword');
 
@@ -20191,8 +20243,28 @@ function Login_screens_Mainvue_type_script_lang_js_objectSpread(target) { for (v
           return response;
         }
 
+        if (_this2.hasCallbackPost) {
+          var payloadPost = JSON.parse(_this2.callbackPost);
+          payloadPost.token = tokenPassword;
+          payloadPost.endpoint = _this2.payloadPostEndpoint;
+
+          _this2.callbackLoginLayout(payloadPost).then(function (res) {
+            var _res$data$data = res.data.data,
+                _res$data$data$token = _res$data$data.token,
+                token = _res$data$data$token === void 0 ? '' : _res$data$data$token,
+                _res$data$data$redire = _res$data$data.redirect,
+                redirect = _res$data$data$redire === void 0 ? '' : _res$data$data$redire;
+
+            _this2.redirect(redirect, token);
+
+            return res;
+          });
+
+          return response;
+        }
+
         if (_this2.callback) {
-          _this2.redirect(_this2.callback, response.data.data.token);
+          _this2.redirect(_this2.callback, tokenPassword);
 
           return response;
         }
@@ -20255,8 +20327,8 @@ function Login_screens_Mainvue_type_script_lang_js_objectSpread(target) { for (v
 
 var Login_screens_Main_component = normalizeComponent(
   screens_Login_screens_Mainvue_type_script_lang_js_,
-  Mainvue_type_template_id_7bc50b94_render,
-  Mainvue_type_template_id_7bc50b94_staticRenderFns,
+  Mainvue_type_template_id_40516943_render,
+  Mainvue_type_template_id_40516943_staticRenderFns,
   false,
   null,
   null,
@@ -20588,6 +20660,7 @@ function Appvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < a
 //
 //
 //
+//
 
 
 
@@ -20623,6 +20696,10 @@ function Appvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < a
       default: 'checkout'
     },
     dataCallback: {
+      type: String,
+      default: '/'
+    },
+    dataCallbackPost: {
       type: String,
       default: '/'
     },

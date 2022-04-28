@@ -1,4 +1,4 @@
-import { http } from '@/plugins/http';
+import { http, httpBasic } from '@/plugins/http';
 
 export default {
   /**
@@ -146,5 +146,17 @@ export default {
   }) {
     const { endpoint, ...params } = payload;
     return http.get(endpoint, { params }).then(response => response);
+  },
+
+  /**
+   * Recupera o token para o login
+   * @param {object} payload
+   * @returns {Promisse}
+   */
+  callbackLoginLayout(payload = {
+    endpoint: 'my-account/api/login',
+  }) {
+    const { endpoint, ...params } = payload;
+    return httpBasic.post(endpoint, params).then(response => response);
   },
 };

@@ -110,6 +110,10 @@ export default {
       type: String,
       default: '/',
     },
+    callbackPost: {
+      type: String,
+      default: '/',
+    },
     endpoint: {
       type: String,
       default: 'password',
@@ -173,12 +177,29 @@ export default {
         && containsNumber(this.password)
       );
     },
+
+    /**
+     * Valida se o callbackPost é diferente de "/"
+     * @return {bool}
+     */
+    hasCallbackPost() {
+      return this.callbackPost !== '/';
+    },
+
+    /**
+     * Rota usada no payload post
+     * @return {string}
+     */
+    payloadPostEndpoint() {
+      return 'my-account/api/login';
+    },
   },
 
   methods: {
     checkUserStatus: http.checkUserStatus,
     passwordLogin: http.passwordLogin,
     generateSecurityCode: http.generateSecurityCode,
+    callbackLoginLayout: http.callbackLoginLayout,
 
     ...mapActions([
       'setSecurityCode',
@@ -209,7 +230,7 @@ export default {
     }) {
       this.setLoading(true);
       this.passwordLogin(payload).then((response) => {
-        this.clearErrors();
+        const { token: tokenPassword, code } = response.data.data;
         this.$emitEvent.login({
           details: {
             response,
@@ -219,14 +240,28 @@ export default {
         });
 
         if (!this.isStrongPassword && !this.isTestIdentifier(this.identification)) {
-          this.setSecurityCode(response.data.data.code);
+          this.setSecurityCode(code);
           this.setScreen('CompulsoryPassword');
           this.setLoading(false);
           return response;
         }
 
+        if (this.hasCallbackPost) {
+          const payloadPost = JSON.parse(this.callbackPost);
+          payloadPost.token = tokenPassword;
+          payloadPost.endpoint = this.payloadPostEndpoint;
+
+          this.callbackLoginLayout(payloadPost).then((res) => {
+            const { token = '', redirect = '' } = res.data.data;
+            this.redirect(redirect, token);
+            return res;
+          });
+
+          return response;
+        }
+
         if (this.callback) {
-          this.redirect(this.callback, response.data.data.token);
+          this.redirect(this.callback, tokenPassword);
           return response;
         }
 

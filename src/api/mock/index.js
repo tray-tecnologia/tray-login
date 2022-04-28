@@ -21,6 +21,9 @@ import otpLoginError from './data/error/otp.json';
 import emailMaskedSuccess from './data/email-masked.json';
 import emailMaskedError from './data/error/email-masked.json';
 
+import callbackPostSuccess from './data/callback-post.json';
+import callbackPostError from './data/error/callback-post.json';
+
 const users = [
   'teste@tray.com.br',
   'usuariobloqueado@tray.com.br',
@@ -185,6 +188,26 @@ export default {
       mockData = emailMaskedError;
     }
 
+    return fetch(mockData, delay, isValid);
+  },
+
+  /**
+   * Recupera o token para o login
+   * @param {object} payload
+   * @returns {promisse}
+   */
+  callbackLoginLayout(payload = {
+    endpoint: 'my-account/api/login',
+  }) {
+    let mockData = callbackPostSuccess;
+    const isValid = true;
+    const { endpoint } = payload;
+
+    if (endpoint !== '/') {
+      return fetch(mockData, delay, isValid);
+    }
+
+    mockData = callbackPostError;
     return fetch(mockData, delay, isValid);
   },
 };
