@@ -78,6 +78,10 @@ export default {
       type: String,
       default: '',
     },
+    callbackPost: {
+      type: String,
+      default: '/',
+    },
     endpoint: {
       type: String,
       default: 'otp',
@@ -117,6 +121,13 @@ export default {
         'tray-input-initial': !this.securityCode,
       };
     },
+    /**
+     * Valida se o callbackPost é diferente de "/"
+     * @return {bool}
+     */
+    hasCallbackPost() {
+      return this.callbackPost !== '/';
+    },
   },
   mounted() {
     const isValidDocument = this.identificationType !== 'email';
@@ -146,19 +157,25 @@ export default {
     }) {
       this.setLoading(true);
       this.otpLogin(payload).then((response) => {
+        const { token = '' } = response.data.data;
         this.$emitEvent.login({
           response,
           method: 'otp',
           type: 'success',
         });
 
+        if (this.hasCallbackPost) {
+          this.mixinCallbackLogin(this.callbackPost, token);
+          return response;
+        }
+
         if (this.callback) {
-          const { token = '' } = response.data.data;
           this.redirect(this.callback, token);
-          return;
+          return response;
         }
 
         this.setLoading(false);
+        return response;
       }).catch((error) => {
         this.$emitEvent.login({
           response: error,
