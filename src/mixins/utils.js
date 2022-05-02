@@ -1,3 +1,4 @@
+import http from 'api-client';
 import {
   checkIcon,
   timesIcon,
@@ -10,7 +11,18 @@ export default {
     };
   },
 
+  computed: {
+    /**
+     * Rota usada no payload post
+     * @return {string}
+     */
+    payloadPostEndpoint() {
+      return 'my-account/api/login';
+    },
+  },
+
   methods: {
+    callbackLoginLayout: http.callbackLoginLayout,
     /**
      * Redirecionar o usuario para a url definida no callback
      *
@@ -31,6 +43,23 @@ export default {
       }
 
       window.location = callback + redirectParam;
+    },
+
+    /**
+     * Faz o login com o post (como descrever melhor?)
+     * @param {string} callbackPost string com os parametros do callback post
+     * @param {string} token
+     */
+    mixinCallbackLogin(callbackPost = '', tokenPassword = '') {
+      const payloadPost = JSON.parse(callbackPost);
+      payloadPost.token = tokenPassword;
+      payloadPost.endpoint = this.payloadPostEndpoint;
+
+      this.callbackLoginLayout(payloadPost).then((res) => {
+        const { token = '', redirect = '' } = res.data.data;
+        this.redirect(redirect, token);
+        return res;
+      });
     },
 
     /**
