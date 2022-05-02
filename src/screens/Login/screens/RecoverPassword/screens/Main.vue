@@ -10,7 +10,9 @@
       :identification="identification"
       :identificationType="identificationType"
       :params="this.params"
-      :password="this.password">
+      :password="this.password"
+      :callbackPost="this.callbackPost"
+      >
     </app-recover-password-login>
   </section>
 </template>
@@ -37,6 +39,10 @@ export default {
       },
     },
     callback: {
+      type: String,
+      default: '/',
+    },
+    callbackPost: {
       type: String,
       default: '/',
     },
