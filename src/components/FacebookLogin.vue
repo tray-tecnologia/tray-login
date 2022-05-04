@@ -41,7 +41,7 @@ export default {
      */
     doFacebookLogin(event, payload = {
       ...this.params,
-      callback: this.callback,
+      callback: `${document.location.origin}/my-account`,
       endpoint: 'facebook/url',
       crossdm: encodeURIComponent(document.location.origin),
     }) {
@@ -53,9 +53,7 @@ export default {
           method: 'facebook',
         });
 
-        if (this.callback) {
-          window.location = response.data.data.url;
-        }
+        window.location = response.data.data.url;
 
         this.$parent.setLoading(false);
 
