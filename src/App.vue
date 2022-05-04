@@ -13,11 +13,13 @@
         :action="this.customTexts['main-action']"
         slot="custom-texts">
       </app-custom-texts>
-      <app-facebook-login v-if="facebookEnabled"
+      <app-facebook-login
+        v-if="facebookEnabled"
         :callback="this.dataCallback"
+        :callbackPost="this.dataCallbackPost"
         :params="params"
-        slot="app-facebook-login">
-      </app-facebook-login>
+        slot="app-facebook-login"
+      />
     </app-identification>
 
     <app-login id="main" v-if="screen === 'Main'"
@@ -36,11 +38,13 @@
         slot="app-otp-login"
       >
       </app-otp-button>
-      <app-facebook-login v-if="facebookEnabled"
+      <app-facebook-login
+        v-if="facebookEnabled"
         :callback="this.dataCallback"
+        :callbackPost="this.dataCallbackPost"
         :params="params"
-        slot="app-facebook-login">
-      </app-facebook-login>
+        slot="app-facebook-login"
+      />
       <button type="button"
         v-if="identificationEnabled"
         class="tray-btn-default tray-btn-other-option"
@@ -66,11 +70,13 @@
         slot="custom-texts">
       </app-custom-texts>
       <p class="tray-action" v-else v-html="$lang['main-action']"></p>
-      <app-facebook-login v-if="facebookEnabled"
+      <app-facebook-login
+        v-if="facebookEnabled"
         :callback="callback"
+        :callbackPost="this.dataCallbackPost"
         :params="params"
-        slot="app-facebook-login">
-      </app-facebook-login>
+        slot="app-facebook-login"
+      />
       <button v-if="identificationEnabled"
         class="tray-btn-default"
         @click="reset"

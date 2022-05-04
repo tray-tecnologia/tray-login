@@ -17,6 +17,10 @@ export default {
       type: String,
       default: '',
     },
+    callbackPost: {
+      type: String,
+      default: '/',
+    },
     endpoint: {
       type: String,
       default: 'facebook/url',
@@ -41,7 +45,7 @@ export default {
      */
     doFacebookLogin(event, payload = {
       ...this.params,
-      callback: `${document.location.origin}/my-account`,
+      callback: this.urlCallbackPost(),
       endpoint: 'facebook/url',
       crossdm: encodeURIComponent(document.location.origin),
     }) {
@@ -69,6 +73,17 @@ export default {
 
         return error;
       });
+    },
+
+    /**
+     * Retorna a URL de callback com os
+     * parametros do callbackPost
+     * @return {string}
+     */
+    urlCallbackPost() {
+      const objectParams = JSON.parse(this.callbackPost);
+      const urlParams = Object.entries(objectParams).map(([key, val]) => `${key}=${val}`).join('&');
+      return `${document.location.origin}/loja/login_layout.php?${urlParams}`;
     },
   },
 };
