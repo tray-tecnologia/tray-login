@@ -172,8 +172,8 @@ export default {
   },
   beforeMount() {
     this.setBaseUrl(this.dataBaseUrl);
-    this.setResolution(window.innerWidth);
 
+    this.setResolution(window.innerWidth);
     window.addEventListener('resize', () => {
       this.setResolution(window.innerWidth);
     });
