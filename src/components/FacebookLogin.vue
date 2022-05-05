@@ -57,7 +57,8 @@ export default {
           method: 'facebook',
         });
 
-        window.location = response.data.data.url;
+        const url = response.data.data.url.replace('\/', '/');
+        window.location = url;
 
         this.$parent.setLoading(false);
 
