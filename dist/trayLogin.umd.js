@@ -18710,12 +18710,12 @@ vue_runtime_esm["a" /* default */].use(vuex_esm["a" /* default */]);
   getters: getters_namespaceObject,
   strict: "production" !== 'production'
 }));
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"50292187-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FacebookLogin.vue?vue&type=template&id=fc2f603a&
-var FacebookLoginvue_type_template_id_fc2f603a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"facebook-button",staticClass:"tray-btn-facebook",on:{"click":function($event){_vm.$emitEvent.click('tray-login-facebook'), _vm.doFacebookLogin($event)}}},[_vm._v("\n    Facebook\n")])}
-var FacebookLoginvue_type_template_id_fc2f603a_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"50292187-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FacebookLogin.vue?vue&type=template&id=7de97b27&
+var FacebookLoginvue_type_template_id_7de97b27_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"facebook-button",staticClass:"tray-btn-facebook",on:{"click":function($event){_vm.$emitEvent.click('tray-login-facebook'), _vm.doFacebookLogin($event)}}},[_vm._v("\n    Facebook\n")])}
+var FacebookLoginvue_type_template_id_7de97b27_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/FacebookLogin.vue?vue&type=template&id=fc2f603a&
+// CONCATENATED MODULE: ./src/components/FacebookLogin.vue?vue&type=template&id=7de97b27&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
 var is_array = __webpack_require__("a745");
@@ -18806,7 +18806,11 @@ function _slicedToArray(arr, i) {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.entries.js
 var es7_object_entries = __webpack_require__("ffc1");
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
+var es6_regexp_replace = __webpack_require__("a481");
+
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FacebookLogin.vue?vue&type=script&lang=js&
+
 
 
 
@@ -18877,7 +18881,8 @@ function FacebookLoginvue_type_script_lang_js_objectSpread(target) { for (var i 
           method: 'facebook'
         });
 
-        window.location = response.data.data.url;
+        var url = response.data.data.url.replace('\/', '/');
+        window.location = url;
 
         _this.$parent.setLoading(false);
 
@@ -19025,8 +19030,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_FacebookLoginvue_type_script_lang_js_,
-  FacebookLoginvue_type_template_id_fc2f603a_render,
-  FacebookLoginvue_type_template_id_fc2f603a_staticRenderFns,
+  FacebookLoginvue_type_template_id_7de97b27_render,
+  FacebookLoginvue_type_template_id_7de97b27_staticRenderFns,
   false,
   null,
   null,
@@ -19535,9 +19540,6 @@ var Newvue_type_template_id_a9c50210_staticRenderFns = [function () {var _vm=thi
 
 
 // CONCATENATED MODULE: ./src/screens/Login/screens/RecoverPassword/screens/New.vue?vue&type=template&id=a9c50210&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
-var es6_regexp_replace = __webpack_require__("a481");
 
 // EXTERNAL MODULE: ./node_modules/vuelidate/lib/index.js
 var lib = __webpack_require__("1dce");
