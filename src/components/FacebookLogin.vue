@@ -85,7 +85,7 @@ export default {
       const objectParams = JSON.parse(this.callbackPost);
       objectParams.facebook = true;
       const urlParams = Object.entries(objectParams).map(([key, val]) => `${key}=${val}`).join('&');
-      return `${document.location.origin}/loja/login_layout.php?${urlParams}`;
+      return `${document.location.origin}/my-account/login?${urlParams}`;
     },
   },
 };
