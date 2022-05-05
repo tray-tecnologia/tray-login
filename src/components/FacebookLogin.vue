@@ -31,8 +31,10 @@ export default {
       },
     },
   },
+
   methods: {
     facebookLogin: client.facebookLogin,
+
     /**
      * Realiza o login com o facebook
      * @param {event} event
@@ -50,10 +52,13 @@ export default {
           type: 'success',
           method: 'facebook',
         });
+
         if (this.callback) {
           window.location = response.data.data.url;
         }
+
         this.$parent.setLoading(false);
+
         return response;
       }).catch((error) => {
         this.$emitEvent.login({
@@ -61,7 +66,9 @@ export default {
           type: 'error',
           method: 'facebook',
         });
+
         this.$parent.setLoading(false);
+
         return error;
       });
     },

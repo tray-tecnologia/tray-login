@@ -46,7 +46,7 @@ export default {
     },
 
     /**
-     * Faz o login com o post (como descrever melhor?)
+     * Faz o login com o post passando por parametros os dados de callpackPost
      * @param {string} callbackPost string com os parametros do callback post
      * @param {string} token
      */

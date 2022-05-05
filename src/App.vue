@@ -173,6 +173,7 @@ export default {
   beforeMount() {
     this.setBaseUrl(this.dataBaseUrl);
     this.setResolution(window.innerWidth);
+
     window.addEventListener('resize', () => {
       this.setResolution(window.innerWidth);
     });
@@ -186,6 +187,7 @@ export default {
       this.setLang(response.data);
     });
   },
+
   watch: {
     dataIdentification(identification) {
       this.initialize(identification);
@@ -199,10 +201,12 @@ export default {
       this.setBaseUrl(baseUrl);
     },
   },
+
   computed: {
     ...mapState([
       'blockedUser',
     ]),
+
     /**
      * Verifica se o login com o otp será utilizado
      * @return {boolean}
@@ -210,6 +214,7 @@ export default {
     otpEnabled() {
       return this.dataMethods.indexOf('otp') !== -1;
     },
+
     /**
      * Verifica se o login com o facebook será utilizado
      * @return {boolean}
@@ -217,6 +222,7 @@ export default {
     facebookEnabled() {
       return this.dataMethods.indexOf('facebook') !== -1;
     },
+
     /**
      * Verifica se o modulo de identificação será utilizado
      * @return {boolean}
@@ -224,6 +230,7 @@ export default {
     identificationEnabled() {
       return this.dataMethods.indexOf('identify') !== -1;
     },
+
     /**
      * Verifica se existe algum texto personalizado definido
      * pelo usuário
@@ -232,6 +239,7 @@ export default {
     hasCustomTexts() {
       return Object.values(this.customTexts).some(value => value);
     },
+
     /**
      * Verifica se tem textos de termos
      * @return {boolean}
@@ -239,6 +247,7 @@ export default {
     hasTerm() {
       return this.dataTerms.trim().length > 0;
     },
+
     /**
      * Realiza o tratamento dos textos personalizados
      * definidos pelo usuário
@@ -250,6 +259,7 @@ export default {
         return this.dataTexts;
       }
     },
+
     /**
      * Parametros que são utilizados em praticamente todas as requests
      * para uma api da plataforma
@@ -262,6 +272,7 @@ export default {
       };
     },
   },
+
   methods: {
     getLangs: http.getLangs,
     ...mapActions([
@@ -270,6 +281,7 @@ export default {
       'setLang',
       'setResolution',
     ]),
+
     /**
      * Define a tela a ser exibida de acordo com a identificação
      * definidas
@@ -277,12 +289,15 @@ export default {
      */
     initialize(identification) {
       this.setIdentification(identification);
+
       if (identification) {
         this.setScreen('Main');
         return;
       }
+
       this.setScreen('Identification');
     },
+
     /**
      * Fecha o componente
      * @param {event}
@@ -292,11 +307,13 @@ export default {
         element: event.target,
         type: event.type,
       });
+
       const trayLogin = document.querySelector('tray-login');
       if (trayLogin) {
         trayLogin.style.display = 'none';
       }
     },
+
     /**
      * Reseta o componente para que um novo login
      * seja realizado
@@ -307,6 +324,7 @@ export default {
         element: event.target,
         type: event.type,
       });
+
       this.setScreen('Identification');
       this.setIdentification('');
       this.clearErrors();
