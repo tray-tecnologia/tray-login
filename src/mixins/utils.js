@@ -55,6 +55,11 @@ export default {
       payloadPost.token = tokenPassword;
       payloadPost.endpoint = this.payloadPostEndpoint;
 
+      try {
+        delete payloadPost.facebook;
+        // eslint-disable-next-line no-empty
+      } catch {}
+
       this.callbackLoginLayout(payloadPost).then((res) => {
         const { token = '', redirect = '' } = res.data.data;
         this.redirect(redirect, token);

@@ -18305,6 +18305,11 @@ var checkIcon = "<svg width=\"10\" height=\"8\" viewBox=\"0 0 10 8\" fill=\"none
       var payloadPost = JSON.parse(callbackPost);
       payloadPost.token = tokenPassword;
       payloadPost.endpoint = this.payloadPostEndpoint;
+
+      try {
+        delete payloadPost.facebook; // eslint-disable-next-line no-empty
+      } catch (_unused) {}
+
       this.callbackLoginLayout(payloadPost).then(function (res) {
         var _res$data$data = res.data.data,
             _res$data$data$token = _res$data$data.token,
