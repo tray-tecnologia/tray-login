@@ -107,6 +107,7 @@
 import { mapActions, mapState } from 'vuex';
 import http from 'api-client';
 import screenHandler from '@/mixins/screenHandler';
+import utils from '@/mixins/utils';
 import store from './store';
 import AppFacebookLogin from './components/FacebookLogin.vue';
 import AppIdentification from './screens/Identification/Main.vue';
@@ -126,7 +127,7 @@ export default {
     AppLogin,
     AppTerms,
   },
-  mixins: [screenHandler],
+  mixins: [screenHandler, utils],
   data() {
     return {
       loading: false,
@@ -192,6 +193,7 @@ export default {
     }).then((response) => {
       this.setLang(response.data);
     });
+    this.verifyFacebookLogin();
   },
 
   watch: {
@@ -334,6 +336,35 @@ export default {
       this.setScreen('Identification');
       this.setIdentification('');
       this.clearErrors();
+    },
+
+    /**
+     * Executa o mixinCallbackLogin caso tenha token de login com o facebook
+     * @return {undefined}
+     */
+    verifyFacebookLogin() {
+      console.log('função do login com facebook');
+      if (this.hasFacebookToken()) {
+        this.mixinCallbackLogin(document.location.origin, localStorage.getItem('jwtToken'));
+      }
+    },
+
+    /**
+     * Verifica se o login o login foi feito pelo facebook e se há token
+     * @return {bool}
+     */
+    hasFacebookToken() {
+      const params = JSON.parse(this.dataCallbackPost);
+      const ifFacebookLogin = String(params.facebook) === 'true';
+
+      const token = localStorage.getItem('jwtToken');
+      const hasToken = token && String(token) !== 'false';
+
+      if (ifFacebookLogin && hasToken) {
+        return true;
+      }
+
+      return false;
     },
   },
 };
