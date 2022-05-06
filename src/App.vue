@@ -343,9 +343,9 @@ export default {
      * @return {undefined}
      */
     verifyFacebookLogin() {
-      console.log('função do login com facebook');
       if (this.hasFacebookToken()) {
-        this.mixinCallbackLogin(document.location.origin, localStorage.getItem('jwtToken'));
+        const localToken = localStorage.getItem('jwtToken');
+        this.mixinCallbackLogin(this.dataCallbackPost, localToken);
       }
     },
 
@@ -355,7 +355,7 @@ export default {
      */
     hasFacebookToken() {
       const params = JSON.parse(this.dataCallbackPost);
-      const ifFacebookLogin = String(params.facebook) === 'true';
+      const ifFacebookLogin = params.facebook === '1';
 
       const token = localStorage.getItem('jwtToken');
       const hasToken = token && String(token) !== 'false';

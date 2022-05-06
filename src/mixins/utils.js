@@ -50,7 +50,7 @@ export default {
      * @param {string} callbackPost string com os parametros do callback post
      * @param {string} token
      */
-    mixinCallbackLogin(callbackPost = '', tokenPassword = '') {
+    mixinCallbackLogin(callbackPost, tokenPassword) {
       const payloadPost = JSON.parse(callbackPost);
       payloadPost.token = tokenPassword;
       payloadPost.endpoint = this.payloadPostEndpoint;

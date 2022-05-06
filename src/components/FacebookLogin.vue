@@ -83,7 +83,7 @@ export default {
      */
     urlCallbackPost() {
       const objectParams = JSON.parse(this.callbackPost);
-      objectParams.facebook = true;
+      objectParams.facebook = '1';
       const urlParams = Object.entries(objectParams).map(([key, val]) => `${key}=${val}`).join('&');
       return `${document.location.origin}/my-account/login?${urlParams}`;
     },
