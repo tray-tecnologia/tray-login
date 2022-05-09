@@ -18815,12 +18815,12 @@ vue_runtime_esm["a" /* default */].use(vuex_esm["a" /* default */]);
   getters: getters_namespaceObject,
   strict: "production" !== 'production'
 }));
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"50292187-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FacebookLogin.vue?vue&type=template&id=09135c6c&
-var FacebookLoginvue_type_template_id_09135c6c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"facebook-button",staticClass:"tray-btn-facebook",on:{"click":function($event){_vm.$emitEvent.click('tray-login-facebook'), _vm.doFacebookLogin($event)}}},[_vm._v("\n    Facebook\n")])}
-var FacebookLoginvue_type_template_id_09135c6c_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"50292187-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FacebookLogin.vue?vue&type=template&id=1d9db856&
+var FacebookLoginvue_type_template_id_1d9db856_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"facebook-button",staticClass:"tray-btn-facebook",on:{"click":function($event){_vm.$emitEvent.click('tray-login-facebook'), _vm.doFacebookLogin($event)}}},[_vm._v("\n    Facebook\n")])}
+var FacebookLoginvue_type_template_id_1d9db856_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/FacebookLogin.vue?vue&type=template&id=09135c6c&
+// CONCATENATED MODULE: ./src/components/FacebookLogin.vue?vue&type=template&id=1d9db856&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
 var is_array = __webpack_require__("a745");
@@ -19011,6 +19011,7 @@ function FacebookLoginvue_type_script_lang_js_objectSpread(target) { for (var i 
      * @return {string}
      */
     urlCallbackPost: function urlCallbackPost() {
+      localStorage.setItem('jwtToken', false);
       var objectParams = JSON.parse(this.callbackPost);
       objectParams.facebook = '1';
 
@@ -19141,8 +19142,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_FacebookLoginvue_type_script_lang_js_,
-  FacebookLoginvue_type_template_id_09135c6c_render,
-  FacebookLoginvue_type_template_id_09135c6c_staticRenderFns,
+  FacebookLoginvue_type_template_id_1d9db856_render,
+  FacebookLoginvue_type_template_id_1d9db856_staticRenderFns,
   false,
   null,
   null,

@@ -82,6 +82,7 @@ export default {
      * @return {string}
      */
     urlCallbackPost() {
+      localStorage.setItem('jwtToken', false);
       const objectParams = JSON.parse(this.callbackPost);
       objectParams.facebook = '1';
 
