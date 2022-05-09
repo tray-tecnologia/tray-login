@@ -279,6 +279,31 @@ export default {
         store_id: this.dataStore,
       };
     },
+
+    /**
+     * Retorna o token salvo no localStorage
+     * @return {string}
+     */
+    localToken() {
+      return localStorage.getItem('jwtToken');
+    },
+
+    /**
+     * Verifica se há token no localStorage
+     * @return {bool}
+     */
+    hasToken() {
+      return this.localToken && this.localToken !== 'false';
+    },
+
+    /**
+     * Valida se foi feito o login do facebook
+     * @return {bool}
+     */
+    ifFacebookLogin() {
+      const params = JSON.parse(this.dataCallbackPost);
+      return params.facebook === '1';
+    },
   },
 
   methods: {
@@ -344,8 +369,7 @@ export default {
      */
     verifyFacebookLogin() {
       if (this.hasFacebookToken()) {
-        const localToken = localStorage.getItem('jwtToken');
-        this.mixinCallbackLogin(this.dataCallbackPost, localToken);
+        this.mixinCallbackLogin(this.dataCallbackPost, this.localToken);
       }
     },
 
@@ -354,13 +378,7 @@ export default {
      * @return {bool}
      */
     hasFacebookToken() {
-      const params = JSON.parse(this.dataCallbackPost);
-      const ifFacebookLogin = params.facebook === '1';
-
-      const token = localStorage.getItem('jwtToken');
-      const hasToken = token && String(token) !== 'false';
-
-      if (ifFacebookLogin && hasToken) {
+      if (this.ifFacebookLogin && this.hasToken) {
         return true;
       }
 

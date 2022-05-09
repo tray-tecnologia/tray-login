@@ -36,6 +36,27 @@ export default {
     },
   },
 
+  computed: {
+    /**
+     * Verifica se há tem callback tem tamanho
+     * @return {bool}
+     */
+    hasCallback() {
+      return this.callback.length > 0;
+    },
+
+    /**
+     * Formata os parametros recebidos pelo callbackPost
+     */
+    urlParams() {
+      let objectParams = JSON.parse(this.callbackPost);
+      objectParams.facebook = '1';
+      objectParams = Object.keys(objectParams).filter(item => item !== 'token');
+
+      return Object.entries(objectParams).map(([key, val]) => `${key}=${val}`).join('&');
+    },
+  },
+
   methods: {
     facebookLogin: client.facebookLogin,
 
@@ -45,7 +66,7 @@ export default {
      */
     doFacebookLogin(event, payload = {
       ...this.params,
-      callback: this.urlCallbackPost(),
+      callback: this.urlCallback(),
       endpoint: 'facebook/url',
       crossdm: encodeURIComponent(document.location.origin),
     }) {
@@ -77,22 +98,20 @@ export default {
     },
 
     /**
-     * Retorna a URL de callback com os
-     * parametros do callbackPost
+     * Retorna a URL de callback
+     * @return {string}
+     */
+    urlCallback() {
+      return this.hasCallback ? this.callback : this.urlCallbackPost();
+    },
+
+    /**
+     * Retorna a URL de callback com os parametros do callbackPost
      * @return {string}
      */
     urlCallbackPost() {
-      localStorage.setItem('jwtToken', false);
-      const objectParams = JSON.parse(this.callbackPost);
-      objectParams.facebook = '1';
-
-      try {
-        delete objectParams.token;
-        // eslint-disable-next-line no-empty
-      } catch {}
-
-      const urlParams = Object.entries(objectParams).map(([key, val]) => `${key}=${val}`).join('&');
-      return `${document.location.origin}/stg1-my-account/login?${urlParams}`;
+      localStorage.setItem('jwtToken', 'false');
+      return `${document.location.origin}/stg1-my-account/login?${this.urlParams}`;
     },
   },
 };

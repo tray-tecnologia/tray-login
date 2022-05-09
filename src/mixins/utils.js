@@ -48,23 +48,29 @@ export default {
     /**
      * Faz o login com o post passando por parametros os dados de callpackPost
      * @param {string} callbackPost string com os parametros do callback post
-     * @param {string} token
+     * @param {string} tokenPassword
      */
     mixinCallbackLogin(callbackPost, tokenPassword) {
-      const payloadPost = JSON.parse(callbackPost);
-      payloadPost.token = tokenPassword;
-      payloadPost.endpoint = this.payloadPostEndpoint;
-
-      try {
-        delete payloadPost.facebook;
-        // eslint-disable-next-line no-empty
-      } catch {}
+      const payloadPost = this.paramCallbackPost(callbackPost, tokenPassword);
 
       this.callbackLoginLayout(payloadPost).then((res) => {
-        const { token = '', redirect = '' } = res.data.data;
+        const { token, redirect } = res.data.data;
         this.redirect(redirect, token);
         return res;
       });
+    },
+
+    /**
+     * Objeto usado no callbackPost
+     * @return {object}
+     */
+    paramCallbackPost(callbackPost, tokenPassword) {
+      let payloadPost = JSON.parse(callbackPost);
+      payloadPost.token = tokenPassword;
+      payloadPost.endpoint = this.payloadPostEndpoint;
+      payloadPost = Object.keys(payloadPost).filter(item => item !== 'facebook');
+
+      return payloadPost;
     },
 
     /**
