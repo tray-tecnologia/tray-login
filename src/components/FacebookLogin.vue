@@ -84,6 +84,12 @@ export default {
     urlCallbackPost() {
       const objectParams = JSON.parse(this.callbackPost);
       objectParams.facebook = '1';
+
+      try {
+        delete objectParams.token;
+        // eslint-disable-next-line no-empty
+      } catch {}
+
       const urlParams = Object.entries(objectParams).map(([key, val]) => `${key}=${val}`).join('&');
       return `${document.location.origin}/stg1-my-account/login?${urlParams}`;
     },
