@@ -65,10 +65,13 @@ export default {
      * @return {object}
      */
     paramCallbackPost(callbackPost, tokenPassword) {
-      let payloadPost = JSON.parse(callbackPost);
+      const payloadPost = JSON.parse(callbackPost);
       payloadPost.token = tokenPassword;
       payloadPost.endpoint = this.payloadPostEndpoint;
-      payloadPost = Object.keys(payloadPost).filter(item => item !== 'facebook');
+
+      if (this.hasFacebookInParams(payloadPost)) {
+        delete payloadPost.facebook;
+      }
 
       return payloadPost;
     },
@@ -90,6 +93,14 @@ export default {
     isTestIdentifier(identification) {
       const testIdentifiers = ['teste@tray.com.br', 'testepagamento@tray.net.br'];
       return testIdentifiers.includes(identification);
+    },
+
+    /**
+     * Valida se há facebook no objeto payloadPost
+     * @return {bool}
+     */
+    hasFacebookInParams(payloadPost) {
+      return Object.prototype.hasOwnProperty.call(payloadPost, 'facebook');
     },
   },
 };

@@ -49,9 +49,12 @@ export default {
      * Formata os parametros recebidos pelo callbackPost
      */
     urlParams() {
-      let objectParams = JSON.parse(this.callbackPost);
+      const objectParams = JSON.parse(this.callbackPost);
       objectParams.facebook = '1';
-      objectParams = Object.keys(objectParams).filter(item => item !== 'token');
+
+      if (this.hasTokenInParams(objectParams)) {
+        delete objectParams.token;
+      }
 
       return Object.entries(objectParams).map(([key, val]) => `${key}=${val}`).join('&');
     },
@@ -59,6 +62,14 @@ export default {
 
   methods: {
     facebookLogin: client.facebookLogin,
+
+    /**
+     * Valida se há token no objeto de parametros
+     * @return {bool}
+     */
+    hasTokenInParams(objectParams) {
+      return Object.prototype.hasOwnProperty.call(objectParams, 'token');
+    },
 
     /**
      * Realiza o login com o facebook

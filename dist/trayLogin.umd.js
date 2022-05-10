@@ -18258,9 +18258,6 @@ var checkIcon = "<svg width=\"10\" height=\"8\" viewBox=\"0 0 10 8\" fill=\"none
 
 
 
-
-
-
 /* harmony default export */ var utils = ({
   data: function data() {
     return {
@@ -18334,9 +18331,11 @@ var checkIcon = "<svg width=\"10\" height=\"8\" viewBox=\"0 0 10 8\" fill=\"none
       var payloadPost = JSON.parse(callbackPost);
       payloadPost.token = tokenPassword;
       payloadPost.endpoint = this.payloadPostEndpoint;
-      payloadPost = Object.keys(payloadPost).filter(function (item) {
-        return item !== 'facebook';
-      });
+
+      if (this.hasFacebookInParams(payloadPost)) {
+        delete payloadPost.facebook;
+      }
+
       return payloadPost;
     },
 
@@ -18357,6 +18356,14 @@ var checkIcon = "<svg width=\"10\" height=\"8\" viewBox=\"0 0 10 8\" fill=\"none
     isTestIdentifier: function isTestIdentifier(identification) {
       var testIdentifiers = ['teste@tray.com.br', 'testepagamento@tray.net.br'];
       return testIdentifiers.includes(identification);
+    },
+
+    /**
+     * Valida se há facebook no objeto payloadPost
+     * @return {bool}
+     */
+    hasFacebookInParams: function hasFacebookInParams(payloadPost) {
+      return Object.prototype.hasOwnProperty.call(payloadPost, 'facebook');
     }
   }
 });
@@ -18823,12 +18830,12 @@ vue_runtime_esm["a" /* default */].use(vuex_esm["a" /* default */]);
   getters: getters_namespaceObject,
   strict: "production" !== 'production'
 }));
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"50292187-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FacebookLogin.vue?vue&type=template&id=25eee44c&
-var FacebookLoginvue_type_template_id_25eee44c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"facebook-button",staticClass:"tray-btn-facebook",on:{"click":function($event){_vm.$emitEvent.click('tray-login-facebook'), _vm.doFacebookLogin($event)}}},[_vm._v("\n    Facebook\n")])}
-var FacebookLoginvue_type_template_id_25eee44c_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"50292187-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FacebookLogin.vue?vue&type=template&id=7b0a66b6&
+var FacebookLoginvue_type_template_id_7b0a66b6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"facebook-button",staticClass:"tray-btn-facebook",on:{"click":function($event){_vm.$emitEvent.click('tray-login-facebook'), _vm.doFacebookLogin($event)}}},[_vm._v("\n    Facebook\n")])}
+var FacebookLoginvue_type_template_id_7b0a66b6_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/FacebookLogin.vue?vue&type=template&id=25eee44c&
+// CONCATENATED MODULE: ./src/components/FacebookLogin.vue?vue&type=template&id=7b0a66b6&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
 var es6_regexp_replace = __webpack_require__("a481");
@@ -18986,9 +18993,11 @@ function FacebookLoginvue_type_script_lang_js_objectSpread(target) { for (var i 
     urlParams: function urlParams() {
       var objectParams = JSON.parse(this.callbackPost);
       objectParams.facebook = '1';
-      objectParams = Object.keys(objectParams).filter(function (item) {
-        return item !== 'token';
-      });
+
+      if (this.hasTokenInParams(objectParams)) {
+        delete objectParams.token;
+      }
+
       return Object.entries(objectParams).map(function (_ref) {
         var _ref2 = _slicedToArray(_ref, 2),
             key = _ref2[0],
@@ -19000,6 +19009,14 @@ function FacebookLoginvue_type_script_lang_js_objectSpread(target) { for (var i 
   },
   methods: {
     facebookLogin: server.facebookLogin,
+
+    /**
+     * Valida se há token no objeto de parametros
+     * @return {bool}
+     */
+    hasTokenInParams: function hasTokenInParams(objectParams) {
+      return Object.prototype.hasOwnProperty.call(objectParams, 'token');
+    },
 
     /**
      * Realiza o login com o facebook
@@ -19170,8 +19187,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_FacebookLoginvue_type_script_lang_js_,
-  FacebookLoginvue_type_template_id_25eee44c_render,
-  FacebookLoginvue_type_template_id_25eee44c_staticRenderFns,
+  FacebookLoginvue_type_template_id_7b0a66b6_render,
+  FacebookLoginvue_type_template_id_7b0a66b6_staticRenderFns,
   false,
   null,
   null,
