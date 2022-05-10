@@ -19,6 +19,14 @@ export default {
     payloadPostEndpoint() {
       return 'my-account/api/login';
     },
+
+    /**
+     * Retorna a rota para a home dependendo do ambiente
+     * @return {string}
+     */
+    homePath() {
+      return window.location.pathname.split('/')[1];
+    },
   },
 
   methods: {
@@ -55,9 +63,18 @@ export default {
 
       this.callbackLoginLayout(payloadPost).then((res) => {
         const { token, redirect } = res.data.data;
-        this.redirect(redirect, token);
+        this.redirect(this.formatedRedirectUrl(redirect), token);
         return res;
       });
+    },
+
+    /**
+     * Formata a URL de redirect
+     * @param {string} url
+     * @return {string}
+     */
+    formatedRedirectUrl(url) {
+      return `${url}/${this.homePath}`;
     },
 
     /**
