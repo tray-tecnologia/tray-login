@@ -74,7 +74,8 @@ export default {
      * @return {string}
      */
     formatedRedirectUrl(url) {
-      return `${url}/${this.homePath}`;
+      const storeUrl = url.replace('/my-account', this.homePath);
+      return `${url}/${storeUrl}`;
     },
 
     /**
