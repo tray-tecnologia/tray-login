@@ -18821,12 +18821,12 @@ vue_runtime_esm["a" /* default */].use(vuex_esm["a" /* default */]);
   getters: getters_namespaceObject,
   strict: "production" !== 'production'
 }));
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"50292187-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FacebookLogin.vue?vue&type=template&id=6a730ffa&
-var FacebookLoginvue_type_template_id_6a730ffa_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"facebook-button",staticClass:"tray-btn-facebook",on:{"click":function($event){_vm.$emitEvent.click('tray-login-facebook'), _vm.doFacebookLogin($event)}}},[_vm._v("\n    Facebook\n")])}
-var FacebookLoginvue_type_template_id_6a730ffa_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"50292187-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FacebookLogin.vue?vue&type=template&id=d988e68e&
+var FacebookLoginvue_type_template_id_d988e68e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"facebook-button",staticClass:"tray-btn-facebook",on:{"click":function($event){_vm.$emitEvent.click('tray-login-facebook'), _vm.doFacebookLogin($event)}}},[_vm._v("\n    Facebook\n")])}
+var FacebookLoginvue_type_template_id_d988e68e_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/FacebookLogin.vue?vue&type=template&id=6a730ffa&
+// CONCATENATED MODULE: ./src/components/FacebookLogin.vue?vue&type=template&id=d988e68e&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
 var es6_regexp_replace = __webpack_require__("a481");
@@ -18983,7 +18983,7 @@ function FacebookLoginvue_type_script_lang_js_objectSpread(target) { for (var i 
      * @return {string}
      */
     urlParams: function urlParams() {
-      return Object.entries(this.formatedParams()).map(function (_ref) {
+      return Object.entries(this.formatedParams).map(function (_ref) {
         var _ref2 = _slicedToArray(_ref, 2),
             key = _ref2[0],
             val = _ref2[1];
@@ -19188,8 +19188,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_FacebookLoginvue_type_script_lang_js_,
-  FacebookLoginvue_type_template_id_6a730ffa_render,
-  FacebookLoginvue_type_template_id_6a730ffa_staticRenderFns,
+  FacebookLoginvue_type_template_id_d988e68e_render,
+  FacebookLoginvue_type_template_id_d988e68e_staticRenderFns,
   false,
   null,
   null,

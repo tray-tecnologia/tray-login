@@ -50,7 +50,7 @@ export default {
      * @return {string}
      */
     urlParams() {
-      return Object.entries(this.formatedParams()).map(([key, val]) => `${key}=${val}`).join('&');
+      return Object.entries(this.formatedParams).map(([key, val]) => `${key}=${val}`).join('&');
     },
 
     /**
