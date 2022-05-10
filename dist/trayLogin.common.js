@@ -18075,6 +18075,12 @@ function _objectWithoutProperties(source, excluded) {
 // CONCATENATED MODULE: ./src/api/server/index.js
 
 
+
+function clearToken() {
+  localStorage.setItem('jwtToken', false);
+  window.location.reload();
+}
+
 /* harmony default export */ var server = ({
   /**
    * Verifica se o usúario está bloqueado
@@ -18304,6 +18310,8 @@ function _objectWithoutProperties(source, excluded) {
 
     return httpBasic.post(endpoint, params).then(function (response) {
       return response;
+    }).catch(function () {
+      return clearToken();
     });
   }
 });
