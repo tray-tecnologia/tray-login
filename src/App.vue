@@ -300,7 +300,7 @@ export default {
      * Valida se foi feito o login do facebook
      * @return {bool}
      */
-    ifFacebookLogin() {
+    isFacebookLogin() {
       const params = JSON.parse(this.dataCallbackPost);
       return params.facebook === '1';
     },
@@ -378,11 +378,7 @@ export default {
      * @return {bool}
      */
     hasFacebookToken() {
-      if (this.ifFacebookLogin && this.hasToken) {
-        return true;
-      }
-
-      return false;
+      return this.isFacebookLogin && this.hasToken;
     },
   },
 };

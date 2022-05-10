@@ -47,8 +47,18 @@ export default {
 
     /**
      * Formata os parametros recebidos pelo callbackPost
+     * @return {string}
      */
     urlParams() {
+      return Object.entries(this.formatedParams()).map(([key, val]) => `${key}=${val}`).join('&');
+    },
+
+    /**
+     * Adiciona aos parametros um index de
+     * facebook e remove o token antigo
+     * @return {object}
+     */
+    formatedParams() {
       const objectParams = JSON.parse(this.callbackPost);
       objectParams.facebook = '1';
 
@@ -56,8 +66,9 @@ export default {
         delete objectParams.token;
       }
 
-      return Object.entries(objectParams).map(([key, val]) => `${key}=${val}`).join('&');
+      return objectParams;
     },
+
   },
 
   methods: {
