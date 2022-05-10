@@ -25,7 +25,7 @@ export default {
      * @return {string}
      */
     homePath() {
-      return window.location.pathname.split('/')[1];
+      return `/${window.location.pathname.split('/')[1]}`;
     },
   },
 

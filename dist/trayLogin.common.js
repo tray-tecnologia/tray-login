@@ -18434,7 +18434,7 @@ var checkIcon = "<svg width=\"10\" height=\"8\" viewBox=\"0 0 10 8\" fill=\"none
      * @return {string}
      */
     homePath: function homePath() {
-      return window.location.pathname.split('/')[1];
+      return "/".concat(window.location.pathname.split('/')[1]);
     }
   },
   methods: {
