@@ -18502,8 +18502,7 @@ var checkIcon = "<svg width=\"10\" height=\"8\" viewBox=\"0 0 10 8\" fill=\"none
      * @return {string}
      */
     formatedRedirectUrl: function formatedRedirectUrl(url) {
-      var storeUrl = url.replace('/my-account', this.homePath);
-      return "".concat(url, "/").concat(storeUrl);
+      return url.replace('/my-account', this.homePath);
     },
 
     /**
