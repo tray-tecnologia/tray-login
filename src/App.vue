@@ -72,7 +72,7 @@
       <p class="tray-action" v-else v-html="$lang['main-action']"></p>
       <app-facebook-login
         v-if="facebookEnabled"
-        :callback="callback"
+        :callback="this.dataCallback"
         :callbackPost="this.dataCallbackPost"
         :params="params"
         slot="app-facebook-login"
