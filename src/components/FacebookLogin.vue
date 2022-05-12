@@ -102,7 +102,7 @@ export default {
           method: 'facebook',
         });
 
-        const url = response.data.data.url.replace('\/', '/');
+        const { url } = response.data.data;
         window.location = url;
 
         return response;
