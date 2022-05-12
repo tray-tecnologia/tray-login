@@ -121,8 +121,10 @@ export default {
         'tray-input-initial': !this.securityCode,
       };
     },
+
     /**
-     * Valida se o callbackPost é diferente de "/"
+     * Valida quando o callback retornado é válido, sendo
+     * diferente do valor inicial atribuido a ele ('/')
      * @return {bool}
      */
     hasCallbackPost() {

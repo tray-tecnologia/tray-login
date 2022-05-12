@@ -7,19 +7,16 @@ import {
 export default {
   data() {
     return {
+      /**
+       * Rota usada no payload post
+       * @return {string}
+       */
+      payloadPostEndpoint: 'my-account/api/login',
       enterKeyCode: 13,
     };
   },
 
   computed: {
-    /**
-     * Rota usada no payload post
-     * @return {string}
-     */
-    payloadPostEndpoint() {
-      return 'my-account/api/login';
-    },
-
     /**
      * Retorna a rota para a home dependendo do ambiente
      * @return {string}
