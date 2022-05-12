@@ -7,18 +7,13 @@ import {
 export default {
   data() {
     return {
+      /**
+       * Rota usada no payload post
+       * @return {string}
+       */
+      payloadPostEndpoint: 'my-account/api/login',
       enterKeyCode: 13,
     };
-  },
-
-  computed: {
-    /**
-     * Rota usada no payload post
-     * @return {string}
-     */
-    payloadPostEndpoint() {
-      return 'my-account/api/login';
-    },
   },
 
   methods: {
@@ -50,15 +45,15 @@ export default {
      * @param {string} callbackPost string com os parametros do callback post
      * @param {string} token
      */
-    mixinCallbackLogin(callbackPost = '', tokenPassword = '') {
+    mixinCallbackLogin(callbackPost, tokenPassword) {
       const payloadPost = JSON.parse(callbackPost);
       payloadPost.token = tokenPassword;
       payloadPost.endpoint = this.payloadPostEndpoint;
 
-      this.callbackLoginLayout(payloadPost).then((res) => {
-        const { token = '', redirect = '' } = res.data.data;
+      this.callbackLoginLayout(payloadPost).then((response) => {
+        const { token, redirect } = response.data.data;
         this.redirect(redirect, token);
-        return res;
+        return response;
       });
     },
 
