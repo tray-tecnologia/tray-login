@@ -38,6 +38,10 @@ export default {
       type: String,
       default: '',
     },
+    callbackPost: {
+      type: String,
+      default: '/',
+    },
     identification: {
       type: String,
       default: '',
@@ -60,6 +64,17 @@ export default {
       default: '',
     },
   },
+
+  computed: {
+    /**
+     * Valida se o callbackPost é diferente de "/"
+     * @return {bool}
+     */
+    hasCallbackPost() {
+      return this.callbackPost !== '/';
+    },
+  },
+
   methods: {
     passwordLogin: http.passwordLogin,
     /**
@@ -75,19 +90,26 @@ export default {
       this.setLoading(true);
       this.passwordLogin(payload)
         .then((response) => {
+          const { token: tokenPassword } = response.data.data;
           this.$emitEvent.login({
             response,
             method: 'password',
             type: 'success',
           });
 
+          if (this.hasCallbackPost) {
+            this.mixinCallbackLogin(this.callbackPost, tokenPassword);
+            return response;
+          }
+
           if (this.callback) {
             const { token = '' } = response.data.data;
             this.redirect(this.callback, token);
-            return;
+            return response;
           }
 
           this.setLoading(false);
+          return response;
         }).catch((error) => {
           this.$emitEvent.login({
             response: error,

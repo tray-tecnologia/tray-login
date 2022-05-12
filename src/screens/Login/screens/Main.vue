@@ -50,16 +50,18 @@
     <app-recover-password
       v-if="screen === 'RecoverPassword'"
       :params="params"
-      :callback="callback">
-    </app-recover-password>
+      :callback="callback"
+      :callbackPost="this.callbackPost"
+    />
 
     <app-otp-login
       v-if="screen === 'Otp'"
       :callback="callback"
       :identification="identification"
       :identificationType="identificationType"
-      :params="params">
-    </app-otp-login>
+      :params="params"
+      :callbackPost="this.callbackPost"
+    />
 
     <app-compulsory-password
       v-if="screen === 'CompulsoryPassword'"
@@ -185,14 +187,6 @@ export default {
     hasCallbackPost() {
       return this.callbackPost !== '/';
     },
-
-    /**
-     * Rota usada no payload post
-     * @return {string}
-     */
-    payloadPostEndpoint() {
-      return 'my-account/api/login';
-    },
   },
 
   methods: {
@@ -247,16 +241,7 @@ export default {
         }
 
         if (this.hasCallbackPost) {
-          const payloadPost = JSON.parse(this.callbackPost);
-          payloadPost.token = tokenPassword;
-          payloadPost.endpoint = this.payloadPostEndpoint;
-
-          this.callbackLoginLayout(payloadPost).then((res) => {
-            const { token = '', redirect = '' } = res.data.data;
-            this.redirect(redirect, token);
-            return res;
-          });
-
+          this.mixinCallbackLogin(this.callbackPost, tokenPassword);
           return response;
         }
 
