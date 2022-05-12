@@ -9,9 +9,11 @@
 
 <script>
 import client from 'api-client';
+import utils from '@/mixins/utils';
 
 export default {
   name: 'AppFacebookLogin',
+  mixins: [utils],
   props: {
     callback: {
       type: String,
@@ -103,8 +105,6 @@ export default {
         const url = response.data.data.url.replace('\/', '/');
         window.location = url;
 
-        this.$parent.setLoading(false);
-
         return response;
       }).catch((error) => {
         this.$emitEvent.login({
@@ -133,7 +133,7 @@ export default {
      */
     urlCallbackPost() {
       localStorage.setItem('jwtToken', 'false');
-      return `${document.location.origin}/stg1-my-account/login?${this.urlParams}`;
+      return `${document.location.origin}/${this.homePath}/login?${this.urlParams}`;
     },
   },
 };

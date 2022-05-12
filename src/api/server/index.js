@@ -1,5 +1,9 @@
 import { http, httpBasic } from '@/plugins/http';
 
+/**
+ * Limpa o token do localStorage e atualiza a página
+ * @return {undefined}
+ */
 function clearToken() {
   localStorage.setItem('jwtToken', false);
   window.location.reload();
