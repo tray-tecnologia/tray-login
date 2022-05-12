@@ -133,7 +133,7 @@ export default {
      */
     urlCallbackPost() {
       localStorage.setItem('jwtToken', 'false');
-      return `${document.location.origin}/${this.homePath}/login?${this.urlParams}`;
+      return `${document.location.origin}${this.homePath}/login?${this.urlParams}`;
     },
   },
 };
