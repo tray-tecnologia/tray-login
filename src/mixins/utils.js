@@ -9,9 +9,12 @@ export default {
     return {
       /**
        * Rota usada no payload post
-       * @return {string}
        */
       payloadPostEndpoint: 'my-account/api/login',
+      /**
+       * Rota do ambiente utilizado
+       */
+      pathEnvironment: this.getPathEnvironment,
       enterKeyCode: 13,
     };
   },
@@ -21,8 +24,19 @@ export default {
      * Retorna a rota para a home dependendo do ambiente
      * @return {string}
      */
-    homePath() {
-      return `/${window.location.pathname.split('/')[1]}`;
+    getPathEnvironment() {
+      return this.isValidPath ? this.pathEnvironment : '/my-account';
+    },
+
+    /**
+     * Verifica se o caminho recebido do ambiente é valido
+     * @return {bool}
+     */
+    isValidPath() {
+      return this.pathEnvironment === '/stg-my-account'
+        || this.pathEnvironment === '/stg1-my-account'
+        || this.pathEnvironment === '/stg2-my-account'
+        || this.pathEnvironment === '/stg3-my-account';
     },
   },
 
@@ -59,8 +73,8 @@ export default {
       const payloadPost = this.paramCallbackPost(callbackPost, tokenPassword);
 
       this.callbackLoginLayout(payloadPost).then((res) => {
-        const { token, redirect } = res.data.data;
-        this.redirect(this.formatedRedirectUrl(redirect), token);
+        const { token, redirect: url } = res.data.data;
+        this.redirect(this.formatedRedirectUrl(url), token);
         return res;
       });
     },
@@ -71,7 +85,7 @@ export default {
      * @return {string}
      */
     formatedRedirectUrl(url) {
-      return url.replace('/my-account', this.homePath);
+      return url.replace('/my-account', this.pathEnvironment);
     },
 
     /**

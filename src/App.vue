@@ -374,7 +374,7 @@ export default {
     },
 
     /**
-     * Verifica se o login o login foi feito pelo facebook e se há token
+     * Verifica se o login foi feito pelo facebook e se há token de sessão
      * @return {bool}
      */
     hasFacebookToken() {

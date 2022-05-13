@@ -40,7 +40,7 @@ export default {
 
   computed: {
     /**
-     * Verifica se há tem callback tem tamanho
+     * Verifica se o tamanho da variavél de callback é maior que 0
      * @return {bool}
      */
     hasCallback() {
@@ -56,8 +56,7 @@ export default {
     },
 
     /**
-     * Adiciona aos parametros um index de
-     * facebook e remove o token antigo
+     * Adiciona aos parametros um index de facebook e remove o token antigo
      * @return {object}
      */
     formatedParams() {
@@ -78,6 +77,7 @@ export default {
 
     /**
      * Valida se há token no objeto de parametros
+     * @param {object} objectParams objeto com os parametros de post
      * @return {bool}
      */
     hasTokenInParams(objectParams) {
