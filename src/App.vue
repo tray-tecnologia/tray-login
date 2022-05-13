@@ -301,8 +301,12 @@ export default {
      * @return {bool}
      */
     isFacebookLogin() {
-      const params = JSON.parse(this.dataCallbackPost);
-      return params.facebook === '1';
+      try {
+        const params = JSON.parse(this.dataCallbackPost);
+        return params.facebook === '1';
+      } catch {
+        return false;
+      }
     },
   },
 

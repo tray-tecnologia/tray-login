@@ -14,7 +14,7 @@ export default {
       /**
        * Rota do ambiente utilizado
        */
-      pathEnvironment: this.getPathEnvironment,
+      pathEnvironment: `/${window.location.pathname.split('/')[1]}`,
       enterKeyCode: 13,
     };
   },
@@ -24,7 +24,7 @@ export default {
      * Retorna a rota para a home dependendo do ambiente
      * @return {string}
      */
-    getPathEnvironment() {
+    homePath() {
       return this.isValidPath ? this.pathEnvironment : '/my-account';
     },
 
@@ -85,7 +85,7 @@ export default {
      * @return {string}
      */
     formatedRedirectUrl(url) {
-      return url.replace('/my-account', this.pathEnvironment);
+      return url.replace('/my-account', this.homePath);
     },
 
     /**
