@@ -33,10 +33,7 @@ export default {
      * @return {bool}
      */
     isValidPath() {
-      return this.pathEnvironment === '/stg-my-account'
-        || this.pathEnvironment === '/stg1-my-account'
-        || this.pathEnvironment === '/stg2-my-account'
-        || this.pathEnvironment === '/stg3-my-account';
+      return this.pathEnvironment.includes('/stg');
     },
   },
 
