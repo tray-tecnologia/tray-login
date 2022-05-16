@@ -9,11 +9,32 @@ export default {
     return {
       /**
        * Rota usada no payload post
-       * @return {string}
        */
       payloadPostEndpoint: 'my-account/api/login',
+      /**
+       * Rota do ambiente utilizado
+       */
+      pathEnvironment: `/${window.location.pathname.split('/')[1]}`,
       enterKeyCode: 13,
     };
+  },
+
+  computed: {
+    /**
+     * Retorna a rota para a home dependendo do ambiente
+     * @return {string}
+     */
+    homePath() {
+      return this.isValidPath ? this.pathEnvironment : '/my-account';
+    },
+
+    /**
+     * Verifica se o caminho recebido do ambiente é valido
+     * @return {bool}
+     */
+    isValidPath() {
+      return this.pathEnvironment.includes('/stg');
+    },
   },
 
   methods: {
@@ -43,18 +64,41 @@ export default {
     /**
      * Faz o login com o post passando por parametros os dados de callpackPost
      * @param {string} callbackPost string com os parametros do callback post
-     * @param {string} token
+     * @param {string} tokenPassword
      */
     mixinCallbackLogin(callbackPost, tokenPassword) {
+      const payloadPost = this.paramCallbackPost(callbackPost, tokenPassword);
+
+      this.callbackLoginLayout(payloadPost).then((res) => {
+        const { token, redirect: url } = res.data.data;
+        this.redirect(this.formatedRedirectUrl(url), token);
+        return res;
+      });
+    },
+
+    /**
+     * Formata a URL de redirect
+     * @param {string} url
+     * @return {string}
+     */
+    formatedRedirectUrl(url) {
+      return url.replace('/my-account', this.homePath);
+    },
+
+    /**
+     * Objeto usado no callbackPost
+     * @return {object}
+     */
+    paramCallbackPost(callbackPost, tokenPassword) {
       const payloadPost = JSON.parse(callbackPost);
       payloadPost.token = tokenPassword;
       payloadPost.endpoint = this.payloadPostEndpoint;
 
-      this.callbackLoginLayout(payloadPost).then((response) => {
-        const { token, redirect } = response.data.data;
-        this.redirect(redirect, token);
-        return response;
-      });
+      if (this.hasFacebookInParams(payloadPost)) {
+        delete payloadPost.facebook;
+      }
+
+      return payloadPost;
     },
 
     /**
@@ -74,6 +118,14 @@ export default {
     isTestIdentifier(identification) {
       const testIdentifiers = ['teste@tray.com.br', 'testepagamento@tray.net.br'];
       return testIdentifiers.includes(identification);
+    },
+
+    /**
+     * Valida se há facebook no objeto payloadPost
+     * @return {bool}
+     */
+    hasFacebookInParams(payloadPost) {
+      return Object.prototype.hasOwnProperty.call(payloadPost, 'facebook');
     },
   },
 };

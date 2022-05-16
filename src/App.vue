@@ -13,11 +13,13 @@
         :action="this.customTexts['main-action']"
         slot="custom-texts">
       </app-custom-texts>
-      <app-facebook-login v-if="facebookEnabled"
+      <app-facebook-login
+        v-if="facebookEnabled"
         :callback="this.dataCallback"
+        :callbackPost="this.dataCallbackPost"
         :params="params"
-        slot="app-facebook-login">
-      </app-facebook-login>
+        slot="app-facebook-login"
+      />
     </app-identification>
 
     <app-login id="main" v-if="screen === 'Main'"
@@ -36,11 +38,13 @@
         slot="app-otp-login"
       >
       </app-otp-button>
-      <app-facebook-login v-if="facebookEnabled"
+      <app-facebook-login
+        v-if="facebookEnabled"
         :callback="this.dataCallback"
+        :callbackPost="this.dataCallbackPost"
         :params="params"
-        slot="app-facebook-login">
-      </app-facebook-login>
+        slot="app-facebook-login"
+      />
       <button type="button"
         v-if="identificationEnabled"
         class="tray-btn-default tray-btn-other-option"
@@ -66,11 +70,13 @@
         slot="custom-texts">
       </app-custom-texts>
       <p class="tray-action" v-else v-html="$lang['main-action']"></p>
-      <app-facebook-login v-if="facebookEnabled"
-        :callback="callback"
+      <app-facebook-login
+        v-if="facebookEnabled"
+        :callback="this.dataCallback"
+        :callbackPost="this.dataCallbackPost"
         :params="params"
-        slot="app-facebook-login">
-      </app-facebook-login>
+        slot="app-facebook-login"
+      />
       <button v-if="identificationEnabled"
         class="tray-btn-default"
         @click="reset"
@@ -101,6 +107,7 @@
 import { mapActions, mapState } from 'vuex';
 import http from 'api-client';
 import screenHandler from '@/mixins/screenHandler';
+import utils from '@/mixins/utils';
 import store from './store';
 import AppFacebookLogin from './components/FacebookLogin.vue';
 import AppIdentification from './screens/Identification/Main.vue';
@@ -120,7 +127,7 @@ export default {
     AppLogin,
     AppTerms,
   },
-  mixins: [screenHandler],
+  mixins: [screenHandler, utils],
   data() {
     return {
       loading: false,
@@ -186,6 +193,7 @@ export default {
     }).then((response) => {
       this.setLang(response.data);
     });
+    this.verifyFacebookLogin();
   },
 
   watch: {
@@ -271,6 +279,35 @@ export default {
         store_id: this.dataStore,
       };
     },
+
+    /**
+     * Retorna o token salvo no localStorage
+     * @return {string}
+     */
+    localToken() {
+      return localStorage.getItem('jwtToken');
+    },
+
+    /**
+     * Verifica se há token no localStorage
+     * @return {bool}
+     */
+    hasToken() {
+      return this.localToken && this.localToken !== 'false';
+    },
+
+    /**
+     * Valida se foi feito o login do facebook
+     * @return {bool}
+     */
+    isFacebookLogin() {
+      try {
+        const params = JSON.parse(this.dataCallbackPost);
+        return params.facebook === '1';
+      } catch {
+        return false;
+      }
+    },
   },
 
   methods: {
@@ -328,6 +365,24 @@ export default {
       this.setScreen('Identification');
       this.setIdentification('');
       this.clearErrors();
+    },
+
+    /**
+     * Executa o mixinCallbackLogin caso tenha token de login com o facebook
+     * @return {undefined}
+     */
+    verifyFacebookLogin() {
+      if (this.hasFacebookToken()) {
+        this.mixinCallbackLogin(this.dataCallbackPost, this.localToken);
+      }
+    },
+
+    /**
+     * Verifica se o login foi feito pelo facebook e se há token de sessão
+     * @return {bool}
+     */
+    hasFacebookToken() {
+      return this.isFacebookLogin && this.hasToken;
     },
   },
 };

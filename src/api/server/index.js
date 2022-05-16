@@ -1,5 +1,14 @@
 import { http, httpBasic } from '@/plugins/http';
 
+/**
+ * Limpa o token do localStorage e atualiza a página
+ * @return {undefined}
+ */
+function clearToken() {
+  localStorage.setItem('jwtToken', false);
+  window.location.reload();
+}
+
 export default {
   /**
    * Verifica se o usúario está bloqueado
@@ -157,6 +166,6 @@ export default {
     endpoint: 'my-account/api/login',
   }) {
     const { endpoint, ...params } = payload;
-    return httpBasic.post(endpoint, params).then(response => response);
+    return httpBasic.post(endpoint, params).then(response => response).catch(() => clearToken());
   },
 };
