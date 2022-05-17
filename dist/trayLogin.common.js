@@ -18079,9 +18079,6 @@ var es6_number_constructor = __webpack_require__("c5f6");
 // EXTERNAL MODULE: ./node_modules/vuex/dist/vuex.esm.js
 var vuex_esm = __webpack_require__("2f62");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
-var es6_regexp_replace = __webpack_require__("a481");
-
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js
 var get_own_property_symbols = __webpack_require__("e265");
 var get_own_property_symbols_default = /*#__PURE__*/__webpack_require__.n(get_own_property_symbols);
@@ -18130,7 +18127,6 @@ function _objectWithoutProperties(source, excluded) {
   return target;
 }
 // CONCATENATED MODULE: ./src/api/server/index.js
-
 
 
 /* harmony default export */ var server = ({
@@ -18363,8 +18359,9 @@ function _objectWithoutProperties(source, excluded) {
     return httpBasic.post(endpoint, params).then(function (response) {
       return response;
     }).catch(function () {
-      window.location.replace("".concat(window.location.origin, "/loja/cadastro_layout.php"));
+      localStorage.setItem('errorPostLogin', '1');
       localStorage.setItem('jwtToken', false);
+      window.location.reload();
     });
   }
 });
@@ -18456,6 +18453,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
     }
   }
 });
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
+var es6_regexp_replace = __webpack_require__("a481");
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.array.includes.js
 var es7_array_includes = __webpack_require__("6762");
 

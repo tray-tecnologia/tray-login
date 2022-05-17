@@ -160,7 +160,7 @@ export default {
     return httpBasic.post(endpoint, params)
       .then(response => response)
       .catch(() => {
-        localStorage.setItem('errorPostLogin', true);
+        localStorage.setItem('errorPostLogin', '1');
         localStorage.setItem('jwtToken', false);
         window.location.reload();
       });
