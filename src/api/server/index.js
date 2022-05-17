@@ -160,8 +160,9 @@ export default {
     return httpBasic.post(endpoint, params)
       .then(response => response)
       .catch(() => {
-        window.location.replace(`${window.location.origin}/loja/cadastro_layout.php`);
+        alert('Suas credenciais ainda não foram cadastradas nessa loja. Você será redirecionado para criar um novo registro.');
         localStorage.setItem('jwtToken', false);
+        window.location.replace(`${window.location.origin}/loja/cadastro_layout.php`);
       });
   },
 };
