@@ -18368,8 +18368,13 @@ function _objectWithoutProperties(source, excluded) {
     return httpBasic.post(endpoint, params).then(function (response) {
       return response;
     }).catch(function () {
-      localStorage.setItem('errorPostLogin', '1');
-      window.location.reload();
+      /**
+       * Adiciona o valor 1 ao errorPostLogin no localStorage
+       * Isso informa ao front-end que deu erro no post de login
+       */
+      localStorage.setItem('errorPostLogin', '1').then(function () {
+        return window.location.reload();
+      });
     });
   }
 });
