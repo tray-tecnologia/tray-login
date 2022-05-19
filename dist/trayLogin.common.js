@@ -18360,7 +18360,6 @@ function _objectWithoutProperties(source, excluded) {
       return response;
     }).catch(function () {
       localStorage.setItem('errorPostLogin', '1');
-      localStorage.setItem('jwtToken', false);
       window.location.reload();
     });
   }

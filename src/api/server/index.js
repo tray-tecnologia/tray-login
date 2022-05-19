@@ -161,7 +161,6 @@ export default {
       .then(response => response)
       .catch(() => {
         localStorage.setItem('errorPostLogin', '1');
-        localStorage.setItem('jwtToken', false);
         window.location.reload();
       });
   },
