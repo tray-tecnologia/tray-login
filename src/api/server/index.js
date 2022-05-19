@@ -160,8 +160,12 @@ export default {
     return httpBasic.post(endpoint, params)
       .then(response => response)
       .catch(() => {
-        localStorage.setItem('errorPostLogin', '1');
-        window.location.reload();
+        /**
+         * Adiciona o valor 1 ao errorPostLogin no localStorage
+         * Isso informa ao projeto pai que deu erro no post de login
+         */
+        localStorage.setItem('errorPostLogin', '1')
+          .then(() => window.location.reload());
       });
   },
 };
