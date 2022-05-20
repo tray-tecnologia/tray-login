@@ -18361,11 +18361,10 @@ function _objectWithoutProperties(source, excluded) {
     }).catch(function () {
       /**
        * Adiciona o valor 1 ao errorPostLogin no localStorage
-       * Isso informa ao front-end que deu erro no post de login
+       * Isso informa ao projeto pai que deu erro no post de login
        */
-      localStorage.setItem('errorPostLogin', '1').then(function () {
-        return window.location.reload();
-      });
+      localStorage.setItem('errorPostLogin', '1');
+      window.location.reload();
     });
   }
 });

@@ -164,8 +164,8 @@ export default {
          * Adiciona o valor 1 ao errorPostLogin no localStorage
          * Isso informa ao projeto pai que deu erro no post de login
          */
-        localStorage.setItem('errorPostLogin', '1')
-          .then(() => window.location.reload());
+        localStorage.setItem('errorPostLogin', '1');
+        window.location.reload();
       });
   },
 };
