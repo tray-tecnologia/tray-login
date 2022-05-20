@@ -18373,6 +18373,7 @@ function _objectWithoutProperties(source, excluded) {
        * Isso informa ao projeto pai que deu erro no post de login
        */
       localStorage.setItem('errorPostLogin', '1');
+      localStorage.setItem('jwtToken', false);
       window.location.reload();
     });
   }
