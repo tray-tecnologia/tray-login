@@ -162,7 +162,7 @@ export default {
       .catch(() => {
         /**
          * Adiciona o valor 1 ao errorPostLogin no localStorage
-         * Isso informa ao projeto pai que deu erro no post de login
+         * Isso informa ao projeto pai que ocorreu um erro no post de login
          */
         localStorage.setItem('errorPostLogin', '1');
         localStorage.setItem('jwtToken', false);
