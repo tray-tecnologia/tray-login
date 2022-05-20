@@ -308,15 +308,6 @@ export default {
         return false;
       }
     },
-
-    /**
-     * Se a variavel errorPostLogin do localStorage tiver o valor 1,
-     * significa que houve um erro no post de login
-     * @return {bool}
-     */
-    hasErrorPostLogin() {
-      return localStorage.getItem('errorPostLogin') === '1';
-    },
   },
 
   methods: {
@@ -381,7 +372,7 @@ export default {
      * @return {undefined}
      */
     verifyFacebookLogin() {
-      if (this.hasFacebookToken() && !this.hasErrorPostLogin) {
+      if (this.hasFacebookToken()) {
         this.mixinCallbackLogin(this.dataCallbackPost, this.localToken);
       }
     },
