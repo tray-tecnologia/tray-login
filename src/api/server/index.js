@@ -161,10 +161,8 @@ export default {
       .then(response => response)
       .catch(() => {
         /**
-         * Adiciona o valor 1 ao errorPostLogin no localStorage
-         * Isso informa ao projeto pai que ocorreu um erro no post de login
+         * Dispara um evento informando que houve erro no post de login
          */
-        // localStorage.setItem('errorPostLogin', '1');
         const errorPostLogin = new CustomEvent('errorPostLogin');
         window.dispatchEvent(errorPostLogin);
         localStorage.setItem('jwtToken', false);
