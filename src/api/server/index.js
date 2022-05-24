@@ -160,7 +160,11 @@ export default {
     return httpBasic.post(endpoint, params)
       .then(response => response)
       .catch(() => {
-        window.location.replace(`${window.location.origin}/loja/cadastro_layout.php`);
+        /**
+         * Dispara um evento informando que houve erro no post de login
+         */
+        const errorPostLogin = new CustomEvent('errorPostLogin');
+        window.dispatchEvent(errorPostLogin);
         localStorage.setItem('jwtToken', false);
       });
   },
