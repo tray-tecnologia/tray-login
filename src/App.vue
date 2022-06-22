@@ -20,6 +20,13 @@
         :params="params"
         slot="app-facebook-login"
       />
+      <app-google-login
+        v-if="googleEnabled"
+        :callback="this.dataCallback"
+        :callbackPost="this.dataCallbackPost"
+        :params="params"
+        slot="app-google-login"
+      />
     </app-identification>
 
     <app-login id="main" v-if="screen === 'Main'"
@@ -44,6 +51,13 @@
         :callbackPost="this.dataCallbackPost"
         :params="params"
         slot="app-facebook-login"
+      />
+      <app-google-login
+        v-if="googleEnabled"
+        :callback="this.dataCallback"
+        :callbackPost="this.dataCallbackPost"
+        :params="params"
+        slot="app-google-login"
       />
       <button type="button"
         v-if="identificationEnabled"
@@ -76,6 +90,13 @@
         :callbackPost="this.dataCallbackPost"
         :params="params"
         slot="app-facebook-login"
+      />
+      <app-google-login
+        v-if="googleEnabled"
+        :callback="this.dataCallback"
+        :callbackPost="this.dataCallbackPost"
+        :params="params"
+        slot="app-google-login"
       />
       <button v-if="identificationEnabled"
         class="tray-btn-default"
@@ -110,6 +131,7 @@ import screenHandler from '@/mixins/screenHandler';
 import utils from '@/mixins/utils';
 import store from './store';
 import AppFacebookLogin from './components/FacebookLogin.vue';
+import AppGoogleLogin from './components/GoogleLogin.vue';
 import AppIdentification from './screens/Identification/Main.vue';
 import AppLogin from './screens/Login/screens/Main.vue';
 import AppOtpButton from './screens/Login/screens/Otp/Button.vue';
@@ -122,6 +144,7 @@ export default {
   components: {
     AppCustomTexts,
     AppFacebookLogin,
+    AppGoogleLogin,
     AppIdentification,
     AppOtpButton,
     AppLogin,
@@ -155,7 +178,7 @@ export default {
     dataMethods: {
       type: [String, Array],
       default() {
-        return ['facebook', 'identify'];
+        return ['facebook', 'google', 'identify'];
       },
     },
     dataSession: {
@@ -187,12 +210,22 @@ export default {
   },
   mounted() {
     this.initialize(this.dataIdentification);
+
     this.getLangs({
       store_id: this.dataStore,
       endpoint: 'langs/login_component',
     }).then((response) => {
       this.setLang(response.data);
     });
+
+    this.googleLoginEasyToggle({
+      store_id: this.dataStore,
+      endpoint: 'login/google/active',
+    }).then((response) => {
+      const { 'google-login': googleLoginToggle } = response;
+      this.setGoogleLoginToggleStatus(googleLoginToggle);
+    });
+
     this.verifyFacebookLogin();
   },
 
@@ -213,8 +246,8 @@ export default {
   computed: {
     ...mapState([
       'blockedUser',
+      'googleLoginToggleStatus',
     ]),
-
     /**
      * Verifica se o login com o otp será utilizado
      * @return {boolean}
@@ -229,6 +262,14 @@ export default {
      */
     facebookEnabled() {
       return this.dataMethods.indexOf('facebook') !== -1;
+    },
+
+    /**
+     * Verifica se o login com o google será utilizado
+     * @return {boolean}
+     */
+    googleEnabled() {
+      return this.googleLoginToggleStatus && this.dataMethods.indexOf('google') !== -1;
     },
 
     /**
@@ -308,15 +349,30 @@ export default {
         return false;
       }
     },
+
+    /**
+     * Valida se foi feito o login com o google
+     * @return {bool}
+     */
+    isGoogleLogin() {
+      try {
+        const params = JSON.parse(this.dataCallbackPost);
+        return params.google === '1';
+      } catch {
+        return false;
+      }
+    },
   },
 
   methods: {
+    googleLoginEasyToggle: http.googleLoginEasyToggle,
     getLangs: http.getLangs,
     ...mapActions([
       'setBaseUrl',
       'setIdentification',
       'setLang',
       'setResolution',
+      'setGoogleLoginToggleStatus',
     ]),
 
     /**

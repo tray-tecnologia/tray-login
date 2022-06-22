@@ -44,6 +44,7 @@
       </div>
       <slot name="app-otp-login"></slot>
       <slot name="app-facebook-login"></slot>
+      <slot name="app-google-login"></slot>
       <slot name="app-back-step"></slot>
     </section>
 
