@@ -53,4 +53,13 @@ export default {
   setResolution(state, resolution) {
     state.resolution = resolution;
   },
+
+  /**
+   * Define o status da toggle de login com o google
+   * @param {object} state
+   * @param {boolean} value
+   */
+  setGoogleLoginToggleStatus(state, value) {
+    state.googleLoginToggleStatus = value;
+  },
 };
