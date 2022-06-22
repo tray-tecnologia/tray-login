@@ -39,6 +39,7 @@ export default {
 
   methods: {
     callbackLoginLayout: http.callbackLoginLayout,
+    googleLoginEasyToggle: http.googleLoginEasyToggle,
     /**
      * Redirecionar o usuario para a url definida no callback
      *
@@ -59,6 +60,14 @@ export default {
       }
 
       window.location = callback + redirectParam;
+    },
+
+    /**
+     * Verifica se a toggle do easy de login com o google está ativa para a loja do parâmetro
+     * @param {string} storeId string com o id da loja
+     */
+    isGoogleLoginToggleActive(storeId) {
+      this.googleLoginEasyToggle(storeId).then(res => res);
     },
 
     /**
