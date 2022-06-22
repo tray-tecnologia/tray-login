@@ -10,10 +10,14 @@ $btn-next-txt: $white;
 $btn-facebook-bg: #3b5998;
 $btn-facebook-bd: #243f77;
 
+$btn-google-bg: #4285F4;
+$btn-google-bd: #2768d1;
+
 tray-login {
     .tray-btn-primary,
     .tray-btn-default,
     .tray-btn-facebook,
+    .tray-btn-google,
     .tray-btn-otp {
         background: $btn-next-bg;
         display: block;
@@ -42,6 +46,16 @@ tray-login {
         &:hover {
             background-color: darken(#3b5998, 10%);
             border-color: darken(#243f77, 10%);
+        }
+    }
+
+    .tray-btn-google {
+        background-color: $btn-google-bg;
+        border-bottom-color: $btn-google-bd;
+
+        &:hover {
+            background-color: darken($btn-google-bg, 10%);
+            border-color: darken($btn-google-bd, 10%);
         }
     }
 
