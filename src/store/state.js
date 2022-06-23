@@ -68,5 +68,4 @@ export default {
   },
   screen: 'Identification',
   resolution: 768,
-  googleLoginToggleStatus: false,
 };

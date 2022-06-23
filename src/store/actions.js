@@ -56,13 +56,4 @@ export default {
   setResolution({ commit }, resolution) {
     commit('setResolution', resolution);
   },
-
-  /**
-   * Dispara a ação para definir o status da toggle de login com o google
-   * @param {function} commit
-   * @param {boolean} value
-   */
-  setGoogleLoginToggleStatus({ commit }, value) {
-    commit('setGoogleLoginToggleStatus', value);
-  },
 };
