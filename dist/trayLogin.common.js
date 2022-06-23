@@ -18029,14 +18029,14 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 /* harmony default export */ var vue_custom_element_esm = (vue_custom_element_esm_install);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=9b693b7c&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=4cd3cfeb&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showComponent),expression:"showComponent"}],ref:"tray-login",staticClass:"tray-container"},[_c('button',{staticClass:"tray-close",on:{"click":_vm.close}},[_vm._v("\n    X\n  ")]),(_vm.screen === 'Identification')?_c('app-identification',{staticClass:"tray-login-screens",attrs:{"id":"identify","callback":this.dataCallback,"params":_vm.params}},[(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","action":this.customTexts['main-action']},slot:"custom-texts"}):_vm._e(),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-facebook-login"}):_vm._e(),(_vm.googleEnabled)?_c('app-google-login',{attrs:{"slot":"app-google-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-google-login"}):_vm._e()],1):_vm._e(),(_vm.screen === 'Main')?_c('app-login',{staticClass:"tray-login-screens",attrs:{"id":"main","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params}},[(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","error":this.customTexts['general-error-alert'],"action":this.customTexts['main-action']},slot:"custom-texts"}):_vm._e(),(_vm.otpEnabled)?_c('app-otp-button',{attrs:{"slot":"app-otp-login","callback":this.dataCallback,"params":_vm.params},slot:"app-otp-login"}):_vm._e(),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-facebook-login"}):_vm._e(),(_vm.googleEnabled)?_c('app-google-login',{attrs:{"slot":"app-google-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-google-login"}):_vm._e(),(_vm.identificationEnabled)?_c('button',{staticClass:"tray-btn-default tray-btn-other-option",attrs:{"slot":"app-back-step","type":"button"},on:{"click":_vm.reset},slot:"app-back-step"},[_vm._v("\n      "+_vm._s(_vm.$lang['go-back'])+"\n    ")]):_vm._e()],1):_vm._e(),(_vm.screen === 'Blocked')?_c('section',{staticClass:"tray-login-screens",attrs:{"id":"blocked"}},[_c('div',[_c('strong',{staticClass:"tray-title tray-login__title"},[_vm._v("\n        "+_vm._s(_vm.$lang['main-title'])+"\n      ")]),_c('p',{staticClass:"tray-action tray-error-message"},[_vm._v("\n        "+_vm._s(_vm.$lang['blocked-user'])+"\n      ")])]),(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","error":this.customTexts['general-error-alert'],"action":this.customTexts['main-action']},slot:"custom-texts"}):_c('p',{staticClass:"tray-action",domProps:{"innerHTML":_vm._s(_vm.$lang['main-action'])}}),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-facebook-login"}):_vm._e(),(_vm.googleEnabled)?_c('app-google-login',{attrs:{"slot":"app-google-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-google-login"}):_vm._e(),(_vm.identificationEnabled)?_c('button',{staticClass:"tray-btn-default",attrs:{"slot":"app-back-step"},on:{"click":_vm.reset},slot:"app-back-step"},[_vm._v("\n      "+_vm._s(_vm.$lang['go-back'])+"\n    ")]):_vm._e()],1):_vm._e(),(_vm.hasTerm)?_c('section',{attrs:{"id":"tray-login-terms"}},[_c('app-terms',{attrs:{"termText":this.dataTerms}})],1):_vm._e(),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading",class:{
       'tray-loading-hidden': !_vm.loading
     },attrs:{"id":"tray-login-loading"}},[_vm._m(0),_c('svg',{staticClass:"tray-loading-icon tray-icon-locked",attrs:{"viewBox":"0 0 1024 1024"}},[_c('path',{staticClass:"path1",attrs:{"d":"M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"}})])])],1)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tray-loading-mask"},[_c('div',{staticClass:"tray-loading-line"})])}]
 
 
-// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=9b693b7c&
+// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=4cd3cfeb&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
 var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
@@ -18180,8 +18180,7 @@ function _objectWithoutProperties(source, excluded) {
 
   /**
    * Realiza o login com o google
-   * @param {string} endpoint
-   * @param {object} params
+   * @param {object} payload
    * @returns {Promise}
    */
   googleLogin: function googleLogin() {
@@ -18734,16 +18733,6 @@ var checkIcon = "<svg width=\"10\" height=\"8\" viewBox=\"0 0 10 8\" fill=\"none
   setResolution: function setResolution(_ref6, resolution) {
     var commit = _ref6.commit;
     commit('setResolution', resolution);
-  },
-
-  /**
-   * Dispara a ação para definir o status da toggle de login com o google
-   * @param {function} commit
-   * @param {boolean} value
-   */
-  setGoogleLoginToggleStatus: function setGoogleLoginToggleStatus(_ref7, value) {
-    var commit = _ref7.commit;
-    commit('setGoogleLoginToggleStatus', value);
   }
 });
 // CONCATENATED MODULE: ./src/store/mutations.js
@@ -18801,15 +18790,6 @@ var checkIcon = "<svg width=\"10\" height=\"8\" viewBox=\"0 0 10 8\" fill=\"none
    */
   setResolution: function setResolution(state, resolution) {
     state.resolution = resolution;
-  },
-
-  /**
-   * Define o status da toggle de login com o google
-   * @param {object} state
-   * @param {boolean} value
-   */
-  setGoogleLoginToggleStatus: function setGoogleLoginToggleStatus(state, value) {
-    state.googleLoginToggleStatus = value;
   }
 });
 // CONCATENATED MODULE: ./src/screens/Login/vuex/actions.js
@@ -19079,8 +19059,7 @@ function store_modules_objectSpread(target) { for (var i = 1; i < arguments.leng
     'invalid-password': 'A nova senha deve possuir no mínimo 6 caracteres'
   },
   screen: 'Identification',
-  resolution: 768,
-  googleLoginToggleStatus: false
+  resolution: 768
 });
 // CONCATENATED MODULE: ./node_modules/@brazilian-utils/helper-only-numbers/dist/index.m.js
 /* harmony default export */ var index_m = (function(e){return String(e).replace(/[^\d]/g,"")});;
@@ -19526,12 +19505,12 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var FacebookLogin = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GoogleLogin.vue?vue&type=template&id=40dbd14e&
-var GoogleLoginvue_type_template_id_40dbd14e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"google-button",staticClass:"tray-btn-google",on:{"click":function($event){_vm.$emitEvent.click('tray-login-google'), _vm.doGoogleLogin($event)}}},[_vm._v("\n    Google\n")])}
-var GoogleLoginvue_type_template_id_40dbd14e_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GoogleLogin.vue?vue&type=template&id=590f1a82&
+var GoogleLoginvue_type_template_id_590f1a82_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"google-button",staticClass:"tray-btn-google",on:{"click":function($event){_vm.$emitEvent.click('tray-login-google'), _vm.doGoogleLogin($event)}}},[_vm._v("\n    Google\n")])}
+var GoogleLoginvue_type_template_id_590f1a82_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GoogleLogin.vue?vue&type=template&id=40dbd14e&
+// CONCATENATED MODULE: ./src/components/GoogleLogin.vue?vue&type=template&id=590f1a82&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GoogleLogin.vue?vue&type=script&lang=js&
 
@@ -19622,6 +19601,7 @@ function GoogleLoginvue_type_script_lang_js_objectSpread(target) { for (var i = 
     /**
      * Realiza o login com o google
      * @param {event} event
+     * @returns {Promise}
      */
     doGoogleLogin: function doGoogleLogin(event) {
       var _this = this;
@@ -19683,8 +19663,8 @@ function GoogleLoginvue_type_script_lang_js_objectSpread(target) { for (var i = 
 
 var GoogleLogin_component = normalizeComponent(
   components_GoogleLoginvue_type_script_lang_js_,
-  GoogleLoginvue_type_template_id_40dbd14e_render,
-  GoogleLoginvue_type_template_id_40dbd14e_staticRenderFns,
+  GoogleLoginvue_type_template_id_590f1a82_render,
+  GoogleLoginvue_type_template_id_590f1a82_staticRenderFns,
   false,
   null,
   null,
@@ -21992,7 +21972,8 @@ function Appvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < a
     return {
       loading: false,
       screen: 'Identification',
-      showComponent: true
+      showComponent: true,
+      googleLoginToggleStatus: false
     };
   },
   props: {
@@ -22061,8 +22042,7 @@ function Appvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < a
       endpoint: 'login/google/active'
     }).then(function (response) {
       var googleLoginToggle = response['google-login'];
-
-      _this2.setGoogleLoginToggleStatus(googleLoginToggle);
+      _this2.googleLoginToggleStatus = googleLoginToggle;
     });
     this.verifyFacebookLogin();
   },
@@ -22079,7 +22059,7 @@ function Appvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < a
       this.setBaseUrl(baseUrl);
     }
   },
-  computed: Appvue_type_script_lang_js_objectSpread(Appvue_type_script_lang_js_objectSpread({}, Object(vuex_esm["d" /* mapState */])(['blockedUser', 'googleLoginToggleStatus'])), {}, {
+  computed: Appvue_type_script_lang_js_objectSpread(Appvue_type_script_lang_js_objectSpread({}, Object(vuex_esm["d" /* mapState */])(['blockedUser'])), {}, {
     /**
      * Verifica se o login com o otp será utilizado
      * @return {boolean}
@@ -22192,7 +22172,8 @@ function Appvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < a
       try {
         var params = JSON.parse(this.dataCallbackPost);
         return params.google === '1';
-      } catch (_unused3) {
+      } catch (error) {
+        console.warn(error);
         return false;
       }
     }
@@ -22200,7 +22181,7 @@ function Appvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < a
   methods: Appvue_type_script_lang_js_objectSpread(Appvue_type_script_lang_js_objectSpread({
     googleLoginEasyToggle: server.googleLoginEasyToggle,
     getLangs: server.getLangs
-  }, Object(vuex_esm["b" /* mapActions */])(['setBaseUrl', 'setIdentification', 'setLang', 'setResolution', 'setGoogleLoginToggleStatus'])), {}, {
+  }, Object(vuex_esm["b" /* mapActions */])(['setBaseUrl', 'setIdentification', 'setLang', 'setResolution'])), {}, {
     /**
      * Define a tela a ser exibida de acordo com a identificação
      * definidas
