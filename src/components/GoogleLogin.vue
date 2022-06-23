@@ -73,6 +73,7 @@ export default {
     /**
      * Realiza o login com o google
      * @param {event} event
+     * @returns {Promise}
      */
     doGoogleLogin(event, payload = {
       ...this.params,

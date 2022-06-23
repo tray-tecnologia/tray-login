@@ -35,8 +35,7 @@ export default {
 
   /**
    * Realiza o login com o google
-   * @param {string} endpoint
-   * @param {object} params
+   * @param {object} payload
    * @returns {Promise}
    */
   googleLogin(payload = {

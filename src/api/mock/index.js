@@ -81,14 +81,16 @@ export default {
     return fetch(facebookResponse, delay).then(response => response);
   },
 
+  /**
+   * Mock com o status do login com o google
+   * @returns {Promise}
+   */
   googleLogin() {
     return fetch(googleResponse, delay).then(response => response);
   },
 
   /**
    * Mock com o status da toggle de login com o google de uma loja no easycheckout
-   * @param {string} endpoint
-   * @param {object} payload
    * @returns {Promise}
    */
   googleLoginEasyToggle() {
