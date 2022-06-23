@@ -61,7 +61,7 @@ export default {
      */
     formatedParams() {
       const objectParams = JSON.parse(this.callbackPost);
-      objectParams.facebook = '1';
+      objectParams.social = '1';
 
       if (this.hasTokenInParams(objectParams)) {
         delete objectParams.token;
@@ -74,6 +74,10 @@ export default {
   methods: {
     googleLogin: client.googleLogin,
 
+    /**
+     * Emite o evento de login com o google e faz a chamada para
+     * o método de login
+     */
     onClickButton() {
       this.$emitEvent.click('tray-login-google');
       this.doGoogleLogin();

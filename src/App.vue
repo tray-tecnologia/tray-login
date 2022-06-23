@@ -344,7 +344,7 @@ export default {
     isFacebookLogin() {
       try {
         const params = JSON.parse(this.dataCallbackPost);
-        return params.facebook === '1';
+        return params.social === '1';
       } catch {
         return false;
       }
@@ -357,7 +357,7 @@ export default {
     isGoogleLogin() {
       try {
         const params = JSON.parse(this.dataCallbackPost);
-        return params.google === '1';
+        return params.social === '1';
       } catch (error) {
         console.warn(error);
         return false;

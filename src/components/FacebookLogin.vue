@@ -61,7 +61,7 @@ export default {
      */
     formatedParams() {
       const objectParams = JSON.parse(this.callbackPost);
-      objectParams.facebook = '1';
+      objectParams.social = '1';
 
       if (this.hasTokenInParams(objectParams)) {
         delete objectParams.token;
