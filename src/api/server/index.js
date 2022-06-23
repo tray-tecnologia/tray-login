@@ -40,12 +40,12 @@ export default {
    */
   googleLogin(payload = {
     callback: '',
-    endpoint: 'com1-login/google/url',
+    endpoint: 'login/google/url',
     session_id: '',
     store_id: '',
   }) {
     const { endpoint, ...params } = payload;
-    return http.get(endpoint, { params }).then(response => response);
+    return http.get('http://minhaloja.commercesuite.com.br/com1-checkout/login/google/url', { params }).then(response => response);
   },
 
   /**
