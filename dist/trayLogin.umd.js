@@ -19514,12 +19514,12 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var FacebookLogin = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GoogleLogin.vue?vue&type=template&id=e4460a7a&
-var GoogleLoginvue_type_template_id_e4460a7a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"google-button",staticClass:"tray-btn-google",on:{"click":_vm.onClickButton}},[_vm._v("\n    Google\n")])}
-var GoogleLoginvue_type_template_id_e4460a7a_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GoogleLogin.vue?vue&type=template&id=0c99c2f2&
+var GoogleLoginvue_type_template_id_0c99c2f2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"google-button",staticClass:"tray-btn-google",on:{"click":_vm.onClickButton}},[_vm._v("\n    Google\n")])}
+var GoogleLoginvue_type_template_id_0c99c2f2_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GoogleLogin.vue?vue&type=template&id=e4460a7a&
+// CONCATENATED MODULE: ./src/components/GoogleLogin.vue?vue&type=template&id=0c99c2f2&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GoogleLogin.vue?vue&type=script&lang=js&
 
@@ -19595,12 +19595,17 @@ function GoogleLoginvue_type_script_lang_js_objectSpread(target) { for (var i = 
     },
 
     /**
-     * Adiciona aos parametros um index de google
+     * Adiciona aos parametros um index de google e remove o token antigo
      * @return {object}
      */
     formatedParams: function formatedParams() {
       var objectParams = JSON.parse(this.callbackPost);
-      objectParams.google = '1';
+      objectParams.facebook = '1';
+
+      if (this.hasTokenInParams(objectParams)) {
+        delete objectParams.token;
+      }
+
       return objectParams;
     }
   },
@@ -19609,6 +19614,15 @@ function GoogleLoginvue_type_script_lang_js_objectSpread(target) { for (var i = 
     onClickButton: function onClickButton() {
       this.$emitEvent.click('tray-login-google');
       this.doGoogleLogin();
+    },
+
+    /**
+     * Valida se há token no objeto de parametros
+     * @param {object} objectParams objeto com os parametros de post
+     * @return {bool}
+     */
+    hasTokenInParams: function hasTokenInParams(objectParams) {
+      return Object.prototype.hasOwnProperty.call(objectParams, 'token');
     },
 
     /**
@@ -19676,8 +19690,8 @@ function GoogleLoginvue_type_script_lang_js_objectSpread(target) { for (var i = 
 
 var GoogleLogin_component = normalizeComponent(
   components_GoogleLoginvue_type_script_lang_js_,
-  GoogleLoginvue_type_template_id_e4460a7a_render,
-  GoogleLoginvue_type_template_id_e4460a7a_staticRenderFns,
+  GoogleLoginvue_type_template_id_0c99c2f2_render,
+  GoogleLoginvue_type_template_id_0c99c2f2_staticRenderFns,
   false,
   null,
   null,

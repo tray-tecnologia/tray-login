@@ -56,12 +56,17 @@ export default {
     },
 
     /**
-     * Adiciona aos parametros um index de google
+     * Adiciona aos parametros um index de google e remove o token antigo
      * @return {object}
      */
     formatedParams() {
       const objectParams = JSON.parse(this.callbackPost);
-      objectParams.google = '1';
+      objectParams.facebook = '1';
+
+      if (this.hasTokenInParams(objectParams)) {
+        delete objectParams.token;
+      }
+
       return objectParams;
     },
   },
@@ -72,6 +77,15 @@ export default {
     onClickButton() {
       this.$emitEvent.click('tray-login-google');
       this.doGoogleLogin();
+    },
+
+    /**
+     * Valida se há token no objeto de parametros
+     * @param {object} objectParams objeto com os parametros de post
+     * @return {bool}
+     */
+    hasTokenInParams(objectParams) {
+      return Object.prototype.hasOwnProperty.call(objectParams, 'token');
     },
 
     /**
