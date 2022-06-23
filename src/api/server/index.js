@@ -45,7 +45,7 @@ export default {
     store_id: '',
   }) {
     const { endpoint, ...params } = payload;
-    return http.get('http://minhaloja.commercesuite.com.br/com1-checkout/login/google/url', { params }).then(response => response);
+    return http.get('https://minhaloja.commercesuite.com.br/com1-checkout/login/google/url', { params }).then(response => response);
   },
 
   /**
