@@ -227,7 +227,7 @@ export default {
       this.googleLoginToggleStatus = googleLoginToggle;
     });
 
-    this.OrGoogle();
+    this.verifyFacebookOrGoogleLogin();
   },
 
   watch: {

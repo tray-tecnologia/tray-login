@@ -2,7 +2,7 @@
   <button
     ref="google-button"
     class="tray-btn-google"
-    @click="$emitEvent.click('tray-login-google'), doGoogleLogin($event)">
+    @click="onClickButton">
       Google
   </button>
 </template>
@@ -64,11 +64,15 @@ export default {
       objectParams.google = '1';
       return objectParams;
     },
-
   },
 
   methods: {
     googleLogin: client.googleLogin,
+
+    onClickButton() {
+      this.$emitEvent.click('tray-login-google');
+      this.doGoogleLogin();
+    },
 
     /**
      * Realiza o login com o google
