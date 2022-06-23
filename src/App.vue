@@ -227,7 +227,7 @@ export default {
       this.googleLoginToggleStatus = googleLoginToggle;
     });
 
-    this.verifyFacebookLogin();
+    this.OrGoogle();
   },
 
   watch: {
@@ -424,11 +424,11 @@ export default {
     },
 
     /**
-     * Executa o mixinCallbackLogin caso tenha token de login com o facebook
+     * Executa o mixinCallbackLogin caso tenha token de login com o facebook ou google
      * @return {undefined}
      */
-    verifyFacebookLogin() {
-      if (this.hasFacebookToken()) {
+    verifyFacebookOrGoogleLogin() {
+      if (this.hasFacebookToken() || this.hasGoogleToken()) {
         this.mixinCallbackLogin(this.dataCallbackPost, this.localToken);
       }
     },
@@ -439,6 +439,14 @@ export default {
      */
     hasFacebookToken() {
       return this.isFacebookLogin && this.hasToken;
+    },
+
+    /**
+     * Verifica se o login foi feito pelo google e se há token de sessão
+     * @return {bool}
+     */
+    hasGoogleToken() {
+      return this.isGoogleLogin && this.hasToken;
     },
   },
 };

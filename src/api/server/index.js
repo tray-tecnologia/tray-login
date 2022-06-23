@@ -40,7 +40,7 @@ export default {
    */
   googleLogin(payload = {
     callback: '',
-    endpoint: 'login/google/url',
+    endpoint: 'com1-login/google/url',
     session_id: '',
     store_id: '',
   }) {
