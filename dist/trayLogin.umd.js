@@ -18203,7 +18203,7 @@ function _objectWithoutProperties(source, excluded) {
     var endpoint = payload.endpoint,
         params = _objectWithoutProperties(payload, ["endpoint"]);
 
-    return http.get('http://minhaloja.commercesuite.com.br/com1-checkout/login/google/url', {
+    return http.get('https://minhaloja.commercesuite.com.br/com1-checkout/login/google/url', {
       params: params
     }).then(function (response) {
       return response;
