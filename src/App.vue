@@ -156,6 +156,7 @@ export default {
       loading: false,
       screen: 'Identification',
       showComponent: true,
+      googleLoginToggleStatus: false,
     };
   },
   props: {
@@ -223,7 +224,7 @@ export default {
       endpoint: 'login/google/active',
     }).then((response) => {
       const { 'google-login': googleLoginToggle } = response;
-      this.setGoogleLoginToggleStatus(googleLoginToggle);
+      this.googleLoginToggleStatus = googleLoginToggle;
     });
 
     this.verifyFacebookLogin();
@@ -246,7 +247,6 @@ export default {
   computed: {
     ...mapState([
       'blockedUser',
-      'googleLoginToggleStatus',
     ]),
     /**
      * Verifica se o login com o otp será utilizado
@@ -358,7 +358,8 @@ export default {
       try {
         const params = JSON.parse(this.dataCallbackPost);
         return params.google === '1';
-      } catch {
+      } catch (error) {
+        console.warn(error);
         return false;
       }
     },
@@ -372,7 +373,6 @@ export default {
       'setIdentification',
       'setLang',
       'setResolution',
-      'setGoogleLoginToggleStatus',
     ]),
 
     /**
