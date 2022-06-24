@@ -18644,8 +18644,8 @@ var checkIcon = "<svg width=\"10\" height=\"8\" viewBox=\"0 0 10 8\" fill=\"none
       payloadPost.token = tokenPassword;
       payloadPost.endpoint = this.payloadPostEndpoint;
 
-      if (this.hasFacebookInParams(payloadPost)) {
-        delete payloadPost.facebook;
+      if (this.hasSocialParam(payloadPost)) {
+        delete payloadPost.social;
       }
 
       return payloadPost;
@@ -18671,11 +18671,11 @@ var checkIcon = "<svg width=\"10\" height=\"8\" viewBox=\"0 0 10 8\" fill=\"none
     },
 
     /**
-     * Valida se há facebook no objeto payloadPost
+     * Valida se há 'social' no objeto payloadPost
      * @return {bool}
      */
-    hasFacebookInParams: function hasFacebookInParams(payloadPost) {
-      return Object.prototype.hasOwnProperty.call(payloadPost, 'facebook');
+    hasSocialParam: function hasSocialParam(payloadPost) {
+      return Object.prototype.hasOwnProperty.call(payloadPost, 'social');
     }
   }
 });
