@@ -3,6 +3,8 @@ import langs from './data/langs.json';
 import checkStatusBlocked from './data/check-status-blocked.json';
 
 import facebookResponse from './data/facebook.json';
+import googleResponse from './data/google.json';
+import googleLoginToggleResponse from './data/google-login-toggle.json';
 
 import securityCodeResponse from './data/generate-security-code.json';
 
@@ -77,6 +79,22 @@ export default {
 
   facebookLogin() {
     return fetch(facebookResponse, delay).then(response => response);
+  },
+
+  /**
+   * Mock com o status do login com o google
+   * @returns {Promise}
+   */
+  googleLogin() {
+    return fetch(googleResponse, delay).then(response => response);
+  },
+
+  /**
+   * Mock com o status da toggle de login com o google de uma loja no easycheckout
+   * @returns {Promise}
+   */
+  googleLoginEasyToggle() {
+    return fetch(googleLoginToggleResponse, delay).then(response => response.data);
   },
 
   /**

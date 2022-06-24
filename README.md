@@ -9,7 +9,7 @@ Web Component para realizar login nas lojas da Tray.
 Atributo             | Descrição
 --------             | -----------
 data-store           | ID da loja
-data-methods         | Tipos de login que você deseja utilizar, opções: ['facebook', 'password', 'otp']
+data-methods         | Tipos de login que você deseja utilizar, opções: ['facebook', 'google', 'password', 'otp']
 data-callback        | URL de callback caso o login esteja correto
 data-texts           | Textos personalizados (opcional)
 data-identification  | Identificação utilizada para login (opcional)
@@ -103,4 +103,4 @@ Agora que o ambiente está configurado, execute na raiz:
 yarn serve
 ```
 
-Caso você esteja utilizando o docker o comando acima já é executado automaticamente ao levantar o ontainer
+Caso você esteja utilizando o docker o comando acima já é executado automaticamente ao levantar o container

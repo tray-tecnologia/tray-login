@@ -46,6 +46,7 @@
       </button>
     </form>
     <slot name="app-facebook-login"></slot>
+    <slot name="app-google-login"></slot>
     <section class="tray-loading" v-show="loading">
       <div class="tray-loading-mask">
         <div class="tray-loading-line"></div>

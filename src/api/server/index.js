@@ -34,6 +34,35 @@ export default {
   },
 
   /**
+   * Realiza o login com o google
+   * @param {object} payload
+   * @returns {Promise}
+   */
+  googleLogin(payload = {
+    callback: '',
+    endpoint: 'login/google/url',
+    session_id: '',
+    store_id: '',
+  }) {
+    const { endpoint, ...params } = payload;
+    return http.get(endpoint, { params }).then(response => response);
+  },
+
+  /**
+   * Recupera o status da toggle de login com o google da loja no easycheckout
+   * @param {string} endpoint
+   * @param {object} payload
+   * @returns {Promise}
+   */
+  googleLoginEasyToggle(payload = {
+    endpoint: 'login/google/active',
+    store_id: '',
+  }) {
+    const { endpoint, ...params } = payload;
+    return http.get(endpoint, { params }).then(response => response.data);
+  },
+
+  /**
    * Recupera as langs definidas na plataforma
    * @param {string} endpoint
    * @param {object} payload

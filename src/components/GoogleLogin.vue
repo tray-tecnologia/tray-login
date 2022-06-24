@@ -1,9 +1,9 @@
 <template>
   <button
-    ref="facebook-button"
-    class="tray-btn-facebook"
-    @click="$emitEvent.click('tray-login-facebook'), doFacebookLogin($event)">
-      Facebook
+    ref="google-button"
+    class="tray-btn-google"
+    @click="onClickButton">
+      Google
   </button>
 </template>
 
@@ -12,7 +12,7 @@ import client from 'api-client';
 import utils from '@/mixins/utils';
 
 export default {
-  name: 'AppFacebookLogin',
+  name: 'AppGoogleLogin',
   mixins: [utils],
   props: {
     callback: {
@@ -25,7 +25,7 @@ export default {
     },
     endpoint: {
       type: String,
-      default: 'facebook/url',
+      default: 'login/google/url',
     },
     params: {
       type: Object,
@@ -56,7 +56,7 @@ export default {
     },
 
     /**
-     * Adiciona aos parametros um index de facebook e remove o token antigo
+     * Adiciona aos parametros um index de google e remove o token antigo
      * @return {object}
      */
     formatedParams() {
@@ -69,11 +69,19 @@ export default {
 
       return objectParams;
     },
-
   },
 
   methods: {
-    facebookLogin: client.facebookLogin,
+    googleLogin: client.googleLogin,
+
+    /**
+     * Emite o evento de login com o google e faz a chamada para
+     * o método de login
+     */
+    onClickButton() {
+      this.$emitEvent.click('tray-login-google');
+      this.doGoogleLogin();
+    },
 
     /**
      * Valida se há token no objeto de parametros
@@ -85,21 +93,21 @@ export default {
     },
 
     /**
-     * Realiza o login com o facebook
+     * Realiza o login com o google
      * @param {event} event
+     * @returns {Promise}
      */
-    doFacebookLogin(event, payload = {
+    doGoogleLogin(event, payload = {
       ...this.params,
       callback: this.urlCallback(),
-      endpoint: 'facebook/url',
-      crossdm: encodeURIComponent(document.location.origin),
+      endpoint: 'login/google/url',
     }) {
       this.$parent.setLoading(true);
-      this.facebookLogin(payload).then((response) => {
+      this.googleLogin(payload).then((response) => {
         this.$emitEvent.login({
           response,
           type: 'success',
-          method: 'facebook',
+          method: 'google',
         });
 
         const { url } = response.data.data;
@@ -110,7 +118,7 @@ export default {
         this.$emitEvent.login({
           response: error,
           type: 'error',
-          method: 'facebook',
+          method: 'google',
         });
 
         this.$parent.setLoading(false);
@@ -132,7 +140,6 @@ export default {
      * @return {string}
      */
     urlCallbackPost() {
-      localStorage.setItem('jwtToken', 'false');
       return `${document.location.origin}${this.homePath}/login?${this.urlParams}`;
     },
   },

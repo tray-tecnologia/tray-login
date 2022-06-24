@@ -20,6 +20,13 @@
         :params="params"
         slot="app-facebook-login"
       />
+      <app-google-login
+        v-if="googleEnabled"
+        :callback="this.dataCallback"
+        :callbackPost="this.dataCallbackPost"
+        :params="params"
+        slot="app-google-login"
+      />
     </app-identification>
 
     <app-login id="main" v-if="screen === 'Main'"
@@ -44,6 +51,13 @@
         :callbackPost="this.dataCallbackPost"
         :params="params"
         slot="app-facebook-login"
+      />
+      <app-google-login
+        v-if="googleEnabled"
+        :callback="this.dataCallback"
+        :callbackPost="this.dataCallbackPost"
+        :params="params"
+        slot="app-google-login"
       />
       <button type="button"
         v-if="identificationEnabled"
@@ -76,6 +90,13 @@
         :callbackPost="this.dataCallbackPost"
         :params="params"
         slot="app-facebook-login"
+      />
+      <app-google-login
+        v-if="googleEnabled"
+        :callback="this.dataCallback"
+        :callbackPost="this.dataCallbackPost"
+        :params="params"
+        slot="app-google-login"
       />
       <button v-if="identificationEnabled"
         class="tray-btn-default"
@@ -110,6 +131,7 @@ import screenHandler from '@/mixins/screenHandler';
 import utils from '@/mixins/utils';
 import store from './store';
 import AppFacebookLogin from './components/FacebookLogin.vue';
+import AppGoogleLogin from './components/GoogleLogin.vue';
 import AppIdentification from './screens/Identification/Main.vue';
 import AppLogin from './screens/Login/screens/Main.vue';
 import AppOtpButton from './screens/Login/screens/Otp/Button.vue';
@@ -122,6 +144,7 @@ export default {
   components: {
     AppCustomTexts,
     AppFacebookLogin,
+    AppGoogleLogin,
     AppIdentification,
     AppOtpButton,
     AppLogin,
@@ -133,6 +156,7 @@ export default {
       loading: false,
       screen: 'Identification',
       showComponent: true,
+      googleLoginToggleStatus: false,
     };
   },
   props: {
@@ -155,7 +179,7 @@ export default {
     dataMethods: {
       type: [String, Array],
       default() {
-        return ['facebook', 'identify'];
+        return ['facebook', 'google', 'identify'];
       },
     },
     dataSession: {
@@ -187,13 +211,23 @@ export default {
   },
   mounted() {
     this.initialize(this.dataIdentification);
+
     this.getLangs({
       store_id: this.dataStore,
       endpoint: 'langs/login_component',
     }).then((response) => {
       this.setLang(response.data);
     });
-    this.verifyFacebookLogin();
+
+    this.googleLoginEasyToggle({
+      store_id: this.dataStore,
+      endpoint: 'login/google/active',
+    }).then((response) => {
+      const { 'google-login': googleLoginToggle } = response;
+      this.googleLoginToggleStatus = googleLoginToggle;
+    });
+
+    this.verifyFacebookOrGoogleLogin();
   },
 
   watch: {
@@ -214,7 +248,6 @@ export default {
     ...mapState([
       'blockedUser',
     ]),
-
     /**
      * Verifica se o login com o otp será utilizado
      * @return {boolean}
@@ -229,6 +262,14 @@ export default {
      */
     facebookEnabled() {
       return this.dataMethods.indexOf('facebook') !== -1;
+    },
+
+    /**
+     * Verifica se o login com o google será utilizado
+     * @return {boolean}
+     */
+    googleEnabled() {
+      return this.googleLoginToggleStatus && this.dataMethods.indexOf('google') !== -1;
     },
 
     /**
@@ -303,14 +344,29 @@ export default {
     isFacebookLogin() {
       try {
         const params = JSON.parse(this.dataCallbackPost);
-        return params.facebook === '1';
+        return params.social === '1';
       } catch {
+        return false;
+      }
+    },
+
+    /**
+     * Valida se foi feito o login com o google
+     * @return {bool}
+     */
+    isGoogleLogin() {
+      try {
+        const params = JSON.parse(this.dataCallbackPost);
+        return params.social === '1';
+      } catch (error) {
+        console.warn(error);
         return false;
       }
     },
   },
 
   methods: {
+    googleLoginEasyToggle: http.googleLoginEasyToggle,
     getLangs: http.getLangs,
     ...mapActions([
       'setBaseUrl',
@@ -368,11 +424,11 @@ export default {
     },
 
     /**
-     * Executa o mixinCallbackLogin caso tenha token de login com o facebook
+     * Executa o mixinCallbackLogin caso tenha token de login com o facebook ou google
      * @return {undefined}
      */
-    verifyFacebookLogin() {
-      if (this.hasFacebookToken()) {
+    verifyFacebookOrGoogleLogin() {
+      if (this.hasFacebookToken() || this.hasGoogleToken()) {
         this.mixinCallbackLogin(this.dataCallbackPost, this.localToken);
       }
     },
@@ -383,6 +439,14 @@ export default {
      */
     hasFacebookToken() {
       return this.isFacebookLogin && this.hasToken;
+    },
+
+    /**
+     * Verifica se o login foi feito pelo google e se há token de sessão
+     * @return {bool}
+     */
+    hasGoogleToken() {
+      return this.isGoogleLogin && this.hasToken;
     },
   },
 };
