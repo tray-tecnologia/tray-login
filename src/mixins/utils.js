@@ -103,8 +103,8 @@ export default {
       payloadPost.token = tokenPassword;
       payloadPost.endpoint = this.payloadPostEndpoint;
 
-      if (this.hasFacebookInParams(payloadPost)) {
-        delete payloadPost.facebook;
+      if (this.hasSocialParam(payloadPost)) {
+        delete payloadPost.social;
       }
 
       return payloadPost;
@@ -130,11 +130,11 @@ export default {
     },
 
     /**
-     * Valida se há facebook no objeto payloadPost
+     * Valida se há 'social' no objeto payloadPost
      * @return {bool}
      */
-    hasFacebookInParams(payloadPost) {
-      return Object.prototype.hasOwnProperty.call(payloadPost, 'facebook');
+    hasSocialParam(payloadPost) {
+      return Object.prototype.hasOwnProperty.call(payloadPost, 'social');
     },
   },
 };
