@@ -2,17 +2,26 @@
   <button
     ref="google-button"
     class="tray-btn-google"
-    @click="onClickButton">
-      Google
+    @click="onClickButton"
+    @mouseover="removeIconColors = true"
+    @mouseleave="removeIconColors = false"
+  >
+    <figure class="tray-button-icon">
+      <google-icon :removeColors="removeIconColors" />
+    </figure>
+
+    <p>Google</p>
   </button>
 </template>
 
 <script>
 import client from 'api-client';
 import utils from '@/mixins/utils';
+import GoogleIcon from './GoogleIcon.vue';
 
 export default {
   name: 'AppGoogleLogin',
+  components: { GoogleIcon },
   mixins: [utils],
   props: {
     callback: {
@@ -36,6 +45,12 @@ export default {
         };
       },
     },
+  },
+
+  data() {
+    return {
+      removeIconColors: false,
+    };
   },
 
   computed: {
