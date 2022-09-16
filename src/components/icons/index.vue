@@ -6,6 +6,9 @@
 import Google from './GoogleIcon.vue';
 import Facebook from './FacebookIcon.vue';
 import Key from './KeyIcon.vue';
+import Email from './EmailIcon.vue';
+import Document from './DocumentIcon.vue';
+import Locked from './LockedIcon.vue';
 
 export default {
   name: 'IconFactory',
@@ -14,6 +17,9 @@ export default {
     Google,
     Facebook,
     Key,
+    Email,
+    Document,
+    Locked,
   },
 
   props: {

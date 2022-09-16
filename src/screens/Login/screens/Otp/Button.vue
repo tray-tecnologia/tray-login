@@ -20,10 +20,10 @@
 import http from 'api-client';
 import screenHandler from '@/mixins/screenHandler';
 import { mapState, mapGetters } from 'vuex';
-import icon from '@/components/icons/index.vue';
+import Icon from '@/components/icons/index.vue';
 
 export default {
-  components: { icon },
+  components: { Icon },
 
   mixins: [screenHandler],
 
