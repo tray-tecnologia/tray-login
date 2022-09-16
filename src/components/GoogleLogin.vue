@@ -7,7 +7,7 @@
     @mouseleave="removeIconColors = false"
   >
     <figure class="tray-button-icon">
-      <google-icon :removeColors="removeIconColors" />
+      <icon name="google" :removeColors="removeIconColors" />
     </figure>
 
     <p>Fazer login com o Google</p>
@@ -17,11 +17,11 @@
 <script>
 import client from 'api-client';
 import utils from '@/mixins/utils';
-import GoogleIcon from './GoogleIcon.vue';
+import Icon from './icons/index.vue';
 
 export default {
   name: 'AppGoogleLogin',
-  components: { GoogleIcon },
+  components: { Icon },
   mixins: [utils],
   props: {
     callback: {

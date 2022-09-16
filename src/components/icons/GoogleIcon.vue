@@ -33,6 +33,7 @@
 <script>
 export default {
   name: 'GoogleIcon',
+
   props: {
     removeColors: {
       default: false,
