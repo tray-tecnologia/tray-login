@@ -9,6 +9,8 @@ import Key from './KeyIcon.vue';
 import Email from './EmailIcon.vue';
 import Document from './DocumentIcon.vue';
 import Locked from './LockedIcon.vue';
+import Visible from './VisibleIcon.vue';
+import Hidden from './HiddenIcon.vue';
 
 export default {
   name: 'IconFactory',
@@ -20,6 +22,8 @@ export default {
     Email,
     Document,
     Locked,
+    Visible,
+    Hidden,
   },
 
   props: {
