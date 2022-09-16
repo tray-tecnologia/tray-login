@@ -10,7 +10,7 @@
       <google-icon :removeColors="removeIconColors" />
     </figure>
 
-    <p>Google</p>
+    <p>Fazer login com o Google</p>
   </button>
 </template>
 

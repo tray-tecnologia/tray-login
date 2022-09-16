@@ -18,7 +18,7 @@
       </svg>
     </figure>
 
-    <p>Facebook</p>
+    <p>Fazer login com o Facebook</p>
   </button>
 </template>
 
