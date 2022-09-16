@@ -2,7 +2,7 @@
     "data": {
         "data": {
             "identify-title":"Identifique-se",
-            "identify-input":"E-mail ou CPF/CNPJ (números)" ,
+            "identify-input":"E-mail ou CPF/CNPJ" ,
             "identify-data-invalid":"Dados inv&aacute;lidos, digite novamente!",
             "identify-error-not-found":"Usu&aacute;rio n&atilde;o encontrado, fa&ccedil;a seu cadastro.",
             "invalid-code":"Autenticação incorreta",
@@ -14,8 +14,6 @@
             "password-button-cpf":"CPF e senha",
             "password-button-cnpj":"CNPJ e senha",
             "password-action":"Informe sua senha.",
-            "password-hide":"Ocultar",
-            "password-show":"Mostrar",
             "password-input-label":"Digite sua senha",
             "confirmation-input-label":"Confirmar nova senha",
             "password-forget":"Esqueci ou não tenho senha",

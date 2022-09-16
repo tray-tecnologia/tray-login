@@ -5,7 +5,7 @@ export default {
   lang: {
     // identify screen
     'identify-title': 'Identifique-se',
-    'identify-input': 'E-mail ou CPF/CNPJ (números)',
+    'identify-input': 'E-mail ou CPF/CNPJ',
     'identify-error-not-found': 'Não foi possível verificar seu cadastro, tente novamente.',
     'identify-button': 'Continuar',
     // errors
@@ -23,8 +23,6 @@ export default {
     'password-button-cpf': 'CPF e senha da loja',
     'password-button-cnpj': 'CNPJ e senha da loja',
     'password-action': 'Informe sua senha.',
-    'password-hide': 'Ocultar',
-    'password-show': 'Mostrar',
     'password-input-label': 'Senha',
     'password-forget': 'Esqueci ou não tenho senha',
     // opt screen
