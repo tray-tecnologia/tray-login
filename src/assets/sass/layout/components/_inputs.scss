@@ -1,5 +1,6 @@
 $general-input: $white;
 $input-error: $red;
+$input-color: #777777;
 
 tray-login {
     .tray-input-group {
@@ -8,7 +9,7 @@ tray-login {
         position: relative;
 
         .tray-input-icon {
-            color: #909090;
+            color: $input-color;
         }
 
         button {
@@ -17,23 +18,22 @@ tray-login {
     }
 
     .tray-input {
-        background: #fff;
-        border: 1px solid #e0dcdc;
-        border-radius: 3px;
-        color: #909090;
+        background: #FFFFFF;
+        border: 1px solid #D2D2D2;
+        border-radius: 4px;
+        color: $input-color;
         display: block;
         font-size: 14px;
         font-weight: 300;
-        height: 47px;
+        height: 44px;
         line-height: 14px;
         padding: 13px 0 14px 36px!important;
-        width: 100%;
+        width: 100%; // TODO: figma 336px
         margin-bottom: 10px;
-        outline-width: 0;
 
         &:focus {
             outline: 0;
-            border-color: silver;
+            border-color: #8F8F8F;
             border-width: 2px;
             color: #909090;
         }
@@ -126,14 +126,13 @@ tray-login {
     .tray-login-hide-password {
         border: 0;
         cursor: pointer;
-        color: #c7c7c7;
+        color: $input-color;
         font-size: 10px;
         height: 25px;
         position: absolute;
         right: 10px;
-        top: 12px;
+        top: 10px;
         text-transform: uppercase;
-        outline-width: 0;
         background: none;
     }
 }
