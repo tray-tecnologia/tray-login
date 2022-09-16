@@ -10,8 +10,7 @@
       <fieldset class="tray-input-group">
         <label for="input-email">
           <figure class="tray-input-icon" :class="identificationClasses">
-            <icon name="email" v-if="earlyType === 'email'" />
-            <icon name="document" v-else />
+            <icon :name="earlyType === 'email' ? 'email' : 'document'" />
           </figure>
         </label>
         <input v-model="computedIdentification"
@@ -23,7 +22,7 @@
           class="tray-input"
           autocapitalize="off"
           :class="identificationClasses"
-          :placeholder="$lang['identify-input']"/>
+          :placeholder="$lang['identify-input']" />
       </fieldset>
       <small class="tray-feedbacks" v-show="errors.length">
         <span class="tray-error-message"
