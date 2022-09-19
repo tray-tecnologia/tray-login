@@ -5,6 +5,7 @@ $input-color: #777777;
 tray-login {
     .tray-input-group {
         border: 0;
+        margin: 0;
         padding: 0;
         position: relative;
 
@@ -77,19 +78,20 @@ tray-login {
     }
 
     .tray-well {
-        width: 100%;
+        background-color: #EBEBEB;
+        border: 1px solid #D2D2D2;
+        border-radius: 4px;
+        color: #8F8F8F;
+
         display: block;
-        background-color: #ebebeb;
-        border-radius: 3px;
-        border: 1px solid #efeded;
-        color: #8f8f8f;
+        height: 44px;
         margin-bottom: 10px;
-        padding: 10px 10px;
-        text-align: center;
+        padding: 12px 10px;
+        width: 100%;
     }
 
     .tray-general-separator {
-        color: #909090;
+        color: #666666;
         display: block;
         margin-bottom: 10px;
         text-align: center;
@@ -109,7 +111,7 @@ tray-login {
             top: 50%;
             width: 9999px;
             height: 1px;
-            background: #909090;
+            background: #EBEBEB;
         }
 
         &:before {

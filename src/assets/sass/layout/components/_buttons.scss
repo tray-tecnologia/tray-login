@@ -44,7 +44,7 @@ tray-login {
         // TODO: figma => max-width: 228px || 336px;
 
         &:hover {
-            background-color: $btn-next-bg-hover;
+          background-color: $btn-next-bg-hover;
         }
     }
 
@@ -108,9 +108,7 @@ tray-login {
 
     .tray-close {
         background: #fff;
-        border: 2px solid #bababa;
-        border-radius: 50%;
-        color: #bababa;
+        border: none;
         cursor: pointer;
         float: right;
         font-weight: 700;

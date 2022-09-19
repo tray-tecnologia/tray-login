@@ -8,7 +8,7 @@ tray-login {
     }
 
     svg {
-        fill: currentColor;
+        fill: $default-color;
     }
 
     // Transitions
@@ -90,13 +90,23 @@ tray-login {
         cursor: pointer;
         font-size: 14px;
         padding: 0;
-        outline: none;
         text-decoration: underline;
     }
 
     .tray-password-forget {
+        border-bottom: 1px solid $blue;
+        color: $blue;
+        text-decoration: none;
+
         display: block;
         margin: 0 0 $default-margin;
+        padding-bottom: 2px;
+
+
+        &:hover {
+            color: darken($blue, 20%);
+            border-color: darken($blue, 20%);
+        }
     }
 
     .tray-custom-text {
