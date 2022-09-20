@@ -1,6 +1,6 @@
 {
     "errors": {
-        "0": "Autenticação incorreta"
+        "0": "Autenticação incorreta. Tente novamente."
     },
     "statusCode": 400
 }

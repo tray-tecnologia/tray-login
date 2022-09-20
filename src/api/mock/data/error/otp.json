@@ -2,6 +2,6 @@
     "data":{
         "hasAccount": false
     },
-    "message": "Autenticação incorreta",
+    "message": "Autenticação incorreta. Tente novamente.",
     "statusCode": 200
 }
