@@ -10,7 +10,7 @@
       <icon name="facebook" :removeColors="removeIconColors" />
     </figure>
 
-    <p>Fazer login com o Facebook</p>
+    <p>{{ $props.label }}</p>
   </button>
 </template>
 
@@ -27,6 +27,10 @@ export default {
   mixins: [utils],
 
   props: {
+    label: {
+      type: String,
+      default: 'Login com o Facebook',
+    },
     callback: {
       type: String,
       default: '',

@@ -10,7 +10,7 @@
       <icon name="google" :removeColors="removeIconColors" />
     </figure>
 
-    <p>Fazer login com o Google</p>
+    <p>{{ $props.label }}</p>
   </button>
 </template>
 
@@ -24,6 +24,10 @@ export default {
   components: { Icon },
   mixins: [utils],
   props: {
+    label: {
+      type: String,
+      default: 'Login com o Google',
+    },
     callback: {
       type: String,
       default: '',
