@@ -9,6 +9,14 @@ tray-login {
 
     svg {
         fill: $default-color;
+
+        &.success {
+            fill: $green;
+        }
+
+        &.error {
+            fill: $red;
+        }
     }
 
     // Transitions
@@ -53,15 +61,19 @@ tray-login {
     .tray-container {
         background: $background;
         border: 1px solid $overlay-color;
-        width: 292px;
-        position: fixed;
-        padding: $default-gutter;
-        z-index: 9999;
-        transform: translate(-50%, -50%);
-        top: 50%;
+        border-radius: 4px;
+
         left: 50%;
         max-height: 100%;
         overflow: auto;
+        padding: $default-gutter;
+        padding-bottom: calc(#{$default-gutter} - #{$default-margin});
+        position: fixed;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        max-width: 448px;
+        z-index: 9999;
     }
 
     .tray-close {
@@ -71,7 +83,7 @@ tray-login {
 
     .tray-title {
         font-weight: 900;
-        font-size: 18px;
+        font-size: 19px;
         margin: 0 0 $default-margin;
         display: block;
 
@@ -84,24 +96,21 @@ tray-login {
         margin: 0 0 $default-margin;
     }
 
-    .tray-link {
-        border: none;
-        background: none;
-        cursor: pointer;
-        font-size: 14px;
-        padding: 0;
-        text-decoration: underline;
+    #tray-login-terms {
+        font-size: 12px;
     }
 
-    .tray-password-forget {
+    #tray-login-terms a,
+    .tray-link {
+        background: none;
+        border: none;
         border-bottom: 1px solid $blue;
         color: $blue;
+        cursor: pointer;
+        font-size: 12px;
+        margin: $default-margin 0;
+        padding: 0;
         text-decoration: none;
-
-        display: block;
-        margin: 0 0 $default-margin;
-        padding-bottom: 2px;
-
 
         &:hover {
             color: darken($blue, 20%);
@@ -109,8 +118,37 @@ tray-login {
         }
     }
 
+    .tray-password-forget {
+        display: block;
+        margin: 0 0 $default-margin;
+        padding-bottom: 2px;
+    }
+
     .tray-custom-text {
         display: block;
         margin-bottom: 5px;
+    }
+
+    .tray-social-login {
+        display: flex;
+        gap: $default-margin;
+
+        button {
+            font-size: 12px;
+            gap: 5px;
+        }
+    }
+
+    @media (max-width: 448px) {
+        $default-gutter: 20px;
+
+        .tray-container {
+            padding: $default-gutter;
+            padding-bottom: calc(#{$default-gutter} - #{$default-margin});
+        }
+
+        .tray-close {
+            right: $default-gutter;
+        }
     }
 }
