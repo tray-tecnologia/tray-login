@@ -38,10 +38,8 @@ tray-login {
         border: 1px solid transparent;
         font-size: 14px;
         font-weight: normal;
-        margin-bottom: 10px;
+        margin-bottom: $default-margin;
         padding: 0;
-
-        // TODO: figma => max-width: 228px || 336px;
 
         &:hover {
           background-color: $btn-next-bg-hover;
@@ -49,10 +47,11 @@ tray-login {
     }
 
     .tray-btn-primary {
-        border-bottom-color: $btn-next-border;
-        border-bottom-width: 3px;
+      border-bottom-color: $btn-next-border;
+      border-bottom-width: 3px;
     }
 
+    .tray-btn-default,
     .tray-btn-otp,
     .tray-btn-facebook,
     .tray-btn-google {
@@ -71,13 +70,18 @@ tray-login {
         }
     }
 
+    .tray-btn-default,
     .tray-btn-otp {
         border-color: $btn-otp-border;
-        font-size: 13px;
+        font-size: 12px;
 
         &:hover {
             background-color: $btn-otp-bg-hover;
             color: $white;
+
+            svg {
+              fill: $white;
+            }
         }
     }
 
@@ -93,19 +97,6 @@ tray-login {
     .tray-btn-google:hover {
         color: $white;
     }
-
-    .tray-btn-default {
-        color: #bcbcbc;
-        background-color: #fff;
-        border: 1px solid #d3d1d1;
-        border-bottom-width: 3px;
-
-        &:hover {
-            background-color: darken(#fff, 5%);
-            border-color: darken(#d3d1d1, 10%);
-        }
-    }
-
     .tray-close {
         background: #fff;
         border: none;
