@@ -1,5 +1,10 @@
 const MIN_LENGTH = 8;
 /**
+ * Valida se está vazio
+ * @return {bool}
+ */
+export const isEmpty = value => value === '';
+/**
  * Valida o comprimento da string
  * @param {int} minLen Mínimo comprimento requerido
  * @return {bool}

@@ -1,8 +1,4 @@
 import http from 'api-client';
-import {
-  checkIcon,
-  timesIcon,
-} from '../screens/Login/screens/RecoverPassword/validators/icons';
 
 export default {
   data() {
@@ -116,7 +112,7 @@ export default {
      * @return {string}
      */
     getIconName(validationRule) {
-      return validationRule ? checkIcon : timesIcon;
+      return validationRule ? 'check' : 'times';
     },
 
     /**
