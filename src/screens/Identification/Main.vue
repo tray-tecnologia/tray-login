@@ -4,8 +4,10 @@
       <strong class="tray-title tray-login__title">
         {{ $lang['identify-title'] }}
       </strong>
+
       <slot name="custom-texts"></slot>
     </div>
+
     <form id="form-identify" method='POST' @submit.prevent="submit">
       <fieldset class="tray-input-group">
         <label for="input-email">
@@ -13,6 +15,7 @@
             <icon :name="earlyType === 'email' ? 'email' : 'document'" />
           </figure>
         </label>
+
         <input v-model="computedIdentification"
           v-autofocus
           type="text"
@@ -22,13 +25,16 @@
           class="tray-input"
           autocapitalize="off"
           :class="identificationClasses"
-          :placeholder="$lang['identify-input']" />
+          :placeholder="$lang['identify-input']"
+        />
       </fieldset>
+
       <small class="tray-feedbacks" v-show="errors.length">
         <span class="tray-error-message"
           v-html="errors[errors.length - 1] || !isValidIdentification">
         </span>
       </small>
+
       <button
         id="tray-login-identify"
         class="tray-btn-primary"
@@ -36,13 +42,22 @@
         {{ $lang['proceed'] }}
       </button>
     </form>
-    <slot name="app-facebook-login"></slot>
+
+    <div class="tray-general-separator">
+      <span class="tray-general-separator-line">
+        {{ $lang['main-separator'] }}
+      </span>
+    </div>
+
     <slot name="app-google-login"></slot>
+    <slot name="app-facebook-login"></slot>
+
     <section class="tray-loading" v-show="loading">
       <div class="tray-loading-mask">
         <div class="tray-loading-line"></div>
       </div>
-      <icon name="locked" />
+
+      <icon name="locked-loading" />
     </section>
   </section>
 </template>
