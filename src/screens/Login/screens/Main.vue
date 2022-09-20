@@ -15,20 +15,26 @@
         </label>
       </div>
 
-      <form method='POST'
-        @submit.prevent="submit">
-        <app-toggle-password id="input-password"
-          :autoFocus="true"
+      <form
+        method='POST'
+        @submit.prevent="submit"
+      >
+        <app-toggle-password
+          id="input-password"
           v-model="password"
+          :autoFocus="true"
           :state="this.errors.length >= 1 ? 'invalid' : 'initial'"
-          @keyup.native="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()">
-        </app-toggle-password>
+          @keyup.native="$event.keyCode !== enterKeyCode ? clearErrors() : $event.preventDefault()"
+        />
+
         <small class="tray-feedbacks" v-show="errors.length">
           <span class="tray-error-message" v-html="errors[errors.length - 1]"></span>
         </small>
+
         <button class="tray-link tray-password-forget" type="button" @click="sendCode">
           {{ $lang['password-forget'] }}
         </button>
+
         <button id="password-submit"
           @click="$emitEvent.click('tray-password-submit')"
           class="tray-btn-primary"
@@ -42,10 +48,13 @@
           {{ $lang['main-separator'] }}
         </span>
       </div>
+
+      <div class="tray-social-login">
+        <slot name="app-google-login"></slot>
+        <slot name="app-facebook-login"></slot>
+      </div>
+
       <slot name="app-otp-login"></slot>
-      <slot name="app-facebook-login"></slot>
-      <slot name="app-google-login"></slot>
-      <slot name="app-back-step"></slot>
     </section>
 
     <app-recover-password
@@ -76,10 +85,8 @@
       <div class="tray-loading-mask">
         <div class="tray-loading-line"></div>
       </div>
-      <svg class="tray-loading-icon tray-icon-locked" viewBox="0 0 1024 1024">
-        <!-- eslint-disable-next-line -->
-        <path class="path1" d="M796.467 417.109v-132.642c0-155.58-128.956-284.467-284.467-284.467s-284.467 128.887-284.467 284.467v132.642c-64.444 0-113.801 49.289-113.801 113.801v379.29c0.068 64.444 49.289 113.801 113.801 113.801h568.866c64.444 0 113.801-49.289 113.801-113.801v-379.29c0.068-60.689-49.289-113.801-113.732-113.801zM265.489 284.399c0-136.533 109.978-246.511 246.511-246.511s246.511 109.978 246.511 246.511v132.71h-37.956v-132.71c0-113.801-94.822-208.623-208.623-208.623s-208.555 94.822-208.555 208.623v132.71h-37.956l0.068-132.71zM682.667 284.399v132.71h-341.333v-132.71c0-94.822 75.844-170.667 170.667-170.667s170.667 75.844 170.667 170.667zM872.311 568.798v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333v75.844h-341.333v37.956h341.333c0 41.711-34.133 75.844-75.844 75.844h-568.866c-41.711 0-75.844-34.133-75.844-75.844v-379.221c0-41.711 34.133-75.844 75.844-75.844h568.866c41.711 0 75.844 34.133 75.844 75.844h-341.333v37.956l341.333-0.137z"></path>
-      </svg>
+
+      <icon name="locked-loading" />
     </section>
   </section>
 </template>
@@ -90,6 +97,7 @@ import utils from '@/mixins/utils';
 import screenHandler from '@/mixins/screenHandler';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import AppTogglePassword from '@/components/TogglePassword.vue';
+import Icon from '@/components/icons/index.vue';
 import AppRecoverPassword from './RecoverPassword/screens/Main.vue';
 import AppOtpLogin from './Otp/screens/Login.vue';
 import AppCompulsoryPassword from './CompulsoryPassword/Main.vue';
@@ -107,6 +115,7 @@ export default {
     AppRecoverPassword,
     AppCompulsoryPassword,
     AppOtpLogin,
+    Icon,
   },
   props: {
     callback: {
@@ -131,12 +140,25 @@ export default {
       },
     },
   },
+
   data() {
     return {
+      numberOfAttempts: 5,
       password: '',
       showPassword: false,
     };
   },
+
+  watch: {
+    numberOfAttempts(value) {
+      this.setBlockedUser(false);
+
+      if (value < 1) {
+        this.setBlockedUser(true);
+      }
+    },
+  },
+
   mounted() {
     this.setLoading(true);
     this.$emitEvent.custom('main');
@@ -182,6 +204,38 @@ export default {
     },
 
     /**
+     * Retorna a lang de 'invalid-code' se for a primeira tentativa
+     * ou concatena a informação da quantidade de tentativas restantes
+     * na lang 'attempts-remaining'
+     *
+     * @return {string}
+     */
+    attemptsRemaningReplacedLang() {
+      const message = this.$lang['invalid-code'];
+
+      if (!message) {
+        return '';
+      }
+
+      if (this.numberOfAttempts === 4) {
+        return message;
+      }
+
+      const attemptMessage = this.$lang['attempts-remaining'];
+      const pluralMessage = this.$lang['attempts-quantity'];
+
+      const hasPropInMessage = pluralMessage.search(':number') !== -1;
+
+      if (hasPropInMessage && this.numberOfAttempts > 1) {
+        return [attemptMessage, pluralMessage.replace(':number', this.numberOfAttempts)].join(' ');
+      }
+
+      const singularMessage = this.$lang['last-attempt'];
+
+      return [attemptMessage, singularMessage].join(' ');
+    },
+
+    /**
      * Valida se o callbackPost é diferente de "/"
      * @return {bool}
      */
@@ -198,6 +252,7 @@ export default {
 
     ...mapActions([
       'setSecurityCode',
+      'setBlockedUser',
     ]),
 
     ...mapActions('Login', [
@@ -223,9 +278,12 @@ export default {
       identification: this.identification,
       [this.identificationType]: this.identification,
     }) {
+      this.numberOfAttempts -= 1;
+
       this.setLoading(true);
       this.passwordLogin(payload).then((response) => {
         const { token: tokenPassword, code } = response.data.data;
+
         this.$emitEvent.login({
           details: {
             response,
@@ -261,8 +319,8 @@ export default {
         });
 
         const { message } = error.data;
-        this.setError(message || this.$lang['invalid-code']);
         this.setLoading(false);
+        this.setError(message || this.attemptsRemaningReplacedLang);
       });
     },
 
