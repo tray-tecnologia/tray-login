@@ -1,5 +1,5 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+  <svg height="24" width="18" viewBox="0 0 24 24">
     <g transform="matrix(1, 0, 0, 1, 27.009001, -39.238998)">
       <path
         d="M -3.264 51.509 C -3.264 50.719 -3.334 49.969 -3.454 49.239 L -14.754 49.239 L -14.754 53.749 L -8.284 53.749
