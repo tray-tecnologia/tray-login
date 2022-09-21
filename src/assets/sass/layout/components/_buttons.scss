@@ -77,7 +77,6 @@ tray-login {
 
         &:hover {
             background-color: $btn-otp-bg-hover;
-            color: $white;
 
             svg {
               fill: $white;
@@ -93,10 +92,13 @@ tray-login {
         background-color: $btn-google-bg-hover;
     }
 
-    .tray-btn-facebook:hover,
-    .tray-btn-google:hover {
-        color: $white;
+    .tray-btn-default:hover > p,
+    .tray-btn-otp:hover > p,
+    .tray-btn-facebook:hover > p,
+    .tray-btn-google:hover > p {
+        color: $white !important;
     }
+
     .tray-close {
         background: #fff;
         border: none;
