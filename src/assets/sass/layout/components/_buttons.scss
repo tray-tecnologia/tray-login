@@ -65,8 +65,9 @@ tray-login {
         gap: 16px;
         padding: 0 10px;
 
-        .tray-button-icon {
-            margin: 0;
+        .tray-button-icon,
+        p {
+            margin: 0 !important;
         }
     }
 
