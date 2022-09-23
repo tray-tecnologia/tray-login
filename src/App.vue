@@ -17,23 +17,45 @@
         slot="custom-texts">
       </app-custom-texts>
 
-      <app-facebook-login
-        v-if="facebookEnabled"
-        :callback="this.dataCallback"
-        :callbackPost="this.dataCallbackPost"
-        :params="params"
-        label="Fazer login com o Facebook"
-        slot="app-facebook-login"
-      />
+      <template v-if="newLoginDesignToggleStatus">
+        <app-facebook-login
+          v-if="facebookEnabled"
+          :callback="this.dataCallback"
+          :callbackPost="this.dataCallbackPost"
+          :params="params"
+          label="Fazer login com o Facebook"
+          slot="app-facebook-login"
+        />
 
-      <app-google-login
-        v-if="googleEnabled"
-        :callback="this.dataCallback"
-        :callbackPost="this.dataCallbackPost"
-        :params="params"
-        label="Fazer login com o Google"
-        slot="app-google-login"
-      />
+        <app-google-login
+          v-if="googleEnabled"
+          :callback="this.dataCallback"
+          :callbackPost="this.dataCallbackPost"
+          :params="params"
+          label="Fazer login com o Google"
+          slot="app-google-login"
+        />
+      </template>
+
+      <template v-else>
+        <app-facebook-login-old
+          v-if="facebookEnabled"
+          :callback="this.dataCallback"
+          :callbackPost="this.dataCallbackPost"
+          :params="params"
+          label="Fazer login com o Facebook"
+          slot="app-facebook-login"
+        />
+
+        <app-google-login-old
+          v-if="googleEnabled"
+          :callback="this.dataCallback"
+          :callbackPost="this.dataCallbackPost"
+          :params="params"
+          label="Fazer login com o Google"
+          slot="app-google-login"
+        />
+      </template>
     </app-identification>
 
     <app-login
@@ -50,27 +72,53 @@
         slot="custom-texts"
       />
 
-      <app-otp-button v-if="otpEnabled"
-        :callback="this.dataCallback"
-        :params="params"
-        slot="app-otp-login"
-      />
+      <template v-if="newLoginDesignToggleStatus">
+        <app-otp-button v-if="otpEnabled"
+          :callback="this.dataCallback"
+          :params="params"
+          slot="app-otp-login"
+        />
 
-      <app-facebook-login
-        v-if="facebookEnabled"
-        :callback="this.dataCallback"
-        :callbackPost="this.dataCallbackPost"
-        :params="params"
-        slot="app-facebook-login"
-      />
+        <app-facebook-login
+          v-if="facebookEnabled"
+          :callback="this.dataCallback"
+          :callbackPost="this.dataCallbackPost"
+          :params="params"
+          slot="app-facebook-login"
+        />
 
-      <app-google-login
-        v-if="googleEnabled"
-        :callback="this.dataCallback"
-        :callbackPost="this.dataCallbackPost"
-        :params="params"
-        slot="app-google-login"
-      />
+        <app-google-login
+          v-if="googleEnabled"
+          :callback="this.dataCallback"
+          :callbackPost="this.dataCallbackPost"
+          :params="params"
+          slot="app-google-login"
+        />
+      </template>
+
+      <template v-else>
+        <app-otp-button-old v-if="otpEnabled"
+          :callback="this.dataCallback"
+          :params="params"
+          slot="app-otp-login"
+        />
+
+        <app-facebook-login-old
+          v-if="facebookEnabled"
+          :callback="this.dataCallback"
+          :callbackPost="this.dataCallbackPost"
+          :params="params"
+          slot="app-facebook-login"
+        />
+
+        <app-google-login-old
+          v-if="googleEnabled"
+          :callback="this.dataCallback"
+          :callbackPost="this.dataCallbackPost"
+          :params="params"
+          slot="app-google-login"
+        />
+      </template>
     </app-login>
 
     <section id="blocked" v-if="screen === 'Blocked'" class="tray-login-screens">
@@ -93,21 +141,41 @@
       <p class="tray-action" v-else v-html="$lang['main-action']"></p>
 
       <div class="tray-social-login">
-        <app-google-login
-          v-if="googleEnabled"
-          :callback="this.dataCallback"
-          :callbackPost="this.dataCallbackPost"
-          :params="params"
-          slot="app-google-login"
-        />
+        <template v-if="newLoginDesignToggleStatus">
+          <app-google-login
+            v-if="googleEnabled"
+            :callback="this.dataCallback"
+            :callbackPost="this.dataCallbackPost"
+            :params="params"
+            slot="app-google-login"
+          />
 
-        <app-facebook-login
-          v-if="facebookEnabled"
-          :callback="this.dataCallback"
-          :callbackPost="this.dataCallbackPost"
-          :params="params"
-          slot="app-facebook-login"
-        />
+          <app-facebook-login
+            v-if="facebookEnabled"
+            :callback="this.dataCallback"
+            :callbackPost="this.dataCallbackPost"
+            :params="params"
+            slot="app-facebook-login"
+          />
+        </template>
+
+        <template v-else>
+          <app-google-login-old
+            v-if="googleEnabled"
+            :callback="this.dataCallback"
+            :callbackPost="this.dataCallbackPost"
+            :params="params"
+            slot="app-google-login"
+          />
+
+          <app-facebook-login-old
+            v-if="facebookEnabled"
+            :callback="this.dataCallback"
+            :callbackPost="this.dataCallbackPost"
+            :params="params"
+            slot="app-facebook-login"
+          />
+        </template>
       </div>
     </section>
 
@@ -137,10 +205,13 @@ import screenHandler from '@/mixins/screenHandler';
 import utils from '@/mixins/utils';
 import store from './store';
 import AppFacebookLogin from './components/FacebookLogin.vue';
+import AppFacebookLoginOld from './components/FacebookLogin_old.vue';
 import AppGoogleLogin from './components/GoogleLogin.vue';
+import AppGoogleLoginOld from './components/GoogleLogin_old.vue';
 import AppIdentification from './screens/Identification/Main.vue';
 import AppLogin from './screens/Login/screens/Main.vue';
 import AppOtpButton from './screens/Login/screens/Otp/Button.vue';
+import AppOtpButtonOld from './screens/Login/screens/Otp/Button_old.vue';
 import AppCustomTexts from './components/CustomTexts.vue';
 import AppTerms from './components/Terms.vue';
 import Icon from './components/icons/index.vue';
@@ -151,9 +222,12 @@ export default {
   components: {
     AppCustomTexts,
     AppFacebookLogin,
+    AppFacebookLoginOld,
     AppGoogleLogin,
+    AppGoogleLoginOld,
     AppIdentification,
     AppOtpButton,
+    AppOtpButtonOld,
     AppLogin,
     AppTerms,
     Icon,
@@ -165,6 +239,7 @@ export default {
       screen: 'Identification',
       showComponent: true,
       googleLoginToggleStatus: false,
+      newLoginDesignToggleStatus: false,
     };
   },
   props: {
@@ -218,7 +293,9 @@ export default {
     });
   },
   mounted() {
+    this.newLoginDesignToggleStatus = localStorage.getItem('new-tray-login') === '1';
     this.initialize(this.dataIdentification);
+    this.changeCssFile();
 
     this.getLangs({
       store_id: this.dataStore,
@@ -239,6 +316,9 @@ export default {
   },
 
   watch: {
+    newLoginDesignToggleStatus() {
+      this.changeCssFile();
+    },
     dataIdentification(identification) {
       this.initialize(identification);
     },
@@ -256,6 +336,7 @@ export default {
     ...mapState([
       'blockedUser',
     ]),
+
     /**
      * Verifica se o login com o otp será utilizado
      * @return {boolean}
@@ -381,6 +462,11 @@ export default {
       'setLang',
       'setResolution',
     ]),
+
+    changeCssFile() {
+      const root = document.getElementsByTagName('body')[0];
+      root.classList.add(this.newLoginDesignToggleStatus ? 'new' : 'old');
+    },
 
     /**
      * Define a tela a ser exibida de acordo com a identificação
