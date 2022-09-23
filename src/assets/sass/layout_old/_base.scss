@@ -1,0 +1,106 @@
+$color: $default-color;
+$background: $white;
+$overlay-color: rgba(0,0,0,.5);
+
+tray-login {
+    * {
+        box-sizing: border-box;
+    }
+
+    svg {
+        fill: currentColor;
+    }
+
+    // Transitions
+    a,
+    input,
+    select,
+    label,
+    div,
+    button,
+    svg,
+    svg {
+        transition: all .3s linear;
+
+        &:hover,
+        &:focus {
+            transition: all .3s linear;
+        }
+    }
+
+    label {
+        padding: 0;
+        margin: 0;
+        display: block;
+    }
+
+    color: $color;
+    font-family: Lato, Helvetica, sans-serif;
+    font-size: 14px;
+
+    &:before {
+        background: $overlay-color;
+        content: "";
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 9998;
+    }
+
+    .tray-container {
+        background: $background;
+        border: 1px solid $overlay-color;
+        width: 292px;
+        position: fixed;
+        padding: $default-gutter;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        max-height: 100%;
+        overflow: auto;
+    }
+
+    .tray-close {
+        position: absolute;
+        right: $default-gutter;
+    }
+
+    .tray-title {
+        font-weight: 900;
+        font-size: 18px;
+        margin: 0 0 $default-margin;
+        display: block;
+
+        &--center {
+            text-align: center;
+        }
+    }
+
+    .tray-action {
+        margin: 0 0 $default-margin;
+    }
+
+    .tray-link {
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 0;
+        outline: none;
+        text-decoration: underline;
+    }
+
+    .tray-password-forget {
+        display: block;
+        margin: 0 0 $default-margin;
+    }
+
+    .tray-custom-text {
+        display: block;
+        margin-bottom: 5px;
+    }
+}
