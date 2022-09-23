@@ -14249,7 +14249,7 @@ exports = module.exports = __webpack_require__("2350")(false);
 
 
 // module
-exports.push([module.i, "tray-login{color:#666;font-family:Lato,Helvetica,sans-serif;font-size:14px}tray-login *{-webkit-box-sizing:border-box;box-sizing:border-box}tray-login svg{fill:#666}tray-login svg.success{fill:#6abf57}tray-login svg.error{fill:#ff5858}tray-login a,tray-login a:focus,tray-login a:hover,tray-login button,tray-login button:focus,tray-login button:hover,tray-login div,tray-login div:focus,tray-login div:hover,tray-login input,tray-login input:focus,tray-login input:hover,tray-login label,tray-login label:focus,tray-login label:hover,tray-login select,tray-login select:focus,tray-login select:hover,tray-login svg,tray-login svg:focus,tray-login svg:hover{-webkit-transition:all .3s linear;transition:all .3s linear}tray-login label{padding:0;margin:0;display:block}tray-login:before{background:rgba(0,0,0,.5);content:\"\";display:block;position:fixed;top:0;left:0;height:100%;width:100%;z-index:9998}tray-login .tray-container{background:#fff;border:1px solid rgba(0,0,0,.5);border-radius:4px;left:50%;max-height:100%;overflow:auto;padding:56px;padding-bottom:40px;position:fixed;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);width:100%;max-width:448px;z-index:9999}tray-login .tray-close{position:absolute;right:56px}tray-login .tray-title{font-weight:900;font-size:19px;margin:0 0 16px;display:block}tray-login .tray-title--center{text-align:center}tray-login .tray-action{margin:0 0 16px}tray-login #tray-login-terms{font-size:12px}tray-login #tray-login-terms a,tray-login .tray-link{background:none;border:none;border-bottom:1px solid #4a6fd0;color:#4a6fd0;cursor:pointer;font-size:12px;margin:16px 0;padding:0;text-decoration:none}tray-login #tray-login-terms a:hover,tray-login .tray-link:hover{color:#25428f;border-color:#25428f}tray-login .tray-password-forget{display:block;margin:0 0 16px;padding-bottom:2px}tray-login .tray-custom-text{display:block;margin-bottom:5px}tray-login .tray-social-login{display:-webkit-box;display:-ms-flexbox;display:flex;gap:16px}tray-login .tray-social-login button{font-size:12px;gap:5px}@media(max-width:448px){tray-login .tray-container{padding:20px;padding-bottom:4px}tray-login .tray-close{right:20px}}@-webkit-keyframes loading-rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}@keyframes loading-rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}tray-login .tray-loading{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background:hsla(0,0%,100%,.7);height:100%;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;left:0;overflow:hidden;position:absolute;text-align:center;text-transform:lowercase;top:0;opacity:1;width:100%;z-index:1}tray-login .tray-loading-mask{-webkit-transform-origin:30px 30px;transform-origin:30px 30px;-webkit-animation:loading-rotate 1.2s linear infinite;animation:loading-rotate 1.2s linear infinite;height:60px;left:50%;margin-left:-30px;margin-top:-30px;-webkit-mask-image:-webkit-linear-gradient(top,#000,transparent);overflow:hidden;position:absolute;top:50%;width:30px}tray-login .tray-loading-line{border-radius:50%;-webkit-box-shadow:inset 0 0 0 1px rgba(0,0,0,.5);box-shadow:inset 0 0 0 1px rgba(0,0,0,.5);height:60px;width:60px}tray-login .tray-loading-icon{-webkit-transform:rotate(0);transform:rotate(0);fill:#666;height:30px;width:30px;position:absolute;left:calc(50% - 15px);top:calc(50% - 15px)}tray-login .tray-input-group{border:0;margin:0;padding:0;position:relative}tray-login .tray-input-group .tray-input-icon{color:#777}tray-login .tray-input-group button{padding:0}tray-login .tray-input{background:#fff;border:1px solid #d2d2d2;border-radius:4px;color:#777;display:block;font-size:14px;font-weight:300;height:44px;line-height:14px;padding:13px 0 14px 28px!important;width:100%;margin-bottom:16px}tray-login .tray-input:focus{outline:0;border-color:#8f8f8f;border-width:2px;color:#909090}tray-login .tray-input-invalid:not(.tray-input-initial),tray-login .tray-input-invalid:not(.tray-input-initial):focus{border-color:#ff5858;color:#ff5858}tray-login .tray-input-invalid:not(.tray-input-initial)::-webkit-input-placeholder{color:#ff5858}tray-login .tray-input-invalid:not(.tray-input-initial)::-moz-placeholder{color:#ff5858}tray-login .tray-input-invalid:not(.tray-input-initial):-ms-input-placeholder{color:#ff5858}tray-login .tray-input-invalid:not(.tray-input-initial)::-ms-input-placeholder{color:#ff5858}tray-login .tray-input-invalid:not(.tray-input-initial)::placeholder{color:#ff5858}tray-login .tray-input-icon{padding:0;margin:0;top:13px;left:8px;width:15px;position:absolute}tray-login .tray-feedbacks{display:block;font-size:14px;margin-bottom:16px}tray-login .tray-error-message,tray-login .tray-error-message strong{color:#ff5858}tray-login .tray-warning-message{background:#fff3cd;border:1px solid #856404;border-radius:4px;color:#856404;padding:16px}tray-login .tray-well{background-color:#ebebeb;border:1px solid #d2d2d2;border-radius:4px;color:#8f8f8f;display:block;height:44px;margin-bottom:10px;padding:12px 8px;width:100%}tray-login .tray-general-separator{color:#666;display:block;margin:24px 0;text-align:center;overflow:hidden;white-space:nowrap}tray-login .tray-general-separator-line{position:relative;display:inline-block}tray-login .tray-general-separator-line:after,tray-login .tray-general-separator-line:before{content:\"\";position:absolute;top:50%;width:9999px;height:1px;background:#ebebeb}tray-login .tray-general-separator-line:before{margin-right:5px;right:100%}tray-login .tray-general-separator-line:after{left:100%;margin-left:5px}tray-login .tray-login-hide-password{border:0;cursor:pointer;color:#777;font-size:10px;height:25px;position:absolute;right:10px;top:10px;text-transform:uppercase;background:none}tray-login .tray-btn-default,tray-login .tray-btn-facebook,tray-login .tray-btn-google,tray-login .tray-btn-otp,tray-login .tray-btn-primary{background:#7db51e;display:block;color:#fff;cursor:pointer;width:100%;height:42px;border-radius:3px;border:1px solid transparent;font-size:14px;font-weight:400;margin-bottom:16px;padding:0}tray-login .tray-btn-default:hover,tray-login .tray-btn-facebook:hover,tray-login .tray-btn-google:hover,tray-login .tray-btn-otp:hover,tray-login .tray-btn-primary:hover{background-color:#72a915}tray-login .tray-btn-primary{border-bottom-color:#72a915;border-bottom-width:3px}tray-login .tray-btn-default,tray-login .tray-btn-facebook,tray-login .tray-btn-google,tray-login .tray-btn-otp{background-color:#fff;border-color:#e0e0e0;color:#666;-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;gap:16px;padding:0 10px}tray-login .tray-btn-default .tray-button-icon,tray-login .tray-btn-default p,tray-login .tray-btn-facebook .tray-button-icon,tray-login .tray-btn-facebook p,tray-login .tray-btn-google .tray-button-icon,tray-login .tray-btn-google p,tray-login .tray-btn-otp .tray-button-icon,tray-login .tray-btn-otp p{margin:0!important}tray-login .tray-btn-default,tray-login .tray-btn-otp{border-color:#524379;font-size:12px}tray-login .tray-btn-default:hover,tray-login .tray-btn-otp:hover{background-color:#524379}tray-login .tray-btn-default:hover svg,tray-login .tray-btn-otp:hover svg{fill:#fff}tray-login .tray-btn-facebook:hover{background-color:#1877f2}tray-login .tray-btn-google:hover{background-color:#4285f3}tray-login .tray-btn-default:hover>p,tray-login .tray-btn-facebook:hover>p,tray-login .tray-btn-google:hover>p,tray-login .tray-btn-otp:hover>p{color:#fff!important}tray-login .tray-close{background:#fff;border:none;cursor:pointer;float:right;font-weight:700;font-size:12px;line-height:1;padding:3px 4px;margin:0;height:21px;width:21px}.tray-login__terms-container a{text-decoration:none;color:#4f08ee}.tray-login__terms-container a:hover{text-decoration:underline;color:#2208ee}.tray-login__terms-container p{color:#666}.tray-login__recover-password__figure{width:133px;display:block;margin:0 auto 10px}tray-login__recover-password__login__title{font-size:20px}.tray-login__recover-password__confirm-code__icon{width:60px;margin:0 auto 10px}.tray-login__recover-password__confirm-code__title{text-align:center}.app__customer-password-change__form{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.app__customer-password-change__form__group{margin-bottom:20px}.app__customer-password-change__input{-webkit-box-flex:2;-ms-flex-positive:2;flex-grow:2;margin-bottom:15px}.app__customer-password-change__validation-rules{font-size:15px;color:#8f8f8f}.app__customer-password-change__validation-rules__list__item{font-weight:400}.app__customer-password-change__validation-rules__list__item .app__icon--rules{display:contents}.app__customer-password-change__validation-rules__list__item .app__icon--rules svg{-webkit-transform:scale(1.3);transform:scale(1.3);margin-right:3px}.app__customer-password-change__actions{margin-top:10px}.app__customer-password-change__errors{margin-top:3px;font-size:11px;color:#ff5858}.app__customer-password-change__border{border-color:#ff5858}.app__customer-password-change__border:focus{-webkit-box-shadow:0 0 0 .2rem rgba(255,0,0,.25);box-shadow:0 0 0 .2rem rgba(255,0,0,.25)}.app__customer-password-change__toggle-visibility{background-color:#fff;display:contents}.app__customer-password-change__toggle-visibility .app__icon{position:absolute;color:#8f8f8f;right:25px;height:20px;width:20px;padding:2px;z-index:2;top:6px}", ""]);
+exports.push([module.i, ".new tray-login{color:#666;font-family:Lato,Helvetica,sans-serif;font-size:14px}.new tray-login *{-webkit-box-sizing:border-box;box-sizing:border-box}.new tray-login svg{fill:#666}.new tray-login svg.success{fill:#6abf57}.new tray-login svg.error{fill:#ff5858}.new tray-login a,.new tray-login a:focus,.new tray-login a:hover,.new tray-login button,.new tray-login button:focus,.new tray-login button:hover,.new tray-login div,.new tray-login div:focus,.new tray-login div:hover,.new tray-login input,.new tray-login input:focus,.new tray-login input:hover,.new tray-login label,.new tray-login label:focus,.new tray-login label:hover,.new tray-login select,.new tray-login select:focus,.new tray-login select:hover,.new tray-login svg,.new tray-login svg:focus,.new tray-login svg:hover{-webkit-transition:all .3s linear;transition:all .3s linear}.new tray-login label{padding:0;margin:0;display:block}.new tray-login:before{background:rgba(0,0,0,.5);content:\"\";display:block;position:fixed;top:0;left:0;height:100%;width:100%;z-index:9998}.new tray-login .tray-container{background:#fff;border:1px solid rgba(0,0,0,.5);border-radius:4px;left:50%;max-height:100%;overflow:auto;padding:56px;padding-bottom:40px;position:fixed;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);width:100%;max-width:448px;z-index:9999}.new tray-login .tray-close{position:absolute;right:56px}.new tray-login .tray-title{font-weight:900;font-size:19px;margin:0 0 16px;display:block}.new tray-login .tray-title--center{text-align:center}.new tray-login .tray-action{margin:0 0 16px}.new tray-login #tray-login-terms{font-size:12px}.new tray-login #tray-login-terms a,.new tray-login .tray-link{background:none;border:none;border-bottom:1px solid #4a6fd0;color:#4a6fd0;cursor:pointer;font-size:12px;margin:16px 0;padding:0;text-decoration:none}.new tray-login #tray-login-terms a:hover,.new tray-login .tray-link:hover{color:#25428f;border-color:#25428f}.new tray-login .tray-password-forget{display:block;margin:0 0 16px;padding-bottom:2px}.new tray-login .tray-custom-text{display:block;margin-bottom:5px}.new tray-login .tray-social-login{display:-webkit-box;display:-ms-flexbox;display:flex;gap:16px}.new tray-login .tray-social-login button{font-size:12px;gap:5px}@media(max-width:448px){.new tray-login .tray-container{padding:20px;padding-bottom:4px}.new tray-login .tray-close{right:20px}}@-webkit-keyframes loading-rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}.new tray-login .tray-loading{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background:hsla(0,0%,100%,.7);height:100%;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;left:0;overflow:hidden;position:absolute;text-align:center;text-transform:lowercase;top:0;opacity:1;width:100%;z-index:1}.new tray-login .tray-loading-mask{-webkit-transform-origin:30px 30px;transform-origin:30px 30px;-webkit-animation:loading-rotate 1.2s linear infinite;animation:loading-rotate 1.2s linear infinite;height:60px;left:50%;margin-left:-30px;margin-top:-30px;-webkit-mask-image:-webkit-linear-gradient(top,#000,transparent);overflow:hidden;position:absolute;top:50%;width:30px}.new tray-login .tray-loading-line{border-radius:50%;-webkit-box-shadow:inset 0 0 0 1px rgba(0,0,0,.5);box-shadow:inset 0 0 0 1px rgba(0,0,0,.5);height:60px;width:60px}.new tray-login .tray-loading-icon{-webkit-transform:rotate(0);transform:rotate(0);fill:#666;height:30px;width:30px;position:absolute;left:calc(50% - 15px);top:calc(50% - 15px)}.new tray-login .tray-input-group{border:0;margin:0;padding:0;position:relative}.new tray-login .tray-input-group .tray-input-icon{color:#777}.new tray-login .tray-input-group button{padding:0}.new tray-login .tray-input{background:#fff;border:1px solid #d2d2d2;border-radius:4px;color:#777;display:block;font-size:14px;font-weight:300;height:44px;line-height:14px;padding:13px 0 14px 28px!important;width:100%;margin-bottom:16px}.new tray-login .tray-input:focus{outline:0;border-color:#8f8f8f;border-width:2px;color:#909090}.new tray-login .tray-input-invalid:not(.tray-input-initial),.new tray-login .tray-input-invalid:not(.tray-input-initial):focus{border-color:#ff5858;color:#ff5858}.new tray-login .tray-input-invalid:not(.tray-input-initial)::-webkit-input-placeholder{color:#ff5858}.new tray-login .tray-input-invalid:not(.tray-input-initial)::-moz-placeholder{color:#ff5858}.new tray-login .tray-input-invalid:not(.tray-input-initial):-ms-input-placeholder{color:#ff5858}.new tray-login .tray-input-invalid:not(.tray-input-initial)::-ms-input-placeholder{color:#ff5858}.new tray-login .tray-input-invalid:not(.tray-input-initial)::placeholder{color:#ff5858}.new tray-login .tray-input-icon{padding:0;margin:0;top:13px;left:8px;width:15px;position:absolute}.new tray-login .tray-feedbacks{display:block;font-size:14px;margin-bottom:16px}.new tray-login .tray-error-message,.new tray-login .tray-error-message strong{color:#ff5858}.new tray-login .tray-warning-message{background:#fff3cd;border:1px solid #856404;border-radius:4px;color:#856404;padding:16px}.new tray-login .tray-well{background-color:#ebebeb;border:1px solid #d2d2d2;border-radius:4px;color:#8f8f8f;display:block;height:44px;margin-bottom:10px;padding:12px 8px;width:100%}.new tray-login .tray-general-separator{color:#666;display:block;margin:24px 0;text-align:center;overflow:hidden;white-space:nowrap}.new tray-login .tray-general-separator-line{position:relative;display:inline-block}.new tray-login .tray-general-separator-line:after,.new tray-login .tray-general-separator-line:before{content:\"\";position:absolute;top:50%;width:9999px;height:1px;background:#ebebeb}.new tray-login .tray-general-separator-line:before{margin-right:5px;right:100%}.new tray-login .tray-general-separator-line:after{left:100%;margin-left:5px}.new tray-login .tray-login-hide-password{border:0;cursor:pointer;color:#777;font-size:10px;height:25px;position:absolute;right:10px;top:10px;text-transform:uppercase;background:none}.new tray-login .tray-btn-default,.new tray-login .tray-btn-facebook,.new tray-login .tray-btn-google,.new tray-login .tray-btn-otp,.new tray-login .tray-btn-primary{background:#7db51e;display:block;color:#fff;cursor:pointer;width:100%;height:42px;border-radius:3px;border:1px solid transparent;font-size:14px;font-weight:400;margin-bottom:16px;padding:0}.new tray-login .tray-btn-default:hover,.new tray-login .tray-btn-facebook:hover,.new tray-login .tray-btn-google:hover,.new tray-login .tray-btn-otp:hover,.new tray-login .tray-btn-primary:hover{background-color:#72a915}.new tray-login .tray-btn-primary{border-bottom-color:#72a915;border-bottom-width:3px}.new tray-login .tray-btn-default,.new tray-login .tray-btn-facebook,.new tray-login .tray-btn-google,.new tray-login .tray-btn-otp{background-color:#fff;border-color:#e0e0e0;color:#666;-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;gap:16px;padding:0 10px}.new tray-login .tray-btn-default .tray-button-icon,.new tray-login .tray-btn-default p,.new tray-login .tray-btn-facebook .tray-button-icon,.new tray-login .tray-btn-facebook p,.new tray-login .tray-btn-google .tray-button-icon,.new tray-login .tray-btn-google p,.new tray-login .tray-btn-otp .tray-button-icon,.new tray-login .tray-btn-otp p{margin:0!important}.new tray-login .tray-btn-default,.new tray-login .tray-btn-otp{border-color:#524379;font-size:12px}.new tray-login .tray-btn-default:hover,.new tray-login .tray-btn-otp:hover{background-color:#524379}.new tray-login .tray-btn-default:hover svg,.new tray-login .tray-btn-otp:hover svg{fill:#fff}.new tray-login .tray-btn-facebook:hover{background-color:#1877f2}.new tray-login .tray-btn-google:hover{background-color:#4285f3}.new tray-login .tray-btn-default:hover>p,.new tray-login .tray-btn-facebook:hover>p,.new tray-login .tray-btn-google:hover>p,.new tray-login .tray-btn-otp:hover>p{color:#fff!important}.new tray-login .tray-close{background:#fff;border:none;cursor:pointer;float:right;font-weight:700;font-size:12px;line-height:1;padding:3px 4px;margin:0;height:21px;width:21px}.new .tray-login__terms-container a{text-decoration:none;color:#4f08ee}.new .tray-login__terms-container a:hover{text-decoration:underline;color:#2208ee}.new .tray-login__terms-container p{color:#666}.new .tray-login__recover-password__figure{width:133px;display:block;margin:0 auto 10px}.new tray-login__recover-password__login__title{font-size:20px}.new .tray-login__recover-password__confirm-code__icon{width:60px;margin:0 auto 10px}.new .tray-login__recover-password__confirm-code__title{text-align:center}.new .app__customer-password-change__form{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.new .app__customer-password-change__form__group{margin-bottom:20px}.new .app__customer-password-change__input{-webkit-box-flex:2;-ms-flex-positive:2;flex-grow:2;margin-bottom:15px}.new .app__customer-password-change__validation-rules{font-size:15px;color:#8f8f8f}.new .app__customer-password-change__validation-rules__list__item{font-weight:400}.new .app__customer-password-change__validation-rules__list__item .app__icon--rules{display:contents}.new .app__customer-password-change__validation-rules__list__item .app__icon--rules svg{-webkit-transform:scale(1.3);transform:scale(1.3);margin-right:3px}.new .app__customer-password-change__actions{margin-top:10px}.new .app__customer-password-change__errors{margin-top:3px;font-size:11px;color:#ff5858}.new .app__customer-password-change__border{border-color:#ff5858}.new .app__customer-password-change__border:focus{-webkit-box-shadow:0 0 0 .2rem rgba(255,0,0,.25);box-shadow:0 0 0 .2rem rgba(255,0,0,.25)}.new .app__customer-password-change__toggle-visibility{background-color:#fff;display:contents}.new .app__customer-password-change__toggle-visibility .app__icon{position:absolute;color:#8f8f8f;right:25px;height:20px;width:20px;padding:2px;z-index:2;top:6px}.old tray-login{color:#909090;font-family:Lato,Helvetica,sans-serif;font-size:14px}.old tray-login *{-webkit-box-sizing:border-box;box-sizing:border-box}.old tray-login svg{fill:currentColor}.old tray-login a,.old tray-login a:focus,.old tray-login a:hover,.old tray-login button,.old tray-login button:focus,.old tray-login button:hover,.old tray-login div,.old tray-login div:focus,.old tray-login div:hover,.old tray-login input,.old tray-login input:focus,.old tray-login input:hover,.old tray-login label,.old tray-login label:focus,.old tray-login label:hover,.old tray-login select,.old tray-login select:focus,.old tray-login select:hover,.old tray-login svg,.old tray-login svg:focus,.old tray-login svg:hover{-webkit-transition:all .3s linear;transition:all .3s linear}.old tray-login label{padding:0;margin:0;display:block}.old tray-login:before{background:rgba(0,0,0,.5);content:\"\";display:block;position:fixed;top:0;left:0;height:100%;width:100%;z-index:9998}.old tray-login .tray-container{background:#fff;border:1px solid rgba(0,0,0,.5);width:292px;position:fixed;padding:12px;z-index:9999;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);top:50%;left:50%;max-height:100%;overflow:auto}.old tray-login .tray-close{position:absolute;right:12px}.old tray-login .tray-title{font-weight:900;font-size:18px;margin:0 0 10px;display:block}.old tray-login .tray-title--center{text-align:center}.old tray-login .tray-action{margin:0 0 10px}.old tray-login .tray-link{border:none;background:none;cursor:pointer;font-size:14px;padding:0;outline:none;text-decoration:underline}.old tray-login .tray-password-forget{display:block;margin:0 0 10px}.old tray-login .tray-custom-text{display:block;margin-bottom:5px}@keyframes loading-rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}.old tray-login .tray-loading{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background:hsla(0,0%,100%,.7);height:100%;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;left:0;overflow:hidden;position:absolute;text-align:center;text-transform:lowercase;top:0;opacity:1;width:100%;z-index:1}.old tray-login .tray-loading-mask{-webkit-transform-origin:30px 30px;transform-origin:30px 30px;-webkit-animation:loading-rotate 1.2s linear infinite;animation:loading-rotate 1.2s linear infinite;height:60px;left:50%;margin-left:-30px;margin-top:-30px;-webkit-mask-image:-webkit-linear-gradient(top,#000,transparent);overflow:hidden;position:absolute;top:50%;width:30px}.old tray-login .tray-loading-line{border-radius:50%;-webkit-box-shadow:inset 0 0 0 1px rgba(0,0,0,.5);box-shadow:inset 0 0 0 1px rgba(0,0,0,.5);height:60px;width:60px}.old tray-login .tray-loading-icon{-webkit-transform:rotate(0);transform:rotate(0);fill:#7f7f7f;height:30px;width:30px;position:absolute;left:calc(50% - 15px);top:calc(50% - 15px)}.old tray-login .tray-input-group{border:0;padding:0;position:relative}.old tray-login .tray-input-group .tray-input-icon{color:#909090}.old tray-login .tray-input-group button{padding:0}.old tray-login .tray-input{background:#fff;border:1px solid #e0dcdc;border-radius:3px;color:#909090;display:block;font-size:14px;font-weight:300;height:47px;line-height:14px;padding:13px 0 14px 36px!important;width:100%;margin-bottom:10px;outline-width:0}.old tray-login .tray-input:focus{outline:0;border-color:silver;border-width:2px;color:#909090}.old tray-login .tray-input-invalid:not(.tray-input-initial),.old tray-login .tray-input-invalid:not(.tray-input-initial):focus{border-color:#ff5858;color:#ff5858}.old tray-login .tray-input-invalid:not(.tray-input-initial)::-webkit-input-placeholder{color:#ff5858}.old tray-login .tray-input-invalid:not(.tray-input-initial)::-moz-placeholder{color:#ff5858}.old tray-login .tray-input-invalid:not(.tray-input-initial):-ms-input-placeholder{color:#ff5858}.old tray-login .tray-input-invalid:not(.tray-input-initial)::-ms-input-placeholder{color:#ff5858}.old tray-login .tray-input-invalid:not(.tray-input-initial)::placeholder{color:#ff5858}.old tray-login .tray-input-icon{padding:0;margin:0;top:15px;left:15px;width:15px;position:absolute}.old tray-login .tray-feedbacks{display:block;font-size:14px;margin-bottom:10px}.old tray-login .tray-error-message,.old tray-login .tray-error-message strong{color:#ff5858}.old tray-login .tray-well{width:100%;display:block;background-color:#ebebeb;border-radius:3px;border:1px solid #efeded;color:#8f8f8f;margin-bottom:10px;padding:10px 10px;text-align:center}.old tray-login .tray-general-separator{color:#909090;margin-bottom:10px;text-align:center;overflow:hidden;white-space:nowrap;display:block}.old tray-login .tray-general-separator-line{position:relative;display:inline-block}.old tray-login .tray-general-separator-line:after,.old tray-login .tray-general-separator-line:before{content:\"\";position:absolute;top:50%;width:9999px;height:1px;background:#909090}.old tray-login .tray-general-separator-line:before{margin-right:5px;right:100%}.old tray-login .tray-general-separator-line:after{left:100%;margin-left:5px}.old tray-login .tray-login-hide-password{border:0;cursor:pointer;color:#c7c7c7;font-size:10px;height:25px;position:absolute;right:10px;top:12px;text-transform:uppercase;outline-width:0;background:none}.old tray-login .tray-btn-default,.old tray-login .tray-btn-facebook,.old tray-login .tray-btn-google,.old tray-login .tray-btn-otp,.old tray-login .tray-btn-primary{background:#6abf57;display:block;color:#fff;cursor:pointer;width:100%;height:48px;border-radius:3px;border:none;border-bottom:3px solid #539e41;font-size:14px;font-weight:700;margin-bottom:10px;padding:0}.old tray-login .tray-btn-default:hover,.old tray-login .tray-btn-facebook:hover,.old tray-login .tray-btn-google:hover,.old tray-login .tray-btn-otp:hover,.old tray-login .tray-btn-primary:hover{background:#51a43f;border-color:#407a32}.old tray-login .tray-btn-facebook{background-color:#3b5998;border-bottom-color:#243f77}.old tray-login .tray-btn-facebook:hover{background-color:#2d4373;border-color:#182a50}.old tray-login .tray-btn-google{background-color:#4285f4;border-bottom-color:#2768d1}.old tray-login .tray-btn-google:hover{background-color:#1266f1;border-color:#1f53a6}.old tray-login .tray-btn-default{color:#bcbcbc;background-color:#fff;border:1px solid #d3d1d1;border-bottom-width:3px}.old tray-login .tray-btn-default:hover{background-color:#f2f2f2;border-color:#bab7b7}.old tray-login .tray-btn-otp{background-color:#52447c;border-bottom-color:#3d3160;font-size:13px}.old tray-login .tray-btn-otp:hover{background-color:#473b6c;border-bottom-color:#28203e}.old tray-login .tray-close{background:#fff;border:none;color:#bababa;cursor:pointer;float:right;font-weight:700;font-size:12px;line-height:1;padding:3px 4px;margin:0;height:21px;width:21px}.old .tray-login__terms-container a{text-decoration:none;color:#4f08ee}.old .tray-login__terms-container a:hover{text-decoration:underline;color:#2208ee}.old .tray-login__terms-container p{color:#909090}.old .tray-login__recover-password__figure{width:133px;display:block;margin:0 auto 10px}.old tray-login__recover-password__login__title{font-size:20px}.old .tray-login__recover-password__confirm-code__icon{width:60px;margin:0 auto 10px}.old .tray-login__recover-password__confirm-code__title{text-align:center}.old .app__customer-password-change__form{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.old .app__customer-password-change__form__group{margin-bottom:20px}.old .app__customer-password-change__input{-webkit-box-flex:2;-ms-flex-positive:2;flex-grow:2;margin-bottom:15px}.old .app__customer-password-change__validation-rules{font-size:15px;color:#8f8f8f;padding:6px}.old .app__customer-password-change__validation-rules__list__item{font-weight:400}.old .app__customer-password-change__validation-rules__list__item .app__icon--rules{display:contents}.old .app__customer-password-change__validation-rules__list__item .app__icon--rules svg{-webkit-transform:scale(1.3);transform:scale(1.3);margin-right:3px}.old .app__customer-password-change__actions{margin-top:10px}.old .app__customer-password-change__errors{margin-top:3px;font-size:11px;color:#ff5858}.old .app__customer-password-change__border{border-color:#ff5858}.old .app__customer-password-change__border:focus{-webkit-box-shadow:0 0 0 .2rem rgba(255,0,0,.25);box-shadow:0 0 0 .2rem rgba(255,0,0,.25)}.old .app__customer-password-change__toggle-visibility{background-color:#fff;display:contents}.old .app__customer-password-change__toggle-visibility .app__icon{position:absolute;color:#8f8f8f;right:25px;height:20px;width:20px;padding:2px;z-index:2;top:6px}", ""]);
 
 // exports
 
@@ -18089,12 +18089,12 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 /* harmony default export */ var vue_custom_element_esm = (vue_custom_element_esm_install);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=5b53c6f1&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showComponent),expression:"showComponent"}],ref:"tray-login",staticClass:"tray-container"},[_c('button',{staticClass:"tray-close",on:{"click":_vm.close}},[_c('icon',{attrs:{"name":"close"}})],1),(_vm.screen === 'Identification')?_c('app-identification',{staticClass:"tray-login-screens",attrs:{"id":"identify","callback":this.dataCallback,"params":_vm.params}},[(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","action":this.customTexts['main-action']},slot:"custom-texts"}):_vm._e(),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params,"label":"Fazer login com o Facebook"},slot:"app-facebook-login"}):_vm._e(),(_vm.googleEnabled)?_c('app-google-login',{attrs:{"slot":"app-google-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params,"label":"Fazer login com o Google"},slot:"app-google-login"}):_vm._e()],1):_vm._e(),(_vm.screen === 'Main')?_c('app-login',{staticClass:"tray-login-screens",attrs:{"id":"main","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params}},[(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","error":this.customTexts['general-error-alert'],"action":this.customTexts['main-action']},slot:"custom-texts"}):_vm._e(),(_vm.otpEnabled)?_c('app-otp-button',{attrs:{"slot":"app-otp-login","callback":this.dataCallback,"params":_vm.params},slot:"app-otp-login"}):_vm._e(),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-facebook-login"}):_vm._e(),(_vm.googleEnabled)?_c('app-google-login',{attrs:{"slot":"app-google-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-google-login"}):_vm._e()],1):_vm._e(),(_vm.screen === 'Blocked')?_c('section',{staticClass:"tray-login-screens",attrs:{"id":"blocked"}},[_c('div',[_c('strong',{staticClass:"tray-title tray-login__title"},[_vm._v("\n        "+_vm._s(_vm.$lang['main-title'])+"\n      ")]),_c('p',{staticClass:"tray-action tray-warning-message"},[_vm._v("\n        "+_vm._s(_vm.$lang['blocked-user'])+"\n      ")])]),(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","error":this.customTexts['general-error-alert'],"action":this.customTexts['main-action']},slot:"custom-texts"}):_c('p',{staticClass:"tray-action",domProps:{"innerHTML":_vm._s(_vm.$lang['main-action'])}}),_c('div',{staticClass:"tray-social-login"},[(_vm.googleEnabled)?_c('app-google-login',{attrs:{"slot":"app-google-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-google-login"}):_vm._e(),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-facebook-login"}):_vm._e()],1)],1):_vm._e(),(_vm.hasTerm)?_c('section',{attrs:{"id":"tray-login-terms"}},[_c('app-terms',{attrs:{"termText":this.dataTerms}})],1):_vm._e(),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading",class:{ 'tray-loading-hidden': !_vm.loading },attrs:{"id":"tray-login-loading"}},[_vm._m(0),_c('icon',{attrs:{"name":"locked-loading"}})],1)],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=0e81a5fe&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showComponent),expression:"showComponent"}],ref:"tray-login",staticClass:"tray-container"},[_c('button',{staticClass:"tray-close",on:{"click":_vm.close}},[_c('icon',{attrs:{"name":"close"}})],1),(_vm.screen === 'Identification')?_c('app-identification',{staticClass:"tray-login-screens",attrs:{"id":"identify","callback":this.dataCallback,"params":_vm.params}},[(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","action":this.customTexts['main-action']},slot:"custom-texts"}):_vm._e(),(_vm.newLoginDesignToggleStatus)?[(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params,"label":"Fazer login com o Facebook"},slot:"app-facebook-login"}):_vm._e(),(_vm.googleEnabled)?_c('app-google-login',{attrs:{"slot":"app-google-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params,"label":"Fazer login com o Google"},slot:"app-google-login"}):_vm._e()]:[(_vm.facebookEnabled)?_c('app-facebook-login-old',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params,"label":"Fazer login com o Facebook"},slot:"app-facebook-login"}):_vm._e(),(_vm.googleEnabled)?_c('app-google-login-old',{attrs:{"slot":"app-google-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params,"label":"Fazer login com o Google"},slot:"app-google-login"}):_vm._e()]],2):_vm._e(),(_vm.screen === 'Main')?_c('app-login',{staticClass:"tray-login-screens",attrs:{"id":"main","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params}},[(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","error":this.customTexts['general-error-alert'],"action":this.customTexts['main-action']},slot:"custom-texts"}):_vm._e(),(_vm.newLoginDesignToggleStatus)?[(_vm.otpEnabled)?_c('app-otp-button',{attrs:{"slot":"app-otp-login","callback":this.dataCallback,"params":_vm.params},slot:"app-otp-login"}):_vm._e(),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-facebook-login"}):_vm._e(),(_vm.googleEnabled)?_c('app-google-login',{attrs:{"slot":"app-google-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-google-login"}):_vm._e()]:[(_vm.otpEnabled)?_c('app-otp-button-old',{attrs:{"slot":"app-otp-login","callback":this.dataCallback,"params":_vm.params},slot:"app-otp-login"}):_vm._e(),(_vm.facebookEnabled)?_c('app-facebook-login-old',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-facebook-login"}):_vm._e(),(_vm.googleEnabled)?_c('app-google-login-old',{attrs:{"slot":"app-google-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-google-login"}):_vm._e()]],2):_vm._e(),(_vm.screen === 'Blocked')?_c('section',{staticClass:"tray-login-screens",attrs:{"id":"blocked"}},[_c('div',[_c('strong',{staticClass:"tray-title tray-login__title"},[_vm._v("\n        "+_vm._s(_vm.$lang['main-title'])+"\n      ")]),_c('p',{staticClass:"tray-action tray-warning-message"},[_vm._v("\n        "+_vm._s(_vm.$lang['blocked-user'])+"\n      ")])]),(_vm.hasCustomTexts)?_c('app-custom-texts',{attrs:{"slot":"custom-texts","error":this.customTexts['general-error-alert'],"action":this.customTexts['main-action']},slot:"custom-texts"}):_c('p',{staticClass:"tray-action",domProps:{"innerHTML":_vm._s(_vm.$lang['main-action'])}}),_c('div',{staticClass:"tray-social-login"},[(_vm.newLoginDesignToggleStatus)?[(_vm.googleEnabled)?_c('app-google-login',{attrs:{"slot":"app-google-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-google-login"}):_vm._e(),(_vm.facebookEnabled)?_c('app-facebook-login',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-facebook-login"}):_vm._e()]:[(_vm.googleEnabled)?_c('app-google-login-old',{attrs:{"slot":"app-google-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-google-login"}):_vm._e(),(_vm.facebookEnabled)?_c('app-facebook-login-old',{attrs:{"slot":"app-facebook-login","callback":this.dataCallback,"callbackPost":this.dataCallbackPost,"params":_vm.params},slot:"app-facebook-login"}):_vm._e()]],2)],1):_vm._e(),(_vm.hasTerm)?_c('section',{attrs:{"id":"tray-login-terms"}},[_c('app-terms',{attrs:{"termText":this.dataTerms}})],1):_vm._e(),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading",class:{ 'tray-loading-hidden': !_vm.loading },attrs:{"id":"tray-login-loading"}},[_vm._m(0),_c('icon',{attrs:{"name":"locked-loading"}})],1)],1)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tray-loading-mask"},[_c('div',{staticClass:"tray-loading-line"})])}]
 
 
-// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=5b53c6f1&
+// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=0e81a5fe&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
 var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
@@ -20290,6 +20290,189 @@ var FacebookLogin_component = normalizeComponent(
 )
 
 /* harmony default export */ var FacebookLogin = (FacebookLogin_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FacebookLogin_old.vue?vue&type=template&id=d8b0efa6&
+var FacebookLogin_oldvue_type_template_id_d8b0efa6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"facebook-button",staticClass:"tray-btn-facebook",on:{"click":function($event){_vm.$emitEvent.click('tray-login-facebook'), _vm.doFacebookLogin($event)}}},[_vm._v("\n    Facebook\n")])}
+var FacebookLogin_oldvue_type_template_id_d8b0efa6_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/FacebookLogin_old.vue?vue&type=template&id=d8b0efa6&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FacebookLogin_old.vue?vue&type=script&lang=js&
+
+
+
+
+
+
+
+
+function FacebookLogin_oldvue_type_script_lang_js_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function FacebookLogin_oldvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { FacebookLogin_oldvue_type_script_lang_js_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { FacebookLogin_oldvue_type_script_lang_js_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var FacebookLogin_oldvue_type_script_lang_js_ = ({
+  name: 'AppFacebookLogin',
+  mixins: [utils],
+  props: {
+    callback: {
+      type: String,
+      default: ''
+    },
+    callbackPost: {
+      type: String,
+      default: '/'
+    },
+    endpoint: {
+      type: String,
+      default: 'facebook/url'
+    },
+    params: {
+      type: Object,
+      default: function _default() {
+        return {
+          session_id: '',
+          store_id: ''
+        };
+      }
+    }
+  },
+  computed: {
+    /**
+     * Verifica se o tamanho da variavél de callback é maior que 0
+     * @return {bool}
+     */
+    hasCallback: function hasCallback() {
+      return this.callback.length > 0;
+    },
+
+    /**
+     * Formata os parametros recebidos pelo callbackPost
+     * @return {string}
+     */
+    urlParams: function urlParams() {
+      return Object.entries(this.formatedParams).map(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            key = _ref2[0],
+            val = _ref2[1];
+
+        return "".concat(key, "=").concat(val);
+      }).join('&');
+    },
+
+    /**
+     * Adiciona aos parametros um index de facebook e remove o token antigo
+     * @return {object}
+     */
+    formatedParams: function formatedParams() {
+      var objectParams = JSON.parse(this.callbackPost);
+      objectParams.social = '1';
+
+      if (this.hasTokenInParams(objectParams)) {
+        delete objectParams.token;
+      }
+
+      return objectParams;
+    }
+  },
+  methods: {
+    facebookLogin: server.facebookLogin,
+
+    /**
+     * Valida se há token no objeto de parametros
+     * @param {object} objectParams objeto com os parametros de post
+     * @return {bool}
+     */
+    hasTokenInParams: function hasTokenInParams(objectParams) {
+      return Object.prototype.hasOwnProperty.call(objectParams, 'token');
+    },
+
+    /**
+     * Realiza o login com o facebook
+     * @param {event} event
+     */
+    doFacebookLogin: function doFacebookLogin(event) {
+      var _this = this;
+
+      var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : FacebookLogin_oldvue_type_script_lang_js_objectSpread(FacebookLogin_oldvue_type_script_lang_js_objectSpread({}, this.params), {}, {
+        callback: this.urlCallback(),
+        endpoint: 'facebook/url',
+        crossdm: encodeURIComponent(document.location.origin)
+      });
+      this.$parent.setLoading(true);
+      this.facebookLogin(payload).then(function (response) {
+        _this.$emitEvent.login({
+          response: response,
+          type: 'success',
+          method: 'facebook'
+        });
+
+        var url = response.data.data.url;
+        window.location = url;
+        return response;
+      }).catch(function (error) {
+        _this.$emitEvent.login({
+          response: error,
+          type: 'error',
+          method: 'facebook'
+        });
+
+        _this.$parent.setLoading(false);
+
+        return error;
+      });
+    },
+
+    /**
+     * Retorna a URL de callback
+     * @return {string}
+     */
+    urlCallback: function urlCallback() {
+      return this.hasCallback ? this.callback : this.urlCallbackPost();
+    },
+
+    /**
+     * Retorna a URL de callback com os parametros do callbackPost
+     * @return {string}
+     */
+    urlCallbackPost: function urlCallbackPost() {
+      localStorage.setItem('jwtToken', 'false');
+      return "".concat(document.location.origin).concat(this.homePath, "/login?").concat(this.urlParams);
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/FacebookLogin_old.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_FacebookLogin_oldvue_type_script_lang_js_ = (FacebookLogin_oldvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/FacebookLogin_old.vue
+
+
+
+
+
+/* normalize component */
+
+var FacebookLogin_old_component = normalizeComponent(
+  components_FacebookLogin_oldvue_type_script_lang_js_,
+  FacebookLogin_oldvue_type_template_id_d8b0efa6_render,
+  FacebookLogin_oldvue_type_template_id_d8b0efa6_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var FacebookLogin_old = (FacebookLogin_old_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GoogleLogin.vue?vue&type=template&id=55b63948&
 var GoogleLoginvue_type_template_id_55b63948_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"google-button",staticClass:"tray-btn-google",on:{"click":_vm.onClickButton,"mouseover":function($event){_vm.removeIconColors = true},"mouseleave":function($event){_vm.removeIconColors = false}}},[_c('figure',{staticClass:"tray-button-icon"},[_c('icon',{attrs:{"name":"google","removeColors":_vm.removeIconColors}})],1),_c('p',[_vm._v(_vm._s(_vm.$props.label))])])}
 var GoogleLoginvue_type_template_id_55b63948_staticRenderFns = []
@@ -20501,6 +20684,197 @@ var GoogleLogin_component = normalizeComponent(
 )
 
 /* harmony default export */ var GoogleLogin = (GoogleLogin_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GoogleLogin_old.vue?vue&type=template&id=f88c9668&
+var GoogleLogin_oldvue_type_template_id_f88c9668_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{ref:"google-button",staticClass:"tray-btn-google",on:{"click":_vm.onClickButton}},[_vm._v("\n    Google\n")])}
+var GoogleLogin_oldvue_type_template_id_f88c9668_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/GoogleLogin_old.vue?vue&type=template&id=f88c9668&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GoogleLogin_old.vue?vue&type=script&lang=js&
+
+
+
+
+
+
+
+
+function GoogleLogin_oldvue_type_script_lang_js_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function GoogleLogin_oldvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { GoogleLogin_oldvue_type_script_lang_js_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { GoogleLogin_oldvue_type_script_lang_js_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var GoogleLogin_oldvue_type_script_lang_js_ = ({
+  name: 'AppGoogleLogin',
+  mixins: [utils],
+  props: {
+    callback: {
+      type: String,
+      default: ''
+    },
+    callbackPost: {
+      type: String,
+      default: '/'
+    },
+    endpoint: {
+      type: String,
+      default: 'login/google/url'
+    },
+    params: {
+      type: Object,
+      default: function _default() {
+        return {
+          session_id: '',
+          store_id: ''
+        };
+      }
+    }
+  },
+  computed: {
+    /**
+     * Verifica se o tamanho da variavél de callback é maior que 0
+     * @return {bool}
+     */
+    hasCallback: function hasCallback() {
+      return this.callback.length > 0;
+    },
+
+    /**
+     * Formata os parametros recebidos pelo callbackPost
+     * @return {string}
+     */
+    urlParams: function urlParams() {
+      return Object.entries(this.formatedParams).map(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            key = _ref2[0],
+            val = _ref2[1];
+
+        return "".concat(key, "=").concat(val);
+      }).join('&');
+    },
+
+    /**
+     * Adiciona aos parametros um index de google e remove o token antigo
+     * @return {object}
+     */
+    formatedParams: function formatedParams() {
+      var objectParams = JSON.parse(this.callbackPost);
+      objectParams.social = '1';
+
+      if (this.hasTokenInParams(objectParams)) {
+        delete objectParams.token;
+      }
+
+      return objectParams;
+    }
+  },
+  methods: {
+    googleLogin: server.googleLogin,
+
+    /**
+     * Emite o evento de login com o google e faz a chamada para
+     * o método de login
+     */
+    onClickButton: function onClickButton() {
+      this.$emitEvent.click('tray-login-google');
+      this.doGoogleLogin();
+    },
+
+    /**
+     * Valida se há token no objeto de parametros
+     * @param {object} objectParams objeto com os parametros de post
+     * @return {bool}
+     */
+    hasTokenInParams: function hasTokenInParams(objectParams) {
+      return Object.prototype.hasOwnProperty.call(objectParams, 'token');
+    },
+
+    /**
+     * Realiza o login com o google
+     * @param {event} event
+     * @returns {Promise}
+     */
+    doGoogleLogin: function doGoogleLogin(event) {
+      var _this = this;
+
+      var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : GoogleLogin_oldvue_type_script_lang_js_objectSpread(GoogleLogin_oldvue_type_script_lang_js_objectSpread({}, this.params), {}, {
+        callback: this.urlCallback(),
+        endpoint: 'login/google/url'
+      });
+      this.$parent.setLoading(true);
+      this.googleLogin(payload).then(function (response) {
+        _this.$emitEvent.login({
+          response: response,
+          type: 'success',
+          method: 'google'
+        });
+
+        var url = response.data.data.url;
+        window.location = url;
+        return response;
+      }).catch(function (error) {
+        _this.$emitEvent.login({
+          response: error,
+          type: 'error',
+          method: 'google'
+        });
+
+        _this.$parent.setLoading(false);
+
+        return error;
+      });
+    },
+
+    /**
+     * Retorna a URL de callback
+     * @return {string}
+     */
+    urlCallback: function urlCallback() {
+      return this.hasCallback ? this.callback : this.urlCallbackPost();
+    },
+
+    /**
+     * Retorna a URL de callback com os parametros do callbackPost
+     * @return {string}
+     */
+    urlCallbackPost: function urlCallbackPost() {
+      return "".concat(document.location.origin).concat(this.homePath, "/login?").concat(this.urlParams);
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/GoogleLogin_old.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_GoogleLogin_oldvue_type_script_lang_js_ = (GoogleLogin_oldvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/GoogleLogin_old.vue
+
+
+
+
+
+/* normalize component */
+
+var GoogleLogin_old_component = normalizeComponent(
+  components_GoogleLogin_oldvue_type_script_lang_js_,
+  GoogleLogin_oldvue_type_template_id_f88c9668_render,
+  GoogleLogin_oldvue_type_template_id_f88c9668_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var GoogleLogin_old = (GoogleLogin_old_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Identification/Main.vue?vue&type=template&id=3a2c1cb2&
 var Mainvue_type_template_id_3a2c1cb2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"tray-login__identify"},[_c('div',[_c('strong',{staticClass:"tray-title tray-login__title"},[_vm._v("\n      "+_vm._s(_vm.$lang['identify-title'])+"\n    ")]),_vm._t("custom-texts")],2),_c('form',{attrs:{"id":"form-identify","method":"POST"},on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_c('fieldset',{staticClass:"tray-input-group"},[_c('label',{attrs:{"for":"input-email"}},[_c('figure',{staticClass:"tray-input-icon",class:_vm.identificationClasses},[_c('icon',{attrs:{"name":_vm.earlyType === 'email' ? 'email' : 'document'}})],1)]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.computedIdentification),expression:"computedIdentification"},{name:"autofocus",rawName:"v-autofocus"}],staticClass:"tray-input",class:_vm.identificationClasses,attrs:{"type":"text","id":"input-email","autocapitalize":"off","placeholder":_vm.$lang['identify-input']},domProps:{"value":(_vm.computedIdentification)},on:{"blur":function($event){return _vm.validity()},"keyup":function($event){$event.keyCode !== _vm.enterKeyCode ? _vm.clearErrors() : $event.preventDefault()},"input":function($event){if($event.target.composing){ return; }_vm.computedIdentification=$event.target.value}}})]),_c('small',{directives:[{name:"show",rawName:"v-show",value:(_vm.errors.length),expression:"errors.length"}],staticClass:"tray-feedbacks"},[_c('span',{staticClass:"tray-error-message",domProps:{"innerHTML":_vm._s(_vm.errors[_vm.errors.length - 1] || !_vm.isValidIdentification)}})]),_c('button',{staticClass:"tray-btn-primary",attrs:{"id":"tray-login-identify","type":"submit"}},[_vm._v("\n      "+_vm._s(_vm.$lang['proceed'])+"\n    ")])]),_c('div',{staticClass:"tray-general-separator"},[_c('span',{staticClass:"tray-general-separator-line"},[_vm._v("\n      "+_vm._s(_vm.$lang['main-separator'])+"\n    ")])]),_vm._t("app-google-login"),_vm._t("app-facebook-login"),_c('section',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading),expression:"loading"}],staticClass:"tray-loading"},[_vm._m(0),_c('icon',{attrs:{"name":"locked-loading"}})],1)],2)}
 var Mainvue_type_template_id_3a2c1cb2_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tray-loading-mask"},[_c('div',{staticClass:"tray-loading-line"})])}]
@@ -22660,6 +23034,123 @@ var Button_component = normalizeComponent(
 )
 
 /* harmony default export */ var Button = (Button_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/Otp/Button_old.vue?vue&type=template&id=36db1834&
+var Button_oldvue_type_template_id_36db1834_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{attrs:{"method":"POST","id":"form-otp"},on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_c('button',{staticClass:"tray-btn-otp",attrs:{"slot":"app-otp-login","id":"tray-login-otp","type":"submit"},on:{"click":function($event){return _vm.$emitEvent.custom('generate-security-code')}},slot:"app-otp-login"},[_vm._v("\n    "+_vm._s(_vm.$lang['otp-receive'])+"\n  ")])])}
+var Button_oldvue_type_template_id_36db1834_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/screens/Login/screens/Otp/Button_old.vue?vue&type=template&id=36db1834&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/screens/Login/screens/Otp/Button_old.vue?vue&type=script&lang=js&
+
+
+
+
+
+
+function Button_oldvue_type_script_lang_js_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function Button_oldvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { Button_oldvue_type_script_lang_js_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { Button_oldvue_type_script_lang_js_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ var Button_oldvue_type_script_lang_js_ = ({
+  mixins: [screenHandler],
+  props: {
+    callback: {
+      type: String,
+      default: ''
+    },
+    endpoint: {
+      type: String,
+      default: 'generate-security-code'
+    },
+    params: {
+      type: Object,
+      default: function _default() {
+        return {
+          session_id: '',
+          store_id: ''
+        };
+      }
+    }
+  },
+  computed: Button_oldvue_type_script_lang_js_objectSpread(Button_oldvue_type_script_lang_js_objectSpread({}, Object(vuex_esm["d" /* mapState */])(['identification'])), Object(vuex_esm["c" /* mapGetters */])(['identificationType'])),
+  methods: {
+    generateSecurityCode: server.generateSecurityCode,
+
+    /**
+       * Gera um token de segurança
+       * @param {object} event
+       * @param {object} payload
+       */
+    submit: function submit(event) {
+      var _this = this;
+
+      var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Button_oldvue_type_script_lang_js_objectSpread(Button_oldvue_type_script_lang_js_objectSpread({}, this.params), {}, _defineProperty({
+        endpoint: this.endpoint,
+        identification: this.identification
+      }, this.identificationType, this.identification));
+      this.$parent.setLoading(true);
+      this.generateSecurityCode(payload).then(function (response) {
+        _this.$emitEvent.custom('generate-security-code', {
+          response: response
+        });
+
+        _this.$parent.setLoading(false);
+
+        _this.$parent.setScreen('Otp');
+      }).catch(function (error) {
+        _this.$emitEvent.custom('generate-security-code', {
+          error: error
+        });
+
+        var _error$data$message = error.data.message,
+            message = _error$data$message === void 0 ? _this.$lang['invalid-code'] : _error$data$message;
+
+        _this.$parent.setError(message);
+
+        _this.$parent.setLoading(false);
+      });
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/screens/Login/screens/Otp/Button_old.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Otp_Button_oldvue_type_script_lang_js_ = (Button_oldvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/screens/Login/screens/Otp/Button_old.vue
+
+
+
+
+
+/* normalize component */
+
+var Button_old_component = normalizeComponent(
+  Otp_Button_oldvue_type_script_lang_js_,
+  Button_oldvue_type_template_id_36db1834_render,
+  Button_oldvue_type_template_id_36db1834_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var Button_old = (Button_old_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a9a82c9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CustomTexts.vue?vue&type=template&id=4f371f26&
 var CustomTextsvue_type_template_id_4f371f26_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('p',{staticClass:"tray-action"},[_c('span',{staticClass:"tray-custom-text tray-input-invalid",domProps:{"innerHTML":_vm._s(_vm.error)}}),_c('span',{staticClass:"tray-custom-text",domProps:{"innerHTML":_vm._s(_vm.action)}})])}
 var CustomTextsvue_type_template_id_4f371f26_staticRenderFns = []
@@ -22900,6 +23391,77 @@ function Appvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 
 
 
@@ -22919,9 +23481,12 @@ function Appvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < a
   components: {
     AppCustomTexts: CustomTexts,
     AppFacebookLogin: FacebookLogin,
+    AppFacebookLoginOld: FacebookLogin_old,
     AppGoogleLogin: GoogleLogin,
+    AppGoogleLoginOld: GoogleLogin_old,
     AppIdentification: Main,
     AppOtpButton: Button,
+    AppOtpButtonOld: Button_old,
     AppLogin: Login_screens_Main,
     AppTerms: Terms,
     Icon: icons
@@ -22932,7 +23497,8 @@ function Appvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < a
       loading: false,
       screen: 'Identification',
       showComponent: true,
-      googleLoginToggleStatus: false
+      googleLoginToggleStatus: false,
+      newLoginDesignToggleStatus: false
     };
   },
   props: {
@@ -22989,7 +23555,9 @@ function Appvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < a
   mounted: function mounted() {
     var _this2 = this;
 
+    this.newLoginDesignToggleStatus = localStorage.getItem('new-tray-login') === '1';
     this.initialize(this.dataIdentification);
+    this.changeCssFile();
     this.getLangs({
       store_id: this.dataStore,
       endpoint: 'langs/login_component'
@@ -23006,6 +23574,9 @@ function Appvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < a
     this.verifyFacebookOrGoogleLogin();
   },
   watch: {
+    newLoginDesignToggleStatus: function newLoginDesignToggleStatus() {
+      this.changeCssFile();
+    },
     dataIdentification: function dataIdentification(identification) {
       this.initialize(identification);
     },
@@ -23140,6 +23711,11 @@ function Appvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < a
     googleLoginEasyToggle: server.googleLoginEasyToggle,
     getLangs: server.getLangs
   }, Object(vuex_esm["b" /* mapActions */])(['setBaseUrl', 'setIdentification', 'setLang', 'setResolution'])), {}, {
+    changeCssFile: function changeCssFile() {
+      var root = document.getElementsByTagName('body')[0];
+      root.classList.add(this.newLoginDesignToggleStatus ? 'new' : 'old');
+    },
+
     /**
      * Define a tela a ser exibida de acordo com a identificação
      * definidas
