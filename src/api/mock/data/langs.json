@@ -38,6 +38,7 @@
             "otp-receive":"Receber código de segurança por e-mail",
             "otp-input-label":"Código de segurança",
             "other-option":"Escolher outra opção",
+            "go-back":"Voltar",
             "proceed":"Continuar",
             "blocked-user":"Por motivos de segurança bloqueamos o acesso por e-mail e senha durante 60 minutos.",
             "title": "Alterar senha",

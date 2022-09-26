@@ -55,6 +55,7 @@
       </div>
 
       <slot name="app-otp-login"></slot>
+      <slot name="app-back-step"></slot>
     </section>
 
     <app-recover-password

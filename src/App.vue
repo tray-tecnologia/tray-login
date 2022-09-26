@@ -1,153 +1,86 @@
 <template>
-  <div class="tray-container"
-    ref="tray-login" v-show="showComponent">
-    <button class="tray-close" @click="close">
-      <icon name="close" />
-    </button>
-
-    <app-identification
-      v-if="screen === 'Identification'"
-      id="identify"
-      class="tray-login-screens"
-      :callback="this.dataCallback"
-      :params="params"
+  <div class="tray-content" @click.self="close">
+    <div
+      class="tray-container"
+      ref="tray-login"
+      v-show="showComponent"
     >
-      <app-custom-texts v-if="hasCustomTexts"
-        :action="this.customTexts['main-action']"
-        slot="custom-texts">
-      </app-custom-texts>
+      <button class="tray-close" @click="close">
+        <icon name="close" />
+      </button>
 
-      <template v-if="newLoginDesignToggleStatus">
-        <app-facebook-login
-          v-if="facebookEnabled"
-          :callback="this.dataCallback"
-          :callbackPost="this.dataCallbackPost"
-          :params="params"
-          label="Fazer login com o Facebook"
-          slot="app-facebook-login"
-        />
+      <app-identification
+        v-if="screen === 'Identification'"
+        id="identify"
+        class="tray-login-screens"
+        :callback="this.dataCallback"
+        :params="params"
+      >
+        <app-custom-texts v-if="hasCustomTexts"
+          :action="this.customTexts['main-action']"
+          slot="custom-texts">
+        </app-custom-texts>
 
-        <app-google-login
-          v-if="googleEnabled"
-          :callback="this.dataCallback"
-          :callbackPost="this.dataCallbackPost"
-          :params="params"
-          label="Fazer login com o Google"
-          slot="app-google-login"
-        />
-      </template>
+        <template v-if="isNewLoginDesignToggleActive">
+          <app-facebook-login
+            v-if="facebookEnabled"
+            :callback="this.dataCallback"
+            :callbackPost="this.dataCallbackPost"
+            :params="params"
+            label="Fazer login com o Facebook"
+            slot="app-facebook-login"
+          />
 
-      <template v-else>
-        <app-facebook-login-old
-          v-if="facebookEnabled"
-          :callback="this.dataCallback"
-          :callbackPost="this.dataCallbackPost"
-          :params="params"
-          label="Fazer login com o Facebook"
-          slot="app-facebook-login"
-        />
-
-        <app-google-login-old
-          v-if="googleEnabled"
-          :callback="this.dataCallback"
-          :callbackPost="this.dataCallbackPost"
-          :params="params"
-          label="Fazer login com o Google"
-          slot="app-google-login"
-        />
-      </template>
-    </app-identification>
-
-    <app-login
-      v-if="screen === 'Main'"
-      id="main"
-      class="tray-login-screens"
-      :callback="this.dataCallback"
-      :callbackPost="this.dataCallbackPost"
-      :params="params"
-    >
-      <app-custom-texts v-if="hasCustomTexts"
-        :error="this.customTexts['general-error-alert']"
-        :action="this.customTexts['main-action']"
-        slot="custom-texts"
-      />
-
-      <template v-if="newLoginDesignToggleStatus">
-        <app-otp-button v-if="otpEnabled"
-          :callback="this.dataCallback"
-          :params="params"
-          slot="app-otp-login"
-        />
-
-        <app-facebook-login
-          v-if="facebookEnabled"
-          :callback="this.dataCallback"
-          :callbackPost="this.dataCallbackPost"
-          :params="params"
-          slot="app-facebook-login"
-        />
-
-        <app-google-login
-          v-if="googleEnabled"
-          :callback="this.dataCallback"
-          :callbackPost="this.dataCallbackPost"
-          :params="params"
-          slot="app-google-login"
-        />
-      </template>
-
-      <template v-else>
-        <app-otp-button-old v-if="otpEnabled"
-          :callback="this.dataCallback"
-          :params="params"
-          slot="app-otp-login"
-        />
-
-        <app-facebook-login-old
-          v-if="facebookEnabled"
-          :callback="this.dataCallback"
-          :callbackPost="this.dataCallbackPost"
-          :params="params"
-          slot="app-facebook-login"
-        />
-
-        <app-google-login-old
-          v-if="googleEnabled"
-          :callback="this.dataCallback"
-          :callbackPost="this.dataCallbackPost"
-          :params="params"
-          slot="app-google-login"
-        />
-      </template>
-    </app-login>
-
-    <section id="blocked" v-if="screen === 'Blocked'" class="tray-login-screens">
-      <div>
-        <strong class="tray-title tray-login__title">
-          {{ $lang['main-title']}}
-        </strong>
-
-        <p class="tray-action tray-warning-message">
-          {{ $lang['blocked-user'] }}
-        </p>
-      </div>
-
-      <app-custom-texts v-if="hasCustomTexts"
-        :error="this.customTexts['general-error-alert']"
-        :action="this.customTexts['main-action']"
-        slot="custom-texts"
-      />
-
-      <p class="tray-action" v-else v-html="$lang['main-action']"></p>
-
-      <div class="tray-social-login">
-        <template v-if="newLoginDesignToggleStatus">
           <app-google-login
             v-if="googleEnabled"
             :callback="this.dataCallback"
             :callbackPost="this.dataCallbackPost"
             :params="params"
+            label="Fazer login com o Google"
             slot="app-google-login"
+          />
+        </template>
+
+        <template v-else>
+          <app-facebook-login-old
+            v-if="facebookEnabled"
+            :callback="this.dataCallback"
+            :callbackPost="this.dataCallbackPost"
+            :params="params"
+            label="Fazer login com o Facebook"
+            slot="app-facebook-login"
+          />
+
+          <app-google-login-old
+            v-if="googleEnabled"
+            :callback="this.dataCallback"
+            :callbackPost="this.dataCallbackPost"
+            :params="params"
+            label="Fazer login com o Google"
+            slot="app-google-login"
+          />
+        </template>
+      </app-identification>
+
+      <app-login
+        v-if="screen === 'Main'"
+        id="main"
+        class="tray-login-screens"
+        :callback="this.dataCallback"
+        :callbackPost="this.dataCallbackPost"
+        :params="params"
+      >
+        <app-custom-texts v-if="hasCustomTexts"
+          :error="this.customTexts['general-error-alert']"
+          :action="this.customTexts['main-action']"
+          slot="custom-texts"
+        />
+
+        <template v-if="isNewLoginDesignToggleActive">
+          <app-otp-button v-if="otpEnabled"
+            :callback="this.dataCallback"
+            :params="params"
+            slot="app-otp-login"
           />
 
           <app-facebook-login
@@ -157,15 +90,21 @@
             :params="params"
             slot="app-facebook-login"
           />
-        </template>
 
-        <template v-else>
-          <app-google-login-old
+          <app-google-login
             v-if="googleEnabled"
             :callback="this.dataCallback"
             :callbackPost="this.dataCallbackPost"
             :params="params"
             slot="app-google-login"
+          />
+        </template>
+
+        <template v-else>
+          <app-otp-button-old v-if="otpEnabled"
+            :callback="this.dataCallback"
+            :params="params"
+            slot="app-otp-login"
           />
 
           <app-facebook-login-old
@@ -175,26 +114,112 @@
             :params="params"
             slot="app-facebook-login"
           />
+
+          <app-google-login-old
+            v-if="googleEnabled"
+            :callback="this.dataCallback"
+            :callbackPost="this.dataCallbackPost"
+            :params="params"
+            slot="app-google-login"
+          />
+
+          <button
+            type="button"
+            v-if="identificationEnabled"
+            class="tray-btn-default tray-btn-other-option"
+            slot="app-back-step"
+            @click="reset"
+          >
+            {{ $lang['go-back'] }}
+          </button>
         </template>
-      </div>
-    </section>
+      </app-login>
 
-    <section id="tray-login-terms" v-if="hasTerm">
-      <app-terms :termText="this.dataTerms"></app-terms>
-    </section>
+      <section id="blocked" v-if="screen === 'Blocked'" class="tray-login-screens">
+        <div>
+          <strong class="tray-title tray-login__title">
+            {{ $lang['main-title']}}
+          </strong>
 
-    <section
-      v-show="loading"
-      id="tray-login-loading"
-      class="tray-loading"
-      :class="{ 'tray-loading-hidden': !loading }"
-    >
-      <div class="tray-loading-mask">
-        <div class="tray-loading-line"></div>
-      </div>
+          <p class="tray-action tray-warning-message">
+            {{ $lang['blocked-user'] }}
+          </p>
+        </div>
 
-      <icon name="locked-loading" />
-    </section>
+        <app-custom-texts v-if="hasCustomTexts"
+          :error="this.customTexts['general-error-alert']"
+          :action="this.customTexts['main-action']"
+          slot="custom-texts"
+        />
+
+        <p class="tray-action" v-else v-html="$lang['main-action']"></p>
+
+        <div class="tray-social-login">
+          <template v-if="isNewLoginDesignToggleActive">
+            <app-google-login
+              v-if="googleEnabled"
+              :callback="this.dataCallback"
+              :callbackPost="this.dataCallbackPost"
+              :params="params"
+              slot="app-google-login"
+            />
+
+            <app-facebook-login
+              v-if="facebookEnabled"
+              :callback="this.dataCallback"
+              :callbackPost="this.dataCallbackPost"
+              :params="params"
+              slot="app-facebook-login"
+            />
+          </template>
+
+          <template v-else>
+            <app-google-login-old
+              v-if="googleEnabled"
+              :callback="this.dataCallback"
+              :callbackPost="this.dataCallbackPost"
+              :params="params"
+              slot="app-google-login"
+            />
+
+            <app-facebook-login-old
+              v-if="facebookEnabled"
+              :callback="this.dataCallback"
+              :callbackPost="this.dataCallbackPost"
+              :params="params"
+              slot="app-facebook-login"
+            />
+
+            <button
+              type="button"
+              v-if="identificationEnabled"
+              class="tray-btn-default tray-btn-other-option"
+              slot="app-back-step"
+              @click="reset"
+            >
+              {{ $lang['go-back'] }}
+            </button>
+          </template>
+        </div>
+      </section>
+
+      <section id="tray-login-terms" v-if="hasTerm">
+        <app-terms :termText="this.dataTerms"></app-terms>
+      </section>
+
+      <section
+        v-show="loading"
+        id="tray-login-loading"
+        class="tray-loading"
+        :class="{ 'tray-loading-hidden': !loading }"
+      >
+        <div class="tray-loading-mask">
+          <div class="tray-loading-line"></div>
+        </div>
+
+        <icon name="locked-loading" />
+      </section>
+    </div>
   </div>
 </template>
 
@@ -239,7 +264,7 @@ export default {
       screen: 'Identification',
       showComponent: true,
       googleLoginToggleStatus: false,
-      newLoginDesignToggleStatus: false,
+      isNewLoginDesignToggleActive: false,
     };
   },
   props: {
@@ -293,7 +318,7 @@ export default {
     });
   },
   mounted() {
-    this.newLoginDesignToggleStatus = localStorage.getItem('new-tray-login') === '1';
+    this.isNewLoginDesignToggleActive = localStorage.getItem('new-tray-login') === '1';
     this.initialize(this.dataIdentification);
     this.changeCssFile();
 
@@ -316,7 +341,7 @@ export default {
   },
 
   watch: {
-    newLoginDesignToggleStatus() {
+    isNewLoginDesignToggleActive() {
       this.changeCssFile();
     },
     dataIdentification(identification) {
@@ -465,7 +490,7 @@ export default {
 
     changeCssFile() {
       const root = document.getElementsByTagName('body')[0];
-      root.classList.add(this.newLoginDesignToggleStatus ? 'new' : 'old');
+      root.classList.add(this.isNewLoginDesignToggleActive ? 'new' : 'old');
     },
 
     /**
