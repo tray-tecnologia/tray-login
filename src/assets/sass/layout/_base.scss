@@ -44,7 +44,7 @@ tray-login {
 
     color: $color;
     font-family: Lato, Helvetica, sans-serif;
-    font-size: 14px;
+    font-size: 14px !important;
 
     .tray-content {
         background: $overlay-color;

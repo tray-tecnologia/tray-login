@@ -54,10 +54,11 @@ tray-login {
     .tray-btn-default,
     .tray-btn-otp,
     .tray-btn-facebook,
-    .tray-btn-google {
+    .tray-btn-google,
+    .tray-btn-other-option {
         background-color: $white;
         border-color: $btn-social-border;
-        color: $btn-custom-text;
+        color: $btn-custom-text !important;
 
         align-items: center;
         display: flex;
@@ -76,13 +77,17 @@ tray-login {
         border-color: $btn-otp-border;
         font-size: 12px;
 
-        &:hover {
+        &:not(.tray-btn-other-option):hover {
             background-color: $btn-otp-bg-hover;
 
             svg {
               fill: $white;
             }
         }
+    }
+
+    .tray-btn-other-option:hover {
+        background-color: transparent;
     }
 
     .tray-btn-facebook:hover {
