@@ -163,7 +163,7 @@
         <div class="tray-loading-line"></div>
       </div>
 
-      <icon name="locked" />
+      <icon name="locked-loading" />
     </section>
   </form>
 </template>
