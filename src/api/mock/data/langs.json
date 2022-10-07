@@ -4,7 +4,6 @@
             "identify-title":"Identifique-se",
             "identify-input":"E-mail ou CPF/CNPJ" ,
             "identify-data-invalid":"Dados inválidos. Tente novamente.",
-            "identify-error-not-found":"Usuário não encontrado, faça seu cadastro.",
             "invalid-code":"Autenticação incorreta. Tente novamente.",
             "attempts-remaining": "Autenticação incorreta. O acesso será bloqueado por 60 minutos após 5 tentativas.",
             "attempts-quantity": "Restam :number tentativas.",

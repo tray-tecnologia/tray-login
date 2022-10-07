@@ -19051,7 +19051,6 @@ function store_modules_objectSpread(target) { for (var i = 1; i < arguments.leng
     // identify screen
     'identify-title': 'Identifique-se',
     'identify-input': 'E-mail ou CPF/CNPJ',
-    'identify-error-not-found': 'Não foi possível verificar seu cadastro, tente novamente.',
     'identify-button': 'Continuar',
     // errors
     'identify-data-invalid': 'Dados inválidos. Tente novamente.',
