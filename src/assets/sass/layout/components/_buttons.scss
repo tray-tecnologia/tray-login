@@ -2,16 +2,25 @@
 $btn-back-bg: $white;
 $btn-back-bd: #d3d1d1;
 $btn-back-txt: #bcbcbc;
+// TODO:
 
-$btn-next-bg: #6ABF57;
-$btn-next-bd: #539E41;
-$btn-next-txt: $white;
+// continue button
+$btn-success-dark: #72A915;
+$btn-next-bg: #7DB51E;
+$btn-next-bg-hover: $btn-success-dark;
+$btn-next-border: $btn-success-dark;
 
-$btn-facebook-bg: #3b5998;
-$btn-facebook-bd: #243f77;
+$btn-custom-text: #666666;
 
-$btn-google-bg: #4285F4;
-$btn-google-bd: #2768d1;
+// otp button
+$btn-otp-dark: #524379;
+$btn-otp-bg-hover: $btn-otp-dark;
+$btn-otp-border: $btn-otp-dark;
+
+// social buttons
+$btn-social-border: #E0E0E0;
+$btn-fb-bg-hover: #1877F2;
+$btn-google-bg-hover: #4285F3;
 
 tray-login {
     .tray-btn-primary,
@@ -21,72 +30,84 @@ tray-login {
     .tray-btn-otp {
         background: $btn-next-bg;
         display: block;
-        color: #fff;
+        color: $white;
         cursor: pointer;
         width: 100%;
-        height: 48px;
+        height: 42px;
         border-radius: 3px;
-        border: none;
-        border-bottom: 3px solid $btn-next-bd;
+        border: 1px solid transparent;
         font-size: 14px;
-        font-weight: bold;
-        margin-bottom: 10px;
+        font-weight: normal;
+        margin-bottom: $default-margin;
         padding: 0;
 
         &:hover {
-            background: darken($btn-next-bg, 10%);
-            border-color: darken($btn-next-bd, 10%);
+          background-color: $btn-next-bg-hover;
         }
     }
 
-    .tray-btn-facebook {
-        background-color: #3b5998;
-        border-bottom-color: #243f77;
+    .tray-btn-primary {
+      border-bottom-color: $btn-next-border;
+      border-bottom-width: 3px;
+    }
 
-        &:hover {
-            background-color: darken(#3b5998, 10%);
-            border-color: darken(#243f77, 10%);
+    .tray-btn-default,
+    .tray-btn-otp,
+    .tray-btn-facebook,
+    .tray-btn-google,
+    .tray-btn-other-option {
+        background-color: $white;
+        border-color: $btn-social-border;
+        color: $btn-custom-text !important;
+
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        padding: 0 10px;
+
+        .tray-button-icon,
+        p {
+            margin: 0 !important;
         }
     }
 
-    .tray-btn-google {
-        background-color: $btn-google-bg;
-        border-bottom-color: $btn-google-bd;
-
-        &:hover {
-            background-color: darken($btn-google-bg, 10%);
-            border-color: darken($btn-google-bd, 10%);
-        }
-    }
-
-    .tray-btn-default {
-        color: #bcbcbc;
-        background-color: #fff;
-        border: 1px solid #d3d1d1;
-        border-bottom-width: 3px;
-
-        &:hover {
-            background-color: darken(#fff, 5%);
-            border-color: darken(#d3d1d1, 10%);
-        }
-    }
-
+    .tray-btn-default,
     .tray-btn-otp {
-        background-color: #52447c;
-        border-bottom-color: #3d3160;
-        font-size: 13px;
+        border-color: $btn-otp-border;
+        font-size: 12px;
 
-        &:hover {
-            background-color: darken(#52447c, 5%);
-            border-bottom-color: darken(#3d3160, 10%);
+        &:not(.tray-btn-other-option):hover {
+            background-color: $btn-otp-bg-hover;
+
+            svg {
+              fill: $white;
+            }
         }
+    }
+
+    .tray-btn-other-option:hover {
+        background-color: transparent;
+    }
+
+    .tray-btn-facebook:hover {
+        background-color: $btn-fb-bg-hover;
+    }
+
+    .tray-btn-google:hover {
+        background-color: $btn-google-bg-hover;
+    }
+
+    .tray-btn-default:hover > p,
+    .tray-btn-otp:hover > p,
+    .tray-btn-facebook:hover > p,
+    .tray-btn-google:hover > p {
+        color: $white !important;
     }
 
     .tray-close {
         background: #fff;
-        border: 2px solid #bababa;
-        border-radius: 50%;
-        color: #bababa;
+        border: none;
         cursor: pointer;
         float: right;
         font-weight: 700;

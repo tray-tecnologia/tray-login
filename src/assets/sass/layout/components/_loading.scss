@@ -1,8 +1,6 @@
 // Variables
 $modal-content-width: 300px;
 $modal-background: rgba(255, 255, 255, .7);
-$modal-icon: #7f7f7f;
-
 $loading-height: 60px;
 $loading-width: $loading-height / 2;
 
@@ -50,7 +48,7 @@ tray-login {
 
     .tray-loading-icon {
         @include rotate(0);
-        fill: $modal-icon;
+        fill: $default-color;
         height: 30px;
         width: 30px;
         position: absolute;

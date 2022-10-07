@@ -2,19 +2,35 @@
   <button
     ref="facebook-button"
     class="tray-btn-facebook"
-    @click="$emitEvent.click('tray-login-facebook'), doFacebookLogin($event)">
-      Facebook
+    @click="$emitEvent.click('tray-login-facebook'), doFacebookLogin($event)"
+    @mouseover="removeIconColors = true"
+    @mouseleave="removeIconColors = false"
+  >
+    <figure class="tray-button-icon">
+      <icon name="facebook" :removeColors="removeIconColors" />
+    </figure>
+
+    <p>{{ $props.label }}</p>
   </button>
 </template>
 
 <script>
 import client from 'api-client';
 import utils from '@/mixins/utils';
+import Icon from './icons/index.vue';
 
 export default {
   name: 'AppFacebookLogin',
+
+  components: { Icon },
+
   mixins: [utils],
+
   props: {
+    label: {
+      type: String,
+      default: 'Login com o Facebook',
+    },
     callback: {
       type: String,
       default: '',
@@ -36,6 +52,12 @@ export default {
         };
       },
     },
+  },
+
+  data() {
+    return {
+      removeIconColors: false,
+    };
   },
 
   computed: {

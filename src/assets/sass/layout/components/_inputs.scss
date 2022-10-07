@@ -1,14 +1,16 @@
 $general-input: $white;
 $input-error: $red;
+$input-color: #777777;
 
 tray-login {
     .tray-input-group {
         border: 0;
+        margin: 0;
         padding: 0;
         position: relative;
 
         .tray-input-icon {
-            color: #909090;
+            color: $input-color;
         }
 
         button {
@@ -17,23 +19,22 @@ tray-login {
     }
 
     .tray-input {
-        background: #fff;
-        border: 1px solid #e0dcdc;
-        border-radius: 3px;
-        color: #909090;
+        background: #FFFFFF;
+        border: 1px solid #D2D2D2;
+        border-radius: 4px;
+        color: $input-color;
         display: block;
         font-size: 14px;
         font-weight: 300;
-        height: 47px;
+        height: 44px;
         line-height: 14px;
-        padding: 13px 0 14px 36px!important;
+        padding: 13px 0 14px 28px!important;
         width: 100%;
-        margin-bottom: 10px;
-        outline-width: 0;
+        margin-bottom: $default-margin;
 
         &:focus {
             outline: 0;
-            border-color: silver;
+            border-color: #8F8F8F;
             border-width: 2px;
             color: #909090;
         }
@@ -56,8 +57,8 @@ tray-login {
     .tray-input-icon {
         padding: 0;
         margin: 0;
-        top: 15px;
-        left: 15px;
+        top: 13px;
+        left: 8px;
         width: 15px;
         position: absolute
     }
@@ -65,7 +66,7 @@ tray-login {
     .tray-feedbacks {
         display: block;
         font-size: 14px;
-        margin-bottom: 10px;
+        margin-bottom: $default-margin;
     }
 
     .tray-error-message {
@@ -76,26 +77,34 @@ tray-login {
         }
     }
 
+    .tray-warning-message {
+        background: $yellow;
+        border: 1px solid $dark-yellow;
+        border-radius: 4px;
+        color: $dark-yellow;
+        padding: $default-margin;
+    }
+
     .tray-well {
-        width: 100%;
+        background-color: #EBEBEB;
+        border: 1px solid #D2D2D2;
+        border-radius: 4px;
+        color: #8F8F8F;
+
         display: block;
-        background-color: #ebebeb;
-        border-radius: 3px;
-        border: 1px solid #efeded;
-        color: #8f8f8f;
+        height: 44px;
         margin-bottom: 10px;
-        padding: 10px 10px;
-        text-align: center;
+        padding: 12px 8px;
+        width: 100%;
     }
 
     .tray-general-separator {
-        color: #909090;
+        color: #666666;
         display: block;
-        margin-bottom: 10px;
+        margin: 24px 0;
         text-align: center;
         overflow: hidden;
         white-space: nowrap;
-        display: block;
     }
 
     .tray-general-separator-line {
@@ -109,7 +118,7 @@ tray-login {
             top: 50%;
             width: 9999px;
             height: 1px;
-            background: #909090;
+            background: #EBEBEB;
         }
 
         &:before {
@@ -126,14 +135,13 @@ tray-login {
     .tray-login-hide-password {
         border: 0;
         cursor: pointer;
-        color: #c7c7c7;
+        color: $input-color;
         font-size: 10px;
         height: 25px;
         position: absolute;
         right: 10px;
-        top: 12px;
+        top: 10px;
         text-transform: uppercase;
-        outline-width: 0;
         background: none;
     }
 }

@@ -1,12 +1,29 @@
-@import 'layout/variables';
-@import 'layout/base';
-@import 'layout/mixins';
-@import 'layout/animations';
-@import 'layout/components/loading';
-@import 'layout/components/inputs';
-@import 'layout/components/buttons';
-@import 'layout/components/terms';
-@import 'layout/components/forgotPassword';
-@import 'layout/screens/recover-password/login';
-@import 'layout/screens/recover-password/confirm-code';
-@import 'layout/screens/password-change/password-change';
+.new {
+  @import 'layout/variables';
+  @import 'layout/base';
+  @import 'layout/mixins';
+  @import 'layout/animations';
+  @import 'layout/components/loading';
+  @import 'layout/components/inputs';
+  @import 'layout/components/buttons';
+  @import 'layout/components/terms';
+  @import 'layout/components/forgotPassword';
+  @import 'layout/screens/recover-password/login';
+  @import 'layout/screens/recover-password/confirm-code';
+  @import 'layout/screens/password-change/password-change';
+}
+
+.old {
+  @import 'layout_old/variables';
+  @import 'layout_old/base';
+  @import 'layout_old/mixins';
+  @import 'layout_old/animations';
+  @import 'layout_old/components/loading';
+  @import 'layout_old/components/inputs';
+  @import 'layout_old/components/buttons';
+  @import 'layout_old/components/terms';
+  @import 'layout_old/components/forgotPassword';
+  @import 'layout_old/screens/recover-password/login';
+  @import 'layout_old/screens/recover-password/confirm-code';
+  @import 'layout_old/screens/password-change/password-change';
+}

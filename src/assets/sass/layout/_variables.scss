@@ -1,9 +1,12 @@
 // Main colors
-$white: #fff;
-$green: #6abf57;
-$red: #ff5858;
-$gray: #909090;
-$black: #000;
+$white: #FFFFFF;
+$green: #6ABF57;
+$blue: #4A6FD0;
+$red: #FF5858;
+$yellow: #FFF3CD;
+$dark-yellow: #856404;
+$gray: #666666;
+$black: #000000;
 
 // Body
 $default-color: $gray;
@@ -11,5 +14,6 @@ $active-color: $green;
 $danger-color: $red;
 
 // Spaces
-$default-margin: 10px;
-$default-gutter: 12px;
+$default-margin: 16px;
+$default-gutter: 56px;
+

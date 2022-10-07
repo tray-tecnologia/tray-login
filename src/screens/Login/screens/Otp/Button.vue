@@ -5,8 +5,13 @@
       type="submit"
       slot="app-otp-login"
       class="tray-btn-otp"
-      @click="$emitEvent.custom('generate-security-code')">
-      {{ $lang['otp-receive'] }}
+      @click="$emitEvent.custom('generate-security-code')"
+    >
+      <figure class="tray-button-icon">
+        <icon name="key" />
+      </figure>
+
+      <p>{{ $lang['otp-receive'] }}</p>
     </button>
   </form>
 </template>
@@ -15,8 +20,11 @@
 import http from 'api-client';
 import screenHandler from '@/mixins/screenHandler';
 import { mapState, mapGetters } from 'vuex';
+import Icon from '@/components/icons/index.vue';
 
 export default {
+  components: { Icon },
+
   mixins: [screenHandler],
 
   props: {
