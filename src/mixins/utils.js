@@ -1,4 +1,5 @@
-import http from 'api-client';
+import http from "api-client";
+import httpBasic from "@/plugins/http";
 
 export default {
   data() {
@@ -6,11 +7,11 @@ export default {
       /**
        * Rota usada no payload post
        */
-      payloadPostEndpoint: 'my-account/api/login',
+      payloadPostEndpoint: "my-account/api/login",
       /**
        * Rota do ambiente utilizado
        */
-      pathEnvironment: `/${window.location.pathname.split('/')[1]}`,
+      pathEnvironment: `/${window.location.pathname.split("/")[1]}`,
       enterKeyCode: 13,
     };
   },
@@ -21,7 +22,7 @@ export default {
      * @return {string}
      */
     homePath() {
-      return this.isValidPath ? this.pathEnvironment : '/my-account';
+      return this.isValidPath ? this.pathEnvironment : "/my-account";
     },
 
     /**
@@ -29,7 +30,7 @@ export default {
      * @return {bool}
      */
     isValidPath() {
-      return this.pathEnvironment.includes('/stg');
+      return this.pathEnvironment.includes("/stg");
     },
   },
 
@@ -42,15 +43,15 @@ export default {
      * @param {string} callback
      * @param {string} token
      */
-    redirect(callback = '', token = '') {
+    redirect(callback = "", token = "") {
       if (!callback) {
         return;
       }
 
-      let redirectParam = '';
+      let redirectParam = "";
       if (token) {
         redirectParam = `?token=${token}`;
-        if (callback.indexOf('?') > -1) {
+        if (callback.indexOf("?") > -1) {
           redirectParam = `&token='${token}`;
         }
       }
@@ -63,7 +64,7 @@ export default {
      * @param {string} storeId string com o id da loja
      */
     isGoogleLoginToggleActive(storeId) {
-      this.googleLoginEasyToggle(storeId).then(res => res);
+      this.googleLoginEasyToggle(storeId).then((res) => res);
     },
 
     /**
@@ -74,11 +75,26 @@ export default {
     mixinCallbackLogin(callbackPost, tokenPassword) {
       const payloadPost = this.paramCallbackPost(callbackPost, tokenPassword);
 
-      this.callbackLoginLayout(payloadPost).then((res) => {
+      this.callbackLoginLayout(payloadPost).then(async (res) => {
         const { token, redirect: url } = res.data.data;
+        await this.generatePlataformToken();
         this.redirect(this.formatedRedirectUrl(url), token);
         return res;
       });
+    },
+
+    /**
+     * Chamando uma das urls do legado somente para fazer a geração de token
+     * @return {undefined}
+     */
+    async generatePlataformToken() {
+      try {
+        const path = `/loja/central_comentarios.php?token=${getToken()}`;
+        await httpBasic.get(path);
+        localStorage.setItem("hasPlataformToken", "true");
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     /**
@@ -87,7 +103,7 @@ export default {
      * @return {string}
      */
     formatedRedirectUrl(url) {
-      return url.replace('/my-account', this.homePath);
+      return url.replace("/my-account", this.homePath);
     },
 
     /**
@@ -112,7 +128,7 @@ export default {
      * @return {string}
      */
     getIconName(validationRule) {
-      return validationRule ? 'check' : 'times';
+      return validationRule ? "check" : "times";
     },
 
     /**
@@ -121,7 +137,7 @@ export default {
      * @return {boolean}
      */
     isTestIdentifier(identification) {
-      const testIdentifiers = ['teste@tray.com.br', 'testepagamento@tray.net.br'];
+      const testIdentifiers = ["teste@tray.com.br", "testepagamento@tray.net.br"];
       return testIdentifiers.includes(identification);
     },
 
@@ -130,7 +146,7 @@ export default {
      * @return {bool}
      */
     hasSocialParam(payloadPost) {
-      return Object.prototype.hasOwnProperty.call(payloadPost, 'social');
+      return Object.prototype.hasOwnProperty.call(payloadPost, "social");
     },
   },
 };
