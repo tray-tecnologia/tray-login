@@ -90,7 +90,8 @@ export default {
         }
 
         console.log('url: ', url);
-        return this.redirect(url, tokenPassword);
+        // return this.redirect(url, tokenPassword);
+        return this.redirect(url);
       });
     },
 

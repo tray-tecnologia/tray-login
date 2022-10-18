@@ -20188,8 +20188,9 @@ var es6_regexp_split = __webpack_require__("28a5");
           return _this.redirect(_this.formatedRedirectUrl(url), token);
         }
 
-        console.log('url: ', url);
-        return _this.redirect(url, tokenPassword);
+        console.log('url: ', url); // return this.redirect(url, tokenPassword);
+
+        return _this.redirect(url);
       });
     },
 
