@@ -20218,7 +20218,7 @@ var es6_regexp_split = __webpack_require__("28a5");
                 _context2.prev = 1;
                 path = "/loja/central_comentarios.php?token=".concat(token);
                 _context2.next = 5;
-                return http_install.get(path);
+                return httpBasic.get(path);
 
               case 5:
                 localStorage.setItem('hasPlataformToken', 'true');

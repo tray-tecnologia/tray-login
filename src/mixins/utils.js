@@ -1,5 +1,5 @@
 import http from 'api-client';
-import httpBasic from '@/plugins/http';
+import { httpBasic } from '@/plugins/http';
 
 export default {
   data() {
