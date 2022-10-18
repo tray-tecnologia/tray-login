@@ -153,7 +153,7 @@ export default {
           type: 'success',
         });
         if (this.hasCallbackPost) {
-          this.mixinCallbackLogin(this.callbackPost, token);
+          this.mixinCallbackLogin(this.callbackPost, token, this.callback);
           return response;
         }
         if (this.callback) {

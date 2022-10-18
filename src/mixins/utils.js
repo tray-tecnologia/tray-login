@@ -56,8 +56,6 @@ export default {
         }
       }
 
-      console.log('redirect: ', callback + redirectParam);
-
       window.location = callback + redirectParam;
     },
 
@@ -74,32 +72,19 @@ export default {
      * @param {string} callbackPost string com os parametros do callback post
      * @param {string} tokenPassword
      */
-    mixinCallbackLogin(callbackPost, tokenPassword) {
+    mixinCallbackLogin(callbackPost, tokenPassword, callback) {
       const payloadPost = this.paramCallbackPost(callbackPost, tokenPassword);
 
       this.callbackLoginLayout(payloadPost).then((res) => {
         const { token, redirect: url } = res.data.data;
-        this.generatePlataformToken(token);
-        console.log('token: ', token, 'url: ', url);
-        this.redirect(this.formatedRedirectUrl(url), token);
-        return res;
+        const { origem } = payloadPost;
+
+        if (origem === 'central') {
+          return this.redirect(this.formatedRedirectUrl(url), token);
+        }
+
+        return this.redirect(callback, tokenPassword);
       });
-    },
-
-    /**
-     * Chamando uma das urls do legado somente para fazer a geração de token
-     * @return {undefined}
-     */
-    async generatePlataformToken(token) {
-      const path = `/loja/central_comentarios.php?token=${token}`;
-
-      try {
-        await httpBasic.get(path);
-        localStorage.setItem('jwtToken', token);
-        localStorage.setItem('hasPlataformToken', 'true');
-      } catch (error) {
-        console.log(error);
-      }
     },
 
     /**
