@@ -20180,11 +20180,14 @@ var es6_regexp_split = __webpack_require__("28a5");
         _this.generatePlataformToken(token);
 
         var origem = payloadPost.origem;
+        console.log('origem: ', origem);
 
         if (origem === 'central') {
+          console.log(_this.formatedRedirectUrl(url));
           return _this.redirect(_this.formatedRedirectUrl(url), token);
         }
 
+        console.log(url);
         return _this.redirect(url);
       });
     },

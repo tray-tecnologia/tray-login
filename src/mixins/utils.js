@@ -81,10 +81,14 @@ export default {
 
         const { origem } = payloadPost;
 
+        console.log('origem: ', origem);
+
         if (origem === 'central') {
+          console.log(this.formatedRedirectUrl(url));
           return this.redirect(this.formatedRedirectUrl(url), token);
         }
 
+        console.log(url);
         return this.redirect(url);
       });
     },
