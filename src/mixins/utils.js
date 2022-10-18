@@ -78,7 +78,7 @@ export default {
 
       this.callbackLoginLayout(payloadPost).then((res) => {
         const { token, redirect: url } = res.data.data;
-        this.generatePlataformToken(token);
+        // this.generatePlataformToken(token);
 
         const { origem } = payloadPost;
 
@@ -90,8 +90,8 @@ export default {
         }
 
         console.log('url: ', url);
-        // return this.redirect(url, tokenPassword);
-        return this.redirect(url);
+        return this.redirect(url, tokenPassword);
+        // return this.redirect(url);
       });
     },
 
