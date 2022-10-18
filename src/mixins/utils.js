@@ -56,6 +56,7 @@ export default {
         }
       }
 
+      console.log('url token: ', callback + redirectParam);
       window.location = callback + redirectParam;
     },
 
@@ -84,11 +85,11 @@ export default {
         console.log('origem: ', origem);
 
         if (origem === 'central') {
-          console.log(this.formatedRedirectUrl(url));
+          console.log('url: ', this.formatedRedirectUrl(url));
           return this.redirect(this.formatedRedirectUrl(url), token);
         }
 
-        console.log(url);
+        console.log('url: ', url);
         return this.redirect(url, tokenPassword);
       });
     },

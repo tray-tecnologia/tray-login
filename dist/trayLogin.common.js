@@ -20150,6 +20150,7 @@ var es6_regexp_split = __webpack_require__("28a5");
         }
       }
 
+      console.log('url token: ', callback + redirectParam);
       window.location = callback + redirectParam;
     },
 
@@ -20183,11 +20184,11 @@ var es6_regexp_split = __webpack_require__("28a5");
         console.log('origem: ', origem);
 
         if (origem === 'central') {
-          console.log(_this.formatedRedirectUrl(url));
+          console.log('url: ', _this.formatedRedirectUrl(url));
           return _this.redirect(_this.formatedRedirectUrl(url), token);
         }
 
-        console.log(url);
+        console.log('url: ', url);
         return _this.redirect(url, tokenPassword);
       });
     },
