@@ -20190,15 +20190,14 @@ var es6_regexp_split = __webpack_require__("28a5");
               switch (_context.prev = _context.next) {
                 case 0:
                   _res$data$data = res.data.data, token = _res$data$data.token, url = _res$data$data.redirect;
-                  _context.next = 3;
-                  return _this.generatePlataformToken(token);
 
-                case 3:
+                  _this.generatePlataformToken(token);
+
                   _this.redirect(_this.formatedRedirectUrl(url), token);
 
                   return _context.abrupt("return", res);
 
-                case 5:
+                case 4:
                 case "end":
                   return _context.stop();
               }
@@ -20223,28 +20222,27 @@ var es6_regexp_split = __webpack_require__("28a5");
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                console.log('generatePlataformToken');
-                _context2.prev = 1;
                 path = "/loja/central_comentarios.php?token=".concat(token);
-                _context2.next = 5;
+                _context2.prev = 1;
+                _context2.next = 4;
                 return httpBasic.get(path);
 
-              case 5:
+              case 4:
                 localStorage.setItem('hasPlataformToken', 'true');
-                _context2.next = 11;
+                _context2.next = 10;
                 break;
 
-              case 8:
-                _context2.prev = 8;
+              case 7:
+                _context2.prev = 7;
                 _context2.t0 = _context2["catch"](1);
                 console.log(_context2.t0);
 
-              case 11:
+              case 10:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[1, 8]]);
+        }, _callee2, null, [[1, 7]]);
       }));
 
       function generatePlataformToken(_x2) {

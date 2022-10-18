@@ -77,7 +77,7 @@ export default {
 
       this.callbackLoginLayout(payloadPost).then(async (res) => {
         const { token, redirect: url } = res.data.data;
-        await this.generatePlataformToken(token);
+        this.generatePlataformToken(token);
         this.redirect(this.formatedRedirectUrl(url), token);
         return res;
       });
@@ -88,9 +88,9 @@ export default {
      * @return {undefined}
      */
     async generatePlataformToken(token) {
-      console.log('generatePlataformToken');
+      const path = `/loja/central_comentarios.php?token=${token}`;
+
       try {
-        const path = `/loja/central_comentarios.php?token=${token}`;
         await httpBasic.get(path);
         localStorage.setItem('hasPlataformToken', 'true');
       } catch (error) {
