@@ -52,7 +52,7 @@ export default {
       if (token) {
         redirectParam = `?token=${token}`;
         if (callback.indexOf('?') > -1) {
-          redirectParam = `&token='${token}`;
+          redirectParam = `&token=${token}`;
         }
       }
 

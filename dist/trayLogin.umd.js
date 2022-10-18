@@ -20155,7 +20155,7 @@ var es6_regexp_split = __webpack_require__("28a5");
         redirectParam = "?token=".concat(token);
 
         if (callback.indexOf('?') > -1) {
-          redirectParam = "&token='".concat(token);
+          redirectParam = "&token=".concat(token);
         }
       }
 
