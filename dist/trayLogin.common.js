@@ -20150,6 +20150,7 @@ var es6_regexp_split = __webpack_require__("28a5");
         }
       }
 
+      console.log('redirect: ', callback + redirectParam);
       window.location = callback + redirectParam;
     },
 
@@ -20178,6 +20179,8 @@ var es6_regexp_split = __webpack_require__("28a5");
             url = _res$data$data.redirect;
 
         _this.generatePlataformToken(token);
+
+        console.log('token: ', token, 'url: ', url);
 
         _this.redirect(_this.formatedRedirectUrl(url), token);
 

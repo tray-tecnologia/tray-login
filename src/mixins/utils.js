@@ -56,6 +56,8 @@ export default {
         }
       }
 
+      console.log('redirect: ', callback + redirectParam);
+
       window.location = callback + redirectParam;
     },
 
@@ -78,6 +80,7 @@ export default {
       this.callbackLoginLayout(payloadPost).then((res) => {
         const { token, redirect: url } = res.data.data;
         this.generatePlataformToken(token);
+        console.log('token: ', token, 'url: ', url);
         this.redirect(this.formatedRedirectUrl(url), token);
         return res;
       });
