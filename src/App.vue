@@ -547,7 +547,7 @@ export default {
      */
     verifyFacebookOrGoogleLogin() {
       if (this.hasFacebookToken() || this.hasGoogleToken()) {
-        this.mixinCallbackLogin(this.dataCallbackPost, this.localToken, this.dataCallback);
+        this.mixinCallbackLogin(this.dataCallbackPost, this.localToken);
       }
     },
 

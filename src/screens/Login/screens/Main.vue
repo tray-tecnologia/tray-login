@@ -301,7 +301,7 @@ export default {
         }
 
         if (this.hasCallbackPost) {
-          this.mixinCallbackLogin(this.callbackPost, tokenPassword, this.callback);
+          this.mixinCallbackLogin(this.callbackPost, tokenPassword);
           return response;
         }
 

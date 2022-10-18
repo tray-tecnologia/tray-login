@@ -72,7 +72,7 @@ export default {
      * @param {string} callbackPost string com os parametros do callback post
      * @param {string} tokenPassword
      */
-    mixinCallbackLogin(callbackPost, tokenPassword, callback) {
+    mixinCallbackLogin(callbackPost, tokenPassword) {
       const payloadPost = this.paramCallbackPost(callbackPost, tokenPassword);
 
       this.callbackLoginLayout(payloadPost).then((res) => {
@@ -83,7 +83,7 @@ export default {
           return this.redirect(this.formatedRedirectUrl(url), token);
         }
 
-        return this.redirect(callback, tokenPassword);
+        return this.redirect(url, tokenPassword);
       });
     },
 
