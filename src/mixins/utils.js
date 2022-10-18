@@ -77,14 +77,32 @@ export default {
 
       this.callbackLoginLayout(payloadPost).then((res) => {
         const { token, redirect: url } = res.data.data;
+        this.generatePlataformToken(token);
+
         const { origem } = payloadPost;
 
         if (origem === 'central') {
           return this.redirect(this.formatedRedirectUrl(url), token);
         }
 
-        return this.redirect(url, tokenPassword);
+        return this.redirect(url);
       });
+    },
+
+    /**
+     * Chamando uma das urls do legado somente para fazer a geração de token
+     * @return {undefined}
+     */
+    async generatePlataformToken(token) {
+      const path = `/loja/central_comentarios.php?token=${token}`;
+
+      try {
+        await httpBasic.get(path);
+        localStorage.setItem('jwtToken', token);
+        localStorage.setItem('hasPlataformToken', 'true');
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     /**
