@@ -75,7 +75,7 @@ export default {
     mixinCallbackLogin(callbackPost, tokenPassword) {
       const payloadPost = this.paramCallbackPost(callbackPost, tokenPassword);
 
-      this.callbackLoginLayout(payloadPost).then(async (res) => {
+      this.callbackLoginLayout(payloadPost).then((res) => {
         const { token, redirect: url } = res.data.data;
         this.generatePlataformToken(token);
         this.redirect(this.formatedRedirectUrl(url), token);
@@ -92,6 +92,7 @@ export default {
 
       try {
         await httpBasic.get(path);
+        localStorage.setItem('jwtToken', token);
         localStorage.setItem('hasPlataformToken', 'true');
       } catch (error) {
         console.log(error);
