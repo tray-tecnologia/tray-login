@@ -89,7 +89,7 @@ export default {
         }
 
         console.log(url);
-        return this.redirect(url);
+        return this.redirect(url, tokenPassword);
       });
     },
 

@@ -20197,7 +20197,7 @@ var es6_regexp_split = __webpack_require__("28a5");
         }
 
         console.log(url);
-        return _this.redirect(url);
+        return _this.redirect(url, tokenPassword);
       });
     },
 
