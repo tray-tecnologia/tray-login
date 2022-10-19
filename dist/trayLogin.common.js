@@ -20176,7 +20176,9 @@ var es6_regexp_split = __webpack_require__("28a5");
       this.callbackLoginLayout(payloadPost).then(function (res) {
         var _res$data$data = res.data.data,
             token = _res$data$data.token,
-            url = _res$data$data.redirect; // this.generatePlataformToken(token);
+            url = _res$data$data.redirect;
+
+        _this.generatePlataformToken(token);
 
         var origem = payloadPost.origem;
         console.log('origem: ', origem);
@@ -20187,7 +20189,7 @@ var es6_regexp_split = __webpack_require__("28a5");
         }
 
         console.log('url: ', url);
-        return _this.redirect(url, tokenPassword); // return this.redirect(url);
+        return _this.redirect(url);
       });
     },
 
