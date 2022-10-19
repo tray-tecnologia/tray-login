@@ -56,7 +56,6 @@ export default {
         }
       }
 
-      console.log('url token: ', callback + redirectParam);
       window.location = callback + redirectParam;
     },
 
@@ -76,20 +75,15 @@ export default {
     mixinCallbackLogin(callbackPost, tokenPassword) {
       const payloadPost = this.paramCallbackPost(callbackPost, tokenPassword);
 
-      this.callbackLoginLayout(payloadPost).then((res) => {
+      this.callbackLoginLayout(payloadPost).then(async (res) => {
         const { token, redirect: url } = res.data.data;
-        this.generatePlataformToken(token);
+        const isOrigimCentral = payloadPost.origem === 'central';
 
-        const { origem } = payloadPost;
-
-        console.log('origem: ', origem);
-
-        if (origem === 'central') {
-          console.log('url: ', this.formatedRedirectUrl(url));
+        if (isOrigimCentral) {
           return this.redirect(this.formatedRedirectUrl(url), token);
         }
 
-        console.log('url: ', url);
+        await this.generatePlataformToken(token);
         return this.redirect(url);
       });
     },

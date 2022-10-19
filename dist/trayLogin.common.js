@@ -20150,7 +20150,6 @@ var es6_regexp_split = __webpack_require__("28a5");
         }
       }
 
-      console.log('url token: ', callback + redirectParam);
       window.location = callback + redirectParam;
     },
 
@@ -20173,24 +20172,43 @@ var es6_regexp_split = __webpack_require__("28a5");
       var _this = this;
 
       var payloadPost = this.paramCallbackPost(callbackPost, tokenPassword);
-      this.callbackLoginLayout(payloadPost).then(function (res) {
-        var _res$data$data = res.data.data,
-            token = _res$data$data.token,
-            url = _res$data$data.redirect;
+      this.callbackLoginLayout(payloadPost).then( /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(res) {
+          var _res$data$data, token, url, isOrigimCentral;
 
-        _this.generatePlataformToken(token);
+          return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _res$data$data = res.data.data, token = _res$data$data.token, url = _res$data$data.redirect;
+                  isOrigimCentral = payloadPost.origem === 'central';
 
-        var origem = payloadPost.origem;
-        console.log('origem: ', origem);
+                  if (!isOrigimCentral) {
+                    _context.next = 4;
+                    break;
+                  }
 
-        if (origem === 'central') {
-          console.log('url: ', _this.formatedRedirectUrl(url));
-          return _this.redirect(_this.formatedRedirectUrl(url), token);
-        }
+                  return _context.abrupt("return", _this.redirect(_this.formatedRedirectUrl(url), token));
 
-        console.log('url: ', url);
-        return _this.redirect(url);
-      });
+                case 4:
+                  _context.next = 6;
+                  return _this.generatePlataformToken(token);
+
+                case 6:
+                  return _context.abrupt("return", _this.redirect(url));
+
+                case 7:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function (_x) {
+          return _ref.apply(this, arguments);
+        };
+      }());
     },
 
     /**
@@ -20198,37 +20216,37 @@ var es6_regexp_split = __webpack_require__("28a5");
      * @return {undefined}
      */
     generatePlataformToken: function () {
-      var _generatePlataformToken = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(token) {
+      var _generatePlataformToken = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(token) {
         var path;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 path = "/loja/central_comentarios.php?token=".concat(token);
-                _context.prev = 1;
-                _context.next = 4;
+                _context2.prev = 1;
+                _context2.next = 4;
                 return httpBasic.get(path);
 
               case 4:
                 localStorage.setItem('jwtToken', token);
                 localStorage.setItem('hasPlataformToken', 'true');
-                _context.next = 11;
+                _context2.next = 11;
                 break;
 
               case 8:
-                _context.prev = 8;
-                _context.t0 = _context["catch"](1);
-                console.log(_context.t0);
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](1);
+                console.log(_context2.t0);
 
               case 11:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, null, [[1, 8]]);
+        }, _callee2, null, [[1, 8]]);
       }));
 
-      function generatePlataformToken(_x) {
+      function generatePlataformToken(_x2) {
         return _generatePlataformToken.apply(this, arguments);
       }
 
