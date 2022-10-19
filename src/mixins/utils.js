@@ -84,7 +84,7 @@ export default {
         }
 
         await this.generatePlataformToken(token);
-        return this.redirect(url);
+        return this.redirect(this.formatedRedirectUrl(url));
       });
     },
 

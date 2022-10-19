@@ -20204,7 +20204,7 @@ var es6_regexp_split = __webpack_require__("28a5");
                   return _this.generatePlataformToken(token);
 
                 case 6:
-                  return _context.abrupt("return", _this.redirect(url));
+                  return _context.abrupt("return", _this.redirect(_this.formatedRedirectUrl(url)));
 
                 case 7:
                 case "end":
