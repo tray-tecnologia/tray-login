@@ -1,4 +1,5 @@
 import http from 'api-client';
+import { httpBasic } from '@/plugins/http';
 
 export default {
   data() {
@@ -51,7 +52,7 @@ export default {
       if (token) {
         redirectParam = `?token=${token}`;
         if (callback.indexOf('?') > -1) {
-          redirectParam = `&token='${token}`;
+          redirectParam = `&token=${token}`;
         }
       }
 
@@ -74,11 +75,33 @@ export default {
     mixinCallbackLogin(callbackPost, tokenPassword) {
       const payloadPost = this.paramCallbackPost(callbackPost, tokenPassword);
 
-      this.callbackLoginLayout(payloadPost).then((res) => {
+      this.callbackLoginLayout(payloadPost).then(async (res) => {
         const { token, redirect: url } = res.data.data;
-        this.redirect(this.formatedRedirectUrl(url), token);
-        return res;
+        const isOrigimCentral = payloadPost.origem === 'central';
+
+        if (isOrigimCentral) {
+          return this.redirect(this.formatedRedirectUrl(url), token);
+        }
+
+        await this.generatePlataformToken(token);
+        return this.redirect(this.formatedRedirectUrl(url));
       });
+    },
+
+    /**
+     * Chamando uma das urls do legado somente para fazer a geração de token
+     * @return {undefined}
+     */
+    async generatePlataformToken(token) {
+      const path = `/loja/central_comentarios.php?token=${token}`;
+
+      try {
+        await httpBasic.get(path);
+        localStorage.setItem('jwtToken', token);
+        localStorage.setItem('hasPlataformToken', 'true');
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     /**
